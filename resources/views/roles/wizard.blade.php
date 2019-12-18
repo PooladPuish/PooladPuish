@@ -126,7 +126,6 @@
         <div class="box-header with-border">
             <h3 class="box-title">افزودن بخش</h3>
         </div>
-        <!-- /.box-header -->
         <div class="box-body">
             <form method="post" action="{{route('admin.role.store')}}">
                 @csrf
@@ -139,7 +138,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="box box-default"><!-- /.box-header -->
+                <div class="box box-default">
                     <div class="box-header with-border">
                         <h3 class="box-title">دسترسی</h3>
                     </div>

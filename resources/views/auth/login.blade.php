@@ -14,7 +14,7 @@
     <div class="row bs-reset">
         <div class="col-md-6 bs-reset mt-login-5-bsfix">
             <div class="login-bg">
-                <img src="{{url('/public/assets/pages/img/login/bg1.jpg')}}" width="100%">
+                <img src="{{url('/public/assets/pages/img/login/bg1.jpg')}}" width="104.3%">
                 <img class="login-logo" src="{{url('/public/assets/pages/img/login/logo.png')}}"/></div>
         </div>
         <div class="col-md-6 login-container bs-reset mt-login-5-bsfix">
@@ -27,6 +27,14 @@
                         <button class="close" data-close="alert"></button>
                         <span>لطفا نام کاربری و کلمه عبور خود را وارد کنید.</span>
                     </div>
+                    @if(session()->has('checkUser'))
+                        <div id="alert" class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close pull-left" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <h4><i class="icon fa fa-trash"></i>خطا!</h4>
+                            کاربر عزیز دسترسی های شما غیر فعال شده است.
+                        </div>
+
+                    @endif
                     <div class="row">
                         <div class="col-xs-6">
                             <input class="form-control form-control-solid placeholder-no-fix form-group" type="text"

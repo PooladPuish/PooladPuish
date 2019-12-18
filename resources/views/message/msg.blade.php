@@ -1,3 +1,5 @@
+<!--sweet Alert-->
+<script src="{{asset('/public/assets/sweetalert.js')}}"></script>
 @if(session()->has('msg-success'))
     <script>
         Swal.fire({

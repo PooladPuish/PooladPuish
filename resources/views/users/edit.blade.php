@@ -1,6 +1,5 @@
 @extends('layouts.master')
 @section('content')
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     @include('message.msg')
     <div class="box box-default">
         <div class="box-header with-border">

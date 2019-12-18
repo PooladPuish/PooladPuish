@@ -33,3 +33,7 @@ Route::post('/users/update', 'UserController@updates')->name('admin.user.updates
 //RoleController
 Route::get('/role/wizard', 'RoleController@wizard')->name('admin.role.wizard');
 Route::post('/role/store', 'RoleController@store')->name('admin.role.store');
+Route::get('/role/show', 'RoleController@show')->name('admin.role.show');
+Route::get('/role/edit/{id?}', 'RoleController@edit')->name('admin.role.edit');
+Route::post('/role/update', 'RoleController@update')->name('admin.role.update');
+Route::get('/role/delete/{id?}', 'RoleController@delete')->name('admin.role.delete');

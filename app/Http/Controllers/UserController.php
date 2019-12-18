@@ -144,68 +144,9 @@ class UserController extends Controller
     //نمایش لیست کاربران
     public function show(Request $request)
     {
-        if ($request->ajax()) {
-            $data = User::get();
-            return DataTables::of($data)
-                ->addIndexColumn()
-                ->addColumn('name', function ($row) {
-                    return $row->name;
-                })
-                ->addColumn('role', function ($row) {
-                    foreach ($row->roles as $name) {
-                        if (!empty($name)) {
-                            return "<label class=\"btn btn-danger\">{$name->name}</label>";
+        $users = User::all();
+        return view('users.show', compact('users'));
 
-                        }
-                    }
-                })
-                ->addColumn('email', function ($row) {
-                    return $row->email;
-                })
-                ->addColumn('phone', function ($row) {
-                    return $row->phone;
-                })
-                ->addColumn('personnel_id', function ($row) {
-                    return $row->personnel_id;
-                })
-                ->addColumn('created_at', function ($row) {
-                    $created_at = Jalalian::forge($row->created_at)->format('Y/m/d');
-                    return $created_at;
-                })
-                ->addColumn('status', function ($row) {
-                    if ($row->status == null) {
-                        return "<img src='" . url('/public/icon/icons8-checked-user-male-40 (1).png') . "' width='25' title='فعال'>";
-                    } else {
-                        return "<img src='" . url('/public/icon/icons8-checked-user-male-40.png') . "' width='25' title='غیر فعال'>";
-                    }
-                })
-                ->addColumn('action', function ($row) {
-                    return $this->makeActionList($row);
-                })
-                ->rawColumns(['action', 'role', 'created_at', 'personnel_id'
-                    , 'phone', 'email', 'name', 'status'])
-                ->make(true);
-        }
-        return view('users.show');
-
-    }
-
-    //عملیات دیتا تیبل
-    public function makeActionList($row)
-    {
-        if (\Gate::allows('ویرایش کاربران')) {
-            $btn = '<a href="' . route('admin.user.edit', $row->id) . '">
-                        <img src="' . url('/public/icon/icons8-update-64.png') . '" width="25" title="ویرایش">
-                        </a>';
-        }
-        if (\Gate::allows('فعال و غیر فعال کردن کاربران')) {
-            $btn .= '<a href="' . route('admin.user.disable', $row->id) . '">
-                        <img src="' . url('/public/icon/disable.png') . '" width="25" title="غیرفعال کردن کاربر">
-                        </a>';
-        }
-        if (!empty($btn)) {
-            return $btn;
-        }
     }
 
 //فعال و غیر فعال کردن کاربر
@@ -226,16 +167,25 @@ class UserController extends Controller
             }
     }
 
+    //نمایش فرم ویرایش کاربران
     public function edit(User $id)
     {
-        foreach ($id->roles as $role) {
-            $rol = $role->id;
+        $role = \DB::table('role_user')->where('user_id', $id->id)
+            ->pluck('role_id')
+            ->all();
+        if (!empty($role)) {
+            foreach ($id->roles as $role)
+                $rol = $role->id;
+        } else {
+            $rol = null;
         }
+
         $roles = Role::all();
         return view('users.edit', compact('roles', 'id', 'rol'));
 
     }
 
+    //ویرایش کاربران
     public function updates(Request $request)
     {
         if (!empty($request->input('avatar'))) {

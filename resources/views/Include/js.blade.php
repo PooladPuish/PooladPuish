@@ -22,8 +22,6 @@
 <!-- daterangepicker -->
 <script src="{{asset('/public/bower_components/moment/min/moment.min.js')}}"></script>
 <script src="{{asset('/public/bower_components/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
-<!-- datepicker -->
-<script src="{{asset('/public/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="{{asset('/public/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}"></script>
 <!-- Slimscroll -->
@@ -36,6 +34,8 @@
 <script src="{{asset('/public/dist/js/pages/dashboard.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('/public/dist/js/demo.js')}}"></script>
+<!--sweet Alert-->
+<script src="{{asset('/public/assets/sweetalert.js')}}"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- Select2 -->
@@ -51,18 +51,10 @@
     });
 </script>
 
-<script src="{{asset('/public/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('/public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
-<script>
-    $(function () {
-        $('#data-table').DataTable({
-            "scrollY": "200px",
-            "scrollCollapse": true,
-            "scrollX": true,
-            "paging": false,
-            "sScrollX": '100%'
+{{--<script src="{{asset('/public/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>--}}
+{{--<script src="{{asset('/public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>--}}
 
-        })
-    })
-</script>
-
+<script src="{{asset('/public/assets/global/scripts/datatable.js')}}" type="text/javascript"></script>
+<script src="{{asset('/public/assets/global/plugins/datatables/datatables.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('/public/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js')}}" type="text/javascript"></script>
+<script src="{{asset('/public/assets/pages/scripts/table-datatables-colreorder.min.js')}}" type="text/javascript"></script>

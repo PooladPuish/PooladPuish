@@ -7,8 +7,6 @@
 <link rel="stylesheet" href="{{asset('/public/dist/css/bootstrap-theme.css')}}">
 <!-- Bootstrap rtl -->
 <link rel="stylesheet" href="{{asset('/public/dist/css/rtl.css')}}">
-<!-- persian Date Picker -->
-<link rel="stylesheet" href="{{asset('/public/dist/css/persian-datepicker-0.4.5.min')}}">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="{{asset('/public/bower_components/font-awesome/css/font-awesome.min.css')}}">
 <!-- Ionicons -->
@@ -31,5 +29,12 @@
 <link rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 <link rel="stylesheet" href="{{asset('/public/bower_components/select2/dist/css/select2.min.css')}}">
-<link rel="stylesheet" href="{{asset('/public/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}">
-<link rel="stylesheet" href="{{asset('/public/dist/css/persian-datepicker-0.4.5.min.css')}}" />
+{{--<link rel="stylesheet" href="{{asset('/public/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}">--}}
+{{--<link rel="stylesheet" href="{{asset('/public/dist/css/persian-datepicker-0.4.5.min.css')}}" />--}}
+<link href="{{asset('/public/assets/global/plugins/datatables/datatables.min.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('/public/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap-rtl.css')}}" rel="stylesheet" type="text/css" />
+<!-- END PAGE LEVEL PLUGINS -->
+<!-- BEGIN THEME GLOBAL STYLES -->
+<link href="{{asset('/public/assets/global/css/components-md-rtl.min.css')}}" rel="stylesheet" id="style_components" type="text/css" />
+<link href="{{asset('/public/assets/global/css/plugins-md-rtl.min.css')}}" rel="stylesheet" type="text/css" />
+<!-- END THEME GLOBAL STYLES -->

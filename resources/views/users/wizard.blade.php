@@ -7,7 +7,7 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-            <form method="post" action="{{route('admin.user.store')}}">
+            <form method="post" action="{{route('admin.user.store')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-md-3">

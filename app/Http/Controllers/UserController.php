@@ -57,7 +57,7 @@ class UserController extends Controller
         if ($request->hasFile('avatar')) {
             $file = $request->file('avatar');
             $name = time() . '.' . $file->getClientOriginalExtension();
-            $avatar = $request->file('avatar')->move("/public/avatar", $name);
+            $avatar = $request->file('avatar')->move('public/upload/avatar/', $name);
         } else {
             $avatar = null;
         }
@@ -83,20 +83,26 @@ class UserController extends Controller
     //ویرایش مشخصات کاربر
     public function update(Request $request)
     {
+        $users = User::where('id', $request->id)->get();
+        foreach ($users as $user)
+            if ($user->email != $request->input('email')) {
+                $this->validate($request, [
+                    'email' => 'required|unique:users',
+                ], [
+                    'email.unique' => 'کاربری با این کد ملی در سیستم موجود است.',
+                    'email.required' => 'پر کردن فیلد کد ملی الزامی میباشد.',
+                ]);
+            }
         $this->validate($request, [
             'name' => 'required',
             'phone' => 'required',
-            'email' => 'required|unique:users',
-        ], [
-            'email.unique' => 'کاربری با این کد ملی در سیستم موجود است.'
+            'email' => 'required',
         ]);
-        $users = User::where('id', $request->id)->get();
-        foreach ($users as $user)
-            User::find($user->id)->update([
-                'name' => $request['name'],
-                'phone' => $request['phone'],
-                'email' => $request['email'],
-            ]);
+        User::find($user->id)->update([
+            'name' => $request['name'],
+            'phone' => $request['phone'],
+            'email' => $request['email'],
+        ]);
         return MsgSuccess('مشخصات شما با موفقیت ویرایش شد');
     }
 
@@ -129,9 +135,7 @@ class UserController extends Controller
         if ($request->hasFile('avatar')) {
             $file = $request->file('avatar');
             $name = time() . '.' . $file->getClientOriginalExtension();
-            $avatar = $request->file('avatar')->move("/public/avatar", $name);
-        } else {
-            $avatar = null;
+            $avatar = $request->file('avatar')->move('public/upload/avatar/', $name);
         }
         $users = User::where('id', $request->id)->get();
         foreach ($users as $user)
@@ -188,6 +192,23 @@ class UserController extends Controller
     //ویرایش کاربران
     public function updates(Request $request)
     {
+        $user = User::find($request->input('id'));
+        if ($user->email != $request->input('email')) {
+            $this->validate($request, [
+                'email' => 'required|unique:users',
+            ], [
+                'email.unique' => 'کاربری با این کد ملی در سیستم موجود است.',
+                'email.required' => 'پر کردن فیلد کد ملی الزامی میباشد.',
+            ]);
+        }
+        if ($user->personnel_id != $request->input('personnel_id')) {
+            $this->validate($request, [
+                'personnel_id' => 'required|unique:users',
+            ], [
+                'personnel_id.unique' => 'کاربری با این شماره پرسنلی در سیستم موجود است.',
+                'personnel_id.required' => 'پر کردن فیلد شماره پرسنلی الزامی میباشد.',
+            ]);
+        }
         if (!empty($request->input('avatar'))) {
             $this->validate($request, [
                 'avatar' => 'mimes:jpeg,jpg,png',
@@ -211,11 +232,10 @@ class UserController extends Controller
         if ($request->hasFile('avatar')) {
             $file = $request->file('avatar');
             $name = time() . '.' . $file->getClientOriginalExtension();
-            $avatar = $request->file('avatar')->move("/public/avatar", $name);
+            $avatar = $request->file('avatar')->move('public/upload/avatar/', $name);
         } else {
-            $avatar = null;
+            $avatar = $user->avatar;
         }
-        $user = User::find($request->input('id'));
         if (!empty($request->input('password'))) {
             $pass = Hash::make($request->input('password'));
         } else {

@@ -78,7 +78,7 @@ var TableDatatablesColreorder = function () {
                 "infoEmpty": "No entries found",
                 "infoFiltered": "(filtered1 from _MAX_ total entries)",
                 "lengthMenu": "_MENU_ entries",
-                "search": "Search:",
+                "search": "جستجو:",
                 "zeroRecords": "No matching records found"
             },
 

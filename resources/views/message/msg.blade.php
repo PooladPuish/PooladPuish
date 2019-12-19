@@ -6,7 +6,7 @@
             title: 'موفق',
             text: '{{session('msg-success')}}',
             icon: 'success',
-            confirmButtonText: 'تایید'
+            confirmButtonText: 'تایید',
         })
     </script>
 @endif

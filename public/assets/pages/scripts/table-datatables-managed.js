@@ -18,7 +18,7 @@ var TableDatatablesManaged = function () {
                 "infoEmpty": "No records found",
                 "infoFiltered": "(filtered1 from _MAX_ total records)",
                 "lengthMenu": "Show _MENU_",
-                "search": "Search:",
+                "search": "جستجو:",
                 "zeroRecords": "No matching records found",
                 "paginate": {
                     "previous":"Prev",
@@ -34,8 +34,8 @@ var TableDatatablesManaged = function () {
             //},
 
             // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
-            // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js). 
-            // So when dropdowns used the scrollable div should be removed. 
+            // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js).
+            // So when dropdowns used the scrollable div should be removed.
             //"dom": "<'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r>t<'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>",
 
             "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
@@ -45,19 +45,19 @@ var TableDatatablesManaged = function () {
                 [5, 15, 20, "All"] // change per page values here
             ],
             // set the initial value
-            "pageLength": 5,            
+            "pageLength": 5,
             "pagingType": "bootstrap_full_number",
             "columnDefs": [
                 {  // set default column settings
                     'orderable': false,
                     'targets': [0]
-                }, 
+                },
                 {
                     "searchable": false,
                     "targets": [0]
                 },
                 {
-                    "className": "dt-right", 
+                    "className": "dt-right",
                     //"targets": [2]
                 }
             ],
@@ -105,7 +105,7 @@ var TableDatatablesManaged = function () {
                 "infoEmpty": "No records found",
                 "infoFiltered": "(filtered1 from _MAX_ total records)",
                 "lengthMenu": "Show _MENU_",
-                "search": "Search:",
+                "search": "جستجو:",
                 "zeroRecords": "No matching records found",
                 "paginate": {
                     "previous":"Prev",
@@ -121,8 +121,8 @@ var TableDatatablesManaged = function () {
             //},
 
             // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
-            // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js). 
-            // So when dropdowns used the scrollable div should be removed. 
+            // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js).
+            // So when dropdowns used the scrollable div should be removed.
             //"dom": "<'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r>t<'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>",
 
             "bStateSave": false, // save datatable state(pagination, sort, etc) in cookie.
@@ -133,19 +133,19 @@ var TableDatatablesManaged = function () {
             ],
 
             // set the initial value
-            "pageLength": 5,            
+            "pageLength": 5,
             "pagingType": "bootstrap_full_number",
             "columnDefs": [
                 {  // set default column settings
                     'orderable': false,
                     'targets': [0]
-                }, 
+                },
                 {
                     "searchable": false,
                     "targets": [0]
                 },
                 {
-                    "className": "dt-right", 
+                    "className": "dt-right",
                     //"targets": [2]
                 }
             ],
@@ -164,12 +164,12 @@ var TableDatatablesManaged = function () {
                         .on( 'change', function () {
                             var val = $.fn.dataTable.util.escapeRegex(
                                 $(this).val()
-                            );     
+                            );
                             column
                                 .search( val ? '^'+val+'$' : '', true, false )
                                 .draw();
                         } );
-     
+
                     column.data().unique().sort().each( function ( d, j ) {
                         select.append( '<option value="'+d+'">'+d+'</option>' )
                     } );
@@ -216,7 +216,7 @@ var TableDatatablesManaged = function () {
                 "infoEmpty": "No records found",
                 "infoFiltered": "(filtered1 from _MAX_ total records)",
                 "lengthMenu": "Show _MENU_",
-                "search": "Search:",
+                "search": "جستجو:",
                 "zeroRecords": "No matching records found",
                 "paginate": {
                     "previous":"Prev",
@@ -227,8 +227,8 @@ var TableDatatablesManaged = function () {
             },
 
             // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
-            // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js). 
-            // So when dropdowns used the scrollable div should be removed. 
+            // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js).
+            // So when dropdowns used the scrollable div should be removed.
             //"dom": "<'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r>t<'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>",
 
             "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
@@ -285,7 +285,7 @@ var TableDatatablesManaged = function () {
                 "infoEmpty": "No records found",
                 "infoFiltered": "(filtered1 from _MAX_ total records)",
                 "lengthMenu": "Show _MENU_",
-                "search": "Search:",
+                "search": "جستجو:",
                 "zeroRecords": "No matching records found",
                 "paginate": {
                     "previous":"Prev",
@@ -294,14 +294,14 @@ var TableDatatablesManaged = function () {
                     "first": "First"
                 }
             },
-            
+
             // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
-            // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js). 
-            // So when dropdowns used the scrollable div should be removed. 
+            // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js).
+            // So when dropdowns used the scrollable div should be removed.
             //"dom": "<'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r>t<'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>",
 
             "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
-            
+
             "lengthMenu": [
                 [6, 15, 20, -1],
                 [6, 15, 20, "All"] // change per page values here
@@ -353,7 +353,7 @@ var TableDatatablesManaged = function () {
                 "infoEmpty": "No records found",
                 "infoFiltered": "(filtered1 from _MAX_ total records)",
                 "lengthMenu": "Show _MENU_",
-                "search": "Search:",
+                "search": "جستجو:",
                 "zeroRecords": "No matching records found",
                 "paginate": {
                     "previous":"Prev",
@@ -363,14 +363,14 @@ var TableDatatablesManaged = function () {
                 }
             },
 
-            
+
             // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
-            // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js). 
-            // So when dropdowns used the scrollable div should be removed. 
+            // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js).
+            // So when dropdowns used the scrollable div should be removed.
             //"dom": "<'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r>t<'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>",
 
             "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
-            
+
             "lengthMenu": [
                 [6, 15, 20, -1],
                 [6, 15, 20, "All"] // change per page values here
@@ -434,7 +434,7 @@ var TableDatatablesManaged = function () {
 
             "footerCallback": function ( row, data, start, end, display ) {
                 var api = this.api(), data;
-     
+
                 // Remove the formatting to get integer data for summation
                 var intVal = function ( i ) {
                     return typeof i === 'string' ?
@@ -442,7 +442,7 @@ var TableDatatablesManaged = function () {
                         typeof i === 'number' ?
                             i : 0;
                 };
-     
+
                 // Total over all pages
                 total = api
                     .column( 3 )
@@ -450,7 +450,7 @@ var TableDatatablesManaged = function () {
                     .reduce( function (a, b) {
                         return intVal(a) + intVal(b);
                     }, 0 );
-     
+
                 // Total over this page
                 pageTotal = api
                     .column( 3, { page: 'current'} )
@@ -458,20 +458,20 @@ var TableDatatablesManaged = function () {
                     .reduce( function (a, b) {
                         return intVal(a) + intVal(b);
                     }, 0 );
-     
+
                 // Update footer
                 $( api.column( 3 ).footer() ).html(
                     '$'+pageTotal +' ( $'+ total +' total)'
                 );
             },
-            
+
             // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
-            // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js). 
-            // So when dropdowns used the scrollable div should be removed. 
+            // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js).
+            // So when dropdowns used the scrollable div should be removed.
             //"dom": "<'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r>t<'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>",
 
             "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
-            
+
             "lengthMenu": [
                 [6, 15, 20, -1],
                 [6, 15, 20, "All"] // change per page values here
@@ -526,7 +526,7 @@ var TableDatatablesManaged = function () {
 
 }();
 
-if (App.isAngularJsApp() === false) { 
+if (App.isAngularJsApp() === false) {
     jQuery(document).ready(function() {
         TableDatatablesManaged.init();
     });

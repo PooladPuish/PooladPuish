@@ -37,7 +37,6 @@
 <!--sweet Alert-->
 <script src="{{asset('/public/assets/sweetalert.js')}}"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- Select2 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <script>
@@ -56,5 +55,7 @@
 
 <script src="{{asset('/public/assets/global/scripts/datatable.js')}}" type="text/javascript"></script>
 <script src="{{asset('/public/assets/global/plugins/datatables/datatables.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('/public/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js')}}" type="text/javascript"></script>
-<script src="{{asset('/public/assets/pages/scripts/table-datatables-colreorder.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('/public/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js')}}"
+        type="text/javascript"></script>
+<script src="{{asset('/public/assets/pages/scripts/table-datatables-colreorder.min.js')}}"
+        type="text/javascript"></script>

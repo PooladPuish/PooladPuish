@@ -84,15 +84,6 @@
                     </div>
                 </form>
             </div>
-            <div class="login-footer">
-                <div class="row bs-reset">
-                    <div class="col-xs-7 bs-reset">
-                        <div class="login-copyright text-right">
-                            <span>تمام حقوق این سیستم متعلق به <a>گروه صنعتی پولاد پویش</a> میباشد.</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>

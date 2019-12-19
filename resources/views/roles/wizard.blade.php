@@ -178,7 +178,6 @@
                                 </div>
                             </div>
                         </div>
-                        <hr/>
                         <div class="form-group">
                             <input type="submit" value="ثبت بخش" class="btn btn-primary">
                         </div>

@@ -57,5 +57,5 @@
 <script src="{{asset('/public/assets/global/plugins/datatables/datatables.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('/public/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js')}}"
         type="text/javascript"></script>
-<script src="{{asset('/public/assets/pages/scripts/table-datatables-colreorder.min.js')}}"
+<script src="{{asset('/public/assets/pages/scripts/table-datatables-colreorder.js')}}"
         type="text/javascript"></script>

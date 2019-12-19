@@ -70,16 +70,16 @@ var TableDatatablesColreorder = function () {
             // Internationalisation. For more info refer to http://datatables.net/manual/i18n
             "language": {
                 "aria": {
-                    "sortAscending": ": activate to sort column ascending",
-                    "sortDescending": ": activate to sort column descending"
+                    "sortAscending": ": مرتب یازی صعودی",
+                    "sortDescending": ": مرتب سازی نزولی"
                 },
-                "emptyTable": "No data available in table",
-                "info": "Showing _START_ to _END_ of _TOTAL_ entries",
-                "infoEmpty": "No entries found",
-                "infoFiltered": "(filtered1 from _MAX_ total entries)",
-                "lengthMenu": "_MENU_ entries",
+                "emptyTable": "داده ای در جدول وجود ندارد",
+                "info": "نمایش _START_ به _END_ از _TOTAL_ مورد",
+                "infoEmpty": "اطلاعاتی برای نمایش وجود ندارد",
+                "infoFiltered": "(فیلتر شده1 از _MAX_ جمع مورد)",
+                "lengthMenu": "_MENU_ مورد",
                 "search": "جستجو:",
-                "zeroRecords": "No matching records found"
+                "zeroRecords": "موردی با این مشخصات یافت نشد!"
             },
 
             // Or you can use remote translation file

@@ -98,12 +98,15 @@ class UserController extends Controller
             'phone' => 'required',
             'email' => 'required',
         ]);
-        User::find($user->id)->update([
+        $user = User::find($user->id)->update([
             'name' => $request['name'],
             'phone' => $request['phone'],
             'email' => $request['email'],
         ]);
-        return MsgSuccess('مشخصات شما با موفقیت ویرایش شد');
+        if ($user) {
+            return MsgSuccess('مشخصات شما با موفقیت ویرایش شد');
+        } else
+            return back();
     }
 
     //ویرایش کلمه عبور کاربر
@@ -119,10 +122,13 @@ class UserController extends Controller
             if (!Hash::check($input['old_pass'], $user->password)) {
                 return MsgError('کلمه عبور قبلی صحیح نمیباشد');
             } else {
-                User::find($user->id)->update([
+                $user = User::find($user->id)->update([
                     'password' => Hash::make($request->input('new_pass')),
                 ]);
-                return MsgSuccess('کلمه عبور شما با موفقیت ویرایش شد');
+                if ($user) {
+                    return MsgSuccess('کلمه عبور شما با موفقیت ویرایش شد');
+                } else
+                    return back();
             }
     }
 
@@ -139,16 +145,19 @@ class UserController extends Controller
         }
         $users = User::where('id', $request->id)->get();
         foreach ($users as $user)
-            User::find($user->id)->update([
+            $user = User::find($user->id)->update([
                 'avatar' => $avatar,
             ]);
-        return MsgSuccess('تصویر پروفایل شما با موفقیت ویرایش شد');
+        if ($user) {
+            return MsgSuccess('تصویر پروفایل شما با موفقیت ویرایش شد');
+        } else
+            return back();
     }
 
     //نمایش لیست کاربران
     public function show(Request $request)
     {
-        $users = User::all();
+        $users = User::orderBy('id', 'DESC')->get();
         return view('users.show', compact('users'));
 
     }
@@ -252,6 +261,13 @@ class UserController extends Controller
         DB::table('role_user')->where('user_id', $request->id)->delete();
         $user->roles()->sync($request->input('roles'));
         return MsgSuccess('مشخصات کاربر با موفقیت ویرایش شد');
+    }
+
+    //قفل صفحه
+    public function lock()
+    {
+        return view('lock.lock');
+
     }
 }
 

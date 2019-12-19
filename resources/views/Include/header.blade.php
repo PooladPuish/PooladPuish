@@ -69,6 +69,11 @@
                     <li class="footer"><a href="#">نمایش همه</a></li>
                 </ul>
             </li>
+            <li class="dropdown notifications-menu">
+                <a href="{{route('admin.user.lock')}}" class="dropdown-toggle">
+                    <i class="fa fa-lock"></i>
+                </a>
+            </li>
             <!-- Tasks: style can be found in dropdown.less -->
             <!-- User Account: style can be found in dropdown.less -->
             <li class="dropdown user user-menu">

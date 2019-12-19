@@ -37,7 +37,7 @@ class RoleController extends Controller
     //نمایش لیست دسترسی ها
     public function show(Request $request)
     {
-        $roles = Role::all();
+        $roles = Role::orderBy('id', 'DESC')->get();
         return view('roles.show', compact('roles'));
 
     }

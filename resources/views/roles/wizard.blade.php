@@ -122,62 +122,69 @@
         }
     </style>
     @include('message.msg')
-    <div class="box box-default">
-        <div class="box-header with-border">
-            <h3 class="box-title">افزودن بخش</h3>
+    <div class="portlet box blue">
+        <div class="portlet-title">
+            <div class="caption">
+                افزودن بخش
+            </div>
         </div>
-        <div class="box-body">
-            <form method="post" action="{{route('admin.role.store')}}">
-                @csrf
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label>عنوان بخش</label>
-                            <input type="text" id="name" name="name" class="form-control"
-                                   required>
-                        </div>
-                    </div>
-                </div>
-                <div class="box box-default">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">دسترسی</h3>
-                    </div>
-                    <div class="tree-box box-border">
+        <div class="portlet-body form">
+            <div class="form-body">
+                <div class="form-group">
+                    <form method="post" action="{{route('admin.role.store')}}" class="mt-repeater">
+                        @csrf
                         <div class="row">
-                            <div class="col-md-4">
-                                <ul class="trees">
-                                    <li class="has-child">
-                                        <input id="tree-controll1" type="checkbox" class="custom-control-input"><span
-                                            class="tree-control"></span>
-                                        <label>
-                                            &nbsp;
-                                            <i class="fa fa-user light-blue"></i> مدیریت
-                                        </label>
-                                        <ul>
-                                            @foreach($permissions as $permission)
-                                                @if(!empty($permission))
-                                                    @if($permission->label == "admin")
-                                                        <li>
-                                                            <label>
-                                                                <input type="checkbox" name="permission[]"
-                                                                       value="{{$permission->id}}"/>
-                                                                {{$permission->name}}
-                                                            </label>
-                                                        </li>
-                                                    @endif
-                                                @endif
-                                            @endforeach
-                                        </ul>
-                                    </li>
-                                </ul>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>عنوان بخش</label>
+                                    <input type="text" id="name" name="name" class="form-control"
+                                           required>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="box box-default">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">دسترسی</h3>
+                            </div>
+                            <div class="tree-box box-border">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <ul class="trees">
+                                            <li class="has-child">
+                                                <input id="tree-controll1" type="checkbox" class="custom-control-input"><span
+                                                    class="tree-control"></span>
+                                                <label>
+                                                    &nbsp;
+                                                    <i class="fa fa-user light-blue"></i> مدیریت
+                                                </label>
+                                                <ul>
+                                                    @foreach($permissions as $permission)
+                                                        @if(!empty($permission))
+                                                            @if($permission->label == "admin")
+                                                                <li>
+                                                                    <label>
+                                                                        <input type="checkbox" name="permission[]"
+                                                                               value="{{$permission->id}}"/>
+                                                                        {{$permission->name}}
+                                                                    </label>
+                                                                </li>
+                                                            @endif
+                                                        @endif
+                                                    @endforeach
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="form-group">
+                            <input type="submit" value="ثبت بخش" class="btn btn-primary">
+                        </div>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <input type="submit" value="ثبت" class="btn btn-primary">
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 @endsection

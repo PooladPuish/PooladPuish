@@ -8,8 +8,19 @@
     <link href="{{asset('/public/assets/global/css/components-md-rtl.min.css')}}" rel="stylesheet" id="style_components"
           type="text/css"/>
     <link href="{{asset('/public/assets/pages/css/login-5-rtl.min.css')}}" rel="stylesheet" type="text/css"/>
+    <style>
+        @font-face {
+            font-family: 'Shahab';
+            src: url('http://cdn.font-store.ir/fonts/shahab/Shahab-Regular.woff2') format('woff2'),
+            url('http://cdn.font-store.ir/fonts/shahab/Shahab-Regular.woff') format('woff'),
+            url('http://cdn.font-store.ir/fonts/shahab/Shahab-Regular.ttf') format('truetype'),
+            url('http://cdn.font-store.ir/fonts/shahab/Shahab-Regular.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+    </style>
 </head>
-<body class=" login">
+<body class=" login" style="font-family: Shahab">
 <div class="user-login-5">
     <div class="row bs-reset">
         <div class="col-md-6 bs-reset mt-login-5-bsfix">
@@ -29,7 +40,9 @@
                     </div>
                     @if(session()->has('checkUser'))
                         <div id="alert" class="alert alert-danger alert-dismissible">
-                            <button type="button" class="close pull-left" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <button type="button" class="close pull-left" data-dismiss="alert" aria-hidden="true">
+                                &times;
+                            </button>
                             <h4><i class="icon fa fa-trash"></i>خطا!</h4>
                             کاربر عزیز دسترسی های شما غیر فعال شده است.
                         </div>

@@ -6,7 +6,6 @@
     foreach ($roles as $role)
 @endphp
 @section('content')
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     @include('message.msg')
     <div class="row">
         <div class="col-md-3">

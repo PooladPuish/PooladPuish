@@ -19,8 +19,19 @@
     <!-- Google Font -->
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <style>
+        @font-face {
+            font-family: 'Shahab';
+            src: url('http://cdn.font-store.ir/fonts/shahab/Shahab-Regular.woff2') format('woff2'),
+            url('http://cdn.font-store.ir/fonts/shahab/Shahab-Regular.woff') format('woff'),
+            url('http://cdn.font-store.ir/fonts/shahab/Shahab-Regular.ttf') format('truetype'),
+            url('http://cdn.font-store.ir/fonts/shahab/Shahab-Regular.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+    </style>
 </head>
-<body class="hold-transition lockscreen">
+<body class="hold-transition lockscreen" style="font-family: Shahab">
 <div class="lockscreen-wrapper">
     <div class="lockscreen-logo">
         <a href="#"><b>پنل کاربری پولاد پویش</b></a>

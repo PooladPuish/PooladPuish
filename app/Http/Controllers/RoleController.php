@@ -68,7 +68,6 @@ class RoleController extends Controller
     {
         $id->delete();
         return MsgSuccess('دسترسی با موفقیت از سیستم حذف شد');
-
     }
 
 

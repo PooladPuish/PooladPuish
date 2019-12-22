@@ -165,6 +165,7 @@ return [
         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        RenatoMarinho\LaravelPageSpeed\ServiceProvider::class,
 
         /*
          * Package Service Providers...

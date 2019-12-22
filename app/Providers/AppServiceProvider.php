@@ -38,5 +38,6 @@ class AppServiceProvider extends ServiceProvider
             return redirect()->back()->with('msg-info', $msg);
         }
 
+
     }
 }

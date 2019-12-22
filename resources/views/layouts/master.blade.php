@@ -45,9 +45,19 @@
           type="text/css"/>
     <link href="{{asset('/public/assets/global/css/plugins-md-rtl.min.css')}}" rel="stylesheet" type="text/css"/>
     <!-- END THEME GLOBAL STYLES -->
-
+    <style>
+        @font-face {
+            font-family: 'Shahab';
+            src: url('http://cdn.font-store.ir/fonts/shahab/Shahab-Regular.woff2') format('woff2'),
+            url('http://cdn.font-store.ir/fonts/shahab/Shahab-Regular.woff') format('woff'),
+            url('http://cdn.font-store.ir/fonts/shahab/Shahab-Regular.ttf') format('truetype'),
+            url('http://cdn.font-store.ir/fonts/shahab/Shahab-Regular.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+    </style>
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini" style="font-family: Shahab">
 <div class="wrapper">
     <header class="main-header">
         <!-- Logo -->

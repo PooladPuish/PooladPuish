@@ -46,7 +46,7 @@
                                 <td>{{\Morilog\Jalali\Jalalian::forge($user->created_at)->format('Y/m/d')}}</td>
                                 <td>
                                     @if($user->status == null)
-                                        <img src="{{url('/public/icon/icons8-checked-user-male-40 (1).png')}}"
+                                        <img src="{{url('/public/icon/icons8-checked-user-male.png')}}"
                                              width="25" title="فعال">
                                     @else
                                         <img src="{{url('/public/icon/icons8-checked-user-male-40.png')}}" width="25"

@@ -16,9 +16,7 @@
                         <tr>
                             <th>عنوان</th>
                             <th>تاریخ ایجاد</th>
-                            @if(Gate::check('ویرایش کاربران') || Gate::check('فعال و غیر فعال کردن کاربران'))
-                                <th>عملیات</th>
-                            @endif
+                            <th>عملیات</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -27,18 +25,14 @@
                                 <td>{{$role->name}}</td>
                                 <td>{{\Morilog\Jalali\Jalalian::forge($role->created_at)->format('Y/m/d')}}</td>
                                 <td>
-                                    @can('ویرایش کاربران')
-                                        <a href="{{route('admin.role.edit',$role->id)}}">
-                                            <img src="{{url('/public/icon/icons8-update-64.png')}}"
-                                                 width="25" title="ویرایش">
-                                        </a>
-                                    @endcan
-                                    @can('فعال و غیر فعال کردن کاربران')
-                                        <a href="{{route('admin.role.delete',$role->id)}}">
-                                            <img src="{{url('/public/icon/delete.png')}}"
-                                                 width="25" title="حذف دسترسی">
-                                        </a>
-                                    @endcan
+                                    <a href="{{route('admin.role.edit',$role->id)}}">
+                                        <img src="{{url('/public/icon/icons8-update-64.png')}}"
+                                             width="25" title="ویرایش">
+                                    </a>
+                                    <a href="{{route('admin.role.delete',$role->id)}}">
+                                        <img src="{{url('/public/icon/delete.png')}}"
+                                             width="25" title="حذف دسترسی">
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach

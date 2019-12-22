@@ -15,7 +15,11 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+
 Auth::routes();
+Route::get('test','TestController@showDatatable');
+Route::post('demos/sortabledatatable','TestController@updateOrder');
+
 //HomeController
 Route::get('/home', 'HomeController@index')->name('home')->middleware('checkUser');
 

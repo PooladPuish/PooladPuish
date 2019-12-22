@@ -325,5 +325,6 @@
         type="text/javascript"></script>
 <script src="{{asset('/public/assets/pages/scripts/table-datatables-colreorder.js')}}"
         type="text/javascript"></script>
+
 </body>
 </html>

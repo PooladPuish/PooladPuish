@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
 use App\Role;
@@ -13,15 +14,14 @@ use Yajra\DataTables\Facades\DataTables;
 use function App\Providers\MsgError;
 use function App\Providers\MsgSuccess;
 
+
 class UserController extends Controller
 {
     //نمایش فرم ثبت کاربر جدید
     public function wizard()
     {
-
         $roles = Role::all();
         return view('users.wizard', compact('roles'));
-
     }
 
     // ثبت کاربر جدید در سیستم
@@ -77,7 +77,6 @@ class UserController extends Controller
     public function profile()
     {
         return view('profile.profile');
-
     }
 
     //ویرایش مشخصات کاربر
@@ -159,7 +158,6 @@ class UserController extends Controller
     {
         $users = User::orderBy('id', 'DESC')->get();
         return view('users.show', compact('users'));
-
     }
 
 //فعال و غیر فعال کردن کاربر
@@ -192,7 +190,6 @@ class UserController extends Controller
         } else {
             $rol = null;
         }
-
         $roles = Role::all();
         return view('users.edit', compact('roles', 'id', 'rol'));
 
@@ -267,12 +264,16 @@ class UserController extends Controller
     public function lock()
     {
         return view('lock.lock');
-
     }
 
     //ارسال کلمه عبور جدید برای پرسنل
     public function RestPassword(Request $request)
     {
+        $this->validate($request, [
+            'phone' => 'required',
+        ], [
+            'phone.required' => 'لطفا شماره ثبت شده در سیستم را وارد کنید',
+        ]);
         $users = User::where('phone', $request->input('phone'))->get();
         foreach ($users as $user)
             if ($user) {
@@ -282,8 +283,6 @@ class UserController extends Controller
             }
         session()->flash('pass-error', 'شماره وارد شده اشتباه است کاربری با این شماره در سیستم موجود نمیباشد');
         return back();
-
-
     }
 }
 

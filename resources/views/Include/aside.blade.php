@@ -41,6 +41,11 @@
 
                         <li><a href="{{route('admin.user.show')}}"><i class="fa fa-circle-o"></i>لیست کاربران</a></li>
                     @endcan
+
+
+                        <li><a href="{{route('admin.user.alternatives')}}"><i class="fa fa-circle-o"></i>جایگزینی</a>
+                        </li>
+
                 </ul>
             </li>
         @endif

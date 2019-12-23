@@ -44,6 +44,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/role/update', 'RoleController@update')->name('admin.role.update');
     Route::get('/role/delete/{id?}', 'RoleController@delete')->name('admin.role.delete');
 
+    //AlternativesController
+    Route::get('/alternatives/wizard', 'AlternativesController@wizard')->name('admin.user.alternatives');
+    Route::post('/alternatives/store', 'AlternativesController@store')->name('admin.user.alternatives.store');
+
+
     //TestController
     Route::get('test', 'TestController@showDatatable');
     Route::post('demos/sortabledatatable', 'TestController@updateOrder');

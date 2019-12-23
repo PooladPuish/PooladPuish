@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <title>ورود به پنل مدیریت پولاد</title>
-    <link rel="shortcut icon" type="image/x-icon" href="{{url('/public/icon/logo.png')}}" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{url('/public/icon/logo.png')}}"/>
 
     <link href="{{asset('/public/assets/global/plugins/bootstrap/css/bootstrap-rtl.min.css')}}" rel="stylesheet"
           type="text/css"/>
@@ -58,10 +58,6 @@
                 <p>سیستم جامع مدیریت گروه صنعتی پولاد پویش</p>
                 <form method="POST" action="{{ route('login') }}" class="login-form">
                     @csrf
-                    <div class="alert alert-danger display-hide">
-                        <button class="close" data-close="alert"></button>
-                        <span>لطفا نام کاربری و کلمه عبور خود را وارد کنید.</span>
-                    </div>
                     @if(session()->has('checkUser'))
                         <div id="alert" class="alert alert-danger alert-dismissible">
                             <button type="button" class="close pull-left" data-dismiss="alert" aria-hidden="true">
@@ -114,8 +110,8 @@
                     <h3 class="font-green">کلمه عبور خود را فراموش کرده ام؟</h3>
                     <p> لطفا شماره همراهی که در سیستم ثبت شده است را وارد کنید. </p>
                     <div class="form-group">
-                        <input class="form-control placeholder-no-fix form-group" type="text" autocomplete="off"
-                               placeholder="شماره همراه" name="phone"/>
+                        <input class="form-control form-control-solid placeholder-no-fix form-group" type="text" autocomplete="off"
+                               placeholder="شماره همراه" name="phone" required/>
                     </div>
                     <div class="form-actions">
                         <button type="button" id="back-btn" class="btn green btn-outline">بازگشت</button>
@@ -134,6 +130,9 @@
 <script src="{{asset('/public/assets/global/plugins/backstretch/jquery.backstretch.min.js')}}"
         type="text/javascript"></script>
 <script src="{{asset('/public//assets/pages/scripts/login-5.min.js')}}" type="text/javascript"></script>
+<script>
+    $(".alert").fadeTo(5000, 50).slideUp(1000);
+</script>
 </body>
 
 </html>

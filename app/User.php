@@ -50,4 +50,10 @@ class User extends Authenticatable
         }
         return !!$role->intersect($this->roles)->count();
     }
+
+    public function alternatives()
+    {
+        return $this->hasMany(Alternatives::class);
+
+    }
 }

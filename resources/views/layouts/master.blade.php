@@ -56,14 +56,15 @@
             font-style: normal;
         }
     </style>
-    <link rel="shortcut icon" type="image/x-icon" href="{{url('/public/icon/logo.png')}}" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{url('/public/icon/logo.png')}}"/>
+    <link href="{{asset('/public/assets/persian-datepicker.css')}}" rel="stylesheet" type="text/css"/>
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini" style="font-family: Shahab">
 <div class="wrapper">
     <header class="main-header">
         <!-- Logo -->
-        <a href="index2.html" class="logo">
+        <a href="#" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini">پولاد</span>
             <!-- logo for regular state and mobile devices -->
@@ -235,6 +236,10 @@
                                 <li><a href="{{route('admin.user.show')}}"><i class="fa fa-circle-o"></i>لیست
                                         کاربران</a></li>
                             @endcan
+                            <li><a href="{{route('admin.user.alternatives')}}"><i
+                                        class="fa fa-circle-o"></i>جایگزینی</a>
+                            </li>
+
                         </ul>
                     </li>
                 @endif
@@ -318,6 +323,22 @@
         placeholder: "سطح دسترسی کاربر را انتخاب کنین",
         allowClear: true
     });
+    $("#singl").select2({
+        language: {
+            noResults: function() {
+                return 'کاربری با این نام یافت نشد';
+            },
+        },
+        placeholder: "لطفا فرد جایگزین را انتخاب کنین",
+    });
+    $("#multipl").select2({
+        language: {
+            noResults: function() {
+                return 'کاربری با این نام یافت نشد';
+            },
+        },
+        placeholder: "لطفا کاربر را انتخاب کنین",
+    });
 </script>
 {{--<script src="{{asset('/public/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>--}}
 {{--<script src="{{asset('/public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>--}}
@@ -327,6 +348,16 @@
         type="text/javascript"></script>
 <script src="{{asset('/public/assets/pages/scripts/table-datatables-colreorder.js')}}"
         type="text/javascript"></script>
-
+<script src="{{asset('/public/assets/persian-date.js')}}"></script>
+<script src="{{asset('/public/assets/persian-datepicker.js')}}"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".example1").persianDatepicker({
+            observer: true,
+            format: 'YYYY/M/D',
+            altField: '.example1-alt',
+        });
+    });
+</script>
 </body>
 </html>

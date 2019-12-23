@@ -27,9 +27,9 @@ var TableDatatablesColreorder = function () {
 
             // setup buttons extentension: http://datatables.net/extensions/buttons/
             buttons: [
-                { extend: 'print', className: 'btn dark btn-outline' },
-                { extend: 'pdf', className: 'btn green btn-outline' },
-                { extend: 'csv', className: 'btn purple btn-outline ' }
+                {extend: 'print', className: 'btn dark btn-outline'},
+                {extend: 'pdf', className: 'btn green btn-outline'},
+                {extend: 'csv', className: 'btn purple btn-outline '}
             ],
 
             // setup responsive extension: http://datatables.net/extensions/responsive/
@@ -38,7 +38,7 @@ var TableDatatablesColreorder = function () {
             // setup colreorder extension: http://datatables.net/extensions/colreorder/
             colReorder: {
                 reorderCallback: function () {
-                    console.log( 'callback' );
+                    console.log('callback');
                 }
             },
 
@@ -48,7 +48,7 @@ var TableDatatablesColreorder = function () {
 
             "lengthMenu": [
                 [5, 10, 15, 20, -1],
-                [5, 10, 15, 20, "All"] // change per page values here
+                ["۵", 10, 15, 20, "نمایش همه"] // change per page values here
             ],
             // set the initial value
             "pageLength": 10,
@@ -88,15 +88,15 @@ var TableDatatablesColreorder = function () {
             //},
 
             buttons: [
-                { extend: 'print', className: 'btn default' },
-                { extend: 'pdf', className: 'btn default' },
-                { extend: 'csv', className: 'btn default' }
+                {extend: 'print', className: 'btn default'},
+                {extend: 'pdf', className: 'btn default'},
+                {extend: 'csv', className: 'btn default'}
             ],
 
             // setup colreorder extension: http://datatables.net/extensions/colreorder/
             colReorder: {
                 reorderCallback: function () {
-                    console.log( 'callback' );
+                    console.log('callback');
                 }
             },
 
@@ -106,7 +106,7 @@ var TableDatatablesColreorder = function () {
 
             "lengthMenu": [
                 [5, 10, 15, 20, -1],
-                [5, 10, 15, 20, "All"] // change per page values here
+                ['۵', '۱۰', '۱۵', '۲۰', "همه"] // change per page values here
             ],
             // set the initial value
             "pageLength": 10,
@@ -137,6 +137,6 @@ var TableDatatablesColreorder = function () {
 
 }();
 
-jQuery(document).ready(function() {
+jQuery(document).ready(function () {
     TableDatatablesColreorder.init();
 });

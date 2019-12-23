@@ -56,6 +56,8 @@
             font-style: normal;
         }
     </style>
+    <link rel="shortcut icon" type="image/x-icon" href="{{url('/public/icon/logo.png')}}" />
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini" style="font-family: Shahab">
 <div class="wrapper">

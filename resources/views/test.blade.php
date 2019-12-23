@@ -1,6 +1,6 @@
 @extends('layouts.master')
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js"></script>
+<script src="{{asset('/public/assets/sort1.js')}}"></script>
+<script src="{{asset('/public/assets/sort2.js')}}"></script>
 @section('content')
     @include('message.msg')
     <div class="row">
@@ -26,7 +26,7 @@
                         @foreach($tests as $test)
                             <tr class="row1" data-id="{{ $test->id }}">
                                 <td>
-                                    <img src="{{url('/public/icon/icons8-sort-80.png')}}" width="25"
+                                    <img src="{{url('/public/icon/icons8-move-grabber-50.png')}}" width="25"
                                     title="اولویت بندی">
                                 </td>
                                 <td>{{ $test->name }}</td>
@@ -40,12 +40,6 @@
             </div>
         </div>
     </div>
-
-    <!-- jQuery UI -->
-    <script type="text/javascript" src="//code.jquery.com/ui/1.12.1/jquery-ui.js" ></script>
-
-    <!-- Datatables Js-->
-    <script type="text/javascript" src="//cdn.datatables.net/v/dt/dt-1.10.12/datatables.min.js"></script>
 
     <script type="text/javascript">
         $(function () {

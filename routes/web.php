@@ -15,11 +15,10 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+//RestPasswordUser
+Route::post('/users/RestPassword', 'UserController@RestPassword')->name('admin.user.RestPassword');
 
 Auth::routes();
-Route::get('test','TestController@showDatatable');
-Route::post('demos/sortabledatatable','TestController@updateOrder');
-
 //HomeController
 Route::get('/home', 'HomeController@index')->name('home')->middleware('checkUser');
 
@@ -45,4 +44,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/role/update', 'RoleController@update')->name('admin.role.update');
     Route::get('/role/delete/{id?}', 'RoleController@delete')->name('admin.role.delete');
 
+    //TestController
+    Route::get('test', 'TestController@showDatatable');
+    Route::post('demos/sortabledatatable', 'TestController@updateOrder');
+
+
 });
+
+

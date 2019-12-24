@@ -3,6 +3,9 @@
     foreach ($users as $user)
     $roles = \App\Role::where('id',$user->role_id)->get();
     foreach ($roles as $role)
+        $users = \App\User::all();
+        $alternatives = \App\Alternatives::whereNull('status')->whereNull('view')->get();
+              foreach ($alternatives as $alternative)
 @endphp
     <!DOCTYPE html>
 <html>
@@ -56,6 +59,22 @@
             font-style: normal;
         }
     </style>
+    <style>
+        .example-modal .modal {
+            position: relative;
+            top: auto;
+            bottom: auto;
+            right: auto;
+            left: auto;
+            display: block;
+            z-index: 1;
+        }
+
+        .example-modal .modal {
+            background: transparent !important;
+        }
+    </style>
+
     <link rel="shortcut icon" type="image/x-icon" href="{{url('/public/icon/logo.png')}}"/>
     <link href="{{asset('/public/assets/persian-datepicker.css')}}" rel="stylesheet" type="text/css"/>
 
@@ -109,26 +128,37 @@
                         </ul>
                     </li>
                     <!-- Notifications: style can be found in dropdown.less -->
+
+
                     <li class="dropdown notifications-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-bell-o"></i>
-                            <span class="label label-warning">1</span>
+                            @if(!empty($alternative))
+                                @if(auth()->user()->id == $alternative->alternate_id)
+                                    <span class="label label-warning">{{count($alternatives)}}</span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li class="header">1 اعلان جدید</li>
+                            <li class="header">{{count($alternatives)}} اعلان جدید</li>
                             <li>
                                 <!-- inner menu: contains the actual data -->
                                 <ul class="menu">
                                     <li>
-                                        <a href="#">
-                                            <i class="fa fa-warning text-yellow"></i> اخطار دقت کنید
+                                        <a data-toggle="modal" data-target="#modal-default">
+                                            <i class="fa fa-warning text-yellow"></i>{{count($alternatives)}}
+                                            درخواست
+                                            جابجایی برای شما
+                                            ثبت شده است
                                         </a>
                                     </li>
                                 </ul>
                             </li>
                             <li class="footer"><a href="#">نمایش همه</a></li>
                         </ul>
+                        @endif
+                        @endif
                     </li>
+
+
                     <li class="dropdown notifications-menu">
                         <a href="{{route('admin.user.lock')}}" class="dropdown-toggle">
                             <i class="fa fa-lock"></i>
@@ -141,7 +171,8 @@
                             @if(!empty(auth()->user()->avatar))
                                 <img src="{{url(auth()->user()->avatar)}}" class="user-image" alt="User Image">
                             @else
-                                <img src="{{url('/public/icon/male-user.png')}}" class="user-image" alt="User Image">
+                                <img src="{{url('/public/icon/male-user.png')}}" class="user-image"
+                                     alt="User Image">
                             @endif
 
 
@@ -240,6 +271,11 @@
                                         class="fa fa-circle-o"></i>جایگزینی</a>
                             </li>
 
+                                <li><a href="{{route('admin.detail.wizard')}}"><i
+                                            class="fa fa-circle-o"></i>جزییات</a>
+                                </li>
+
+
                         </ul>
                     </li>
                 @endif
@@ -282,6 +318,37 @@
         <strong>تمام حقوق این سیستم متعلق به <a>گروه صنعتی پولاد پویش</a> میباشد.</strong>
     </footer>
 </div>
+<div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">اطلاعات جابجایی</h4>
+            </div>
+            <div class="modal-body">
+                @foreach($users as $user)
+                    @if(!empty($alternative))
+                        @if($user->id == $alternative->user_id)
+                            <p>{{auth()->user()->name}} عزیز شما برای جایگزینی {{$user->name}} از
+                                تاریخ {{$alternative->from}} تا تاریخ {{$alternative->ToDate}} انتخاب شده اید لطفا در
+                                نظر
+                                داشته باشید در این مدت تمام دسترسی های {{$user->name}} برای شما نیز قابل دسترس میباشد
+                                .</p>
+                        @endif
+                    @endif
+                @endforeach
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">خروج</button>
+                <a type="button" class="btn btn-primary" href="{{route('admin.user.alternatives.view')}}">تایید</a>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
 <!-- ./wrapper -->
 <!-- jQuery 3 -->
 <script src="{{asset('/public/bower_components/jquery/dist/jquery.min.js')}}"></script>
@@ -325,7 +392,7 @@
     });
     $("#singl").select2({
         language: {
-            noResults: function() {
+            noResults: function () {
                 return 'کاربری با این نام یافت نشد';
             },
         },
@@ -333,7 +400,7 @@
     });
     $("#multipl").select2({
         language: {
-            noResults: function() {
+            noResults: function () {
                 return 'کاربری با این نام یافت نشد';
             },
         },
@@ -354,7 +421,7 @@
     $(document).ready(function () {
         $(".example1").persianDatepicker({
             observer: true,
-            format: 'YYYY/M/D',
+            format: 'YYYY/MM/DD',
             altField: '.example1-alt',
         });
     });

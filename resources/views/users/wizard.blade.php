@@ -25,7 +25,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label>کد ملی</label>
+                                    <label>نام کاربری</label>
                                     <input type="text" id="email" name="email" class="form-control"
                                            required>
                                 </div>
@@ -34,13 +34,6 @@
                                 <div class="form-group">
                                     <label>شماره تماس</label>
                                     <input type="text" id="phone" name="phone" class="form-control"
-                                           required>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>شماره پرسنلی</label>
-                                    <input type="text" id="personnel_id" name="personnel_id" class="form-control"
                                            required>
                                 </div>
                             </div>
@@ -64,6 +57,13 @@
                                     <input type="file" name="avatar" class="form-control">
                                 </div>
                             </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>امضا</label>
+                                    <input type="file" name="sign" class="form-control">
+                                </div>
+                            </div>
+
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>کلمه عبور</label>

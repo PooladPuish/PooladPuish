@@ -19,6 +19,8 @@ class CreateAlternativesTable extends Migration
             $table->unsignedBigInteger('alternate_id')->index();
             $table->string('from');
             $table->string('ToDate');
+            $table->string('status')->nullable();
+            $table->string('view')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')

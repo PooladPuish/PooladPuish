@@ -24,7 +24,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label>کد ملی</label>
+                                    <label>نام کاربری</label>
                                     <input type="text" id="email" name="email" class="form-control"
                                            required @if($id) value="{{$id->email}}" @endif>
                                 </div>
@@ -34,13 +34,6 @@
                                     <label>شماره تماس</label>
                                     <input type="text" id="phone" name="phone" class="form-control"
                                            required @if($id) value="{{$id->phone}}" @endif>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>شماره پرسنلی</label>
-                                    <input type="text" id="personnel_id" name="personnel_id" class="form-control"
-                                           required @if($id) value="{{$id->personnel_id}}" @endif>
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -69,10 +62,18 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
+                                    <label>امضا</label>
+                                    <input type="file" name="sign" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
                                     <label>کلمه عبور</label>
                                     <input type="text" id="password" name="password" class="form-control">
                                 </div>
                             </div>
+
                         </div>
                         <div class="form-group">
                             <input type="submit" value="ویرایش کاربر" class="btn btn-primary">

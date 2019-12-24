@@ -32,26 +32,22 @@ class UserController extends Controller
                 'avatar' => 'mimes:jpeg,jpg,png',
                 'name' => 'required',
                 'phone' => 'required',
-                'personnel_id' => 'required|unique:users',
                 'password' => 'required',
                 'email' => 'required|unique:users',
             ], [
                 'email.unique' => 'کاربری با این کد ملی در سیستم موجود است.',
                 'email.required' => 'پر کردن فیلد کد ملی الزامی میباشد.',
-                'personnel_id.unique' => 'کاربری با این شماره پرسنلی در سیستم موجود است.',
             ]);
         } else
             $this->validate($request, [
                 'name' => 'required',
                 'phone' => 'required',
-                'personnel_id' => 'required|unique:users',
                 'password' => 'required',
                 'email' => 'required|unique:users',
 
             ], [
                 'email.unique' => 'کاربری با این کد ملی در سیستم موجود است.',
                 'email.required' => 'پر کردن فیلد کد ملی الزامی میباشد.',
-                'personnel_id.unique' => 'کاربری با این شماره پرسنلی در سیستم موجود است.',
 
             ]);
         if ($request->hasFile('avatar')) {
@@ -65,7 +61,6 @@ class UserController extends Controller
             'name' => $request['name'],
             'email' => $request['email'],
             'phone' => $request['phone'],
-            'personnel_id' => $request['personnel_id'],
             'password' => Hash::make($request['password']),
             'avatar' => $avatar,
         ]);
@@ -156,8 +151,12 @@ class UserController extends Controller
     //نمایش لیست کاربران
     public function show(Request $request)
     {
-        $users = User::orderBy('id', 'DESC')->get();
-        return view('users.show', compact('users'));
+        $details = \DB::table('detail_user')->where('user_id', auth()->user()->id)->get();
+        foreach ($details as $detail)
+            $check_details = \App\Detail::where('id', $detail->detail_id)->get();
+        foreach ($check_details as $check_detail)
+            $users = User::orderBy('id', 'DESC')->get();
+        return view('users.show', compact('users', 'check_detail'));
     }
 
 //فعال و غیر فعال کردن کاربر
@@ -207,20 +206,11 @@ class UserController extends Controller
                 'email.required' => 'پر کردن فیلد کد ملی الزامی میباشد.',
             ]);
         }
-        if ($user->personnel_id != $request->input('personnel_id')) {
-            $this->validate($request, [
-                'personnel_id' => 'required|unique:users',
-            ], [
-                'personnel_id.unique' => 'کاربری با این شماره پرسنلی در سیستم موجود است.',
-                'personnel_id.required' => 'پر کردن فیلد شماره پرسنلی الزامی میباشد.',
-            ]);
-        }
         if (!empty($request->input('avatar'))) {
             $this->validate($request, [
                 'avatar' => 'mimes:jpeg,jpg,png',
                 'name' => 'required',
                 'phone' => 'required',
-                'personnel_id' => 'required',
                 'email' => 'required',
             ], [
                 'email.required' => 'پر کردن فیلد کد ملی الزامی میباشد.',
@@ -229,7 +219,6 @@ class UserController extends Controller
             $this->validate($request, [
                 'name' => 'required',
                 'phone' => 'required',
-                'personnel_id' => 'required',
                 'email' => 'required',
 
             ], [
@@ -251,7 +240,6 @@ class UserController extends Controller
             'name' => $request['name'],
             'email' => $request['email'],
             'phone' => $request['phone'],
-            'personnel_id' => $request['personnel_id'],
             'password' => $pass,
             'avatar' => $avatar,
         ]);

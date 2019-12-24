@@ -32,6 +32,7 @@ class AuthServiceProvider extends ServiceProvider
             });
         }
 
+
     }
 
     protected function getPermission()

@@ -47,6 +47,11 @@ Route::group(['middleware' => ['auth']], function () {
     //AlternativesController
     Route::get('/alternatives/wizard', 'AlternativesController@wizard')->name('admin.user.alternatives');
     Route::post('/alternatives/store', 'AlternativesController@store')->name('admin.user.alternatives.store');
+    Route::get('/alternatives/view', 'AlternativesController@view')->name('admin.user.alternatives.view');
+
+    //DetailController
+    Route::get('/detail/wizard', 'DetailController@wizard')->name('admin.detail.wizard');
+    Route::post('/detail/store', 'DetailController@store')->name('admin.detail.store');
 
 
     //TestController

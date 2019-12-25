@@ -268,48 +268,57 @@
                             @can('لیست کاربران')
 
                                 <li><a href="{{route('admin.user.show')}}"><i class="fa fa-circle-o"></i>لیست
-                                        کاربران</a></li>
+                                        کاربران</a>
+                                </li>
                             @endcan
-                            @can('ثبت بخش جدید')
-
+                            @can('ثبت دسترسی جدید')
                                 <li><a href="{{route('admin.role.wizard')}}"><i class="fa fa-circle-o"></i>ثبت دسترسی
                                         جدید</a>
                                 </li>
                             @endcan
-                            @can('لیست بخش ها')
-
+                            @can('لیست دسترسی ها')
                                 <li><a href="{{route('admin.role.show')}}"><i class="fa fa-circle-o"></i>لیست دسترسی ها</a>
                                 </li>
                             @endcan
-                            <li><a href="{{route('admin.user.alternatives')}}"><i
-                                        class="fa fa-circle-o"></i>تعیین جانشین</a>
-                            </li>
+                            @can('تعیین جانشین')
+                                <li><a href="{{route('admin.user.alternatives')}}"><i
+                                            class="fa fa-circle-o"></i>تعیین جانشین</a>
+                                </li>
+                            @endcan
+                            @can('دسترسی اجزاء')
 
-                            <li><a href="{{route('admin.detail.wizard')}}"><i
-                                        class="fa fa-circle-o"></i>دسترسی اجزاء</a>
-                            </li>
+                                <li><a href="{{route('admin.detail.wizard')}}"><i
+                                            class="fa fa-circle-o"></i>دسترسی اجزاء</a>
+                                </li>
+                            @endcan
                         </ul>
                     </li>
                 @endif
 
+                @if(Gate::check('بازسازی نرم افزار') || Gate::check('شروع به کار نرم افزار'))
 
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-hourglass-start"></i> <span>تنظیمات نرم افزار</span>
-                        <span class="pull-left-container">
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-hourglass-start"></i> <span>تنظیمات نرم افزار</span>
+                            <span class="pull-left-container">
               <i class="fa fa-angle-right pull-left"></i>
             </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="{{route('admin.users.system.stop')}}"><i
-                                    class="fa fa-circle-o"></i>بازسازی نرم افزار</a>
-                        </li>
-                        <li><a href="{{route('admin.users.system.start')}}"><i
-                                    class="fa fa-circle-o"></i>شروع به کار نرم افزار</a>
-                        </li>
+                        </a>
+                        <ul class="treeview-menu">
+                            @can('بازسازی نرم افزار')
+                                <li><a href="{{route('admin.users.system.stop')}}"><i
+                                            class="fa fa-circle-o"></i>بازسازی نرم افزار</a>
+                                </li>
+                            @endcan
+                            @can('شروع به کار نرم افزار')
+                                <li><a href="{{route('admin.users.system.start')}}"><i
+                                            class="fa fa-circle-o"></i>شروع به کار نرم افزار</a>
+                                </li>
+                            @endcan
 
-                    </ul>
-                </li>
+                        </ul>
+                    </li>
+                @endif
             </ul>
         </section>
         <!-- /.sidebar -->

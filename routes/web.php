@@ -22,7 +22,7 @@ Auth::routes();
 //HomeController
 Route::get('/home', 'HomeController@index')->name('home')->middleware('checkUser');
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth', 'web']], function () {
     //UserController
     Route::post('/user/update', 'UserController@update')->name('admin.user.update');
     Route::post('/user/reset', 'UserController@reset')->name('admin.user.reset.pass');

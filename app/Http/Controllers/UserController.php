@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Detail;
 use App\Role;
 use App\User;
 use Illuminate\Http\Request;
@@ -17,6 +18,10 @@ use function App\Providers\MsgSuccess;
 
 class UserController extends Controller
 {
+    public function isOnline()
+    {
+        return \Cache::has('active' . $this->id);
+    }
     //نمایش فرم ثبت کاربر جدید
     public function wizard()
     {
@@ -151,12 +156,17 @@ class UserController extends Controller
     //نمایش لیست کاربران
     public function show(Request $request)
     {
-        $details = \DB::table('detail_user')->where('user_id', auth()->user()->id)->get();
-        foreach ($details as $detail)
-            $check_details = \App\Detail::where('id', $detail->detail_id)->get();
-        foreach ($check_details as $check_detail)
+        $detail_users = \DB::table('detail_user')
+            ->where('user_id', auth()->user()->id)
+            ->pluck('detail_id');
+        $permissions = Detail::get();
+        if (count($detail_users) > 0) {
             $users = User::orderBy('id', 'DESC')->get();
-        return view('users.show', compact('users', 'check_detail'));
+            return view('users.show', compact('users', 'detail_users', 'permissions'));
+        } else {
+            $users = User::orderBy('id', 'DESC')->get();
+            return view('users.list', compact('users'));
+        }
     }
 
 //فعال و غیر فعال کردن کاربر

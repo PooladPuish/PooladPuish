@@ -267,37 +267,25 @@
                                 <li><a href="{{route('admin.user.show')}}"><i class="fa fa-circle-o"></i>لیست
                                         کاربران</a></li>
                             @endcan
-                            <li><a href="{{route('admin.user.alternatives')}}"><i
-                                        class="fa fa-circle-o"></i>جایگزینی</a>
-                            </li>
-
-                                <li><a href="{{route('admin.detail.wizard')}}"><i
-                                            class="fa fa-circle-o"></i>جزییات</a>
-                                </li>
-
-
-                        </ul>
-                    </li>
-                @endif
-                @if(Gate::check('ثبت بخش جدید') || Gate::check('لیست بخش ها'))
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-edit"></i> <span>مدیریت بخش ها</span>
-                            <span class="pull-left-container">
-              <i class="fa fa-angle-right pull-left"></i>
-            </span>
-                        </a>
-                        <ul class="treeview-menu">
                             @can('ثبت بخش جدید')
 
-                                <li><a href="{{route('admin.role.wizard')}}"><i class="fa fa-circle-o"></i>ثبت بخش جدید</a>
+                                <li><a href="{{route('admin.role.wizard')}}"><i class="fa fa-circle-o"></i>ثبت دسترسی جدید</a>
                                 </li>
                             @endcan
                             @can('لیست بخش ها')
 
-                                <li><a href="{{route('admin.role.show')}}"><i class="fa fa-circle-o"></i>لیست بخش ها</a>
+                                <li><a href="{{route('admin.role.show')}}"><i class="fa fa-circle-o"></i>لیست دسترسی ها</a>
                                 </li>
                             @endcan
+                            <li><a href="{{route('admin.user.alternatives')}}"><i
+                                        class="fa fa-circle-o"></i>تعیین جانشین</a>
+                            </li>
+
+                            <li><a href="{{route('admin.detail.wizard')}}"><i
+                                        class="fa fa-circle-o"></i>دسترسی اجزاء</a>
+                            </li>
+
+
                         </ul>
                     </li>
                 @endif

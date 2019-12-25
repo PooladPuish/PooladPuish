@@ -25,6 +25,7 @@ class RoleController extends Controller
     //ثبت بخش جدید
     public function store(Request $request)
     {
+        dd($request->all());
         $this->validate($request, [
             'name' => 'required',
             'permission' => 'required',

@@ -52,7 +52,7 @@ Route::group(['middleware' => ['auth', 'web']], function () {
     Route::get('/alternatives/view', 'AlternativesController@view')->name('admin.user.alternatives.view');
 
     //DetailController
-    Route::get('/detail/wizard', 'DetailController@wizard')->name('admin.detail.wizard');
+    Route::get('/detail/wizard/{id?}', 'DetailController@wizard')->name('admin.detail.wizard');
     Route::post('/detail/store', 'DetailController@store')->name('admin.detail.store');
 
 

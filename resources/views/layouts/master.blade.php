@@ -285,12 +285,6 @@
                                             class="fa fa-circle-o"></i>تعیین جانشین</a>
                                 </li>
                             @endcan
-                            @can('دسترسی اجزاء')
-
-                                <li><a href="{{route('admin.detail.wizard')}}"><i
-                                            class="fa fa-circle-o"></i>دسترسی اجزاء</a>
-                                </li>
-                            @endcan
                         </ul>
                     </li>
                 @endif
@@ -401,11 +395,22 @@
 <script src="{{asset('/public/assets/select2.js')}}"></script>
 <script>
     $("#single").select2({
-        placeholder: "سطح دسترسی کاربر را انتخاب کنین",
+        language: {
+            noResults: function () {
+                return 'نقش با این نام یافت نشد';
+            },
+        },
+        placeholder: " نقش کاربر را انتخاب کنین",
         allowClear: true
+
     });
     $("#multiple").select2({
-        placeholder: "سطح دسترسی کاربر را انتخاب کنین",
+        language: {
+            noResults: function () {
+                return 'نقش با این نام یافت نشد';
+            },
+        },
+        placeholder: " نقش کاربر را انتخاب کنین",
         allowClear: true
     });
     $("#singl").select2({

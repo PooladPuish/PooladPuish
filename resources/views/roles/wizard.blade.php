@@ -136,7 +136,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label>عنوان بخش</label>
+                                    <label>عنوان نقش</label>
                                     <input type="text" id="name" name="name" class="form-control"
                                            required>
                                 </div>

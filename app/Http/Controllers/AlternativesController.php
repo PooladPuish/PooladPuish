@@ -31,12 +31,14 @@ class AlternativesController extends Controller
         }
         $check_users = Alternatives::whereNull('status')->get();
         foreach ($check_users as $check_user)
-            if ($check_user->user_id == $request->alternate_id) {
-                return MsgError('پرسنلی که برای جانشینی انتخاب کرده اید در مرخصی میباشد');
+            if (!empty($check_user)) {
+                if ($check_user->user_id == $request->alternate_id) {
+                    return MsgError('پرسنلی که برای جانشینی انتخاب کرده اید در مرخصی میباشد');
+                }
+                if ($check_user->alternate_id == $request->user_id) {
+                    return MsgError('پرسنل مرود نظر به عنوان جانشین در سیستم ثبت شده است');
+                }
             }
-        if ($check_user->alternate_id == $request->user_id) {
-            return MsgError('پرسنل مرود نظر به عنوان جانشین در سیستم ثبت شده است');
-        }
         try {
             \DB::transaction(function () use ($request) {
                 $success = Alternatives::create($request->all());

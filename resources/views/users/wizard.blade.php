@@ -39,8 +39,8 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label>دسترسی</label>
-                                    <select id="multiple" class="js-states form-control" name="roles[]" multiple
+                                    <label>نقش</label>
+                                    <select dir="rtl" id="multiple" class="js-states form-control" name="roles[]" multiple
                                             required>
                                         @foreach($roles as $role)
                                             @if(!empty($role))
@@ -67,7 +67,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>کلمه عبور</label>
-                                    <input type="text" id="password" name="password" class="form-control"
+                                    <input type="password" id="password" name="password" class="form-control"
                                            required>
                                 </div>
                             </div>

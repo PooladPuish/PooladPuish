@@ -70,8 +70,10 @@ class UserController extends Controller
             'password' => Hash::make($request['password']),
             'avatar' => $avatar,
         ]);
-        $user->roles()->sync($request->input('roles'));
-        return MsgSuccess('مشخصات کاربر جدید با موفقیت در سیستم ثبت شد');
+        $success = $user->roles()->sync($request->input('roles'));
+        if ($success) {
+            return MsgSuccess('مشخصات کاربر جدید با موفقیت در سیستم ثبت شد');
+        }
     }
 
     //نمایش پروفایل کاربر
@@ -176,15 +178,19 @@ class UserController extends Controller
         $sStatus = User::where('id', $id->id)->get();
         foreach ($sStatus as $status)
             if ($status->status == null) {
-                User::find($status->id)->update([
+                $ok = User::find($status->id)->update([
                     'status' => 1,
                 ]);
-                return MsgSuccess('تمام فعالیت های کاربر با موفقیت غیر فعال شد');
+                if ($ok) {
+                    return MsgSuccess('تمام فعالیت های کاربر با موفقیت غیر فعال شد');
+                }
             } else {
-                User::find($status->id)->update([
+                $success = User::find($status->id)->update([
                     'status' => null,
                 ]);
-                return MsgSuccess('تمام فعالیت های کاربر با موفقیت فعال شد');
+                if ($success) {
+                    return MsgSuccess('تمام فعالیت های کاربر با موفقیت فعال شد');
+                }
             }
     }
 
@@ -255,8 +261,10 @@ class UserController extends Controller
             'avatar' => $avatar,
         ]);
         DB::table('role_user')->where('user_id', $request->id)->delete();
-        $user->roles()->sync($request->input('roles'));
-        return MsgSuccess('مشخصات کاربر با موفقیت ویرایش شد');
+        $success = $user->roles()->sync($request->input('roles'));
+        if ($success) {
+            return MsgSuccess('مشخصات کاربر با موفقیت ویرایش شد');
+        }
     }
 
     //قفل صفحه
@@ -292,10 +300,14 @@ class UserController extends Controller
         if ($exit) {
             $user = User::where('id', auth()->user()->id)->get();
             foreach ($user as $use)
-                User::find($use->id)->update([
+                $success = User::find($use->id)->update([
                     'exit' => null,
                 ]);
-            return MsgSuccess('سیستم اماده بازسازی میباشد');
+            if ($success) {
+                return MsgSuccess('سیستم اماده بازسازی میباشد');
+            }
+        } else {
+            return MsgError('در حال حاضر امکان توقف سرویس های نرم افزار ممکن نیست');
         }
 
     }
@@ -307,8 +319,9 @@ class UserController extends Controller
         ]);
         if ($exit) {
             return MsgSuccess('نرم افزار با موفقیت راه اندازی شد');
+        } else {
+            return MsgSuccess('تمام سرویس های نرم افزار در حال اجرا هستند نیازی به راه اندازی نیست');
         }
-
     }
 }
 

@@ -133,21 +133,7 @@
                 <div class="form-group">
                     <form method="post" action="{{route('admin.detail.store')}}" class="mt-repeater">
                         @csrf
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>پرسنل</label>
-                                    <select id="singl" class="js-states form-control" name="user"
-                                            required>
-                                        @foreach($users as $user)
-                                            @if(!empty($user))
-                                                <option value="{{$user->id}}">{{$user->name}}</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
+                        <input type="hidden" name="id" value="{{$id->id}}">
                         <div class="box box-default">
                             <div class="box-header with-border">
                                 <h3 class="box-title">جزییات</h3>
@@ -186,7 +172,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="submit" value="ثبت بخش" class="btn btn-primary">
+                            <input type="submit" value="ثبت جزییات" class="btn btn-primary">
                         </div>
                     </form>
                 </div>

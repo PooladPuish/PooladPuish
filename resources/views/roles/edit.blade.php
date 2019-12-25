@@ -209,7 +209,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="submit" value="ویرایش بخش" class="btn btn-primary">
+                            <input type="submit" value="تایید" class="btn btn-primary">
+                            &nbsp;
+                            <a href="{{route('admin.role.show')}}" class="btn btn-danger">انصراف</a>
                         </div>
                     </form>
 

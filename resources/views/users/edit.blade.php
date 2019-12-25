@@ -38,9 +38,10 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label>دسترسی</label>
+                                    <label>نقش</label>
 
-                                    <select id="multiple" class="js-states form-control" name="roles[]" multiple
+                                    <select dir="rtl" id="multiple" class="js-states form-control" name="roles[]"
+                                            multiple
                                             required>
 
                                         @foreach($roles as $role)
@@ -70,13 +71,16 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>کلمه عبور</label>
-                                    <input type="text" id="password" name="password" class="form-control">
+                                    <input type="password" id="password" name="password" class="form-control">
                                 </div>
                             </div>
 
                         </div>
+                        <hr/>
                         <div class="form-group">
-                            <input type="submit" value="ویرایش کاربر" class="btn btn-primary">
+                            <input type="submit" value="تایید" class="btn btn-primary">
+                            &nbsp;
+                            <a href="{{route('admin.user.show')}}" class="btn btn-danger">انصراف</a>
                         </div>
                     </form>
 

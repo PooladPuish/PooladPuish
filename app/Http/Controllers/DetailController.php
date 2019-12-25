@@ -9,22 +9,22 @@ use function App\Providers\MsgSuccess;
 
 class DetailController extends Controller
 {
-    public function wizard()
+    public function wizard(User $id)
     {
         $details = Detail::all();
-        $users = User::all();
-        return view('details.wizard', compact('details', 'users'));
+        return view('details.wizard', compact('details', 'id'));
 
     }
 
     public function store(Request $request)
     {
-        $userss = User::where('id', $request['user'])->get();
-        foreach ($userss as $users)
-            $user = $users->id;
+        $this->validate($request, [
+            'detail' => 'required',
+        ]);
+
         foreach ($request->input('detail') as $detail) {
             $details = \DB::table('detail_user')->insert([
-                'user_id' => $user,
+                'user_id' => $request->id,
                 'detail_id' => $detail,
             ]);
         }

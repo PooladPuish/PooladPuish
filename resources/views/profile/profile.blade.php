@@ -78,7 +78,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-sm-offset-2 col-sm-10">
-                                                    <button type="submit" class="btn btn-primary">ویرایش مشخصات</button>
+                                                    <button type="submit" class="btn btn-primary">تایید مشخصات</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -112,7 +112,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-sm-offset-2 col-sm-10">
-                                                    <button type="submit" class="btn btn-primary">ویرایش تصویر کاربری
+                                                    <button type="submit" class="btn btn-primary">تایید تصویر کاربری
                                                     </button>
                                                 </div>
                                             </div>
@@ -160,7 +160,7 @@
 
                                                 <div class="form-group">
                                                     <div class="col-sm-offset-2 col-sm-10">
-                                                        <button type="submit" class="btn btn-primary">ویرایش کلمه عبور
+                                                        <button type="submit" class="btn btn-primary">تایید کلمه عبور
                                                         </button>
                                                     </div>
                                                 </div>

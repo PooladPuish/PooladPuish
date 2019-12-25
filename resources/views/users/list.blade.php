@@ -15,7 +15,7 @@
                         <thead>
                         <tr>
                             <th> نام و نام خانوادگی</th>
-                            <th>دسترسی</th>
+                            <th>نقش</th>
                             <th>نام کاربری</th>
                             <th> شماره تماس</th>
                             <th>انلاین</th>
@@ -31,9 +31,9 @@
                                 <td>
                                     @foreach($user->roles as $role)
                                         @if(!empty($role))
-                                            <span class="btn btn-danger">{{$role->name}}</span>
+                                            {{$role->name}}
                                         @else
-                                            <span class="btn btn-info">بدون دسترسی</span>
+                                            بدون دسترسی
                                         @endif
                                     @endforeach
                                 </td>
@@ -64,12 +64,17 @@
                                 </td>
                                 <td>
                                     <a href="{{route('admin.user.edit',$user->id)}}">
-                                        <img src="{{url('/public/icon/icons8-update-64.png')}}"
+                                        <img src="{{url('/public/icon/icons8-edit-144.png')}}"
                                              width="25" title="ویرایش">
                                     </a>
                                     <a href="{{route('admin.user.disable',$user->id)}}">
-                                        <img src="{{url('/public/icon/icons8-user-rights-50.png')}}"
+                                        <img src="{{url('/public/icon/icons8-key-144.png')}}"
                                              width="25" title="فعال و غیر فعال کردن کاربر">
+                                        <a href="{{route('admin.detail.wizard',$user->id)}}">
+                                            <img src="{{url('/public/icon/icons8-view-details-96.png')}}"
+                                                 width="25" title="افزودن جزییات">
+                                        </a>
+
                                     </a>
                             </tr>
                         @endforeach

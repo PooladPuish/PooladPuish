@@ -25,14 +25,15 @@ class RoleController extends Controller
     //ثبت بخش جدید
     public function store(Request $request)
     {
-        dd($request->all());
         $this->validate($request, [
             'name' => 'required',
             'permission' => 'required',
         ]);
         $role = Role::create(['name' => $request->input('name')]);
-        $role->permissions()->sync($request->input('permission'));
-        return MsgSuccess('بخش جدید با موفقیت در سیستم ثبت شد');
+        $success = $role->permissions()->sync($request->input('permission'));
+        if ($success) {
+            return MsgSuccess('بخش جدید با موفقیت در سیستم ثبت شد');
+        }
     }
 
     //نمایش لیست دسترسی ها
@@ -60,15 +61,19 @@ class RoleController extends Controller
         $role = Role::find($request->id);
         $role->name = $request->input('name');
         $role->save();
-        $role->permissions()->sync($request->input('permission'));
-        return MsgSuccess('بخش با موفقیت در سیستم ویرایش شد');
+        $success = $role->permissions()->sync($request->input('permission'));
+        if ($success) {
+            return MsgSuccess('بخش با موفقیت در سیستم ویرایش شد');
+        }
     }
 
     //حذف دسترسی ها
     public function delete(Role $id)
     {
-        $id->delete();
-        return MsgSuccess('دسترسی با موفقیت از سیستم حذف شد');
+        $success = $id->delete();
+        if ($success) {
+            return MsgSuccess('دسترسی با موفقیت از سیستم حذف شد');
+        }
     }
 
 

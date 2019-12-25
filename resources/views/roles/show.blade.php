@@ -14,7 +14,7 @@
                     <table class="table table-striped table-bordered table-hover" id="sample_2">
                         <thead>
                         <tr>
-                            <th>عنوان</th>
+                            <th>نقش</th>
                             <th>تاریخ ایجاد</th>
                             <th>عملیات</th>
                         </tr>
@@ -26,16 +26,21 @@
                                 <td>{{\Morilog\Jalali\Jalalian::forge($role->created_at)->format('Y/m/d')}}</td>
                                 <td>
                                     <a href="{{route('admin.role.edit',$role->id)}}">
-                                        <img src="{{url('/public/icon/icons8-update-64.png')}}"
+                                        <img src="{{url('/public/icon/icons8-edit-144.png')}}"
                                              width="25" title="ویرایش">
                                     </a>
-                                    <a href="{{route('admin.role.delete',$role->id)}}">
-                                        <img src="{{url('/public/icon/delete.png')}}"
-                                             width="25" title="حذف دسترسی">
-                                    </a>
+                                    @php
+                                        $ro =DB::table('role_user')->where('role_id',$role->id)->first();
+                                    @endphp
+                                    @if(empty($ro))
+                                        <a href="{{route('admin.role.delete',$role->id)}}">
+                                            <img src="{{url('/public/icon/icons8-delete-bin-96.png')}}"
+                                                 width="25" title="حذف دسترسی">
+                                        </a>
+                                    @endif
+                                    @endforeach
                                 </td>
                             </tr>
-                        @endforeach
                         </tbody>
                     </table>
                 </div>

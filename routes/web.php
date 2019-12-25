@@ -35,6 +35,8 @@ Route::group(['middleware' => ['auth', 'web']], function () {
     Route::get('/user/edit/{id?}', 'UserController@edit')->name('admin.user.edit');
     Route::post('/users/update', 'UserController@updates')->name('admin.user.updates');
     Route::get('/users/lock', 'UserController@lock')->name('admin.user.lock');
+    Route::get('/users/system/stop', 'UserController@stop')->name('admin.users.system.stop');
+    Route::get('/users/system/start', 'UserController@start')->name('admin.users.system.start');
 
     //RoleController
     Route::get('/role/wizard', 'RoleController@wizard')->name('admin.role.wizard');

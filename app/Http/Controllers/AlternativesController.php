@@ -29,16 +29,14 @@ class AlternativesController extends Controller
         if ($request->from > $request->ToDate or $request->from == $request->ToDate) {
             return MsgError('تاریخ انتخاب شده اشتباه است لطفا در انتخاب تاریخ جایگزینی دقت کنید');
         }
-        $checks = Alternatives::whereNull('status')->get();
-        foreach ($checks as $check)
-            if (!empty($check)) {
-                if ($request->alternate_id == $check->alternate_id) {
-                    return MsgError('پرسنلی که برای جایگزینی انتخاب کرده اید از قبل درسیستم درخواست جایگزینی فعال دارد');
-                }
-                if ($request->user_id == $check->user_id) {
-                    return MsgError('پرسنلی که قصد درخواست جابجایی دارد از قبل در سیتم درخواست جابجایی فعال دارد');
-                }
+        $check_users = Alternatives::whereNull('status')->get();
+        foreach ($check_users as $check_user)
+            if ($check_user->user_id == $request->alternate_id) {
+                return MsgError('پرسنلی که برای جانشینی انتخاب کرده اید در مرخصی میباشد');
             }
+        if ($check_user->alternate_id == $request->user_id) {
+            return MsgError('پرسنل مرود نظر به عنوان جانشین در سیستم ثبت شده است');
+        }
         try {
             \DB::transaction(function () use ($request) {
                 $success = Alternatives::create($request->all());
@@ -65,6 +63,7 @@ class AlternativesController extends Controller
                                 return MsgError('پرسنل مورد نظر دسترسی های لازم را داراست');
                             }
                         } catch (Exception $exception) {
+                            return MsgError('پرسنل مورد نظر دسترسی های لازم را داراست');
                         }
                     } else {
                         return MsgError('پرسنل مورد نظر دسترسی های لازم را داراست');
@@ -74,7 +73,7 @@ class AlternativesController extends Controller
             });
             return MsgSuccess('جایگزینی با موفقیت ثبت شد و اعلان برای کاربران ارسال خواهد شد');
         } catch (Exception $exception) {
-            DB::rollBack();
+            \DB::rollBack();
             return MsgError('پرسنل مورد نظر دسترسی های لازم را داراست');
         }
     }

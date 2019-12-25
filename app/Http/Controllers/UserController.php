@@ -22,6 +22,7 @@ class UserController extends Controller
     {
         return \Cache::has('active' . $this->id);
     }
+
     //نمایش فرم ثبت کاربر جدید
     public function wizard()
     {
@@ -281,6 +282,33 @@ class UserController extends Controller
             }
         session()->flash('pass-error', 'شماره وارد شده اشتباه است کاربری با این شماره در سیستم موجود نمیباشد');
         return back();
+    }
+
+    public function stop()
+    {
+        $exit = \DB::table('users')->update([
+            'exit' => 1,
+        ]);
+        if ($exit) {
+            $user = User::where('id', auth()->user()->id)->get();
+            foreach ($user as $use)
+                User::find($use->id)->update([
+                    'exit' => null,
+                ]);
+            return MsgSuccess('سیستم اماده بازسازی میباشد');
+        }
+
+    }
+
+    public function start()
+    {
+        $exit = \DB::table('users')->update([
+            'exit' => null,
+        ]);
+        if ($exit) {
+            return MsgSuccess('نرم افزار با موفقیت راه اندازی شد');
+        }
+
     }
 }
 

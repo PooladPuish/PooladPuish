@@ -44,6 +44,7 @@ class Kernel extends HttpKernel
             \RenatoMarinho\LaravelPageSpeed\Middleware\RemoveQuotes::class,
             \RenatoMarinho\LaravelPageSpeed\Middleware\CollapseWhitespace::class,
             \App\Http\Middleware\LastUserActivity::class,
+            \App\Http\Middleware\ExitUsers::class,
 
         ],
 

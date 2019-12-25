@@ -4,7 +4,10 @@
     $roles = \App\Role::where('id',$user->role_id)->get();
     foreach ($roles as $role)
         $users = \App\User::all();
-        $alternatives = \App\Alternatives::whereNull('status')->whereNull('view')->get();
+        $alternatives = \App\Alternatives::where('alternate_id',auth()->user()->id)
+        ->whereNull('status')
+        ->whereNull('view')
+        ->get();
               foreach ($alternatives as $alternative)
 @endphp
     <!DOCTYPE html>
@@ -269,7 +272,8 @@
                             @endcan
                             @can('ثبت بخش جدید')
 
-                                <li><a href="{{route('admin.role.wizard')}}"><i class="fa fa-circle-o"></i>ثبت دسترسی جدید</a>
+                                <li><a href="{{route('admin.role.wizard')}}"><i class="fa fa-circle-o"></i>ثبت دسترسی
+                                        جدید</a>
                                 </li>
                             @endcan
                             @can('لیست بخش ها')
@@ -284,11 +288,28 @@
                             <li><a href="{{route('admin.detail.wizard')}}"><i
                                         class="fa fa-circle-o"></i>دسترسی اجزاء</a>
                             </li>
-
-
                         </ul>
                     </li>
                 @endif
+
+
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-hourglass-start"></i> <span>تنظیمات نرم افزار</span>
+                        <span class="pull-left-container">
+              <i class="fa fa-angle-right pull-left"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{route('admin.users.system.stop')}}"><i
+                                    class="fa fa-circle-o"></i>بازسازی نرم افزار</a>
+                        </li>
+                        <li><a href="{{route('admin.users.system.start')}}"><i
+                                    class="fa fa-circle-o"></i>شروع به کار نرم افزار</a>
+                        </li>
+
+                    </ul>
+                </li>
             </ul>
         </section>
         <!-- /.sidebar -->
@@ -312,7 +333,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">اطلاعات جابجایی</h4>
+                <h4 class="modal-title">اطلاعات جانشینی</h4>
             </div>
             <div class="modal-body">
                 @foreach($users as $user)

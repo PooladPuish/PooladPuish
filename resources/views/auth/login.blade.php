@@ -46,6 +46,7 @@
             })
         </script>
     @endif
+
     <div class="row bs-reset">
         <div class="col-md-6 bs-reset mt-login-5-bsfix">
             <div class="login-bg">
@@ -65,6 +66,17 @@
                             </button>
                             <h4><i class="icon fa fa-trash"></i>خطا!</h4>
                             کاربر عزیز دسترسی های شما غیر فعال شده است.
+                        </div>
+
+                    @endif
+
+                    @if(session()->has('exit'))
+                        <div id="alert" class="alert alert-info alert-dismissible">
+                            <button type="button" class="close pull-left" data-dismiss="alert" aria-hidden="true">
+                                &times;
+                            </button>
+                            <h4><i class="icon fa fa-trash"></i>به روز رسانی!</h4>
+                            پرسنل عزیز نرم افزار در حال به روزرسانی میباشد لطفا صبر کنید
                         </div>
 
                     @endif
@@ -110,7 +122,8 @@
                     <h3 class="font-green">کلمه عبور خود را فراموش کرده ام؟</h3>
                     <p> لطفا شماره همراهی که در سیستم ثبت شده است را وارد کنید. </p>
                     <div class="form-group">
-                        <input class="form-control form-control-solid placeholder-no-fix form-group" type="text" autocomplete="off"
+                        <input class="form-control form-control-solid placeholder-no-fix form-group" type="text"
+                               autocomplete="off"
                                placeholder="شماره همراه" name="phone" required/>
                     </div>
                     <div class="form-actions">
@@ -130,9 +143,6 @@
 <script src="{{asset('/public/assets/global/plugins/backstretch/jquery.backstretch.min.js')}}"
         type="text/javascript"></script>
 <script src="{{asset('/public//assets/pages/scripts/login-5.min.js')}}" type="text/javascript"></script>
-<script>
-    $(".alert").fadeTo(5000, 50).slideUp(1000);
-</script>
 </body>
 
 </html>

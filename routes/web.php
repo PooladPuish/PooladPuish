@@ -54,6 +54,7 @@ Route::group(['middleware' => ['auth', 'web']], function () {
     //DetailController
     Route::get('/detail/wizard/{id?}', 'DetailController@wizard')->name('admin.detail.wizard');
     Route::post('/detail/store', 'DetailController@store')->name('admin.detail.store');
+    Route::post('/detail/update', 'DetailController@update')->name('admin.detail.update');
 
 
     //TestController

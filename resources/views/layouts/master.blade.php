@@ -80,10 +80,48 @@
 
     <link rel="shortcut icon" type="image/x-icon" href="{{url('/public/icon/logo.png')}}"/>
     <link href="{{asset('/public/assets/persian-datepicker.css')}}" rel="stylesheet" type="text/css"/>
+    <style>
+        #loader {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background: url({{url('/public/icon/Preloader_2.gif')}}) center no-repeat #fff;
+        }
+    </style>
+    <style>
+        /* Expand button to all of option */
+        .select2-results__option.select2-results__message {
+            padding: 0px;
+        }
+        button#no-results-btn {
+            width: 100%;
+            height: 100%;
+            padding: 6px;
+        }
 
+        /* Make button look like other li elements */
+        button#no-results-btn {
+            border: 0;
+            background-color: white;
+            text-align: left;
+        }
+
+        /* Give button same hover effect */
+        .select2-results__option.select2-results__message:hover {
+            color: white;
+        }
+        button#no-results-btn:hover {
+            background-color: #5897fb;
+        }
+    </style>
 </head>
-<body class="hold-transition skin-blue sidebar-mini" style="font-family: Shahab">
-<div class="wrapper">
+<body class="hold-transition skin-blue sidebar-mini" style="font-family: Shahab"
+      onload="myFunction()">
+<div id="loader"></div>
+<div class="wrapper animate-bottom">
     <header class="main-header">
         <!-- Logo -->
         <a href="#" class="logo">
@@ -318,7 +356,7 @@
         <!-- /.sidebar -->
     </aside>
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="content-wrapper" style="display:none;" id="myDiv">
         <!-- Main content -->
         <section class="content">
             @yield('content')
@@ -446,6 +484,53 @@
             observer: true,
             format: 'YYYY/MM/DD',
             altField: '.example1-alt',
+        });
+    });
+</script>
+<script>
+    var myVar;
+
+    function myFunction() {
+        myVar = setTimeout(showPage, 3000);
+    }
+
+    function showPage() {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("myDiv").style.display = "block";
+    }
+</script>
+<script>
+    $(document).ready(function() {
+        $('#select2-example').select2({
+            width: '100%',
+            placeholder: 'لطفا نقش پرسنل را انتخاب کنید',
+            language: {
+                noResults: function () {
+                    return 'نقش با این نام یافت نشد';
+                },
+            },
+        });
+    });
+    $(document).ready(function() {
+        $('#select2-exampl').select2({
+            width: '100%',
+            placeholder: 'لطفا پرسنل را انتخاب کنید',
+            language: {
+                noResults: function () {
+                    return 'پرسنلی با این نام یافت نشد';
+                },
+            },
+        });
+    });
+    $(document).ready(function() {
+        $('#select2-examp').select2({
+            width: '100%',
+            placeholder: 'لطفا پرسنل را انتخاب کنید',
+            language: {
+                noResults: function () {
+                    return 'پرسنلی با این نام یافت نشد';
+                },
+            },
         });
     });
 </script>

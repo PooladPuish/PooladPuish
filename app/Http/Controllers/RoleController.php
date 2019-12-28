@@ -48,7 +48,8 @@ class RoleController extends Controller
     public function edit($id)
     {
         $role = Role::find($id);
-        $rolePermission = \DB::table("permission_role")->where("permission_role.role_id", $id)
+        $rolePermission = \DB::table("permission_role")
+            ->where("permission_role.role_id", $id)
             ->pluck("permission_role.permission_id", "permission_role.permission_id")
             ->all();
         $permissions = Permission::get();

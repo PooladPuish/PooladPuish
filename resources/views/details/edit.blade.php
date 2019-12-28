@@ -125,28 +125,18 @@
     <div class="portlet box blue">
         <div class="portlet-title">
             <div class="caption">
-                ویرایش بخش
+                افزودن جزییات
             </div>
         </div>
         <div class="portlet-body form">
             <div class="form-body">
                 <div class="form-group">
-                    <form method="post" action="{{route('admin.role.update')}}"
-                    class="mt-repeater">
+                    <form method="post" action="{{route('admin.detail.update')}}" class="mt-repeater">
                         @csrf
-                        <input type="hidden" name="id" value="{{$role->id}}">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>عنوان بخش</label>
-                                    <input type="text" id="name" name="name" class="form-control"
-                                           required value="{{$role->name}}">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box box-default"><!-- /.box-header -->
+                        <input type="hidden" name="id" value="{{$id->id}}">
+                        <div class="box box-default">
                             <div class="box-header with-border">
-                                <h3 class="box-title">دسترسی</h3>
+                                <h3 class="box-title">جزییات</h3>
                             </div>
                             <div class="tree-box box-border">
                                 <div class="row">
@@ -157,16 +147,16 @@
                                                     class="tree-control"></span>
                                                 <label>
                                                     &nbsp;
-                                                    <i class="fa fa-user light-blue"></i> مدیریت
+                                                    <i class="fa fa-user light-blue"></i> کاربران
                                                 </label>
                                                 <ul>
-                                                    @foreach($permissions as $value)
-                                                        @if(!empty($value))
-                                                            @if($value->label == "admin")
 
+                                                    @foreach($details as $detail)
+                                                        @if(!empty($detail))
+                                                            @if($detail->label == "user")
                                                                 <li>
-                                                                    <label>{{ Form::checkbox('permission[]',$value->id,in_array($value->id,$rolePermission)? true : false , array('class'=>'name')) }}
-                                                                        {{$value->name}}
+                                                                    <label>{{ Form::checkbox('detail[]',$detail->id,in_array($detail->id,$checks)? true : false , array('class'=>'name')) }}
+                                                                        {{$detail->name}}
                                                                     </label>
                                                                 </li>
                                                             @endif
@@ -180,11 +170,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="submit" value="ویرایش بخش" class="btn btn-primary">
+                            <input type="submit" value="ثبت جزییات" class="btn btn-primary">
                         </div>
                     </form>
-
-
                 </div>
             </div>
         </div>

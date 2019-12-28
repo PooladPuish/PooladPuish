@@ -19,7 +19,8 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>کاربر</label>
-                                    <select dir="rtl" id="multipl" class="js-states form-control" name="user_id"
+                                    <select dir="rtl" id="select2-examp" class="form-control"
+                                            name="user_id"
                                             required>
                                         @foreach($users as $user)
                                             @if(!empty($user))
@@ -32,7 +33,9 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>جایگزین</label>
-                                    <select dir="rtl" id="singl" class="js-states form-control" name="alternate_id"
+                                    <br/>
+                                    <select dir="rtl" id="select2-exampl" class="form-control"
+                                            name="alternate_id"
                                             required>
                                         @foreach($users as $user)
                                             @if(!empty($user))

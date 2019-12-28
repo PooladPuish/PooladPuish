@@ -72,7 +72,7 @@
                                              width="25" title="فعال و غیر فعال کردن کاربر">
                                         <a href="{{route('admin.detail.wizard',$user->id)}}">
                                             <img src="{{url('/public/icon/icons8-view-details-96.png')}}"
-                                                 width="25" title="افزودن جزییات">
+                                                 width="25" title="جزییات">
                                         </a>
 
                                     </a>

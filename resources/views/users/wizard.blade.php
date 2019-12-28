@@ -37,19 +37,6 @@
                                            required>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>نقش</label>
-                                    <select dir="rtl" id="multiple" class="js-states form-control" name="roles[]" multiple
-                                            required>
-                                        @foreach($roles as $role)
-                                            @if(!empty($role))
-                                                <option value="{{$role->id}}">{{$role->name}}</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
 
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -71,6 +58,22 @@
                                            required>
                                 </div>
                             </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>نقش</label>
+                                    <br/>
+                                    <select dir="rtl" id="select2-example" class="form-control"
+                                            name="roles[]" multiple
+                                            required>
+                                        @foreach($roles as $role)
+                                            @if(!empty($role))
+                                                <option value="{{$role->id}}">{{$role->name}}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
                         </div>
                         <hr/>
                         <div class="form-group">

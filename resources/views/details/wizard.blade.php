@@ -157,7 +157,8 @@
                                                                 <li>
                                                                     <label>
                                                                         <input type="checkbox" name="detail[]"
-                                                                               value="{{$detail->id}}"/>
+                                                                               value="{{$detail->id}}
+                                                                                   "/>
                                                                         {{$detail->name}}
                                                                     </label>
                                                                 </li>

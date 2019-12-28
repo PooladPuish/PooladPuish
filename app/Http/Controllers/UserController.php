@@ -159,13 +159,17 @@ class UserController extends Controller
     //نمایش لیست کاربران
     public function show(Request $request)
     {
-        $detail_users = \DB::table('detail_user')
-            ->where('user_id', auth()->user()->id)
-            ->pluck('detail_id');
+
+
+        $checks = \DB::table("detail_user")
+            ->where("user_id", auth()->user()->id)
+            ->pluck("detail_id", "detail_id")
+            ->all();
+        foreach ($checks as $check)
         $permissions = Detail::get();
-        if (count($detail_users) > 0) {
+        if (count($checks) > 0) {
             $users = User::orderBy('id', 'DESC')->get();
-            return view('users.show', compact('users', 'detail_users', 'permissions'));
+            return view('users.show', compact('users', 'permissions', 'check'));
         } else {
             $users = User::orderBy('id', 'DESC')->get();
             return view('users.list', compact('users'));

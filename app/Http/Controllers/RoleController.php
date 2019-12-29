@@ -14,7 +14,9 @@ use function App\Providers\MsgSuccess;
 
 class RoleController extends Controller
 {
-    //نمایش فرم ثبت بخش جدید
+    /**
+     * نمایش فرم ثبت بخش جدید*
+     */
     public function wizard()
     {
         $permissions = Permission::all();
@@ -22,7 +24,9 @@ class RoleController extends Controller
 
     }
 
-    //ثبت بخش جدید
+    /**
+     * در این بخش اطلاعات  از فرم گرفته میشود  و در حدولهای مربوط به سطح دسترسی در دیتا بیس ذخیره میشود*
+     */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -36,7 +40,9 @@ class RoleController extends Controller
         }
     }
 
-    //نمایش لیست دسترسی ها
+    /**
+     *نمایش لیست بخش ها*
+     */
     public function show(Request $request)
     {
         $roles = Role::orderBy('id', 'DESC')->get();
@@ -44,7 +50,9 @@ class RoleController extends Controller
 
     }
 
-    //نمایش فرم ویرایش دسترسی ها
+    /**
+     *نمایش فرم ویرایش بخش ها*
+     */
     public function edit($id)
     {
         $role = Role::find($id);
@@ -56,7 +64,9 @@ class RoleController extends Controller
         return view('roles.edit', compact('permissions', 'role', 'rolePermission'));
     }
 
-    //ویرایش دسترسی ها
+    /**
+     *به روزرسانی بخش ها*
+     */
     public function update(Request $request)
     {
         $role = Role::find($request->id);
@@ -68,7 +78,9 @@ class RoleController extends Controller
         }
     }
 
-    //حذف دسترسی ها
+    /**
+     *حذف بخش ها*
+     */
     public function delete(Role $id)
     {
         $success = $id->delete();
@@ -77,5 +89,23 @@ class RoleController extends Controller
         }
     }
 
+    /**
+     *نمایش فرم دسترسی ها*
+     */
+    public function permission()
+    {
+        $permissions = Permission::all();
+        return view('permissions.wizard', compact('permissions'));
+    }
 
+    /**
+     *ثبت دسترسی های حدید در سیستم*
+     */
+    public function Pstore(Request $request)
+    {
+
+        Permission::create($request->all());
+        return MsgSuccess('دسترسی جدید با موفقیت ثبت شد');
+
+    }
 }

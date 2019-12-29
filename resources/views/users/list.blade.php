@@ -16,7 +16,9 @@
                         <tr>
                             <th> نام و نام خانوادگی</th>
                             <th>نقش</th>
-                            <th>نام کاربری</th>
+                            @can('نام کاربری')
+                                <th>نام کاربری</th>
+                            @endcan
                             <th> شماره تماس</th>
                             <th>انلاین</th>
                             <th>تاریخ ایجاد</th>
@@ -37,7 +39,10 @@
                                         @endif
                                     @endforeach
                                 </td>
-                                <td>{{$user->email}}</td>
+                                @can('نام کاربری')
+
+                                    <td>{{$user->email}}</td>
+                                @endcan
                                 <td>{{$user->phone}}</td>
                                 <td>
                                     @if(Cache::has('active' . $user->id))
@@ -63,19 +68,24 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{route('admin.user.edit',$user->id)}}">
-                                        <img src="{{url('/public/icon/icons8-edit-144.png')}}"
-                                             width="25" title="ویرایش">
-                                    </a>
-                                    <a href="{{route('admin.user.disable',$user->id)}}">
-                                        <img src="{{url('/public/icon/icons8-key-144.png')}}"
-                                             width="25" title="فعال و غیر فعال کردن کاربر">
-                                        <a href="{{route('admin.detail.wizard',$user->id)}}">
-                                            <img src="{{url('/public/icon/icons8-view-details-96.png')}}"
-                                                 width="25" title="جزییات">
+                                    @can('ویرایش')
+                                        <a href="{{route('admin.user.edit',$user->id)}}">
+                                            <img src="{{url('/public/icon/icons8-edit-144.png')}}"
+                                                 width="25" title="ویرایش">
                                         </a>
-
+                                    @endcan
+                                    @can('حذف')
+                                        <a href="{{route('admin.user.disable',$user->id)}}">
+                                            <img src="{{url('/public/icon/icons8-key-144.png')}}"
+                                                 width="25" title="فعال و غیر فعال کردن کاربر">
+                                        </a>
+                                    @endcan
+                                    <a href="{{route('admin.detail.wizard',$user->id)}}">
+                                        <img src="{{url('/public/icon/icons8-view-details-96.png')}}"
+                                             width="25" title="جزییات">
                                     </a>
+
+
                             </tr>
                         @endforeach
                         </tbody>

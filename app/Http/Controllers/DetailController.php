@@ -38,14 +38,9 @@ class DetailController extends Controller
 
     public function update(Request $request)
     {
-        $this->validate($request, [
-            'detail' => 'required',
-        ]);
-
         $user = User::find($request->id);
         $user->details()->sync($request->input('detail'));
         return MsgSuccess('دسترسی های جزیی برای پرسنل در سیستم ثبت شد');
-
 
     }
 }

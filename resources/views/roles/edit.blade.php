@@ -132,7 +132,7 @@
             <div class="form-body">
                 <div class="form-group">
                     <form method="post" action="{{route('admin.role.update')}}"
-                    class="mt-repeater">
+                          class="mt-repeater">
                         @csrf
                         <input type="hidden" name="id" value="{{$role->id}}">
                         <div class="row">
@@ -162,7 +162,7 @@
                                                 <ul>
                                                     @foreach($permissions as $value)
                                                         @if(!empty($value))
-                                                            @if($value->label == "admin")
+                                                            @if($value->label == "user")
 
                                                                 <li>
                                                                     <label>{{ Form::checkbox('permission[]',$value->id,in_array($value->id,$rolePermission)? true : false , array('class'=>'name')) }}
@@ -172,6 +172,29 @@
                                                             @endif
                                                         @endif
                                                     @endforeach
+                                                    <li class="has-child">
+                                                        <input type="checkbox"><span
+                                                            class="tree-control"></span>
+                                                        <label>
+                                                            <input type="checkbox"/>
+                                                            <i class="fa fa-tasks orange"></i>لیست کاربران
+                                                        </label>
+                                                        <ul>
+                                                            @foreach($permissions as $permission)
+                                                                @if(!empty($permission))
+                                                                    @if($permission->label == "user/user")
+                                                                        <li>
+                                                                            <label>{{ Form::checkbox('permission[]',$permission->id,in_array($permission->id,$rolePermission)? true : false , array('class'=>'name')) }}
+                                                                                {{$permission->name}}
+                                                                            </label>
+                                                                        </li>
+
+                                                                    @endif
+                                                                @endif
+                                                            @endforeach
+                                                        </ul>
+                                                    </li>
+
                                                 </ul>
                                             </li>
                                         </ul>

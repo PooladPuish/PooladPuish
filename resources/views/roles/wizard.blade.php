@@ -154,13 +154,13 @@
                                                 <input id="tree-controll1" type="checkbox" class="custom-control-input"><span
                                                     class="tree-control"></span>
                                                 <label>
-                                                    &nbsp;
+                                                    <input type="checkbox"/>
                                                     <i class="fa fa-user light-blue"></i> مدیریت
                                                 </label>
                                                 <ul>
                                                     @foreach($permissions as $permission)
                                                         @if(!empty($permission))
-                                                            @if($permission->label == "admin")
+                                                            @if($permission->label == "user" and $permission->name != "لیست کاربران")
                                                                 <li>
                                                                     <label>
                                                                         <input type="checkbox" name="permission[]"
@@ -168,10 +168,38 @@
                                                                         {{$permission->name}}
                                                                     </label>
                                                                 </li>
+
                                                             @endif
                                                         @endif
                                                     @endforeach
+                                                    <li class="has-child">
+                                                        <input type="checkbox"><span
+                                                            class="tree-control"></span>
+                                                        <label>
+                                                            <input type="checkbox"/>
+                                                            <i class="fa fa-tasks orange"></i>لیست کاربران
+                                                        </label>
+                                                        <ul>
+                                                            @foreach($permissions as $permission)
+                                                                @if(!empty($permission))
+                                                                    @if($permission->label == "user/user")
+                                                                        <li>
+                                                                            <label>
+                                                                                <input type="checkbox"
+                                                                                       name="permission[]"
+                                                                                       value="{{$permission->id}}"/>
+                                                                                {{$permission->name}}
+                                                                            </label>
+                                                                        </li>
+
+                                                                    @endif
+                                                                @endif
+                                                            @endforeach
+                                                        </ul>
+                                                    </li>
+
                                                 </ul>
+
                                             </li>
 
                                         </ul>

@@ -15,12 +15,19 @@ use function App\Providers\MsgSuccess;
 
 class AlternativesController extends Controller
 {
+    /**
+     نمایش فرم جابجایی*
+     */
     public function wizard()
     {
         $users = User::all();
         return view('alternatives.wizard', compact('users'));
     }
 
+    /**
+     *ثبت جایگزین*
+     * در این قسمت اطلاعات از صفحه جایجایی دریافت میشود و پس از ولدیت کردن شروع به ذخیره اطلاعات  در جدول مربوطه میشویم*
+     */
     public function store(Request $request)
     {
         if ($request->user_id == $request->alternate_id) {
@@ -79,6 +86,7 @@ class AlternativesController extends Controller
             return MsgError('پرسنل مورد نظر دسترسی های لازم را داراست');
         }
     }
+
 
     public function view(Request $request)
     {

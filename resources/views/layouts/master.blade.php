@@ -96,6 +96,7 @@
         .select2-results__option.select2-results__message {
             padding: 0px;
         }
+
         button#no-results-btn {
             width: 100%;
             height: 100%;
@@ -113,6 +114,7 @@
         .select2-results__option.select2-results__message:hover {
             color: white;
         }
+
         button#no-results-btn:hover {
             background-color: #5897fb;
         }
@@ -121,7 +123,7 @@
 <body class="hold-transition skin-blue sidebar-mini" style="font-family: Shahab"
       onload="myFunction()">
 <div id="loader"></div>
-<div class="wrapper animate-bottom">
+<div class="wrapper">
     <header class="main-header">
         <!-- Logo -->
         <a href="#" class="logo">
@@ -309,13 +311,17 @@
                                         کاربران</a>
                                 </li>
                             @endcan
+                                <li><a href="{{route('admin.user.permission')}}"><i
+                                            class="fa fa-circle-o"></i>دسترسی ها</a>
+                                </li>
                             @can('ثبت دسترسی جدید')
-                                <li><a href="{{route('admin.role.wizard')}}"><i class="fa fa-circle-o"></i>ثبت دسترسی
+                                <li><a href="{{route('admin.role.wizard')}}"><i class="fa fa-circle-o"></i>ثبت نقش
                                         جدید</a>
                                 </li>
                             @endcan
+
                             @can('لیست دسترسی ها')
-                                <li><a href="{{route('admin.role.show')}}"><i class="fa fa-circle-o"></i>لیست دسترسی ها</a>
+                                <li><a href="{{route('admin.role.show')}}"><i class="fa fa-circle-o"></i>لیست نقش ها</a>
                                 </li>
                             @endcan
                             @can('تعیین جانشین')
@@ -356,7 +362,7 @@
         <!-- /.sidebar -->
     </aside>
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper" style="display:none;" id="myDiv">
+    <div class="content-wrapper animate-bottom" style="display:none;" id="myDiv">
         <!-- Main content -->
         <section class="content">
             @yield('content')
@@ -491,7 +497,7 @@
     var myVar;
 
     function myFunction() {
-        myVar = setTimeout(showPage, 3000);
+        myVar = setTimeout(showPage, 1000);
     }
 
     function showPage() {
@@ -500,7 +506,7 @@
     }
 </script>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#select2-example').select2({
             width: '100%',
             placeholder: 'لطفا نقش پرسنل را انتخاب کنید',
@@ -511,7 +517,7 @@
             },
         });
     });
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#select2-exampl').select2({
             width: '100%',
             placeholder: 'لطفا پرسنل را انتخاب کنید',
@@ -522,7 +528,7 @@
             },
         });
     });
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#select2-examp').select2({
             width: '100%',
             placeholder: 'لطفا پرسنل را انتخاب کنید',

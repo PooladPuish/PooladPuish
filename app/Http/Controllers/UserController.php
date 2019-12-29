@@ -18,19 +18,26 @@ use function App\Providers\MsgSuccess;
 
 class UserController extends Controller
 {
+    /**
+     * بررسی انلاینی پرسنل *
+     */
     public function isOnline()
     {
         return \Cache::has('active' . $this->id);
     }
 
-    //نمایش فرم ثبت کاربر جدید
+    /**
+     * نمایش فرم ثبت نام کاربر *
+     */
     public function wizard()
     {
         $roles = Role::all();
         return view('users.wizard', compact('roles'));
     }
 
-    // ثبت کاربر جدید در سیستم
+    /**
+     *ثبت نام کاربر جدید در سیستم*
+     */
     public function store(Request $request)
     {
         if (!empty($request->input('avatar'))) {
@@ -76,13 +83,17 @@ class UserController extends Controller
         }
     }
 
-    //نمایش پروفایل کاربر
+    /**
+     * نمایش پروفایل پرسنل *
+     */
     public function profile()
     {
         return view('profile.profile');
     }
 
-    //ویرایش مشخصات کاربر
+    /**
+     *ویرایش مشخصات کاربران*
+     */
     public function update(Request $request)
     {
         $users = User::where('id', $request->id)->get();
@@ -111,7 +122,9 @@ class UserController extends Controller
             return back();
     }
 
-    //ویرایش کلمه عبور کاربر
+    /**
+     *ویرایش گلمه عبور کاربران*
+     */
     public function reset(Request $request)
     {
         $this->validate($request, [
@@ -134,7 +147,9 @@ class UserController extends Controller
             }
     }
 
-    //ویرایش تصویر کاربر
+    /**
+     *ویرایش تصویر کاربران*
+     */
     public function avatar(Request $request)
     {
         $this->validate($request, [
@@ -156,27 +171,29 @@ class UserController extends Controller
             return back();
     }
 
-    //نمایش لیست کاربران
+    /**
+     *نمایش لیست کاربران*
+     */
     public function show(Request $request)
     {
-
-
         $checks = \DB::table("detail_user")
             ->where("user_id", auth()->user()->id)
             ->pluck("detail_id", "detail_id")
             ->all();
         foreach ($checks as $check)
-        $permissions = Detail::get();
+            $permissions = Detail::get();
         if (count($checks) > 0) {
             $users = User::orderBy('id', 'DESC')->get();
-            return view('users.show', compact('users', 'permissions', 'check'));
+            return view('users.show', compact('users', 'permissions', 'check', 'checks'));
         } else {
             $users = User::orderBy('id', 'DESC')->get();
             return view('users.list', compact('users'));
         }
     }
 
-//فعال و غیر فعال کردن کاربر
+    /**
+     *نمایش لیست کاربران*
+     */
     public function disable(User $id)
     {
         $sStatus = User::where('id', $id->id)->get();
@@ -198,7 +215,9 @@ class UserController extends Controller
             }
     }
 
-    //نمایش فرم ویرایش کاربران
+    /**
+     *نمایش فرم ویرایش کاربران*
+     */
     public function edit(User $id)
     {
         $role = \DB::table('role_user')->where('user_id', $id->id)
@@ -215,7 +234,9 @@ class UserController extends Controller
 
     }
 
-    //ویرایش کاربران
+    /**
+     *ویرایش کاربران*
+     */
     public function updates(Request $request)
     {
         $user = User::find($request->input('id'));
@@ -271,13 +292,17 @@ class UserController extends Controller
         }
     }
 
-    //قفل صفحه
+    /**
+     *  قفل صفحه*
+     */
     public function lock()
     {
         return view('lock.lock');
     }
 
-    //ارسال کلمه عبور جدید برای پرسنل
+    /**
+     * ارسال کبمه عبور جدید برای کاربران
+     */
     public function RestPassword(Request $request)
     {
         $this->validate($request, [
@@ -296,6 +321,9 @@ class UserController extends Controller
         return back();
     }
 
+    /**
+     * متوقف کردن نرم افزار*
+     */
     public function stop()
     {
         $exit = \DB::table('users')->update([
@@ -316,6 +344,10 @@ class UserController extends Controller
 
     }
 
+
+    /**
+     * شروع کار نرم افزار *
+     */
     public function start()
     {
         $exit = \DB::table('users')->update([

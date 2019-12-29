@@ -171,6 +171,9 @@
                         </div>
                         <div class="form-group">
                             <input type="submit" value="ثبت جزییات" class="btn btn-primary">
+                            &nbsp;
+                            <a class="btn btn-danger" href="{{route('admin.user.show')}}">بازگشت</a>
+
                         </div>
                     </form>
                 </div>

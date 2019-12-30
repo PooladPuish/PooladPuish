@@ -45,8 +45,9 @@ Route::group(['middleware' => ['auth', 'web']], function () {
     Route::get('/role/edit/{id?}', 'RoleController@edit')->name('admin.role.edit');
     Route::post('/role/update', 'RoleController@update')->name('admin.role.update');
     Route::get('/role/delete/{id?}', 'RoleController@delete')->name('admin.role.delete');
-    Route::get('/permission', 'RoleController@permission')->name('admin.user.permission');
+    Route::get('/permission/{id?}', 'RoleController@permission')->name('admin.user.permission');
     Route::post('/permission/Pstore', 'RoleController@Pstore')->name('admin.permission.store');
+    Route::get('/permission/Pdelete/{id?}', 'RoleController@Pdelete')->name('admin.permission.delete');
 
     //AlternativesController
     Route::get('/alternatives/wizard', 'AlternativesController@wizard')->name('admin.user.alternatives');

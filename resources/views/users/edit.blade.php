@@ -36,24 +36,6 @@
                                            required @if($id) value="{{$id->phone}}" @endif>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>نقش</label>
-
-                                    <select dir="rtl" id="multiple" class="js-states form-control" name="roles[]"
-                                            multiple
-                                            required>
-
-                                        @foreach($roles as $role)
-                                            @if(!empty($role))
-                                                <option value="{{$role->id}}"
-                                                        @if($id and $rol == $role->id) selected @endif>{{$role->name}}</option>
-                                            @endif
-                                        @endforeach
-
-                                    </select>
-                                </div>
-                            </div>
 
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -65,6 +47,22 @@
                                 <div class="form-group">
                                     <label>امضا</label>
                                     <input type="file" name="sign" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>نقش</label>
+                                    <select dir="rtl" id="select2-example" class="form-control" name="roles[]"
+                                            multiple
+                                            required>
+                                        @foreach($roles as $role)
+                                            @if(!empty($role))
+                                                <option value="{{$role->id}}"
+                                                        @if($id and $rol == $role->id) selected @endif>{{$role->name}}</option>
+                                            @endif
+                                        @endforeach
+
+                                    </select>
                                 </div>
                             </div>
 

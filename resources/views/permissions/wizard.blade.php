@@ -33,10 +33,22 @@
                                 <td>{{$permission->label}}</td>
                                 <td>{{\Morilog\Jalali\Jalalian::forge($permission->created_at)->format('Y/m/d')}}</td>
                                 <td>
-                                    <a href="{{route('admin.user.edit',$permission->id)}}">
+                                    <a href="{{route('admin.user.permission',$permission->id)}}">
                                         <img src="{{url('/public/icon/icons8-edit-144.png')}}"
                                              width="25" title="ویرایش">
                                     </a>
+
+                                    @php
+                                        $pers =DB::table('permission_role')->where('permission_id',$permission->id)->first();
+                                    @endphp
+                                    @if(empty($pers))
+                                        <a href="{{route('admin.permission.delete',$permission->id)}}">
+                                            <img src="{{url('/public/icon/icons8-delete-bin-96.png')}}"
+                                                 width="25" title="حذف دسترسی">
+                                        </a>
+                                @endif
+
+
                             </tr>
                         @endforeach
                         </tbody>
@@ -57,19 +69,24 @@
                                       class="mt-repeater"
                                       enctype="multipart/form-data">
                                     @csrf
+                                    @if($id)
+                                        <input type="hidden" name="id" value="{{$id->id}}">
+                                    @endif
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>دسترسی</label>
                                                 <input type="text" id="name" name="name" class="form-control"
-                                                       required>
+                                                       required
+                                                       @if($id) value="{{$id->name}}" @endif>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>عنوان دسترسی</label>
                                                 <input type="text" id="label" name="label" class="form-control"
-                                                       required>
+                                                       required
+                                                       @if($id) value="{{$id->label}}" @endif>
                                             </div>
                                         </div>
 

@@ -50,14 +50,6 @@
                                     <input type="file" name="sign" class="form-control">
                                 </div>
                             </div>
-
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>کلمه عبور</label>
-                                    <input type="password" id="password" name="password" class="form-control"
-                                           required>
-                                </div>
-                            </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>نقش</label>
@@ -71,6 +63,14 @@
                                             @endif
                                         @endforeach
                                     </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>کلمه عبور</label>
+                                    <input type="password" id="password" name="password" class="form-control"
+                                           required>
                                 </div>
                             </div>
 

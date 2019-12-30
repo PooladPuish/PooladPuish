@@ -77,9 +77,11 @@ class UserController extends Controller
             'password' => Hash::make($request['password']),
             'avatar' => $avatar,
         ]);
-        $success = $user->roles()->sync($request->input('roles'));
-        if ($success) {
-            return MsgSuccess('مشخصات کاربر جدید با موفقیت در سیستم ثبت شد');
+        if ($user) {
+            $success = $user->roles()->sync($request->input('roles'));
+            if ($success) {
+                return MsgSuccess('مشخصات کاربر جدید با موفقیت در سیستم ثبت شد');
+            }
         }
     }
 
@@ -278,18 +280,23 @@ class UserController extends Controller
         } else {
             $pass = $user->password;
         }
-        $user->update([
+        $update = $user->update([
             'name' => $request['name'],
             'email' => $request['email'],
             'phone' => $request['phone'],
             'password' => $pass,
             'avatar' => $avatar,
         ]);
-        DB::table('role_user')->where('user_id', $request->id)->delete();
-        $success = $user->roles()->sync($request->input('roles'));
-        if ($success) {
-            return MsgSuccess('مشخصات کاربر با موفقیت ویرایش شد');
+        if ($update) {
+            $delete = \DB::table('role_user')->where('user_id', $request->id)->delete();
+            if ($delete) {
+                $success = $user->roles()->sync($request->input('roles'));
+                if ($success) {
+                    return MsgSuccess('مشخصات کاربر با موفقیت ویرایش شد');
+                }
+            }
         }
+
     }
 
     /**

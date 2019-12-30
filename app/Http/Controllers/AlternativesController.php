@@ -16,7 +16,7 @@ use function App\Providers\MsgSuccess;
 class AlternativesController extends Controller
 {
     /**
-     نمایش فرم جابجایی*
+     * نمایش فرم جابجایی*
      */
     public function wizard()
     {
@@ -87,15 +87,19 @@ class AlternativesController extends Controller
         }
     }
 
-
+    /**
+     * تایید مشاهده توفیکیشن مربوط به جابجایی *
+     */
     public function view(Request $request)
     {
         $alternatives = Alternatives::where('alternate_id', auth()->user()->id)
             ->whereNull('view')->get();
         foreach ($alternatives as $alternative)
-            Alternatives::find($alternative->id)->update([
+            $success = Alternatives::find($alternative->id)->update([
                 'view' => 1,
             ]);
-        return back();
+        if ($success) {
+            return back();
+        }
     }
 }

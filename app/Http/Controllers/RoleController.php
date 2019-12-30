@@ -92,10 +92,10 @@ class RoleController extends Controller
     /**
      *نمایش فرم دسترسی ها*
      */
-    public function permission()
+    public function permission(Permission $id)
     {
         $permissions = Permission::all();
-        return view('permissions.wizard', compact('permissions'));
+        return view('permissions.wizard', compact('permissions', 'id'));
     }
 
     /**
@@ -103,9 +103,32 @@ class RoleController extends Controller
      */
     public function Pstore(Request $request)
     {
+        $id = $request['id'];
+        if (!empty($id)) {
+            $update = Permission::find($id)->update([
+                'name' => $request['name'],
+                'label' => $request['label'],
+            ]);
+            if ($update) {
+                return MsgSuccess('دسترسی با موفقیت ویرایش شد');
+            }
+        } else {
+            $create = Permission::create($request->all());
+            if ($create) {
+                return MsgSuccess('دسترسی جدید با موفقیت ثبت شد');
+            }
+        }
+    }
 
-        Permission::create($request->all());
-        return MsgSuccess('دسترسی جدید با موفقیت ثبت شد');
+    /**
+     * حذف دسترسی ها*
+     */
 
+    public function Pdelete(Permission $id)
+    {
+        $success = $id->delete();
+        if ($success) {
+            return MsgSuccess('دسترسی با موفقیت حذف شد');
+        }
     }
 }

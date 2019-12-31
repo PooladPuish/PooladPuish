@@ -15,7 +15,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>سیستم مدیریت پولاد</title>
+    <title>سیستم مدیریت پولاد صنعت</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="{{asset('/public/dist/css/bootstrap-theme.css')}}">
     <link rel="stylesheet" href="{{asset('/public/dist/css/rtl.css')}}">
@@ -267,9 +267,9 @@
                                 ||Gate::check('انلاین')
                                 ||Gate::check('تاریخ ایجاد')
                                 ||Gate::check('وضعیت'))
-                                    <li><a href="{{route('admin.user.show')}}"><i class="fa fa-circle-o"></i>لیست
-                                            کاربران</a>
-                                    </li>
+                                <li><a href="{{route('admin.user.show')}}"><i class="fa fa-circle-o"></i>لیست
+                                        کاربران</a>
+                                </li>
                             @endif
                             @can('دسترسی ها')
                                 <li><a href="{{route('admin.user.permission')}}"><i
@@ -293,6 +293,34 @@
                         </ul>
                     </li>
                 @endif
+
+
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-star"></i> <span>تعاریف پایه</span>
+                        <span class="pull-left-container">
+              <i class="fa fa-angle-right pull-left"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{route('admin.commodity.list')}}"><i
+                                    class="fa fa-circle-o"></i>گروه کالایی</a>
+                        </li>
+
+                        <li><a href="{{route('admin.ProductCharacteristic.list')}}"><i
+                                    class="fa fa-circle-o"></i>مشخصه محصول</a>
+                        </li>
+                        <li><a href="{{route('admin.product.list')}}"><i
+                                    class="fa fa-circle-o"></i>تعریف محصول</a>
+                        </li>
+                        <li><a href="{{route('admin.models.list')}}"><i
+                                    class="fa fa-circle-o"></i>تعریف قالب سازها</a>
+                        </li>
+
+                    </ul>
+                </li>
+
+
                 @if(Gate::check('بازسازی نرم افزار') || Gate::check('شروع به کار نرم افزار'))
                     <li class="treeview">
                         <a href="#">
@@ -315,6 +343,8 @@
                         </ul>
                     </li>
                 @endif
+
+
             </ul>
         </section>
     </aside>
@@ -324,7 +354,7 @@
         </section>
     </div>
     <footer class="main-footer text-right">
-        <strong>تمام حقوق این سیستم متعلق به <a>گروه صنعتی پولاد پویش</a> میباشد.</strong>
+        <strong>تمام حقوق این سیستم متعلق به <a>پولاد صنعت</a> میباشد.</strong>
     </footer>
 </div>
 
@@ -445,7 +475,7 @@
     $(document).ready(function () {
         $('#select2-example').select2({
             width: '100%',
-            placeholder: 'لطفا نقش پرسنل را انتخاب کنید',
+            placeholder: 'نقش پرسنل',
             language: {
                 noResults: function () {
                     return 'نقش با این نام یافت نشد';
@@ -471,6 +501,29 @@
             language: {
                 noResults: function () {
                     return 'پرسنلی با این نام یافت نشد';
+                },
+            },
+        });
+    });
+
+    $(document).ready(function () {
+        $('#select2-pro').select2({
+            width: '100%',
+            placeholder: 'لطفا گروه کالا را انتخاب کنید',
+            language: {
+                noResults: function () {
+                    return 'گروه کالا با این نام یافت نشد';
+                },
+            },
+        });
+    });
+    $(document).ready(function () {
+        $('#select2-prod').select2({
+            width: '100%',
+            placeholder: 'لطفا گروه کالا را انتخاب کنید',
+            language: {
+                noResults: function () {
+                    return 'گروه کالا با این نام یافت نشد';
                 },
             },
         });

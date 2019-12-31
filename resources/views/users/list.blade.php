@@ -35,7 +35,9 @@
                             @can('وضعیت')
                                 <th> وضعیت</th>
                             @endcan
-                            <th>عملیات</th>
+                            @if(Gate::check('ویرایش') || Gate::check('فعال و غیر فعال کردن'))
+                                <th>عملیات</th>
+                            @endif
                         </tr>
                         </thead>
                         <tbody>
@@ -90,19 +92,22 @@
                                         @endif
                                     </td>
                                 @endcan
-                                <td>
-                                    @can('ویرایش')
-                                        <a href="{{route('admin.user.edit',$user->id)}}">
-                                            <img src="{{url('/public/icon/icons8-edit-144.png')}}"
-                                                 width="25" title="ویرایش">
-                                        </a>
-                                    @endcan
-                                    @can('حذف')
-                                        <a href="{{route('admin.user.disable',$user->id)}}">
-                                            <img src="{{url('/public/icon/icons8-key-144.png')}}"
-                                                 width="25" title="فعال و غیر فعال کردن کاربر">
-                                        </a>
-                                @endcan
+                                @if(Gate::check('ویرایش') || Gate::check('فعال و غیر فعال کردن'))
+                                    <td>
+                                        @can('ویرایش')
+                                            <a href="{{route('admin.user.edit',$user->id)}}">
+                                                <img src="{{url('/public/icon/icons8-edit-144.png')}}"
+                                                     width="25" title="ویرایش">
+                                            </a>
+                                        @endcan
+                                        @can('حذف')
+                                            <a href="{{route('admin.user.disable',$user->id)}}">
+                                                <img src="{{url('/public/icon/icons8-key-144.png')}}"
+                                                     width="25" title="فعال و غیر فعال کردن کاربر">
+                                            </a>
+                                        @endcan
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
                         </tbody>

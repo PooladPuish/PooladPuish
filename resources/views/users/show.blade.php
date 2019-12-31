@@ -14,7 +14,7 @@
                     <table class="table table-striped table-bordered table-hover" id="sample_2">
                         <thead>
                         <tr>
-                            <th id="full_name"> نام و نام خانوادگی</th>
+                            <th> نام و نام خانوادگی</th>
                             <th>نقش</th>
                             <th>نام کاربری</th>
                             <th> شماره تماس</th>
@@ -85,19 +85,6 @@
             </div>
         </div>
     </div>
-    <script>
 
-        @foreach($permissions as $permission)
-        @foreach($checks as $check)
-        @if($permission->id == $check)
-        @if($permission->name == "نام و نام خانوادگی")
-        @foreach($users as $user)
-        document.getElementById("full_name").style.display = 'none';
-        @endforeach
-        @endif
-        @endif
-        @endforeach
-        @endforeach
 
-    </script>
 @endsection

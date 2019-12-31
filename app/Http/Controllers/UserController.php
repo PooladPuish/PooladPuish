@@ -178,19 +178,10 @@ class UserController extends Controller
      */
     public function show(Request $request)
     {
-        $checks = \DB::table("detail_user")
-            ->where("user_id", auth()->user()->id)
-            ->pluck("detail_id", "detail_id")
-            ->all();
-        foreach ($checks as $check)
-            $permissions = Detail::get();
-        if (count($checks) > 0) {
-            $users = User::orderBy('id', 'DESC')->get();
-            return view('users.show', compact('users', 'permissions', 'check', 'checks'));
-        } else {
-            $users = User::orderBy('id', 'DESC')->get();
-            return view('users.list', compact('users'));
-        }
+
+        $users = User::orderBy('id', 'DESC')->get();
+        return view('users.list', compact('users'));
+
     }
 
     /**

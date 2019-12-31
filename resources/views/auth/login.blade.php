@@ -2,7 +2,7 @@
 <html lang="en" dir="rtl">
 <head>
     <meta charset="utf-8"/>
-    <title>ورود به پنل مدیریت پولاد</title>
+    <title>ورود به پنل مدیریت پولاد صنعت</title>
     <link rel="shortcut icon" type="image/x-icon" href="{{url('/public/icon/logo.png')}}"/>
 
     <link href="{{asset('/public/assets/global/plugins/bootstrap/css/bootstrap-rtl.min.css')}}" rel="stylesheet"
@@ -55,8 +55,8 @@
         </div>
         <div class="col-md-6 login-container bs-reset mt-login-5-bsfix">
             <div class="login-content">
-                <h1>سیستم مدیریت پولاد</h1>
-                <p>سیستم جامع مدیریت گروه صنعتی پولاد پویش</p>
+                <h1>سیستم مدیریت پولاد صنعت</h1>
+                <p>سیستم جامع مدیریت پولاد صنعت</p>
                 <form method="POST" action="{{ route('login') }}" class="login-form">
                     @csrf
                     @if(session()->has('checkUser'))

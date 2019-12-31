@@ -64,6 +64,30 @@ Route::group(['middleware' => ['auth', 'web']], function () {
     Route::get('test', 'TestController@showDatatable');
     Route::post('demos/sortabledatatable', 'TestController@updateOrder');
 
+    //CommodityController
+    Route::get('/commodity/list', 'CommodityController@list')->name('admin.commodity.list');
+    Route::get('/commodity/delete/{id?}', 'CommodityController@delete')->name('admin.commodity.delete');
+    Route::post('/commodity/store', 'CommodityController@store')->name('admin.commodity.store');
+    Route::post('/commodity/edit', 'CommodityController@edit')->name('admin.commodity.edit');
+
+    //ProductCharacteristicController
+    Route::get('/ProductCharacteristic/list', 'ProductCharacteristicController@list')->name('admin.ProductCharacteristic.list');
+    Route::post('/ProductCharacteristic/store', 'ProductCharacteristicController@store')->name('admin.ProductCharacteristic.store');
+    Route::post('/ProductCharacteristic/edit', 'ProductCharacteristicController@edit')->name('admin.ProductCharacteristic.edit');
+    Route::get('/ProductCharacteristic/delete/{id?}', 'ProductCharacteristicController@delete')->name('admin.ProductCharacteristic.delete');
+
+    //ProductController
+    Route::get('/Product/list', 'ProductController@list')->name('admin.product.list');
+    Route::get('/Product/list/select', 'ProductController@getcharacteristic')->name('admin.list.product');
+    Route::post('/Product/store', 'ProductController@store')->name('admin.Product.store');
+    Route::post('/Product/edit', 'ProductController@edit')->name('admin.Product.edit');
+    Route::get('/Product/delete/{id?}', 'ProductController@delete')->name('admin.Product.delete');
+
+    //ModelController
+    Route::get('/model/list', 'ModelController@list')->name('admin.models.list');
+    Route::post('/model/store', 'ModelController@store')->name('admin.model.store');
+    Route::post('/model/edit', 'ModelController@edit')->name('admin.model.edit');
+    Route::get('/model/delete/{id?}', 'ModelController@delete')->name('admin.model.delete');
 
 });
 

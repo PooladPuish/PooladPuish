@@ -37,7 +37,8 @@ class ProductCharacteristicController extends Controller
             'code' => $request['code'],
             'name' => $request['name'],
         ]);
-        return back();
+        return MsgSuccess('مشخصه محصول جدید با موفقیت در سیستم ثبت شد');
+
 
     }
 
@@ -78,14 +79,14 @@ class ProductCharacteristicController extends Controller
             'code' => $request['code'],
             'name' => $request['name'],
         ]);
-        return back();
+        return MsgSuccess('مشخصه محصول جدید با موفقیت در سیستم ویرایش شد');
 
     }
 
     public function delete(ProductCharacteristic $id)
     {
         $id->delete();
-        return MsgSuccess('مشخصه کالا با موفقیت از سیستم حذف شد');
+        return MsgSuccess('مشخصه محصول با موفقیت از سیستم حذف شد');
 
     }
 

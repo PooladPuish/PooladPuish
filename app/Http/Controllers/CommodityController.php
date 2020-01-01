@@ -13,7 +13,6 @@ class CommodityController extends Controller
     {
         $commoditys = Commodity::all();
         return view('CommodityGroup.list', compact('commoditys'));
-
     }
 
     public function store(Request $request)
@@ -33,7 +32,7 @@ class CommodityController extends Controller
             'code' => $request['code'],
             'name' => $request['name'],
         ]);
-        return back();
+        return MsgSuccess('مشخصات گروه کالای جدید با موفقیت در سیستم ثبت شد');
     }
 
     public function delete(Commodity $id)
@@ -73,7 +72,7 @@ class CommodityController extends Controller
             'name' => $request['name'],
             'code' => $request['code'],
         ]);
-        return back();
+        return MsgSuccess('مشخصات گروه کالا با موفقیت ویرایش شد');
 
     }
 }

@@ -85,9 +85,9 @@ Route::group(['middleware' => ['auth', 'web']], function () {
 
     //ModelController
     Route::get('/model/list', 'ModelController@list')->name('admin.models.list');
-    Route::post('/model/store', 'ModelController@store')->name('admin.model.store');
-    Route::post('/model/edit', 'ModelController@edit')->name('admin.model.edit');
-    Route::get('/model/delete/{id?}', 'ModelController@delete')->name('admin.model.delete');
+    Route::get('/model/delete/{id?}', 'ModelController@delete')->name('admin.models.delete');
+    Route::post('/model/store', 'ModelController@store')->name('admin.models.store');
+    Route::post('/model/edit', 'ModelController@edit')->name('admin.models.edit');
 
 });
 

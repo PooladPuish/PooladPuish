@@ -388,6 +388,9 @@
     </div>
 </div>
 
+
+
+
 <script src="{{asset('/public/bower_components/jquery/dist/jquery.min.js')}}"></script>
 <script src="{{asset('/public/bower_components/jquery-ui/jquery-ui.min.js')}}"></script>
 <script>
@@ -529,5 +532,6 @@
         });
     });
 </script>
+
 </body>
 </html>

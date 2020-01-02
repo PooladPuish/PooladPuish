@@ -9,12 +9,18 @@ use function App\Providers\MsgSuccess;
 
 class CommodityController extends Controller
 {
+    /**
+     * نمایش لیست گروهای کالایی *
+     */
     public function list()
     {
-        $commoditys = Commodity::all();
+        $commoditys = Commodity::orderBy('id', 'desc')->get();
         return view('CommodityGroup.list', compact('commoditys'));
     }
 
+    /**
+     * ثبت مشخصات گروه های کالایی *
+     */
     public function store(Request $request)
     {
 
@@ -35,6 +41,9 @@ class CommodityController extends Controller
         return MsgSuccess('مشخصات گروه کالای جدید با موفقیت در سیستم ثبت شد');
     }
 
+    /**
+     * حذف مشخصات گروه کالایی *
+     */
     public function delete(Commodity $id)
     {
         $id->delete();
@@ -42,6 +51,9 @@ class CommodityController extends Controller
 
     }
 
+    /**
+     * ویرایش مشخصات گروه کالایی *
+     */
     public function edit(Request $request)
     {
         $commoditys = Commodity::where('id', $request['id'])->pluck('code')->all();
@@ -75,4 +87,5 @@ class CommodityController extends Controller
         return MsgSuccess('مشخصات گروه کالا با موفقیت ویرایش شد');
 
     }
+
 }

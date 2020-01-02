@@ -25,9 +25,6 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-
-
         foreach ($this->getPermission() as $permission) {
             \Gate::define($permission->name, function ($user) use ($permission) {
                 return $user->hasRole($permission->roles);

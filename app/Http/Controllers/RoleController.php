@@ -31,12 +31,10 @@ class RoleController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'permission' => 'required',
         ]);
         $role = Role::create(['name' => $request->input('name')]);
-        $success = $role->permissions()->sync($request->input('permission'));
-        if ($success) {
-            return MsgSuccess('بخش جدید با موفقیت در سیستم ثبت شد');
+        if ($role) {
+            return MsgSuccess('نقش جدید با موفقیت در سیستم ثبت شد');
         }
     }
 
@@ -74,7 +72,7 @@ class RoleController extends Controller
         $role->save();
         $success = $role->permissions()->sync($request->input('permission'));
         if ($success) {
-            return MsgSuccess('بخش با موفقیت در سیستم ویرایش شد');
+            return MsgSuccess('نقش با موفقیت در سیستم ویرایش شد');
         }
     }
 
@@ -85,7 +83,7 @@ class RoleController extends Controller
     {
         $success = $id->delete();
         if ($success) {
-            return MsgSuccess('دسترسی با موفقیت از سیستم حذف شد');
+            return MsgSuccess('نقش با موفقیت از سیستم حذف شد');
         }
     }
 

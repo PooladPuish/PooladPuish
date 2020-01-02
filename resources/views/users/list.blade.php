@@ -29,9 +29,6 @@
                             @can('انلاین')
                                 <th>انلاین</th>
                             @endcan
-                            @can('تاریخ ایجاد')
-                                <th>تاریخ ایجاد</th>
-                            @endcan
                             @can('وضعیت')
                                 <th> وضعیت</th>
                             @endcan
@@ -41,79 +38,13 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($users as $user)
-                            <tr>
-                                @can('نام و نام خانوادگی')
-                                    <td>{{$user->name}}</td>
-                                @endcan
-                                @can('نقش')
-                                    <td>
-                                        @foreach($user->roles as $role)
-                                            @if(!empty($role))
-                                                {{$role->name}}
-                                            @else
-                                                بدون دسترسی
-                                            @endif
-                                        @endforeach
-                                    </td>
-                                @endcan
-                                @can('نام کاربری')
-                                    <td>{{$user->email}}</td>
-                                @endcan
-                                @can('شماره تماس')
-                                    <td>{{$user->phone}}</td>
-                                @endcan
-                                @can('انلاین')
-                                    <td>
-                                        @if(Cache::has('active' . $user->id))
-                                            <img src="{{url('/public/icon/online.png')}}"
-                                                 title="انلاین"
-                                                 width="25">
-                                        @else
-                                            <img src="{{url('/public/icon/offline.png')}}"
-                                                 title="افلاین"
-                                                 width="25">
-                                        @endif
-                                    </td>
-                                @endcan
-                                @can('تاریخ ایجاد')
-                                    <td>{{\Morilog\Jalali\Jalalian::forge($user->created_at)->format('Y/m/d')}}</td>
-                                @endcan
-                                @can('وضعیت')
-                                    <td>
-                                        @if($user->status == null)
-                                            <img src="{{url('/public/icon/icons8-checked-user-male.png')}}"
-                                                 width="25" title="فعال">
-                                        @else
-                                            <img
-                                                src="{{url('/public/icon/icons8-checked-user-male-40.png')}}"
-                                                width="25"
-                                                title="غیر فعال">
-                                        @endif
-                                    </td>
-                                @endcan
-                                @if(Gate::check('ویرایش') || Gate::check('فعال و غیر فعال کردن'))
-                                    <td>
-                                        @can('ویرایش')
-                                            <a href="{{route('admin.user.edit',$user->id)}}">
-                                                <img src="{{url('/public/icon/icons8-edit-144.png')}}"
-                                                     width="25" title="ویرایش">
-                                            </a>
-                                        @endcan
-                                        @can('حذف')
-                                            <a href="{{route('admin.user.disable',$user->id)}}">
-                                                <img src="{{url('/public/icon/icons8-key-144.png')}}"
-                                                     width="25" title="فعال و غیر فعال کردن کاربر">
-                                            </a>
-                                        @endcan
-                                    </td>
-                                @endif
-                            </tr>
-                        @endforeach
+                        @include('users.tables.table')
                         </tbody>
                     </table>
+                    <a data-toggle="modal" data-target="#modal-default" class="btn btn-primary">تعریف کاربر جدید</a>
                 </div>
             </div>
         </div>
     </div>
+    @include('users.modals.modal')
 @endsection

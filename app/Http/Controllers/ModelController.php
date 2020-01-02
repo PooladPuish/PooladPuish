@@ -13,14 +13,19 @@ use function App\Providers\MsgSuccess;
 
 class ModelController extends Controller
 {
-
+    /**
+     * نمایش لیست قالب سازها *
+     */
     public function list()
     {
-        $models = Models::all();
+        $models = Models::orderBy('id', 'desc')->get();
         return view('models.list', compact('models'));
 
     }
 
+    /**
+     * ثبت مشخصات قالب سازها *
+     */
     public function store(Request $request)
     {
 
@@ -41,6 +46,9 @@ class ModelController extends Controller
         return MsgSuccess('مشخصات سازنده قالب جدید با موفقیت در سیستم ثبت شد');
     }
 
+    /**
+     * حذف مشخصات قالب سازها *
+     */
     public function delete(Models $id)
     {
         $id->delete();
@@ -48,6 +56,9 @@ class ModelController extends Controller
 
     }
 
+    /**
+     * ویرایش مشخصات قالب سازها *
+     */
     public function edit(Request $request)
     {
         $models = Models::where('id', $request['id'])->pluck('code')->all();

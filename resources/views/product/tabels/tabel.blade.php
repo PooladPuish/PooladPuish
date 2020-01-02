@@ -1,5 +1,7 @@
+<?php $number = 1 ?>
 @foreach($products as $product)
     <tr>
+        <td>{{$number++}}</td>
         <td>{{$product->code}}</td>
         <td>
             @foreach($commoditys as $commodity)
@@ -19,7 +21,6 @@
         </td>
 
         <td>{{$product->name}}</td>
-        <td>{{\Morilog\Jalali\Jalalian::forge($product->created_at)->format('Y/m/d')}}</td>
         <td>
             @include('product.actions.action')
         </td>

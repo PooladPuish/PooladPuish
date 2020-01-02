@@ -10,24 +10,31 @@ use function App\Providers\MsgSuccess;
 
 class ProductController extends Controller
 {
+    /**
+     * نمایش لیست محصولات *
+     */
     public function list()
     {
-        $products = Product::all();
+        $products = Product::orderBy('id', 'desc')->get();
         $ProductCharacteristics = ProductCharacteristic::all();
         $commoditys = Commodity::all();
         return view('product.list', compact('products', 'commoditys', 'ProductCharacteristics'));
-
     }
 
+    /**
+     * تعامل بین گروه کالایی و مشخصه محصول ایجکس *
+     */
     public function getcharacteristic(Request $request)
     {
-
         $states = \DB::table("product_characteristics")
             ->where("commodity_id", $request->commodity_id)
             ->pluck("name", "id");
         return response()->json($states);
     }
 
+    /**
+     * ثبت مشخصات محصولات *
+     */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -49,6 +56,9 @@ class ProductController extends Controller
 
     }
 
+    /**
+     * ویرایش مشخصات محصولات *
+     */
     public function edit(Request $request)
     {
         $commoditys = Commodity::where('id', $request['id'])->pluck('code')->all();
@@ -85,6 +95,9 @@ class ProductController extends Controller
 
     }
 
+    /**
+     * حذف مشخصات محصولات *
+     */
     public function delete(Product $id)
     {
         $id->delete();

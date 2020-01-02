@@ -6,7 +6,7 @@
             <div class="portlet box blue">
                 <div class="portlet-title">
                     <div class="caption">
-                        لیست دسترسی ها
+                        لیست نقش ها
                     </div>
                     <div class="tools"></div>
                 </div>
@@ -43,8 +43,10 @@
                             </tr>
                         </tbody>
                     </table>
+                    <a data-toggle="modal" data-target="#modal-default" class="btn btn-primary">تعریف نفش جدید</a>
                 </div>
             </div>
         </div>
     </div>
+    @include('roles.modals.modal')
 @endsection

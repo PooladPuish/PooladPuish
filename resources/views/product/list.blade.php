@@ -15,11 +15,11 @@
                     <table class="table table-striped table-bordered table-hover" id="sample_2">
                         <thead>
                         <tr>
+                            <th>ردیف</th>
                             <th>کد</th>
                             <th>گروه کالایی</th>
                             <th>مشخصه محصول</th>
                             <th>نام محصول</th>
-                            <th>تاریخ ایجاد</th>
                             <th>عملیات</th>
                         </tr>
                         </thead>

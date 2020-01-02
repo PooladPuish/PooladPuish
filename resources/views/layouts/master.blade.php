@@ -256,11 +256,6 @@
             </span>
                         </a>
                         <ul class="treeview-menu">
-                            @can('ثبت کاربر جدید')
-                                <li><a href="{{route('admin.user.wizard')}}"><i class="fa fa-circle-o"></i>ثبت کاربر
-                                        جدید</a>
-                                </li>
-                            @endcan
                             @if(Gate::check('نام و نام خانوادگی') || Gate::check('نقش')
                                 || Gate::check('نام کاربری')
                                 || Gate::check('شماره تماس')
@@ -273,16 +268,11 @@
                             @endif
                             @can('دسترسی ها')
                                 <li><a href="{{route('admin.user.permission')}}"><i
-                                            class="fa fa-circle-o"></i>دسترسی ها</a>
-                                </li>
-                            @endcan
-                            @can('ثبت دسترسی جدید')
-                                <li><a href="{{route('admin.role.wizard')}}"><i class="fa fa-circle-o"></i>ثبت نقش
-                                        جدید</a>
+                                            class="fa fa-circle-o"></i>تعریف دسترسی ها</a>
                                 </li>
                             @endcan
                             @can('لیست دسترسی ها')
-                                <li><a href="{{route('admin.role.show')}}"><i class="fa fa-circle-o"></i>لیست نقش ها</a>
+                                <li><a href="{{route('admin.role.show')}}"><i class="fa fa-circle-o"></i>تعریف نقش ها</a>
                                 </li>
                             @endcan
                             @can('تعیین جانشین')
@@ -315,6 +305,21 @@
                         </li>
                         <li><a href="{{route('admin.models.list')}}"><i
                                     class="fa fa-circle-o"></i>تعریف قالب سازها</a>
+                        </li>
+                        <li><a href="{{route('admin.format.list')}}"><i
+                                    class="fa fa-circle-o"></i>تعریف قالب</a>
+                        </li>
+                        <li><a href="{{route('admin.device.list')}}"><i
+                                    class="fa fa-circle-o"></i>تعریف دستگاه</a>
+                        </li>
+                        <li><a href="{{route('admin.color.list')}}"><i
+                                    class="fa fa-circle-o"></i>تعریف رنگ</a>
+                        </li>
+                        <li><a href="{{route('admin.polymeric.list')}}"><i
+                                    class="fa fa-circle-o"></i>مواد پلیمیری</a>
+                        </li>
+                        <li><a href="{{route('admin.seller.list')}}"><i
+                                    class="fa fa-circle-o"></i>فروشنده</a>
                         </li>
 
                     </ul>
@@ -487,6 +492,17 @@
         });
     });
     $(document).ready(function () {
+        $('#select2-exampled').select2({
+            width: '100%',
+            placeholder: 'نقش پرسنل',
+            language: {
+                noResults: function () {
+                    return 'نقش با این نام یافت نشد';
+                },
+            },
+        });
+    });
+    $(document).ready(function () {
         $('#select2-exampl').select2({
             width: '100%',
             placeholder: 'لطفا پرسنل را انتخاب کنید',
@@ -531,6 +547,96 @@
             },
         });
     });
+
+    $(document).ready(function () {
+        $('#select2-prodd').select2({
+            width: '100%',
+            placeholder: 'لطفا گروه کالا را انتخاب کنید',
+            language: {
+                noResults: function () {
+                    return 'گروه کالا با این نام یافت نشد';
+                },
+            },
+        });
+    });
+
+
+
+
+
+
+
+
+
+
+
+    $(document).ready(function () {
+        $('#select2-a').select2({
+            width: '100%',
+            placeholder: 'لطفا قالب ساز را انتخاب کنید',
+            language: {
+                noResults: function () {
+                    return 'قالب ساز با این نام یافت نشد';
+                },
+            },
+        });
+    });
+    $(document).ready(function () {
+        $('#select2-aa').select2({
+            width: '100%',
+            placeholder: 'لطفا قالب ساز را انتخاب کنید',
+            language: {
+                noResults: function () {
+                    return 'قالب ساز با این نام یافت نشد';
+                },
+            },
+        });
+    });
+    $(document).ready(function () {
+        $('#select2-b').select2({
+            width: '100%',
+            placeholder: 'لطفا مشخصه محصول را انتخاب کنید',
+            language: {
+                noResults: function () {
+                    return 'مشخصه محصول با این نام یافت نشد';
+                },
+            },
+        });
+    });
+    $(document).ready(function () {
+        $('#select2-bb').select2({
+            width: '100%',
+            placeholder: 'لطفا مشخصه محصول را انتخاب کنید',
+            language: {
+                noResults: function () {
+                    return 'مشخصه محصول با این نام یافت نشد';
+                },
+            },
+        });
+    });
+    $(document).ready(function () {
+        $('#select2-c').select2({
+            width: '100%',
+            placeholder: 'لطفا محصول را انتخاب کنید',
+            language: {
+                noResults: function () {
+                    return 'محصول با این نام یافت نشد';
+                },
+            },
+        });
+    });
+    $(document).ready(function () {
+        $('#select2-cc').select2({
+            width: '100%',
+            placeholder: 'لطفا محصول را انتخاب کنید',
+            language: {
+                noResults: function () {
+                    return 'محصول با این نام یافت نشد';
+                },
+            },
+        });
+    });
+
 </script>
 
 </body>

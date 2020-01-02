@@ -10,14 +10,19 @@ use function App\Providers\MsgSuccess;
 
 class ProductCharacteristicController extends Controller
 {
+    /**
+     * نمایش لیست مشخصه محصولات *
+     */
     public function list()
     {
-        $commoditys = Commodity::all();
+        $commoditys = Commodity::orderBy('id', 'desc')->get();
         $products = ProductCharacteristic::all();
         return view('ProductCharacteristic.list', compact('products', 'commoditys'));
-
     }
 
+    /**
+     * ثبت مشخصات مشخصه محصول *
+     */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -42,9 +47,11 @@ class ProductCharacteristicController extends Controller
 
     }
 
+    /**
+     * ویرایش مشخصات مشخصه محصول *
+     */
     public function edit(Request $request)
     {
-
         $ProductCharacteristics = ProductCharacteristic::where('id', $request['commodity_id'])->pluck('code')->all();
         foreach ($ProductCharacteristics as $ProductCharacteristic)
             if ($request['code'] == $ProductCharacteristic) {
@@ -83,6 +90,9 @@ class ProductCharacteristicController extends Controller
 
     }
 
+    /**
+     * حذف مشخصات مشخصه محصول *
+     */
     public function delete(ProductCharacteristic $id)
     {
         $id->delete();

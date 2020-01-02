@@ -48,8 +48,8 @@ class UserController extends Controller
                 'password' => 'required',
                 'email' => 'required|unique:users',
             ], [
-                'email.unique' => 'کاربری با این کد ملی در سیستم موجود است.',
-                'email.required' => 'پر کردن فیلد کد ملی الزامی میباشد.',
+                'email.unique' => 'کاربری با این نام کاربری در سیستم موجود است.',
+                'email.required' => 'پر کردن فیلد نام کاربری الزامی میباشد.',
             ]);
         } else
             $this->validate($request, [
@@ -59,8 +59,8 @@ class UserController extends Controller
                 'email' => 'required|unique:users',
 
             ], [
-                'email.unique' => 'کاربری با این کد ملی در سیستم موجود است.',
-                'email.required' => 'پر کردن فیلد کد ملی الزامی میباشد.',
+                'email.unique' => 'کاربری با این نام کاربری در سیستم موجود است.',
+                'email.required' => 'پر کردن فیلد نام کاربری الزامی میباشد.',
 
             ]);
         if ($request->hasFile('avatar')) {
@@ -176,11 +176,21 @@ class UserController extends Controller
     /**
      *نمایش لیست کاربران*
      */
-    public function show(Request $request)
+    public function show(User $id)
     {
+        $role = \DB::table('role_user')->where('user_id', $id->id)
+            ->pluck('role_id')
+            ->all();
+        if (!empty($role)) {
+            foreach ($id->roles as $role)
+                $rol = $role->id;
+        } else {
+            $rol = null;
+        }
 
+        $roles = Role::all();
         $users = User::orderBy('id', 'DESC')->get();
-        return view('users.list', compact('users'));
+        return view('users.list', compact('users', 'roles', 'id','rol'));
 
     }
 
@@ -237,8 +247,8 @@ class UserController extends Controller
             $this->validate($request, [
                 'email' => 'required|unique:users',
             ], [
-                'email.unique' => 'کاربری با این کد ملی در سیستم موجود است.',
-                'email.required' => 'پر کردن فیلد کد ملی الزامی میباشد.',
+                'email.unique' => 'کاربری با این نام کاربری در سیستم موجود است.',
+                'email.required' => 'پر کردن فیلد نام کاربری الزامی میباشد.',
             ]);
         }
         if (!empty($request->input('avatar'))) {
@@ -248,7 +258,7 @@ class UserController extends Controller
                 'phone' => 'required',
                 'email' => 'required',
             ], [
-                'email.required' => 'پر کردن فیلد کد ملی الزامی میباشد.',
+                'email.required' => 'پر کردن فیلد نام کاربری الزامی میباشد.',
             ]);
         } else
             $this->validate($request, [
@@ -257,7 +267,7 @@ class UserController extends Controller
                 'email' => 'required',
 
             ], [
-                'email.required' => 'پر کردن فیلد کد ملی الزامی میباشد.',
+                'email.required' => 'پر کردن فیلد نام کاربری الزامی میباشد.',
             ]);
         if ($request->hasFile('avatar')) {
             $file = $request->file('avatar');

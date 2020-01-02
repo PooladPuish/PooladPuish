@@ -14,9 +14,9 @@
                     <table class="table table-striped table-bordered table-hover" id="sample_2">
                         <thead>
                         <tr>
+                            <th>ردیف</th>
                             <th>کد</th>
                             <th>نام</th>
-                            <th>تاریخ ایجاد</th>
                             <th>عملیات</th>
                         </tr>
                         </thead>

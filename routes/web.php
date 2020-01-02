@@ -30,7 +30,7 @@ Route::group(['middleware' => ['auth', 'web']], function () {
     Route::post('/user/store', 'UserController@store')->name('admin.user.store');
     Route::get('/user/wizard/{id?}', 'UserController@wizard')->name('admin.user.wizard');
     Route::get('/user/profile', 'UserController@profile')->name('admin.user.profile');
-    Route::get('/user/show', 'UserController@show')->name('admin.user.show');
+    Route::get('/user/show/{id?}', 'UserController@show')->name('admin.user.show');
     Route::get('/user/disable/{id?}', 'UserController@disable')->name('admin.user.disable');
     Route::get('/user/edit/{id?}', 'UserController@edit')->name('admin.user.edit');
     Route::post('/users/update', 'UserController@updates')->name('admin.user.updates');
@@ -88,6 +88,37 @@ Route::group(['middleware' => ['auth', 'web']], function () {
     Route::get('/model/delete/{id?}', 'ModelController@delete')->name('admin.models.delete');
     Route::post('/model/store', 'ModelController@store')->name('admin.models.store');
     Route::post('/model/edit', 'ModelController@edit')->name('admin.models.edit');
+
+    //DeviceController
+    Route::get('/device/list', 'DeviceController@list')->name('admin.device.list');
+    Route::post('/device/store', 'DeviceController@store')->name('admin.device.store');
+    Route::post('/device/edit', 'DeviceController@edit')->name('admin.device.edit');
+    Route::get('/device/delete/{id?}', 'DeviceController@delete')->name('admin.device.delete');
+
+    //ColorController
+    Route::get('/color/list', 'ColorController@list')->name('admin.color.list');
+    Route::post('/color/store', 'ColorController@store')->name('admin.color.store');
+    Route::post('/color/edit', 'ColorController@edit')->name('admin.color.edit');
+    Route::get('/color/delete/{id?}', 'ColorController@delete')->name('admin.color.delete');
+
+    //FormatController
+    Route::get('/format/list', 'FormatController@list')->name('admin.format.list');
+    Route::post('/format/store', 'FormatController@store')->name('admin.format.store');
+    Route::post('/format/edit', 'FormatController@edit')->name('admin.format.edit');
+    Route::get('/format/delete/{id?}', 'FormatController@delete')->name('admin.format.delete');
+
+    //PolymericController
+    Route::get('/polymeric/list', 'PolymericController@list')->name('admin.polymeric.list');
+    Route::post('/polymeric/store', 'PolymericController@store')->name('admin.polymeric.store');
+    Route::post('/polymeric/edit', 'PolymericController@edit')->name('admin.polymeric.edit');
+    Route::get('/polymeric/delete/{id?}', 'PolymericController@delete')->name('admin.polymeric.delete');
+
+    //SellerController
+    Route::get('/seller/list', 'SellerController@list')->name('admin.seller.list');
+    Route::post('/seller/store', 'SellerController@store')->name('admin.seller.store');
+    Route::post('/seller/edit', 'SellerController@edit')->name('admin.seller.edit');
+    Route::get('/seller/delete/{id?}', 'SellerController@delete')->name('admin.seller.delete');
+
 
 });
 

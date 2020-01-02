@@ -277,7 +277,7 @@
                             @endcan
                             @can('تعیین جانشین')
                                 <li><a href="{{route('admin.user.alternatives')}}"><i
-                                            class="fa fa-circle-o"></i>تعیین جانشین</a>
+                                            class="fa fa-circle-o"></i>لیست جابجایی ها</a>
                                 </li>
                             @endcan
                         </ul>

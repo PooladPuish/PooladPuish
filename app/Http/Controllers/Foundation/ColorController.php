@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Foundation;
 
 use App\Color;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use function App\Providers\MsgSuccess;
 

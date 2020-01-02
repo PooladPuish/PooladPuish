@@ -125,7 +125,7 @@
     <div class="portlet box blue">
         <div class="portlet-title">
             <div class="caption">
-                ویرایش بخش
+                ویرایش نقش
             </div>
         </div>
         <div class="portlet-body form">
@@ -138,7 +138,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label>عنوان بخش</label>
+                                    <label>عنوان نقش</label>
                                     <input type="text" id="name" name="name" class="form-control"
                                            required value="{{$role->name}}">
                                 </div>
@@ -234,7 +234,7 @@
                         <div class="form-group">
                             <input type="submit" value="تایید" class="btn btn-primary">
                             &nbsp;
-                            <a href="{{route('admin.role.show')}}" class="btn btn-danger">انصراف</a>
+                            <a href="{{route('admin.role.show')}}" class="btn btn-danger">بازگشت</a>
                         </div>
                     </form>
 

@@ -1,7 +1,9 @@
 <?php
 
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Users;
+
+use App\Http\Controllers\Controller;
 
 use App\Detail;
 use App\Role;
@@ -190,7 +192,7 @@ class UserController extends Controller
 
         $roles = Role::all();
         $users = User::orderBy('id', 'DESC')->get();
-        return view('users.list', compact('users', 'roles', 'id','rol'));
+        return view('users.list', compact('users', 'roles', 'id', 'rol'));
 
     }
 

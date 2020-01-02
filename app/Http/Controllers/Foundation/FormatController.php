@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Foundation;
+use App\Http\Controllers\Controller;
 use App\Commodity;
 use App\Format;
 use App\Models;

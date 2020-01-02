@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Users;
 use App\Alternatives;
+use App\Http\Controllers\Controller;
 use App\User;
 use Carbon\Carbon;
 use Hekmatinasser\Verta\Verta;
@@ -21,7 +21,8 @@ class AlternativesController extends Controller
     public function wizard()
     {
         $users = User::all();
-        return view('alternatives.wizard', compact('users'));
+        $alternatives = Alternatives::all();
+        return view('alternatives.list', compact('users', 'alternatives'));
     }
 
     /**

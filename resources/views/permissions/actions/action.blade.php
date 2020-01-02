@@ -12,7 +12,7 @@
                 <div class="portlet box blue">
                     <div class="portlet-title">
                         <div class="caption">
-                            افزودن دسترسی
+                            ویرایش دسترسی
                         </div>
                     </div>
                     <div class="portlet-body form">
@@ -46,7 +46,7 @@
                                     </div>
                                     <hr/>
                                     <div class="form-group">
-                                        <input type="submit" value="ثبت"
+                                        <input type="submit" value="تایید"
                                                class="btn btn-primary">
                                         <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">
                                             انصراف

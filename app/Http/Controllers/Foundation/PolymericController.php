@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Foundation;
+use App\Http\Controllers\Controller;
 use App\Polymeric;
 use App\Product;
 use Illuminate\Http\Request;

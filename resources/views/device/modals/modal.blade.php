@@ -13,7 +13,7 @@
                             <div class="form-group">
 
                                 <form id="productForm" name="productForm" class="form-horizontal">
-                                    <input type="hidden" name="product_id" id="product_id">
+                                    <input type="hidden" name="product" id="product">
                                     @csrf
                                     <div class="col-md-12 form-group">
                                         <div class="col-md-12">

@@ -42,23 +42,38 @@ class PolymericController extends Controller
     public function store(Request $request)
     {
         if (!empty($request->product)) {
-            $validator = Validator::make($request->all(), [
-                'code' => 'required|integer',
-                'type' => 'required',
-                'grid' => 'required',
-                'name' => 'required',
-                'product_id' => 'required',
-                'description' => 'required',
-            ], [
-                'code.required' => 'پرکردن کد مواد پلیمیری الزامی میباشد',
-                'code.integer' => 'کد مواد پلیمیری بایستی از نوع عدد باشد',
-                'name.required' => 'نام مواد پلیمیری را وارد کنید',
-                'type.required' => 'نوع مواد پلیمیری را وارد کنید',
-                'grid.required' => 'نام گرید مواد پلیمیری را وارد کنید',
-                'product_id.required' => 'نام محصول را وارد کنید',
-                'description.required' => 'توضیحات را وارد کنید',
-
-            ]);
+            $polymerics = Polymeric::find($request->product);
+            if ($polymerics->code != $request->code) {
+                $validator = Validator::make($request->all(), [
+                    'code' => 'required|integer|unique:polymerics',
+                    'type' => 'required',
+                    'grid' => 'required',
+                    'name' => 'required',
+                    'product_id' => 'required',
+                ], [
+                    'code.unique' => 'مواد پلیمیری با این کد در سیستم موجود است.',
+                    'code.required' => 'پرکردن کد مواد پلیمیری الزامی میباشد',
+                    'code.integer' => 'کد مواد پلیمیری بایستی از نوع عدد باشد',
+                    'name.required' => 'نام مواد پلیمیری را وارد کنید',
+                    'type.required' => 'نوع مواد پلیمیری را وارد کنید',
+                    'grid.required' => 'نام گرید مواد پلیمیری را وارد کنید',
+                    'product_id.required' => 'نام محصول را وارد کنید',
+                ]);
+            } else
+                $validator = Validator::make($request->all(), [
+                    'code' => 'required|integer',
+                    'type' => 'required',
+                    'grid' => 'required',
+                    'name' => 'required',
+                    'product_id' => 'required',
+                ], [
+                    'code.required' => 'پرکردن کد مواد پلیمیری الزامی میباشد',
+                    'code.integer' => 'کد مواد پلیمیری بایستی از نوع عدد باشد',
+                    'name.required' => 'نام مواد پلیمیری را وارد کنید',
+                    'type.required' => 'نوع مواد پلیمیری را وارد کنید',
+                    'grid.required' => 'نام گرید مواد پلیمیری را وارد کنید',
+                    'product_id.required' => 'نام محصول را وارد کنید',
+                ]);
         } else
             $validator = Validator::make($request->all(), [
                 'code' => 'required|integer|unique:polymerics',
@@ -66,7 +81,7 @@ class PolymericController extends Controller
                 'grid' => 'required',
                 'name' => 'required',
                 'product_id' => 'required',
-                'description' => 'required',
+
             ], [
                 'code.unique' => 'مواد پلیمیری با این کد در سیستم موجود است.',
                 'code.required' => 'پرکردن کد مواد پلیمیری الزامی میباشد',
@@ -75,8 +90,6 @@ class PolymericController extends Controller
                 'type.required' => 'نوع مواد پلیمیری را وارد کنید',
                 'grid.required' => 'نام گرید مواد پلیمیری را وارد کنید',
                 'product_id.required' => 'نام محصول را وارد کنید',
-                'description.required' => 'توضیحات را وارد کنید',
-
             ]);
         if ($validator->passes()) {
             Polymeric::updateOrCreate(['id' => $request->product],

@@ -685,7 +685,18 @@
         });
     });
 </script>
+<script>
+    $("#users").click(function () {
+        $(".user").prop('checked', $(this).prop('checked'));
+    });
+    $("#list_users").click(function () {
+        $(".list_user").prop('checked', $(this).prop('checked'));
+    });
+    $("#setting").click(function () {
+        $(".settings").prop('checked', $(this).prop('checked'));
+    });
 
+</script>
 
 </body>
 </html>

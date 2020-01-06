@@ -38,14 +38,26 @@ class CommodityController extends Controller
     public function store(Request $request)
     {
         if (!empty($request->product_id)) {
-            $validator = Validator::make($request->all(), [
-                'name' => 'required',
-                'code' => 'required|integer',
-            ], [
-                'code.required' => 'لطفا کد گروه کالایی را وارد کنید',
-                'code.integer' => 'کد گروه کالایی باید از نوع عددی باشد',
-                'name.required' => 'لطفا نام گروه کالایی را وارد کنید',
-            ]);
+            $commoditys = Commodity::find($request->product_id);
+            if ($request->code != $commoditys->code) {
+                $validator = Validator::make($request->all(), [
+                    'name' => 'required',
+                    'code' => 'required|integer|unique:commodities',
+                ], [
+                    'code.unique' => 'گروه کالایی با این کد در سیستم موجود است',
+                    'code.required' => 'لطفا کد گروه کالایی را وارد کنید',
+                    'code.integer' => 'کد گروه کالایی باید از نوع عددی باشد',
+                    'name.required' => 'لطفا نام گروه کالایی را وارد کنید',
+                ]);
+            } else
+                $validator = Validator::make($request->all(), [
+                    'name' => 'required',
+                    'code' => 'required|integer',
+                ], [
+                    'code.required' => 'لطفا کد گروه کالایی را وارد کنید',
+                    'code.integer' => 'کد گروه کالایی باید از نوع عددی باشد',
+                    'name.required' => 'لطفا نام گروه کالایی را وارد کنید',
+                ]);
         } else
             $validator = Validator::make($request->all(), [
                 'name' => 'required',
@@ -56,6 +68,8 @@ class CommodityController extends Controller
                 'code.integer' => 'کد گروه کالایی باید از نوع عددی باشد',
                 'name.required' => 'لطفا نام گروه کالایی را وارد کنید',
             ]);
+
+
         if ($validator->passes()) {
             Commodity::updateOrCreate(['id' => $request->product_id],
                 ['name' => $request->name, 'code' => $request->code]);

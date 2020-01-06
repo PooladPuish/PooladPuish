@@ -32,13 +32,13 @@
         $('#createNewProduct').click(function () {
             $('#productForm').trigger("reset");
             $('#ajaxModel').modal('show');
-            $('#product_id').val('');
+            $('#product').val('');
         });
         $('body').on('click', '.editProduct', function () {
             var product_id = $(this).data('id');
             $.get("{{ route('admin.device.update') }}" + '/' + product_id, function (data) {
                 $('#ajaxModel').modal('show');
-                $('#product_id').val(data.id);
+                $('#product').val(data.id);
                 $('#name').val(data.name);
                 $('#code').val(data.code);
                 $('#model').val(data.model);
@@ -75,14 +75,14 @@
                         });
                         $('#name').val('');
                         $('#code').val('');
-                        $('#product_id').val('');
+                        $('#product').val('');
                     }
                 }
             });
         });
         $('#name').val('');
         $('#code').val('');
-        $('#product_id').val('');
+        $('#product').val('');
     });
     $('body').on('click', '.deleteProduct', function () {
         var id = $(this).data("id");

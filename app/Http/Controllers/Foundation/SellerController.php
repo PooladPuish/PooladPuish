@@ -42,26 +42,50 @@ class SellerController extends Controller
     public function store(Request $request)
     {
         if (!empty($request->product_id)) {
-            $validator = Validator::make($request->all(), [
-                'code' => 'required|integer',
-                'color_id' => 'required',
-                'company' => 'required',
-                'connector' => 'required',
-                'side' => 'required',
-                'tel' => 'required',
-                'inside' => 'required',
-                'phone' => 'required',
-            ], [
-                'code.required' => 'پرکردن کد فروشنده الزامی میباشد',
-                'code.integer' => 'کد فروشنده بایستی از نوع عدد باشد',
-                'color_id.required' => 'رنگ مستربچ را انتخاب کنید',
-                'connector.required' => 'نام شخص رابط را وارد کنید',
-                'grid.required' => 'نام گرید مواد پلیمیری را وارد کنید',
-                'side.required' => 'سمت را وارد کنید',
-                'tel.required' => 'شماره تلفن را وارد کنید',
-                'inside.required' => 'شماره داخلی را وارد کنید',
-                'phone.required' => 'شماره همراه را وارد کنید',
-            ]);
+            $sellers = Seller::find($request->product_id);
+            if ($sellers->code != $request->code) {
+                $validator = Validator::make($request->all(), [
+                    'code' => 'required|integer|unique:sellers',
+                    'color_id' => 'required',
+                    'company' => 'required',
+                    'connector' => 'required',
+                    'side' => 'required',
+                    'tel' => 'required',
+                    'inside' => 'required',
+                    'phone' => 'required',
+                ], [
+                    'code.unique' => 'فروشنده با این کد در سیستم موجود است.',
+                    'code.required' => 'پرکردن کد فروشنده الزامی میباشد',
+                    'code.integer' => 'کد فروشنده بایستی از نوع عدد باشد',
+                    'color_id.required' => 'رنگ مستربچ را انتخاب کنید',
+                    'connector.required' => 'نام شخص رابط را وارد کنید',
+                    'grid.required' => 'نام گرید مواد پلیمیری را وارد کنید',
+                    'side.required' => 'سمت را وارد کنید',
+                    'tel.required' => 'شماره تلفن را وارد کنید',
+                    'inside.required' => 'شماره داخلی را وارد کنید',
+                    'phone.required' => 'شماره همراه را وارد کنید',
+                ]);
+            } else
+                $validator = Validator::make($request->all(), [
+                    'code' => 'required|integer',
+                    'color_id' => 'required',
+                    'company' => 'required',
+                    'connector' => 'required',
+                    'side' => 'required',
+                    'tel' => 'required',
+                    'inside' => 'required',
+                    'phone' => 'required',
+                ], [
+                    'code.required' => 'پرکردن کد فروشنده الزامی میباشد',
+                    'code.integer' => 'کد فروشنده بایستی از نوع عدد باشد',
+                    'color_id.required' => 'رنگ مستربچ را انتخاب کنید',
+                    'connector.required' => 'نام شخص رابط را وارد کنید',
+                    'grid.required' => 'نام گرید مواد پلیمیری را وارد کنید',
+                    'side.required' => 'سمت را وارد کنید',
+                    'tel.required' => 'شماره تلفن را وارد کنید',
+                    'inside.required' => 'شماره داخلی را وارد کنید',
+                    'phone.required' => 'شماره همراه را وارد کنید',
+                ]);
         } else
             $validator = Validator::make($request->all(), [
                 'code' => 'required|integer|unique:sellers',

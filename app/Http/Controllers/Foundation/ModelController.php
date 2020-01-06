@@ -37,14 +37,26 @@ class ModelController extends Controller
     public function store(Request $request)
     {
         if (!empty($request->product_id)) {
-            $validator = Validator::make($request->all(), [
-                'name' => 'required',
-                'code' => 'required|integer',
-            ], [
-                'code.required' => 'لطفا کد سازنده قالب را وارد کنید',
-                'code.integer' => 'کد سازنده قالب باید از نوع عددی باشد',
-                'name.required' => 'لطفا نام سازنده قالب را وارد کنید',
-            ]);
+            $models = Models::find($request->product_id);
+            if ($models->code != $request->code) {
+                $validator = Validator::make($request->all(), [
+                    'name' => 'required',
+                    'code' => 'required|integer|unique:models',
+                ], [
+                    'code.unique' => 'سازنده قالب با این کد در سیستم موجود است',
+                    'code.required' => 'لطفا کد سازنده قالب را وارد کنید',
+                    'code.integer' => 'کد سازنده قالب باید از نوع عددی باشد',
+                    'name.required' => 'لطفا نام سازنده قالب را وارد کنید',
+                ]);
+            } else
+                $validator = Validator::make($request->all(), [
+                    'name' => 'required',
+                    'code' => 'required|integer',
+                ], [
+                    'code.required' => 'لطفا کد سازنده قالب را وارد کنید',
+                    'code.integer' => 'کد سازنده قالب باید از نوع عددی باشد',
+                    'name.required' => 'لطفا نام سازنده قالب را وارد کنید',
+                ]);
         } else
             $validator = Validator::make($request->all(), [
                 'name' => 'required',

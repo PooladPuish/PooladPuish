@@ -59,14 +59,26 @@ class ProductController extends Controller
     {
 
         if (!empty($request->product_id)) {
-            $validator = Validator::make($request->all(), [
-                'name' => 'required',
-                'code' => 'required|integer',
-            ], [
-                'code.required' => 'پرکردن کد محصول الزامی میباشد',
-                'code.integer' => 'کد محصول بایستی از نوع عدد باشد',
-                'name.required' => 'پرکردن نام محصول الزامی میباشد',
-            ]);
+            $products = Product::find($request->product_id);
+            if ($products->code != $request->code) {
+                $validator = Validator::make($request->all(), [
+                    'name' => 'required',
+                    'code' => 'required|integer|unique:products',
+                ], [
+                    'code.unique' => 'محصول با این کد در سیستم موجود است.',
+                    'code.required' => 'پرکردن کد محصول الزامی میباشد',
+                    'code.integer' => 'کد محصول بایستی از نوع عدد باشد',
+                    'name.required' => 'پرکردن نام محصول الزامی میباشد',
+                ]);
+            } else
+                $validator = Validator::make($request->all(), [
+                    'name' => 'required',
+                    'code' => 'required|integer',
+                ], [
+                    'code.required' => 'پرکردن کد محصول الزامی میباشد',
+                    'code.integer' => 'کد محصول بایستی از نوع عدد باشد',
+                    'name.required' => 'پرکردن نام محصول الزامی میباشد',
+                ]);
         } else
             $validator = Validator::make($request->all(), [
                 'name' => 'required',

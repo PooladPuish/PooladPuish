@@ -57,8 +57,4 @@ class User extends Authenticatable
 
     }
 
-    public function details()
-    {
-        return $this->belongsToMany(Detail::class);
-    }
 }

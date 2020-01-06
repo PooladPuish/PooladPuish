@@ -36,21 +36,40 @@ class ColorController extends Controller
     public function store(Request $request)
     {
         if (!empty($request->product_id)) {
-            $validator = Validator::make($request->all(), [
-                'code' => 'required|integer',
-                'name' => 'required',
-                'manufacturer' => 'required',
-                'combination' => 'required',
-                'masterbatch' => 'required|integer',
-            ], [
-                'code.required' => 'پرکردن کد رنگ الزامی میباشد',
-                'code.integer' => 'کد دستگاه بایستی از نوع عدد باشد',
-                'name.required' => 'نام رنگ را وارد کنید',
-                'manufacturer.required' => 'نام سازنده رنگ را وارد کنید',
-                'combination.required' => 'درصد ترکیب مواد را وارد کنید',
-                'masterbatch.required' => 'کد مستربچ را وارد کنید',
-                'masterbatch.integer' => 'کد مستربچ باید از نوع عددی باشد',
-            ]);
+            $color = Color::find($request->product_id);
+            if ($color->code != $request->code) {
+                $validator = Validator::make($request->all(), [
+                    'code' => 'required|integer|unique:colors',
+                    'name' => 'required',
+                    'manufacturer' => 'required',
+                    'combination' => 'required',
+                    'masterbatch' => 'required|integer',
+                ], [
+                    'code.unique' => 'رنگ با این کد در سیستم موجود است.',
+                    'code.required' => 'پرکردن کد رنگ الزامی میباشد',
+                    'code.integer' => 'کد دستگاه بایستی از نوع عدد باشد',
+                    'name.required' => 'نام رنگ را وارد کنید',
+                    'manufacturer.required' => 'نام سازنده رنگ را وارد کنید',
+                    'combination.required' => 'درصد ترکیب مواد را وارد کنید',
+                    'masterbatch.required' => 'کد مستربچ را وارد کنید',
+                    'masterbatch.integer' => 'کد مستربچ باید از نوع عددی باشد',
+                ]);
+            } else
+                $validator = Validator::make($request->all(), [
+                    'code' => 'required|integer',
+                    'name' => 'required',
+                    'manufacturer' => 'required',
+                    'combination' => 'required',
+                    'masterbatch' => 'required|integer',
+                ], [
+                    'code.required' => 'پرکردن کد رنگ الزامی میباشد',
+                    'code.integer' => 'کد دستگاه بایستی از نوع عدد باشد',
+                    'name.required' => 'نام رنگ را وارد کنید',
+                    'manufacturer.required' => 'نام سازنده رنگ را وارد کنید',
+                    'combination.required' => 'درصد ترکیب مواد را وارد کنید',
+                    'masterbatch.required' => 'کد مستربچ را وارد کنید',
+                    'masterbatch.integer' => 'کد مستربچ باید از نوع عددی باشد',
+                ]);
         } else
             $validator = Validator::make($request->all(), [
                 'code' => 'required|integer|unique:colors',

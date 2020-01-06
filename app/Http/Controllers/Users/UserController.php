@@ -44,17 +44,29 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        if (!empty($request->input('avatar'))) {
-            $validator = Validator::make($request->all(), [
-                'avatar' => 'mimes:jpeg,jpg,png',
-                'name' => 'required',
-                'phone' => 'required',
-                'password' => 'required',
-                'email' => 'required|unique:users',
-            ], [
-                'email.unique' => 'کاربری با این نام کاربری در سیستم موجود است.',
-                'email.required' => 'پر کردن فیلد نام کاربری الزامی میباشد.',
-            ]);
+        if (!empty($request->id)) {
+            $user = User::find($request->id);
+            if ($user->email != $request->email) {
+                $validator = Validator::make($request->all(), [
+                    'avatar' => 'mimes:jpeg,jpg,png',
+                    'name' => 'required',
+                    'phone' => 'required',
+                    'password' => 'required',
+                    'email' => 'required|unique:users',
+                ], [
+                    'email.unique' => 'کاربری با این نام کاربری در سیستم موجود است.',
+                    'email.required' => 'پر کردن فیلد نام کاربری الزامی میباشد.',
+                ]);
+            } else
+                $validator = Validator::make($request->all(), [
+                    'avatar' => 'mimes:jpeg,jpg,png',
+                    'name' => 'required',
+                    'phone' => 'required',
+                    'password' => 'required',
+                    'email' => 'required',
+                ], [
+                    'email.required' => 'پر کردن فیلد نام کاربری الزامی میباشد.',
+                ]);
         } else
             $validator = Validator::make($request->all(), [
                 'name' => 'required',

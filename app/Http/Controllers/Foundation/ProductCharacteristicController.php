@@ -42,16 +42,30 @@ class ProductCharacteristicController extends Controller
     public function store(Request $request)
     {
         if (!empty($request->product_id)) {
-            $validator = Validator::make($request->all(), [
-                'commodity_id' => 'required',
-                'name' => 'required',
-                'code' => 'required|integer',
-            ], [
-                'commodity_id.required' => 'گروه کالایی را انتخاب کنید',
-                'code.required' => 'لطفا کد مشخصه محصول را وارد کنید',
-                'code.integer' => 'کد مشخصه محصول  باید از نوع عددی باشد',
-                'name.required' => 'لطفا نام مشخصه محصول  را وارد کنید',
-            ]);
+            $characteristics = ProductCharacteristic::find($request->product_id);
+            if ($characteristics->code != $request->code) {
+                $validator = Validator::make($request->all(), [
+                    'commodity_id' => 'required',
+                    'name' => 'required',
+                    'code' => 'required|integer|unique:product_characteristics',
+                ], [
+                    'commodity_id.required' => 'گروه کالایی را انتخاب کنید',
+                    'code.unique' => 'مشخصه محصول با این کد در سیستم موجود است',
+                    'code.required' => 'لطفا کد مشخصه محصول  را وارد کنید',
+                    'code.integer' => 'کد مشخصه محصول  باید از نوع عددی باشد',
+                    'name.required' => 'لطفا نام مشخصه محصول  را وارد کنید',
+                ]);
+            } else
+                $validator = Validator::make($request->all(), [
+                    'commodity_id' => 'required',
+                    'name' => 'required',
+                    'code' => 'required|integer',
+                ], [
+                    'commodity_id.required' => 'گروه کالایی را انتخاب کنید',
+                    'code.required' => 'لطفا کد مشخصه محصول  را وارد کنید',
+                    'code.integer' => 'کد مشخصه محصول  باید از نوع عددی باشد',
+                    'name.required' => 'لطفا نام مشخصه محصول  را وارد کنید',
+                ]);
         } else
             $validator = Validator::make($request->all(), [
                 'commodity_id' => 'required',

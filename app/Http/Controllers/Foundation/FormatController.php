@@ -60,26 +60,47 @@ class FormatController extends Controller
      */
     public function store(Request $request)
     {
-        if (!empty($request->product_id)) {
-            $validator = Validator::make($request->all(), [
-                'code' => 'required|integer',
-                'model_id' => 'required',
-                'product_id' => 'required',
-                'commodity_id' => 'required',
-                'characteristics_id' => 'required',
-                'size' => 'required',
-                'quetta' => 'required',
-            ], [
-                'code.required' => 'پرکردن کد قالب الزامی میباشد',
-                'code.integer' => 'کد قالب بایستی از نوع عدد باشد',
-                'model_id.required' => 'وارد کردن قالب ساز الزامی میباشد',
-                'product_id.required' => 'وارد کردن محصول الزامی میباشد',
-                'commodity_id.required' => 'وارد کردن گروه کالایی الزامی میباشد',
-                'characteristics_id.required' => 'وارد کردن مشخصه قالب الزامی میباشد',
-                'size.required' => 'وارد کردن وزن محصول الزامی میباشد',
-                'quetta.required' => 'وارد کردن تعداد کویته الزامی میباشد',
-
-            ]);
+        if (!empty($request->product)) {
+            $formats = Format::find($request->product);
+            if ($formats->code != $request->code) {
+                $validator = Validator::make($request->all(), [
+                    'code' => 'required|integer|unique:formats',
+                    'model_id' => 'required',
+                    'product_id' => 'required',
+                    'commodity_id' => 'required',
+                    'characteristics_id' => 'required',
+                    'size' => 'required',
+                    'quetta' => 'required',
+                ], [
+                    'code.unique' => 'قالب با این کد در سیستم موجود است.',
+                    'code.required' => 'پرکردن کد قالب الزامی میباشد',
+                    'code.integer' => 'کد قالب بایستی از نوع عدد باشد',
+                    'model_id.required' => 'وارد کردن قالب ساز الزامی میباشد',
+                    'product_id.required' => 'وارد کردن محصول الزامی میباشد',
+                    'commodity_id.required' => 'وارد کردن گروه کالایی الزامی میباشد',
+                    'characteristics_id.required' => 'وارد کردن مشخصه قالب الزامی میباشد',
+                    'size.required' => 'وارد کردن وزن محصول الزامی میباشد',
+                    'quetta.required' => 'وارد کردن تعداد کویته الزامی میباشد',
+                ]);
+            } else
+                $validator = Validator::make($request->all(), [
+                    'code' => 'required|integer',
+                    'model_id' => 'required',
+                    'product_id' => 'required',
+                    'commodity_id' => 'required',
+                    'characteristics_id' => 'required',
+                    'size' => 'required',
+                    'quetta' => 'required',
+                ], [
+                    'code.required' => 'پرکردن کد قالب الزامی میباشد',
+                    'code.integer' => 'کد قالب بایستی از نوع عدد باشد',
+                    'model_id.required' => 'وارد کردن قالب ساز الزامی میباشد',
+                    'product_id.required' => 'وارد کردن محصول الزامی میباشد',
+                    'commodity_id.required' => 'وارد کردن گروه کالایی الزامی میباشد',
+                    'characteristics_id.required' => 'وارد کردن مشخصه قالب الزامی میباشد',
+                    'size.required' => 'وارد کردن وزن محصول الزامی میباشد',
+                    'quetta.required' => 'وارد کردن تعداد کویته الزامی میباشد',
+                ]);
         } else
             $validator = Validator::make($request->all(), [
                 'code' => 'required|integer|unique:formats',
@@ -99,7 +120,6 @@ class FormatController extends Controller
                 'characteristics_id.required' => 'وارد کردن مشخصه قالب الزامی میباشد',
                 'size.required' => 'وارد کردن وزن محصول الزامی میباشد',
                 'quetta.required' => 'وارد کردن تعداد کویته الزامی میباشد',
-
             ]);
         if ($validator->passes()) {
             Format::updateOrCreate(['id' => $request->product],

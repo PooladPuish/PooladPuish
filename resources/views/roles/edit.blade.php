@@ -156,7 +156,7 @@
                                                 <input id="tree-controll1" type="checkbox" class="custom-control-input"><span
                                                     class="tree-control"></span>
                                                 <label>
-                                                    <input type="checkbox"/>
+                                                    <input type="checkbox"  class="check" id="users" />
                                                     <i class="fa fa-user light-blue"></i> مدیریت
                                                 </label>
                                                 <ul>
@@ -165,7 +165,7 @@
                                                             @if($value->label == "user")
 
                                                                 <li>
-                                                                    <label>{{ Form::checkbox('permission[]',$value->id,in_array($value->id,$rolePermission)? true : false , array('class'=>'name')) }}
+                                                                    <label>{{ Form::checkbox('permission[]',$value->id,in_array($value->id,$rolePermission)? true : false , array('class'=>'user')) }}
                                                                         {{$value->name}}
                                                                     </label>
                                                                 </li>
@@ -176,7 +176,7 @@
                                                         <input type="checkbox"><span
                                                             class="tree-control"></span>
                                                         <label>
-                                                            <input type="checkbox"/>
+                                                            <input type="checkbox" class="user" id="list_users"/>
                                                             <i class="fa fa-tasks orange"></i>لیست کاربران
                                                         </label>
                                                         <ul>
@@ -184,7 +184,7 @@
                                                                 @if(!empty($permission))
                                                                     @if($permission->label == "user/user")
                                                                         <li>
-                                                                            <label>{{ Form::checkbox('permission[]',$permission->id,in_array($permission->id,$rolePermission)? true : false , array('class'=>'name')) }}
+                                                                            <label>{{ Form::checkbox('permission[]',$permission->id,in_array($permission->id,$rolePermission)? true : false , array('class'=>'user list_user')) }}
                                                                                 {{$permission->name}}
                                                                             </label>
                                                                         </li>
@@ -207,7 +207,7 @@
                                                 <input id="tree-controll1" type="checkbox" class="custom-control-input"><span
                                                     class="tree-control"></span>
                                                 <label>
-                                                    <input type="checkbox"/>
+                                                    <input type="checkbox" id="setting"/>
                                                     <i class="fa fa-user light-blue"></i> تنظیمات سیستم
                                                 </label>
                                                 <ul>
@@ -216,7 +216,7 @@
                                                             @if($value->label == "setting")
 
                                                                 <li>
-                                                                    <label>{{ Form::checkbox('permission[]',$value->id,in_array($value->id,$rolePermission)? true : false , array('class'=>'name')) }}
+                                                                    <label>{{ Form::checkbox('permission[]',$value->id,in_array($value->id,$rolePermission)? true : false , array('class'=>'settings')) }}
                                                                         {{$value->name}}
                                                                     </label>
                                                                 </li>
@@ -243,4 +243,6 @@
             </div>
         </div>
     </div>
+
+
 @endsection

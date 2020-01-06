@@ -36,17 +36,31 @@ class DeviceController extends Controller
      */
     public function store(Request $request)
     {
-        if (!empty($request->product_id)) {
-            $validator = Validator::make($request->all(), [
-                'code' => 'required|integer',
-                'name' => 'required',
-                'model' => 'required',
-            ], [
-                'code.required' => 'پرکردن کد دستگاه الزامی میباشد',
-                'code.integer' => 'کد دستگاه بایستی از نوع عدد باشد',
-                'name.required' => 'نام دستگاه را وارد کنید',
-                'model.required' => 'مدل دستگاه را وارد کنید',
-            ]);
+        if (!empty($request->product)) {
+            $devices = Device::find($request->product);
+            if ($devices->code != $request->code) {
+                $validator = Validator::make($request->all(), [
+                    'code' => 'required|integer|unique:devices',
+                    'name' => 'required',
+                    'model' => 'required',
+                ], [
+                    'code.unique' => 'دستگاه با این کد در سیستم موجود است.',
+                    'code.required' => 'پرکردن کد دستگاه الزامی میباشد',
+                    'code.integer' => 'کد دستگاه بایستی از نوع عدد باشد',
+                    'name.required' => 'نام دستگاه را وارد کنید',
+                    'model.required' => 'مدل دستگاه را وارد کنید',
+                ]);
+            } else
+                $validator = Validator::make($request->all(), [
+                    'code' => 'required|integer',
+                    'name' => 'required',
+                    'model' => 'required',
+                ], [
+                    'code.required' => 'پرکردن کد دستگاه الزامی میباشد',
+                    'code.integer' => 'کد دستگاه بایستی از نوع عدد باشد',
+                    'name.required' => 'نام دستگاه را وارد کنید',
+                    'model.required' => 'مدل دستگاه را وارد کنید',
+                ]);
         } else
             $validator = Validator::make($request->all(), [
                 'code' => 'required|integer|unique:devices',
@@ -60,7 +74,7 @@ class DeviceController extends Controller
                 'model.required' => 'مدل دستگاه را وارد کنید',
             ]);
         if ($validator->passes()) {
-            Device::updateOrCreate(['id' => $request->product_id],
+            Device::updateOrCreate(['id' => $request->product],
                 [
                     'name' => $request->name,
                     'code' => $request->code,

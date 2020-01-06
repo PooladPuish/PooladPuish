@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Morilog\Jalali\Jalalian;
+use Response;
+use Validator;
 use Yajra\DataTables\Facades\DataTables;
 use function App\Providers\MsgError;
 use function App\Providers\MsgSuccess;
@@ -43,7 +45,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         if (!empty($request->input('avatar'))) {
-            $this->validate($request, [
+            $validator = Validator::make($request->all(), [
                 'avatar' => 'mimes:jpeg,jpg,png',
                 'name' => 'required',
                 'phone' => 'required',
@@ -54,16 +56,14 @@ class UserController extends Controller
                 'email.required' => 'پر کردن فیلد نام کاربری الزامی میباشد.',
             ]);
         } else
-            $this->validate($request, [
+            $validator = Validator::make($request->all(), [
                 'name' => 'required',
                 'phone' => 'required',
                 'password' => 'required',
                 'email' => 'required|unique:users',
-
             ], [
                 'email.unique' => 'کاربری با این نام کاربری در سیستم موجود است.',
                 'email.required' => 'پر کردن فیلد نام کاربری الزامی میباشد.',
-
             ]);
         if ($request->hasFile('avatar')) {
             $file = $request->file('avatar');
@@ -72,19 +72,20 @@ class UserController extends Controller
         } else {
             $avatar = null;
         }
-        $user = User::create([
-            'name' => $request['name'],
-            'email' => $request['email'],
-            'phone' => $request['phone'],
-            'password' => Hash::make($request['password']),
-            'avatar' => $avatar,
-        ]);
-        if ($user) {
-            $success = $user->roles()->sync($request->input('roles'));
-            if ($success) {
-                return MsgSuccess('مشخصات کاربر جدید با موفقیت در سیستم ثبت شد');
-            }
+        if ($validator->passes()) {
+            $user = User::updateOrCreate(['id' => $request->id],
+                [
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                    'password' => Hash::make($request->password),
+                    'avatar' => $avatar,
+                ]);
+            $user->roles()->sync($request->input('roles'));
+            return response()->json(['success' => 'Product saved successfully.']);
         }
+        return Response::json(['errors' => $validator->errors()]);
+
     }
 
     /**
@@ -178,44 +179,62 @@ class UserController extends Controller
     /**
      *نمایش لیست کاربران*
      */
-    public function show(User $id)
+    public function show(Request $request)
     {
-        $role = \DB::table('role_user')->where('user_id', $id->id)
-            ->pluck('role_id')
-            ->all();
-        if (!empty($role)) {
-            foreach ($id->roles as $role)
-                $rol = $role->id;
-        } else {
-            $rol = null;
-        }
-
         $roles = Role::all();
-        $users = User::orderBy('id', 'DESC')->get();
-        return view('users.list', compact('users', 'roles', 'id', 'rol'));
-
+        if ($request->ajax()) {
+            $data = User::orderBy('id', 'desc')->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('role', function ($row) {
+                    foreach ($row->roles as $role)
+                        return $role->name;
+                })
+                ->addColumn('online', function ($row) {
+                    $online = url('/public/icon/online.png');
+                    $offline = url('/public/icon/offline.png');
+                    if (\Cache::has('active' . $row->id)) {
+                        return '<img src="' . $online . '" title="انلاین" width="25">';
+                    } else
+                        return '<img src="' . $offline . '" title="افلاین" width="25">';
+                })
+                ->addColumn('status', function ($row) {
+                    $active = url('/public/icon/icons8-checked-user-male.png');
+                    $notActive = url('/public/icon/icons8-checked-user-male-40.png');
+                    if ($row->status == null) {
+                        return '<img src="' . $active . '" title="فعال" width="25">';
+                    } else
+                        return '<img src="' . $notActive . '" title="غیرفعال" width="25">';
+                })
+                ->addColumn('action', function ($row) {
+                    return $this->actions($row);
+                })
+                ->rawColumns(['action', 'online', 'status'])
+                ->make(true);
+        }
+        return view('users.list', compact('roles'));
     }
 
     /**
      *نمایش لیست کاربران*
      */
-    public function disable(User $id)
+    public function disable(Request $request)
     {
-        $sStatus = User::where('id', $id->id)->get();
+        $sStatus = User::where('id', $request->id)->get();
         foreach ($sStatus as $status)
             if ($status->status == null) {
                 $ok = User::find($status->id)->update([
                     'status' => 1,
                 ]);
                 if ($ok) {
-                    return MsgSuccess('تمام فعالیت های کاربر با موفقیت غیر فعال شد');
+                    return response()->json(['errors' => 'تمام فعالیت های کاربر با موفقیت غیر فعال شد']);
                 }
             } else {
                 $success = User::find($status->id)->update([
                     'status' => null,
                 ]);
                 if ($success) {
-                    return MsgSuccess('تمام فعالیت های کاربر با موفقیت فعال شد');
+                    return response()->json(['success' => 'تمام فعالیت های کاربر با موفقیت فعال شد']);
                 }
             }
     }
@@ -346,14 +365,13 @@ class UserController extends Controller
                     'exit' => null,
                 ]);
             if ($success) {
-                return MsgSuccess('سیستم اماده بازسازی میباشد');
+                return response()->json(['success' => 'سیستم اماده بازسازی میباشد']);
             }
         } else {
-            return MsgError('در حال حاضر امکان توقف سرویس های نرم افزار ممکن نیست');
+            return Response::json(['errors' => 'در حال حاضر امکان توقف سرویس های نرم افزار ممکن نیست']);
         }
 
     }
-
 
     /**
      * شروع کار نرم افزار *
@@ -364,10 +382,42 @@ class UserController extends Controller
             'exit' => null,
         ]);
         if ($exit) {
-            return MsgSuccess('نرم افزار با موفقیت راه اندازی شد');
+            return response()->json(['success' => 'نرم افزار با موفقیت راه اندازی شد']);
         } else {
-            return MsgSuccess('تمام سرویس های نرم افزار در حال اجرا هستند نیازی به راه اندازی نیست');
+            return Response::json(['errors' => 'تمام سرویس های نرم افزار در حال اجرا هستند نیازی به راه اندازی نیست']);
         }
     }
+
+    /**
+     * اکشن های دیتا تیبل *
+     */
+    public function actions($row)
+    {
+        $success = url('/public/icon/icons8-edit-144.png');
+        $delete = url('/public/icon/icons8-key-144.png');
+        $btn = '<a href="javascript:void(0)" data-toggle="tooltip"
+                      data-id="' . $row->id . '" data-original-title="ویرایش"
+                       class="editProduct">
+                       <img src="' . $success . '" width="25" title="ویرایش"></a>';
+
+        $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"
+                      data-id="' . $row->id . '" data-original-title="فعال و غیر فعال کردن کاربر"
+                       class="status">
+                       <img src="' . $delete . '" width="25" title="فعال و غیر فعال کردن کاربر">
+                       </a>';
+
+        return $btn;
+    }
+
+    /**
+     * ویرایش مشخصات کاربران *
+     */
+    public function u($id)
+    {
+        $product = User::find($id);
+        return response()->json($product);
+
+    }
+
 }
 

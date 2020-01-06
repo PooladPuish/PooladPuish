@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal-default">
+<div class="modal fade" id="ajaxModel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body">
@@ -11,13 +11,15 @@
                     <div class="portlet-body form">
                         <div class="form-body">
                             <div class="form-group">
-                                <form action="{{route('admin.format.store')}}" method="post">
+
+                                <form id="productForm" name="productForm" class="form-horizontal">
+                                    <input type="hidden" name="product" id="product">
                                     @csrf
                                     <div class="col-md-12 form-group">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>کد</label>
-                                                <input type="text" name="code" class="form-control"
+                                                <input type="text" id="code" name="code" class="form-control"
                                                        placeholder="لطفا کد قالب را وارد کنید"
                                                        required>
                                             </div>
@@ -25,7 +27,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>قالب ساز</label>
-                                                <select dir="rtl" id="select2-aa" class="form-control"
+                                                <select dir="rtl" id="model_id" class="form-control"
                                                         name="model_id"
                                                         required>
                                                     @foreach($models as $model)
@@ -40,7 +42,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>گروه کالایی</label>
-                                                <select dir="rtl" id="select2-prodd" class="form-control"
+                                                <select dir="rtl" id="commodity_id" class="form-control"
                                                         name="commodity_id"
                                                         required>
                                                     @foreach($commoditys as $commodity)
@@ -55,7 +57,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>مشخصه محصول</label>
-                                                <select dir="rtl" id="select2-bb" class="form-control"
+                                                <select dir="rtl" id="characteristics_id" class="form-control"
                                                         name="characteristics_id"
                                                         required>
                                                     @foreach($characteristics as $characteristic)
@@ -70,7 +72,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>نام محصول</label>
-                                                <select dir="rtl" id="select2-cc" class="form-control"
+                                                <select dir="rtl" id="product_id" class="form-control"
                                                         name="product_id"
                                                         required>
                                                     @foreach($products as $product)
@@ -85,7 +87,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>وزن محصول</label>
-                                                <input type="text" name="size" class="form-control"
+                                                <input type="text" id="size" name="size" class="form-control"
                                                        placeholder="لطفا وزن محصول را وارد کنید"
                                                        required>
                                             </div>
@@ -93,7 +95,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>تعداد کویته</label>
-                                                <input type="text" name="quetta" class="form-control"
+                                                <input type="text" id="quetta" name="quetta" class="form-control"
                                                        placeholder="لطفا تعداد کویته را وارد کنید"
                                                        required>
                                             </div>
@@ -103,7 +105,9 @@
                                         <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">
                                             انصراف
                                         </button>
-                                        <input type="submit" class="btn btn-primary" value="ثبت">
+                                        <button type="submit" class="btn btn-primary" id="saveBtn" value="ثبت">
+                                            ثبت
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -115,3 +119,4 @@
         </div>
     </div>
 </div>
+

@@ -11,7 +11,7 @@
                     <div class="tools"></div>
                 </div>
                 <div class="portlet-body">
-                    <table class="table table-striped table-bordered table-hover" id="sample_2">
+                    <table class="table table-striped table-bordered data-table" id="data-table">
                         <thead>
                         <tr>
                             <th>ردیف</th>
@@ -22,13 +22,12 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @include('device.tabels.tabel')
                         </tbody>
                     </table>
-                    <a data-toggle="modal" data-target="#modal-default" class="btn btn-primary">تعریف دستگاه جدید</a>
+                    <a class="btn btn-primary" href="javascript:void(0)" id="createNewProduct">تعریف دستگاه جدید</a>
                 </div>
             </div>
         </div>
     </div>
     @include('device.modals.modal')
-@endsection
+    @include('device.scripts.script')@endsection

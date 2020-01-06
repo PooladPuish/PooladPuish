@@ -15,6 +15,10 @@ class ProductCharacteristic extends Model
 
     public function products()
     {
-        return $this->belongsTo(ProductCharacteristic::class);
+        return $this->hasMany(Product::class);
+    }
+    public function formats()
+    {
+        return $this->hasMany(Format::class);
     }
 }

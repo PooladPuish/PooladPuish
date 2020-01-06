@@ -1,23 +1,17 @@
 @extends('layouts.master')
 @section('content')
     @include('message.msg')
-
     <div class="row">
-
         <div class="col-md-12">
-
             <div class="portlet box blue">
-
                 <div class="portlet-title">
                     <div class="caption">
                         مشخصه محصول
                     </div>
                     <div class="tools"></div>
                 </div>
-
                 <div class="portlet-body">
-
-                    <table class="table table-striped table-bordered table-hover" id="sample_2">
+                    <table class="table table-striped table-bordered data-table" id="data-table">
                         <thead>
                         <tr>
                             <th>ردیف</th>
@@ -28,17 +22,14 @@
                         </tr>
                         </thead>
                         <tbody>
-                      @include('ProductCharacteristic.tabels.tabel')
                         </tbody>
                     </table>
-                    <a data-toggle="modal" data-target="#modal-default" class="btn btn-primary">تعریف مشخصه محصول
-                        جدید</a>
+                    <a class="btn btn-primary" href="javascript:void(0)" id="createNewProduct">تعریف مشخصه محصول جدید</a>
+
                 </div>
             </div>
         </div>
     </div>
     @include('ProductCharacteristic.modals.modal')
-
-
-
+    @include('ProductCharacteristic.scripts.script')
 @endsection

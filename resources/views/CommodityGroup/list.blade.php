@@ -11,7 +11,7 @@
                     <div class="tools"></div>
                 </div>
                 <div class="portlet-body">
-                    <table class="table table-striped table-bordered table-hover" id="sample_2">
+                    <table class="table table-striped table-bordered data-table" id="data-table">
                         <thead>
                         <tr>
                             <th>ردیف</th>
@@ -21,13 +21,13 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @include('CommodityGroup.tabels.tabel')
                         </tbody>
                     </table>
-                    <a data-toggle="modal" data-target="#modal-default" class="btn btn-primary">تعریف گروه جدید</a>
+                    <a class="btn btn-primary" href="javascript:void(0)" id="createNewProduct">تعریف گروه جدید</a>
                 </div>
             </div>
         </div>
     </div>
     @include('CommodityGroup.modals.modal')
+    @include('CommodityGroup.scripts.script')
 @endsection

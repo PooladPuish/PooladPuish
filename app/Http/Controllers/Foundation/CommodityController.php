@@ -1,9 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\Foundation;
+
 use App\Http\Controllers\Controller;
 use App\Commodity;
 use Illuminate\Http\Request;
+use Response;
+use Validator;
+use Yajra\DataTables\DataTables;
 use function App\Providers\MsgError;
 use function App\Providers\MsgSuccess;
 
@@ -12,10 +16,20 @@ class CommodityController extends Controller
     /**
      * نمایش لیست گروهای کالایی *
      */
-    public function list()
+    public function list(Request $request)
     {
-        $commoditys = Commodity::orderBy('id', 'desc')->get();
-        return view('CommodityGroup.list', compact('commoditys'));
+        if ($request->ajax()) {
+            $data = Commodity::orderBy('id', 'desc')->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    return $this->actions($row);
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+
+        }
+        return view('CommodityGroup.list');
     }
 
     /**
@@ -23,68 +37,71 @@ class CommodityController extends Controller
      */
     public function store(Request $request)
     {
-
-        $this->validate($request, [
-            'name' => 'required',
-            'code' => 'required|integer|unique:commodities',
-        ], [
-            'code.unique' => 'کالا با این کد در سیستم موجود است.',
-            'code.required' => 'پرکردن کد محصول الزامی میباشد',
-            'code.integer' => 'کد محصول بایستی از نوع عدد باشد',
-            'name.required' => 'پرکردن نام محصول الزامی میباشد',
-        ]);
-
-        $success = Commodity::create([
-            'code' => $request['code'],
-            'name' => $request['name'],
-        ]);
-        return MsgSuccess('مشخصات گروه کالای جدید با موفقیت در سیستم ثبت شد');
+        if (!empty($request->product_id)) {
+            $validator = Validator::make($request->all(), [
+                'name' => 'required',
+                'code' => 'required|integer',
+            ], [
+                'code.required' => 'لطفا کد گروه کالایی را وارد کنید',
+                'code.integer' => 'کد گروه کالایی باید از نوع عددی باشد',
+                'name.required' => 'لطفا نام گروه کالایی را وارد کنید',
+            ]);
+        } else
+            $validator = Validator::make($request->all(), [
+                'name' => 'required',
+                'code' => 'required|integer|unique:commodities',
+            ], [
+                'code.unique' => 'گروه کالایی با این کد در سیستم موجود است',
+                'code.required' => 'لطفا کد گروه کالایی را وارد کنید',
+                'code.integer' => 'کد گروه کالایی باید از نوع عددی باشد',
+                'name.required' => 'لطفا نام گروه کالایی را وارد کنید',
+            ]);
+        if ($validator->passes()) {
+            Commodity::updateOrCreate(['id' => $request->product_id],
+                ['name' => $request->name, 'code' => $request->code]);
+            return response()->json(['success' => 'Product saved successfully.']);
+        }
+        return Response::json(['errors' => $validator->errors()]);
     }
 
     /**
      * حذف مشخصات گروه کالایی *
      */
-    public function delete(Commodity $id)
+    public function delete($id)
     {
-        $id->delete();
-        return MsgSuccess('مشخصات کالا با موفقیت از سیستم حذف شد');
-
+        $post = Commodity::findOrFail($id);
+        $post->delete();
+        return response()->json($post);
     }
 
     /**
      * ویرایش مشخصات گروه کالایی *
      */
-    public function edit(Request $request)
+    public function update($id)
     {
-        $commoditys = Commodity::where('id', $request['id'])->pluck('code')->all();
-        foreach ($commoditys as $commodity)
-            if ($request['code'] == $commodity) {
+        $product = Commodity::find($id);
+        return response()->json($product);
+    }
 
-                $this->validate($request, [
-                    'name' => 'required',
-                    'code' => 'required|integer',
-                ], [
-                    'code.required' => 'پرکردن کد محصول الزامی میباشد',
-                    'code.integer' => 'کد محصول بایستی از نوع عدد باشد',
-                    'name.required' => 'پرکردن نام محصول الزامی میباشد',
-                ]);
-            } else
-                $this->validate($request, [
-                    'name' => 'required',
-                    'code' => 'required|integer|unique:commodities',
-                ], [
-                    'code.unique' => 'کالا با این کد در سیستم موجود است.',
-                    'code.required' => 'پرکردن کد محصول الزامی میباشد',
-                    'code.integer' => 'کد محصول بایستی از نوع عدد باشد',
-                    'name.required' => 'پرکردن نام محصول الزامی میباشد',
-                ]);
+    /**
+     * اکشن های دیتا تیبل *
+     */
+    public function actions($row)
+    {
+        $success = url('/public/icon/icons8-edit-144.png');
+        $delete = url('/public/icon/icons8-delete-bin-96.png');
 
-        $id = $request['id'];
-        Commodity::find($id)->update([
-            'name' => $request['name'],
-            'code' => $request['code'],
-        ]);
-        return MsgSuccess('مشخصات گروه کالا با موفقیت ویرایش شد');
+        $btn = '<a href="javascript:void(0)" data-toggle="tooltip"
+                      data-id="' . $row->id . '" data-original-title="ویرایش"
+                       class="editProduct">
+                       <img src="' . $success . '" width="25" title="ویرایش"></a>';
+
+        $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"
+                      data-id="' . $row->id . '" data-original-title="حذف"
+                       class="deleteProduct">
+                       <img src="' . $delete . '" width="25" title="حذف"></a>';
+
+        return $btn;
 
     }
 

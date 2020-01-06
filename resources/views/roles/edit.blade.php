@@ -156,7 +156,7 @@
                                                 <input id="tree-controll1" type="checkbox" class="custom-control-input"><span
                                                     class="tree-control"></span>
                                                 <label>
-                                                    &nbsp;
+                                                    <input type="checkbox"/>
                                                     <i class="fa fa-user light-blue"></i> مدیریت
                                                 </label>
                                                 <ul>

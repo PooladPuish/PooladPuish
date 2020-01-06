@@ -1,11 +1,15 @@
 <?php
 
 namespace App\Http\Controllers\Foundation;
+
 use App\Http\Controllers\Controller;
 use App\Commodity;
 use App\Product;
 use App\ProductCharacteristic;
 use Illuminate\Http\Request;
+use Response;
+use Validator;
+use Yajra\DataTables\DataTables;
 use function App\Providers\MsgSuccess;
 
 class ProductCharacteristicController extends Controller
@@ -13,11 +17,23 @@ class ProductCharacteristicController extends Controller
     /**
      * نمایش لیست مشخصه محصولات *
      */
-    public function list()
+    public function list(Request $request)
     {
-        $commoditys = Commodity::orderBy('id', 'desc')->get();
-        $products = ProductCharacteristic::all();
-        return view('ProductCharacteristic.list', compact('products', 'commoditys'));
+        $commoditys = Commodity::all();
+        if ($request->ajax()) {
+            $data = ProductCharacteristic::orderBy('id', 'desc')->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    return $this->actions($row);
+                })
+                ->addColumn('commodity_id', function ($row) {
+                    return $row->commodity->name;
+                })
+                ->rawColumns(['action', 'commodity_id'])
+                ->make(true);
+        }
+        return view('ProductCharacteristic.list', compact('commoditys'));
     }
 
     /**
@@ -25,80 +41,80 @@ class ProductCharacteristicController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'commodity_id' => 'required',
-            'code' => 'required|integer|unique:product_characteristics',
-            'name' => 'required',
-        ], [
-            'code.unique' => 'مشخصه محصول با این کد در سیستم موجود است.',
-            'code.required' => 'پرکردن کد مشخصه محصول الزامی میباشد',
-            'code.integer' => 'کد مشخصه محصول بایستی از نوع عدد باشد',
-            'name.required' => 'نام مشخصه را وارد کنید',
-            'commodity_id.required' => 'گروه کالایی را انتخاب کنید',
-        ]);
-
-        ProductCharacteristic::create([
-            'commodity_id' => $request['commodity_id'],
-            'code' => $request['code'],
-            'name' => $request['name'],
-        ]);
-        return MsgSuccess('مشخصه محصول جدید با موفقیت در سیستم ثبت شد');
-
-
+        if (!empty($request->product_id)) {
+            $validator = Validator::make($request->all(), [
+                'commodity_id' => 'required',
+                'name' => 'required',
+                'code' => 'required|integer',
+            ], [
+                'commodity_id.required' => 'گروه کالایی را انتخاب کنید',
+                'code.required' => 'لطفا کد مشخصه محصول را وارد کنید',
+                'code.integer' => 'کد مشخصه محصول  باید از نوع عددی باشد',
+                'name.required' => 'لطفا نام مشخصه محصول  را وارد کنید',
+            ]);
+        } else
+            $validator = Validator::make($request->all(), [
+                'commodity_id' => 'required',
+                'name' => 'required',
+                'code' => 'required|integer|unique:product_characteristics',
+            ], [
+                'commodity_id.required' => 'گروه کالایی را انتخاب کنید',
+                'code.unique' => 'مشخصه محصول با این کد در سیستم موجود است',
+                'code.required' => 'لطفا کد مشخصه محصول  را وارد کنید',
+                'code.integer' => 'کد مشخصه محصول  باید از نوع عددی باشد',
+                'name.required' => 'لطفا نام مشخصه محصول  را وارد کنید',
+            ]);
+        if ($validator->passes()) {
+            ProductCharacteristic::updateOrCreate(['id' => $request->product_id],
+                [
+                    'name' => $request->name,
+                    'code' => $request->code,
+                    'commodity_id' => $request->commodity_id,
+                ]);
+            return response()->json(['success' => 'Product saved successfully.']);
+        }
+        return Response::json(['errors' => $validator->errors()]);
     }
 
     /**
-     * ویرایش مشخصات مشخصه محصول *
+     * اکشن های دیتا تیبل *
      */
-    public function edit(Request $request)
+    public function actions($row)
     {
-        $ProductCharacteristics = ProductCharacteristic::where('id', $request['commodity_id'])->pluck('code')->all();
-        foreach ($ProductCharacteristics as $ProductCharacteristic)
-            if ($request['code'] == $ProductCharacteristic) {
+        $success = url('/public/icon/icons8-edit-144.png');
+        $delete = url('/public/icon/icons8-delete-bin-96.png');
 
-                $this->validate($request, [
-                    'commodity_id' => 'required',
-                    'code' => 'required|integer',
-                    'name' => 'required',
-                ], [
-                    'code.required' => 'پرکردن کد مشخصه محصول الزامی میباشد',
-                    'code.integer' => 'کد مشخصه محصول بایستی از نوع عدد باشد',
-                    'name.required' => 'نام مشخصه را وارد کنید',
-                    'commodity_id.required' => 'گروه کالایی را انتخاب کنید',
-                ]);
-            } else
-                $this->validate($request, [
-                    'commodity_id' => 'required',
-                    'code' => 'required|integer|unique:product_characteristics',
-                    'name' => 'required',
-                ], [
-                    'code.unique' => 'مشخصه محصول با این کد در سیستم موجود است.',
-                    'code.required' => 'پرکردن کد مشخصه محصول الزامی میباشد',
-                    'code.integer' => 'کد مشخصه محصول بایستی از نوع عدد باشد',
-                    'name.required' => 'نام مشخصه را وارد کنید',
-                    'commodity_id.required' => 'گروه کالایی را انتخاب کنید',
-                ]);
+        $btn = '<a href="javascript:void(0)" data-toggle="tooltip"
+                      data-id="' . $row->id . '" data-original-title="ویرایش"
+                       class="editProduct">
+                       <img src="' . $success . '" width="25" title="ویرایش"></a>';
 
+        $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"
+                      data-id="' . $row->id . '" data-original-title="حذف"
+                       class="deleteProduct">
+                       <img src="' . $delete . '" width="25" title="حذف"></a>';
 
-        $id = $request['id'];
-        ProductCharacteristic::find($id)->update([
-            'commodity_id' => $request['commodity_id'],
-            'code' => $request['code'],
-            'name' => $request['name'],
-        ]);
-        return MsgSuccess('مشخصه محصول جدید با موفقیت در سیستم ویرایش شد');
+        return $btn;
 
     }
 
     /**
      * حذف مشخصات مشخصه محصول *
      */
-    public function delete(ProductCharacteristic $id)
+    public function delete($id)
     {
-        $id->delete();
-        return MsgSuccess('مشخصه محصول با موفقیت از سیستم حذف شد');
-
+        $post = ProductCharacteristic::findOrFail($id);
+        $post->delete();
+        return response()->json($post);
     }
 
+    /**
+     * ویرایش مشخصات مشخصه محصول *
+     */
+    public function update($id)
+    {
+        $product = ProductCharacteristic::find($id);
+        return response()->json($product);
+    }
 
 }

@@ -1,57 +1,47 @@
-<div class="modal fade" id="modal-default">
+<div class="modal fade" id="ajaxModel" aria-hidden="true">
     <div class="modal-dialog col-md-12">
         <div class="modal-content">
             <div class="modal-body col-md-12">
                 <div class="portlet box blue">
                     <div class="portlet-title">
                         <div class="caption">
-                            افزودن کاربر
+                           افزودن کاربر
                         </div>
                     </div>
                     <div class="portlet-body form">
                         <div class="form-body">
                             <div class="form-group">
-                                <form method="post" action="{{route('admin.user.store')}}"
-                                      class="mt-repeater"
-                                      enctype="multipart/form-data">
+
+                                <form id="productForm" name="productForm" class="form-horizontal">
                                     @csrf
+                                    <input type="hidden" id="id" name="id">
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <div class="form-group">
                                                 <label>نام و نام خانوادگی</label>
                                                 <input type="text" id="name" name="name" class="form-control"
                                                        required>
-                                            </div>
                                         </div>
                                         <div class="col-md-3">
-                                            <div class="form-group">
                                                 <label>نام کاربری</label>
                                                 <input type="text" id="email" name="email" class="form-control"
                                                        required>
-                                            </div>
                                         </div>
                                         <div class="col-md-3">
-                                            <div class="form-group">
                                                 <label>شماره تماس</label>
                                                 <input type="text" id="phone" name="phone" class="form-control"
                                                        required>
-                                            </div>
                                         </div>
 
                                         <div class="col-md-3">
-                                            <div class="form-group">
                                                 <label>تصویر پروفایل</label>
                                                 <input type="file" name="avatar" class="form-control">
-                                            </div>
                                         </div>
                                         <div class="col-md-3">
-                                            <div class="form-group">
                                                 <label>امضا</label>
                                                 <input type="file" name="sign" class="form-control">
-                                            </div>
                                         </div>
+
                                         <div class="col-md-3">
-                                            <div class="form-group">
                                                 <label>نقش</label>
                                                 <br/>
                                                 <select dir="rtl" id="select2-example" class="form-control"
@@ -63,36 +53,32 @@
                                                         @endif
                                                     @endforeach
                                                 </select>
-                                            </div>
                                         </div>
 
                                         <div class="col-md-3">
-                                            <div class="form-group">
                                                 <label>کلمه عبور</label>
                                                 <input type="password" id="password" name="password"
                                                        class="form-control"
                                                        required>
-                                            </div>
                                         </div>
 
                                     </div>
-                                    <hr/>
-                                    <div class="form-group">
-                                        <input type="submit" value="ثبت"
-                                               class="btn btn-primary">
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">
                                             انصراف
+                                        </button>
+                                        <button type="submit" class="btn btn-primary" id="saveBtn" value="ثبت">
+                                            ثبت
                                         </button>
                                     </div>
                                 </form>
-
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-
         </div>
     </div>
 </div>
+

@@ -13,4 +13,15 @@ class Commodity extends Model
         return $this->hasMany(ProductCharacteristic::class);
 
     }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+
+    }
+    public function formats()
+    {
+        return $this->hasMany(Format::class);
+    }
+
 }

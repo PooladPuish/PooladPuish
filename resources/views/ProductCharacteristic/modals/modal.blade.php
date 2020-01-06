@@ -1,23 +1,35 @@
-<div class="modal fade" id="modal-default">
+<div class="modal fade" id="ajaxModel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body">
                 <div class="portlet box blue">
                     <div class="portlet-title">
                         <div class="caption">
-                            تعریف مشخصه محصول
+                           مشخصه محصول
                         </div>
                     </div>
                     <div class="portlet-body form">
                         <div class="form-body">
                             <div class="form-group">
-                                <form action="{{route('admin.ProductCharacteristic.store')}}" method="post">
+
+                                <form id="productForm" name="productForm" class="form-horizontal">
+                                    <input type="hidden" name="product_id" id="product_id">
                                     @csrf
                                     <div class="col-md-12 form-group">
                                         <div class="col-md-12">
                                             <div class="form-group">
+                                                <label>کد مشخصه محصول</label>
+                                                <input type="text" id="code" name="code" class="form-control"
+                                                       placeholder="لطفا کد مشخصه محصول را وارد کنید"
+                                                       required>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
                                                 <label>گروه کالا</label>
-                                                <select dir="rtl" id="select2-prod" class="form-control"
+                                                <select dir="rtl" id="commodity_id" class="form-control"
                                                         name="commodity_id"
                                                         required>
                                                     @foreach($commoditys as $commodity)
@@ -30,19 +42,12 @@
                                             </div>
                                         </div>
 
+
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>کد مشخصه</label>
-                                                <input type="text" name="code" class="form-control"
-                                                       placeholder="لطفا کد مشخصه را وارد کنید"
-                                                       required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>نام مشخصه</label>
-                                                <input type="text" name="name" class="form-control"
-                                                       placeholder="لطفا نام مشخصه را وارد کنید"
+                                                <label>نام مشخصه محصول</label>
+                                                <input type="text" id="name" name="name" class="form-control"
+                                                       placeholder="لطفا نام مشخصه محصول را وارد کنید"
                                                        required>
                                             </div>
                                         </div>
@@ -51,7 +56,9 @@
                                         <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">
                                             انصراف
                                         </button>
-                                        <input type="submit" class="btn btn-primary" value="ثبت">
+                                        <button type="submit" class="btn btn-primary" id="saveBtn" value="ثبت">
+                                            ثبت
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -63,3 +70,10 @@
         </div>
     </div>
 </div>
+
+
+
+
+
+
+

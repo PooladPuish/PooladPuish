@@ -8,9 +8,9 @@ class Models extends Model
 {
     protected $guarded = ['id'];
 
-    public function format()
+    public function formats()
     {
-        return $this->belongsTo(Format::class);
-
+        return $this->hasMany(Format::class);
     }
+
 }

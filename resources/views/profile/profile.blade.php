@@ -69,7 +69,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="inputName" class="col-sm-2 control-label">کد ملی</label>
+                                                <label for="inputName" class="col-sm-2 control-label">نام کاربری</label>
 
                                                 <div class="col-sm-10">
                                                     <input type="text" class="form-control" name="email" id="email"

@@ -272,7 +272,8 @@
                                 </li>
                             @endcan
                             @can('لیست دسترسی ها')
-                                <li><a href="{{route('admin.role.show')}}"><i class="fa fa-circle-o"></i>تعریف نقش ها</a>
+                                <li><a href="{{route('admin.role.show')}}"><i class="fa fa-circle-o"></i>تعریف نقش
+                                        ها</a>
                                 </li>
                             @endcan
                             @can('تعیین جانشین')
@@ -336,12 +337,12 @@
                         </a>
                         <ul class="treeview-menu">
                             @can('بازسازی نرم افزار')
-                                <li><a href="{{route('admin.users.system.stop')}}"><i
+                                <li><a id="stop"><i
                                             class="fa fa-circle-o"></i>بازسازی نرم افزار</a>
                                 </li>
                             @endcan
                             @can('شروع به کار نرم افزار')
-                                <li><a href="{{route('admin.users.system.start')}}"><i
+                                <li><a id="start_s"><i
                                             class="fa fa-circle-o"></i>شروع به کار نرم افزار</a>
                                 </li>
                             @endcan
@@ -392,8 +393,6 @@
         </div>
     </div>
 </div>
-
-
 
 
 <script src="{{asset('/public/bower_components/jquery/dist/jquery.min.js')}}"></script>
@@ -561,15 +560,6 @@
     });
 
 
-
-
-
-
-
-
-
-
-
     $(document).ready(function () {
         $('#select2-a').select2({
             width: '100%',
@@ -638,6 +628,64 @@
     });
 
 </script>
+<script src="{{asset('/public/assets/sweetalert.js')}}"></script>
+
+
+<script type="text/javascript">
+    $('#stop').click(function () {
+        $.ajax({
+            type: "GET",
+            url: "{{route('admin.users.system.stop')}}",
+            success: function (data) {
+                if (data.errors) {
+                    Swal.fire({
+                        title: 'خطا!',
+                        text: data.errors,
+                        icon: 'error',
+                        confirmButtonText: 'تایید'
+                    })
+                }
+                if (data.success) {
+                    Swal.fire({
+                        title: 'موفق',
+                        text: data.success,
+                        icon: 'success',
+                        confirmButtonText: 'تایید',
+                    });
+
+                }
+
+            }
+        });
+    });
+    $('#start_s').click(function () {
+        $.ajax({
+            type: "GET",
+            url: "{{route('admin.users.system.start')}}",
+            success: function (data) {
+                if (data.errors) {
+                    Swal.fire({
+                        title: 'خطا!',
+                        text: data.errors,
+                        icon: 'error',
+                        confirmButtonText: 'تایید'
+                    })
+                }
+                if (data.success) {
+                    Swal.fire({
+                        title: 'موفق',
+                        text: data.success,
+                        icon: 'success',
+                        confirmButtonText: 'تایید',
+                    });
+
+                }
+
+            }
+        });
+    });
+</script>
+
 
 </body>
 </html>

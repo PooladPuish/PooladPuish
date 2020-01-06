@@ -1,9 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\Foundation;
+
 use App\Http\Controllers\Controller;
 use App\Device;
 use Illuminate\Http\Request;
+use Response;
+use Validator;
+use Yajra\DataTables\DataTables;
 use function App\Providers\MsgSuccess;
 
 class DeviceController extends Controller
@@ -11,10 +15,20 @@ class DeviceController extends Controller
     /**
      * نمایش لیست دستگاها *
      */
-    public function list()
+    public function list(Request $request)
     {
-        $devices = Device::orderBy('id', 'desc')->get();
-        return view('device.list', compact('devices'));
+        if ($request->ajax()) {
+            $data = Device::orderBy('id', 'desc')->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    return $this->actions($row);
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+
+        }
+        return view('device.list');
     }
 
     /**
@@ -22,71 +36,79 @@ class DeviceController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'code' => 'required|integer|unique:devices',
-            'name' => 'required',
-            'model' => 'required',
-        ], [
-            'code.unique' => 'دستگاه با این کد در سیستم موجود است.',
-            'code.required' => 'پرکردن کد دستگاه الزامی میباشد',
-            'code.integer' => 'کد دستگاه بایستی از نوع عدد باشد',
-            'name.required' => 'نام دستگاه را وارد کنید',
-            'model.required' => 'مدل دستگاه را وارد کنید',
-        ]);
-        Device::create($request->all());
-        return MsgSuccess('مشخصات دستگاه جدید با موفقیت در سیستم ثبت شد');
+        if (!empty($request->product_id)) {
+            $validator = Validator::make($request->all(), [
+                'code' => 'required|integer',
+                'name' => 'required',
+                'model' => 'required',
+            ], [
+                'code.required' => 'پرکردن کد دستگاه الزامی میباشد',
+                'code.integer' => 'کد دستگاه بایستی از نوع عدد باشد',
+                'name.required' => 'نام دستگاه را وارد کنید',
+                'model.required' => 'مدل دستگاه را وارد کنید',
+            ]);
+        } else
+            $validator = Validator::make($request->all(), [
+                'code' => 'required|integer|unique:devices',
+                'name' => 'required',
+                'model' => 'required',
+            ], [
+                'code.unique' => 'دستگاه با این کد در سیستم موجود است.',
+                'code.required' => 'پرکردن کد دستگاه الزامی میباشد',
+                'code.integer' => 'کد دستگاه بایستی از نوع عدد باشد',
+                'name.required' => 'نام دستگاه را وارد کنید',
+                'model.required' => 'مدل دستگاه را وارد کنید',
+            ]);
+        if ($validator->passes()) {
+            Device::updateOrCreate(['id' => $request->product_id],
+                [
+                    'name' => $request->name,
+                    'code' => $request->code,
+                    'model' => $request->model,
+                ]);
+            return response()->json(['success' => 'Product saved successfully.']);
+        }
+        return Response::json(['errors' => $validator->errors()]);
     }
 
     /**
-     * ویرایش مشخصات دستگاها *
+     * حذف مشخصات گروه کالایی *
      */
-    public function edit(Request $request)
+    public function delete($id)
     {
-
-        $devices = Device::where('id', $request['id'])->pluck('code')->all();
-        foreach ($devices as $device)
-            if ($request['code'] == $device) {
-
-                $this->validate($request, [
-                    'code' => 'required|integer',
-                    'name' => 'required',
-                    'model' => 'required',
-                ], [
-                    'code.unique' => 'دستگاه با این کد در سیستم موجود است.',
-                    'code.required' => 'پرکردن کد دستگاه الزامی میباشد',
-                    'code.integer' => 'کد دستگاه بایستی از نوع عدد باشد',
-                    'name.required' => 'نام دستگاه را وارد کنید',
-                    'model.required' => 'مدل دستگاه را وارد کنید',
-                ]);
-            } else
-                $this->validate($request, [
-                    'code' => 'required|integer|unique:devices',
-                    'name' => 'required',
-                    'model' => 'required',
-                ], [
-                    'code.unique' => 'دستگاه با این کد در سیستم موجود است.',
-                    'code.required' => 'پرکردن کد دستگاه الزامی میباشد',
-                    'code.integer' => 'کد دستگاه بایستی از نوع عدد باشد',
-                    'name.required' => 'نام دستگاه را وارد کنید',
-                    'model.required' => 'مدل دستگاه را وارد کنید',
-                ]);
-        $id = $request['id'];
-        Device::find($id)->update([
-            'code' => $request->code,
-            'name' => $request->name,
-            'model' => $request->model,
-        ]);
-        return MsgSuccess('مشخصات دستگاه با موفقیت ویرایش شد');
+        $post = Device::findOrFail($id);
+        $post->delete();
+        return response()->json($post);
     }
 
     /**
-     * حذف مشخصات دستگاها *
+     * ویرایش مشخصات گروه کالایی *
      */
-    public function delete(Device $id)
+    public function update($id)
     {
-        $id->delete();
-        return MsgSuccess('مشخصات دستگاه با موفقیت از سیستم حذف شد');
-
+        $product = Device::find($id);
+        return response()->json($product);
     }
 
+    /**
+     * اکشن های دیتا تیبل *
+     */
+    public function actions($row)
+    {
+        $success = url('/public/icon/icons8-edit-144.png');
+        $delete = url('/public/icon/icons8-delete-bin-96.png');
+
+        $btn = '<a href="javascript:void(0)" data-toggle="tooltip"
+                      data-id="' . $row->id . '" data-original-title="ویرایش"
+                       class="editProduct">
+                       <img src="' . $success . '" width="25" title="ویرایش"></a>';
+
+        $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"
+                      data-id="' . $row->id . '" data-original-title="حذف"
+                       class="deleteProduct">
+                       <img src="' . $delete . '" width="25" title="حذف"></a>';
+
+        return $btn;
+
+    }
 }

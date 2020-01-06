@@ -1,23 +1,25 @@
-<div class="modal fade" id="modal-default">
+<div class="modal fade" id="ajaxModel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body">
                 <div class="portlet box blue">
                     <div class="portlet-title">
                         <div class="caption">
-                            تعریف دستگاه
+                           دستگاها
                         </div>
                     </div>
                     <div class="portlet-body form">
                         <div class="form-body">
                             <div class="form-group">
-                                <form action="{{route('admin.device.store')}}" method="post">
+
+                                <form id="productForm" name="productForm" class="form-horizontal">
+                                    <input type="hidden" name="product_id" id="product_id">
                                     @csrf
                                     <div class="col-md-12 form-group">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>کد دستگاه</label>
-                                                <input type="text" name="code" class="form-control"
+                                                <input type="text" id="code" name="code" class="form-control"
                                                        placeholder="لطفا کد دستگاه را وارد کنید"
                                                        required>
                                             </div>
@@ -26,7 +28,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>نام دستگاه</label>
-                                                <input type="text" name="name" class="form-control"
+                                                <input type="text" id="name" name="name" class="form-control"
                                                        placeholder="لطفا نام دستگاه را وارد کنید"
                                                        required>
                                             </div>
@@ -35,7 +37,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>مدل دستگاه</label>
-                                                <input type="text" name="model" class="form-control"
+                                                <input type="text" id="model" name="model" class="form-control"
                                                        placeholder="لطفا مدل دستگاه را وارد کنید"
                                                        required>
                                             </div>
@@ -46,7 +48,9 @@
                                         <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">
                                             انصراف
                                         </button>
-                                        <input type="submit" class="btn btn-primary" value="ثبت">
+                                        <button type="submit" class="btn btn-primary" id="saveBtn" value="ثبت">
+                                            ثبت
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -58,3 +62,4 @@
         </div>
     </div>
 </div>
+

@@ -11,40 +11,34 @@
                     <div class="tools"></div>
                 </div>
                 <div class="portlet-body">
-                    <table class="table table-striped table-bordered table-hover" id="sample_2">
+                    <table class="table table-striped table-bordered data-table" id="data-table">
                         <thead>
                         <tr>
-                            @can('نام و نام خانوادگی')
-                                <th> نام و نام خانوادگی</th>
-                            @endcan
-                            @can('نقش')
-                                <th>نقش</th>
-                            @endcan
-                            @can('نام کاربری')
-                                <th>نام کاربری</th>
-                            @endcan
-                            @can('شماره تماس')
-                                <th> شماره تماس</th>
-                            @endcan
-                            @can('انلاین')
-                                <th>انلاین</th>
-                            @endcan
-                            @can('وضعیت')
-                                <th> وضعیت</th>
-                            @endcan
-                            @if(Gate::check('ویرایش') || Gate::check('فعال و غیر فعال کردن'))
-                                <th>عملیات</th>
-                            @endif
+                            <th>ردیف</th>
+
+                            <th> نام و نام خانوادگی</th>
+
+                            <th>نقش</th>
+
+                            <th>نام کاربری</th>
+
+                            <th> شماره تماس</th>
+
+                            <th>انلاین</th>
+
+                            <th> وضعیت</th>
+
+                            <th>عملیات</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @include('users.tables.table')
                         </tbody>
                     </table>
-                    <a data-toggle="modal" data-target="#modal-default" class="btn btn-primary">تعریف کاربر جدید</a>
+                    <a class="btn btn-primary" href="javascript:void(0)" id="createNewProduct">تعریف کاربر جدید</a>
                 </div>
             </div>
         </div>
     </div>
     @include('users.modals.modal')
+    @include('users.scripts.script')
 @endsection

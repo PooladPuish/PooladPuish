@@ -8,8 +8,22 @@ class Product extends Model
 {
     protected $guarded = ['id'];
 
-    public function characteristics()
+    public function characteristic()
     {
-        return $this->hasMany(ProductCharacteristic::class);
+        return $this->belongsTo(ProductCharacteristic::class);
+    }
+    public function commodity()
+    {
+        return $this->belongsTo(Commodity::class);
+    }
+    public function formats()
+    {
+        return $this->hasMany(Format::class);
+    }
+
+    public function polymerics()
+    {
+        return $this->hasMany(Polymeric::class);
+
     }
 }

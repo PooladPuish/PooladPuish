@@ -1,26 +1,34 @@
 <?php
 
 namespace App\Http\Controllers\Foundation;
+
 use App\Http\Controllers\Controller;
-use App\Commodity;
 use App\Models;
-use App\Post;
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Validation\Validator;
-use function App\Providers\MsgSuccess;
+use Response;
+use Validator;
+use Yajra\DataTables\DataTables;
 
 class ModelController extends Controller
 {
     /**
      * نمایش لیست قالب سازها *
      */
-    public function list()
+    public function list(Request $request)
     {
-        $models = Models::orderBy('id', 'desc')->get();
-        return view('models.list', compact('models'));
+        if ($request->ajax()) {
+            $data = Models::orderBy('id', 'desc')->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    return $this->actions($row);
+                })
+                ->rawColumns(['action'])
+                ->make(true);
 
+        }
+        return view('models.list');
     }
 
     /**
@@ -28,68 +36,71 @@ class ModelController extends Controller
      */
     public function store(Request $request)
     {
-
-        $this->validate($request, [
-            'name' => 'required',
-            'code' => 'required|integer|unique:commodities',
-        ], [
-            'code.unique' => 'سازنده قالب با این کد در سیستم موجود است.',
-            'code.required' => 'پرکردن کد سازنده قالب الزامی میباشد',
-            'code.integer' => 'کد سازنده قالب بایستی از نوع عدد باشد',
-            'name.required' => 'پرکردن نام سازنده قالب الزامی میباشد',
-        ]);
-
-        $success = Models::create([
-            'code' => $request['code'],
-            'name' => $request['name'],
-        ]);
-        return MsgSuccess('مشخصات سازنده قالب جدید با موفقیت در سیستم ثبت شد');
+        if (!empty($request->product_id)) {
+            $validator = Validator::make($request->all(), [
+                'name' => 'required',
+                'code' => 'required|integer',
+            ], [
+                'code.required' => 'لطفا کد سازنده قالب را وارد کنید',
+                'code.integer' => 'کد سازنده قالب باید از نوع عددی باشد',
+                'name.required' => 'لطفا نام سازنده قالب را وارد کنید',
+            ]);
+        } else
+            $validator = Validator::make($request->all(), [
+                'name' => 'required',
+                'code' => 'required|integer|unique:models',
+            ], [
+                'code.unique' => 'سازنده قالب با این کد در سیستم موجود است',
+                'code.required' => 'لطفا کد سازنده قالب را وارد کنید',
+                'code.integer' => 'کد سازنده قالب باید از نوع عددی باشد',
+                'name.required' => 'لطفا نام سازنده قالب را وارد کنید',
+            ]);
+        if ($validator->passes()) {
+            Models::updateOrCreate(['id' => $request->product_id],
+                ['name' => $request->name, 'code' => $request->code]);
+            return response()->json(['success' => 'Product saved successfully.']);
+        }
+        return Response::json(['errors' => $validator->errors()]);
     }
 
     /**
      * حذف مشخصات قالب سازها *
      */
-    public function delete(Models $id)
+    public function delete($id)
     {
-        $id->delete();
-        return MsgSuccess('مشخصات سازنده قالب با موفقیت از سیستم حذف شد');
-
+        $post = Models::findOrFail($id);
+        $post->delete();
+        return response()->json($post);
     }
 
     /**
-     * ویرایش مشخصات قالب سازها *
+     *ویرایش مشخصات قالب سازها *
      */
-    public function edit(Request $request)
+    public function update($id)
     {
-        $models = Models::where('id', $request['id'])->pluck('code')->all();
-        foreach ($models as $model)
-            if ($request['code'] == $model) {
+        $product = Models::find($id);
+        return response()->json($product);
+    }
 
-                $this->validate($request, [
-                    'name' => 'required',
-                    'code' => 'required|integer',
-                ], [
-                    'code.required' => 'پرکردن کد سازنده قالب الزامی میباشد',
-                    'code.integer' => 'کد سازنده قالب بایستی از نوع عدد باشد',
-                    'name.required' => 'پرکردن نام سازنده قالب الزامی میباشد',
-                ]);
-            } else
-                $this->validate($request, [
-                    'name' => 'required',
-                    'code' => 'required|integer|unique:commodities',
-                ], [
-                    'code.unique' => 'سازنده قالب با این کد در سیستم موجود است.',
-                    'code.required' => 'پرکردن کد سازنده قالب الزامی میباشد',
-                    'code.integer' => 'کد سازنده قالب بایستی از نوع عدد باشد',
-                    'name.required' => 'پرکردن نام سازنده قالب الزامی میباشد',
-                ]);
+    /**
+     * اکشن های دیتا تیبل *
+     */
+    public function actions($row)
+    {
+        $success = url('/public/icon/icons8-edit-144.png');
+        $delete = url('/public/icon/icons8-delete-bin-96.png');
 
-        $id = $request['id'];
-        Models::find($id)->update([
-            'name' => $request['name'],
-            'code' => $request['code'],
-        ]);
-        return MsgSuccess('مشخصات سازنده قالب با موفقیت ویرایش شد');
+        $btn = '<a href="javascript:void(0)" data-toggle="tooltip"
+                      data-id="' . $row->id . '" data-original-title="ویرایش"
+                       class="editProduct">
+                       <img src="' . $success . '" width="25" title="ویرایش"></a>';
+
+        $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"
+                      data-id="' . $row->id . '" data-original-title="حذف"
+                       class="deleteProduct">
+                       <img src="' . $delete . '" width="25" title="حذف"></a>';
+
+        return $btn;
 
     }
 

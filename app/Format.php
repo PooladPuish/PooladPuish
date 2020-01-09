@@ -29,5 +29,10 @@ class Format extends Model
         return $this->belongsTo(Commodity::class);
     }
 
+    public function modelProducts()
+    {
+        return $this->hasMany(ModelProduct::class);
+    }
+
 
 }

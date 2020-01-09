@@ -12,10 +12,12 @@ class Product extends Model
     {
         return $this->belongsTo(ProductCharacteristic::class);
     }
+
     public function commodity()
     {
         return $this->belongsTo(Commodity::class);
     }
+
     public function formats()
     {
         return $this->hasMany(Format::class);
@@ -25,5 +27,16 @@ class Product extends Model
     {
         return $this->hasMany(Polymeric::class);
 
+    }
+
+    public function boms()
+    {
+        return $this->belongsToMany(Bom::class);
+
+    }
+
+    public function modelProducts()
+    {
+        return $this->hasMany(ModelProduct::class);
     }
 }

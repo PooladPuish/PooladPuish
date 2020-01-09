@@ -1,10 +1,4 @@
 @extends('layouts.master')
-@php
-    $users = DB::table('role_user')->where('user_id',auth()->user()->id)->get();
-    foreach ($users as $user)
-    $roles = \App\Role::where('id',$user->role_id)->get();
-    foreach ($roles as $role)
-@endphp
 @section('content')
     @include('message.msg')
     <div class="row">
@@ -19,7 +13,6 @@
                              src="{{url('/public/icon/male-user.png')}}" alt="User profile picture">
                     @endif
                     <h3 class="profile-username text-center">{{auth()->user()->name}}</h3>
-                    <p class="text-muted text-center">{{$role->name}}</p>
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
                             <b>شماره پرسنلی</b> <a class="pull-left">{{auth()->user()->personnel_id}}</a>

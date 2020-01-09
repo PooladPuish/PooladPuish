@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFormatsTable extends Migration
+class CreateInsertsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,12 @@ class CreateFormatsTable extends Migration
      */
     public function up()
     {
-        Schema::create('formats', function (Blueprint $table) {
+        Schema::create('inserts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('code')->unique()->index();
+            $table->bigInteger('code')->index()->unique();
+            $table->string('manufacturer');
             $table->string('name');
-            $table->unsignedBigInteger('model_id')->index();
-            $table->bigInteger('quetta');
             $table->timestamps();
-
-            $table->foreign('model_id')->references('id')
-                ->on('models')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-
-
         });
     }
 
@@ -37,6 +29,6 @@ class CreateFormatsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('formats');
+        Schema::dropIfExists('inserts');
     }
 }

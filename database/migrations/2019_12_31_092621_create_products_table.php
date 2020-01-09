@@ -19,6 +19,8 @@ class CreateProductsTable extends Migration
             $table->bigInteger('commodity_id')->index();
             $table->bigInteger('code')->unique()->index();
             $table->string('name');
+            $table->string('label');
+            $table->integer('manufacturing');
             $table->timestamps();
 
             $table->foreign('characteristics_id')->references('id')

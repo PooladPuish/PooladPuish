@@ -31,6 +31,14 @@ class ProductController extends Controller
                 ->addColumn('commodity_id', function ($row) {
                     return $row->commodity->name;
                 })
+                ->addColumn('manufacturing', function ($row) {
+                    if ($row->manufacturing == 1) {
+                        return 'داخلی';
+                    } elseif ($row->manufacturing == 2) {
+                        return 'خارجی';
+                    } else
+                        return '';
+                })
                 ->addColumn('characteristics_id', function ($row) {
                     $characteristics_id = ProductCharacteristic::find($row->characteristics_id);
                     return $characteristics_id->name;
@@ -90,6 +98,9 @@ class ProductController extends Controller
                 'name.required' => 'پرکردن نام محصول الزامی میباشد',
             ]);
 
+        $commodity = Commodity::where('id', $request->commodity_id)->first();
+        $characteristic = ProductCharacteristic::where('id', $request->characteristic)->first();
+
         if ($validator->passes()) {
             Product::updateOrCreate(['id' => $request->product_id],
                 [
@@ -97,6 +108,8 @@ class ProductController extends Controller
                     'code' => $request->code,
                     'commodity_id' => $request->commodity_id,
                     'characteristics_id' => $request->characteristic,
+                    'manufacturing' => $request->manufacturing,
+                    'label' => $commodity->name . ' ' . $characteristic->name . ' ' . $request->name,
                 ]);
             return response()->json(['success' => 'Product saved successfully.']);
         }

@@ -12,11 +12,10 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
 
-        for ($i = 0; $i < 1000; $i++) {
-            \App\User::create([
+        for ($i = 0; $i < 10000; $i++) {
+            \App\Test::create([
+                'code' => Str::random(10),
                 'name' => Str::random(10),
-                'email' => Str::random(10),
-                'password' => bcrypt('password'),
 
             ]);
         }

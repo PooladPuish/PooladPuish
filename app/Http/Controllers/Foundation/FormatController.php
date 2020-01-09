@@ -32,20 +32,10 @@ class FormatController extends Controller
                 ->addColumn('models', function ($row) {
                     return $row->model->name;
                 })
-                ->addColumn('commoditys', function ($row) {
-                    return $row->commodity->name;
-                })
-                ->addColumn('characteristics', function ($row) {
-                    $characteristics = ProductCharacteristic::find($row->characteristics_id);
-                    return $characteristics->name;
-                })
-                ->addColumn('products', function ($row) {
-                    return $row->product->name;
-                })
                 ->addColumn('action', function ($row) {
                     return $this->actions($row);
                 })
-                ->rawColumns(['action', 'models', 'commoditys', 'characteristics', 'products'])
+                ->rawColumns(['action', 'models'])
                 ->make(true);
 
         }
@@ -66,71 +56,54 @@ class FormatController extends Controller
                 $validator = Validator::make($request->all(), [
                     'code' => 'required|integer|unique:formats',
                     'model_id' => 'required',
-                    'product_id' => 'required',
-                    'commodity_id' => 'required',
-                    'characteristics_id' => 'required',
-                    'size' => 'required',
                     'quetta' => 'required',
+                    'name' => 'required',
                 ], [
                     'code.unique' => 'قالب با این کد در سیستم موجود است.',
                     'code.required' => 'پرکردن کد قالب الزامی میباشد',
                     'code.integer' => 'کد قالب بایستی از نوع عدد باشد',
                     'model_id.required' => 'وارد کردن قالب ساز الزامی میباشد',
-                    'product_id.required' => 'وارد کردن محصول الزامی میباشد',
-                    'commodity_id.required' => 'وارد کردن گروه کالایی الزامی میباشد',
-                    'characteristics_id.required' => 'وارد کردن مشخصه قالب الزامی میباشد',
-                    'size.required' => 'وارد کردن وزن محصول الزامی میباشد',
                     'quetta.required' => 'وارد کردن تعداد کویته الزامی میباشد',
+                    'name.required' => 'وارد کردن نام الزامی میباشد',
                 ]);
             } else
                 $validator = Validator::make($request->all(), [
                     'code' => 'required|integer',
                     'model_id' => 'required',
-                    'product_id' => 'required',
-                    'commodity_id' => 'required',
-                    'characteristics_id' => 'required',
-                    'size' => 'required',
                     'quetta' => 'required',
+                    'name' => 'required',
+
                 ], [
                     'code.required' => 'پرکردن کد قالب الزامی میباشد',
                     'code.integer' => 'کد قالب بایستی از نوع عدد باشد',
                     'model_id.required' => 'وارد کردن قالب ساز الزامی میباشد',
-                    'product_id.required' => 'وارد کردن محصول الزامی میباشد',
-                    'commodity_id.required' => 'وارد کردن گروه کالایی الزامی میباشد',
-                    'characteristics_id.required' => 'وارد کردن مشخصه قالب الزامی میباشد',
-                    'size.required' => 'وارد کردن وزن محصول الزامی میباشد',
                     'quetta.required' => 'وارد کردن تعداد کویته الزامی میباشد',
+                    'name.required' => 'وارد کردن نام الزامی میباشد',
+
                 ]);
         } else
             $validator = Validator::make($request->all(), [
                 'code' => 'required|integer|unique:formats',
                 'model_id' => 'required',
-                'product_id' => 'required',
-                'commodity_id' => 'required',
-                'characteristics_id' => 'required',
-                'size' => 'required',
                 'quetta' => 'required',
+                'name.required' => 'وارد کردن نام الزامی میباشد',
+
             ], [
                 'code.unique' => 'قالب با این کد در سیستم موجود است.',
                 'code.required' => 'پرکردن کد قالب الزامی میباشد',
                 'code.integer' => 'کد قالب بایستی از نوع عدد باشد',
                 'model_id.required' => 'وارد کردن قالب ساز الزامی میباشد',
-                'product_id.required' => 'وارد کردن محصول الزامی میباشد',
-                'commodity_id.required' => 'وارد کردن گروه کالایی الزامی میباشد',
-                'characteristics_id.required' => 'وارد کردن مشخصه قالب الزامی میباشد',
-                'size.required' => 'وارد کردن وزن محصول الزامی میباشد',
                 'quetta.required' => 'وارد کردن تعداد کویته الزامی میباشد',
+                'name.required' => 'وارد کردن نام الزامی میباشد',
+
             ]);
         if ($validator->passes()) {
             Format::updateOrCreate(['id' => $request->product],
                 [
                     'model_id' => $request->model_id,
-                    'commodity_id' => $request->commodity_id,
-                    'characteristics_id' => $request->characteristics_id,
-                    'product_id' => $request->product_id,
-                    'size' => $request->size,
                     'quetta' => $request->quetta,
-                    'code' => $request->code
+                    'code' => $request->code,
+                    'name' => $request->name,
                 ]);
             return response()->json(['success' => 'Product saved successfully.']);
         }

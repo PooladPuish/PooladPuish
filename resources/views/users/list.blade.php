@@ -11,7 +11,7 @@
                     <div class="tools"></div>
                 </div>
                 <div class="portlet-body">
-                    <table class="table table-striped table-bordered data-table" id="data-table">
+                    <table class="table table-striped table-bordered data-table" id="data-table" >
                         <thead>
                         <tr>
                             <th>ردیف</th>

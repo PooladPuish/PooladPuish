@@ -1,8 +1,4 @@
 @php
-    $users = DB::table('role_user')->where('user_id',auth()->user()->id)->get();
-    foreach ($users as $user)
-    $roles = \App\Role::where('id',$user->role_id)->get();
-    foreach ($roles as $role)
         $users = \App\User::all();
         $alternatives = \App\Alternatives::where('alternate_id',auth()->user()->id)
         ->whereNull('status')
@@ -196,7 +192,6 @@
                                 @endif
                                 <p>
                                     {{auth()->user()->name}}
-                                    <small>{{$role->name}}</small>
                                 </p>
                             </li>
                             <li class="user-footer">
@@ -266,7 +261,7 @@
                                         کاربران</a>
                                 </li>
                             @endif
-                            @can('دسترسی ها')
+                                @can('لیست دسترسی ها')
                                 <li><a href="{{route('admin.user.permission')}}"><i
                                             class="fa fa-circle-o"></i>تعریف دسترسی ها</a>
                                 </li>
@@ -322,6 +317,16 @@
                         <li><a href="{{route('admin.seller.list')}}"><i
                                     class="fa fa-circle-o"></i>فروشنده</a>
                         </li>
+                        <li><a href="{{route('admin.bom.list')}}"><i
+                                    class="fa fa-circle-o"></i>BOM</a>
+                        </li>
+                        <li><a href="{{route('admin.insert.list')}}"><i
+                                    class="fa fa-circle-o"></i>Insert های قالب  </a>
+                        </li>
+                        <li><a href="{{route('admin.model.product.list')}}"><i
+                                    class="fa fa-circle-o"></i>انتصاب محصول به قالب</a>
+                        </li>
+
 
                     </ul>
                 </li>
@@ -354,7 +359,7 @@
             </ul>
         </section>
     </aside>
-    <div class="content-wrapper animate-bottom" style="display:none;" id="myDiv">
+    <div class="content-wrapper">
         <section class="content">
             @yield('content')
         </section>
@@ -467,15 +472,10 @@
     });
 </script>
 <script>
-    var myVar;
-
     function myFunction() {
-        myVar = setTimeout(showPage, 1000);
-    }
-
-    function showPage() {
-        document.getElementById("loader").style.display = "none";
-        document.getElementById("myDiv").style.display = "block";
+        $(window).on("load", function () {
+            $('#loader').hide();
+        });
     }
 </script>
 <script>
@@ -688,6 +688,9 @@
 <script>
     $("#users").click(function () {
         $(".user").prop('checked', $(this).prop('checked'));
+    });
+    $("#user").click(function () {
+        $(".users").prop('checked', $(this).prop('checked'));
     });
     $("#list_users").click(function () {
         $(".list_user").prop('checked', $(this).prop('checked'));

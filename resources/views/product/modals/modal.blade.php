@@ -57,6 +57,17 @@
                                                        required>
                                             </div>
                                         </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="title">نوع تهیه</label>
+                                                <select name="manufacturing" id="manufacturing"
+                                                        class="form-control">
+                                                    <option value="1">داخلی</option>
+                                                    <option value="2">خارجی</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">

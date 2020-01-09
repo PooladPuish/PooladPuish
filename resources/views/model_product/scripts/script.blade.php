@@ -20,13 +20,14 @@
                 "infoFiltered": "(جستجو از _MAX_ مورد)",
                 "processing": "در حال پردازش اطلاعات"
             },
-            ajax: "{{ route('admin.format.list') }}",
+            ajax: "{{ route('admin.model.product.list') }}",
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                {data: 'code', name: 'code'},
-                {data: 'name', name: 'name'},
-                {data: 'models', name: 'models'},
-                {data: 'quetta', name: 'quetta'},
+                {data: 'format', name: 'format'},
+                {data: 'insert', name: 'insert'},
+                {data: 'product', name: 'product'},
+                {data: 'size', name: 'size'},
+                {data: 'cycletime', name: 'cycletime'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]
         });
@@ -37,20 +38,21 @@
         });
         $('body').on('click', '.editProduct', function () {
             var product_id = $(this).data('id');
-            $.get("{{ route('admin.format.update') }}" + '/' + product_id, function (data) {
+            $.get("{{ route('admin.model.product.update') }}" + '/' + product_id, function (data) {
                 $('#ajaxModel').modal('show');
                 $('#product').val(data.id);
-                $('#model_id').val(data.model_id);
-                $('#quetta').val(data.quetta);
-                $('#name').val(data.name);
-                $('#code').val(data.code);
-            })
+                $('#format_id').val(data.format_id);
+                $('#insert_id').val(data.insert_id);
+                $('#product_id').val(data.product_id);
+                $('#size').val(data.size);
+                $('#cycletime').val(data.cycletime);
+            });
         });
         $('#saveBtn').click(function (e) {
             e.preventDefault();
             $.ajax({
                 data: $('#productForm').serialize(),
-                url: "{{ route('admin.format.store') }}",
+                url: "{{ route('admin.model.product.store') }}",
                 type: "POST",
                 dataType: 'json',
                 success: function (data) {
@@ -71,25 +73,25 @@
                         table.draw();
                         Swal.fire({
                             title: 'موفق',
-                            text: 'مشخصات قالب با موفقیت در سیستم ثبت شد',
+                            text: 'مشخصات با موفقیت در سیستم ثبت شد',
                             icon: 'success',
                             confirmButtonText: 'تایید',
                         });
-                        $('#quetta').val(data.quetta);
-                        $('#code').val(data.code);
-                        $('#product').val('');
                     }
                 }
             });
         });
-        $('#quetta').val(data.quetta);
-        $('#code').val(data.code);
         $('#product').val('');
+        $('#format_id').val('');
+        $('#insert_id').val('');
+        $('#product_id').val('');
+        $('#size').val('');
+        $('#cycletime').val('');
     });
     $('body').on('click', '.deleteProduct', function () {
         var id = $(this).data("id");
         Swal.fire({
-            title: 'حذف قالب؟',
+            title: 'حذف؟',
             text: "مشخصات حذف شده قابل بازیابی نیستند!",
             icon: 'warning',
             showCancelButton: true,
@@ -101,7 +103,7 @@
             if (result.value) {
                 $.ajax({
                     type: 'DELETE',
-                    url: "{{route('admin.format.delete')}}" + '/' + id,
+                    url: "{{route('admin.model.product.delete')}}" + '/' + id,
                     data: {
                         '_token': $('input[name=_token]').val(),
                     },
@@ -109,7 +111,7 @@
                         $('#data-table').DataTable().ajax.reload();
                         Swal.fire({
                             title: 'موفق',
-                            text: 'مشخصات قالب با موفقیت از سیستم حذف شد',
+                            text: 'مشخصات با موفقیت از سیستم حذف شد',
                             icon: 'success',
                             confirmButtonText: 'تایید'
                         })

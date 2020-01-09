@@ -15,8 +15,11 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+
+
+
 //RestPasswordUser
-Route::post('/users/RestPassword', 'UserController@RestPassword')->name('admin.user.RestPassword');
+Route::post('/users/RestPassword', 'RestPasswordController@RestPassword')->name('admin.user.RestPassword');
 
 Auth::routes();
 //HomeController
@@ -64,6 +67,28 @@ Route::group(['middleware' => ['auth', 'web']], function () {
 
     });
     Route::group(["namespace" => "Foundation"], function () {
+
+        //ModelProductController
+        Route::get('/modelProduct/list', 'ModelProductController@list')->name('admin.model.product.list');
+        Route::get('/modelProduct/update/{id?}', 'ModelProductController@update')->name('admin.model.product.update');
+        Route::delete('/modelProduct/delete/{id?}', 'ModelProductController@delete')->name('admin.model.product.delete');
+        Route::post('/modelProduct/store', 'ModelProductController@store')->name('admin.model.product.store');
+
+
+        //InsertController
+        Route::get('/insert/list', 'InserController@list')->name('admin.insert.list');
+        Route::get('/insert/update/{id?}', 'InserController@update')->name('admin.insert.update');
+        Route::delete('/insert/delete/{id?}', 'InserController@delete')->name('admin.insert.delete');
+        Route::post('/insert/store', 'InserController@store')->name('admin.insert.store');
+
+
+        //BomController
+        Route::get('/bom/list', 'BomController@list')->name('admin.bom.list');
+        Route::get('/bom/update/{id?}', 'BomController@update')->name('admin.bom.update');
+        Route::get('/bom/detail/{id?}', 'BomController@detail')->name('admin.bom.detail');
+        Route::delete('/bom/delete/{id?}', 'BomController@delete')->name('admin.bom.delete');
+        Route::post('/bom/store', 'BomController@store')->name('admin.bom.store');
+
 
         //CommodityController
         Route::get('/commodity/list', 'CommodityController@list')->name('admin.commodity.list');

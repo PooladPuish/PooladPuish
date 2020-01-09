@@ -27,7 +27,6 @@ class CommodityController extends Controller
                 })
                 ->rawColumns(['action'])
                 ->make(true);
-
         }
         return view('CommodityGroup.list');
     }
@@ -72,7 +71,10 @@ class CommodityController extends Controller
 
         if ($validator->passes()) {
             Commodity::updateOrCreate(['id' => $request->product_id],
-                ['name' => $request->name, 'code' => $request->code]);
+                [
+                    'name' => $request->name,
+                    'code' => $request->code
+                ]);
             return response()->json(['success' => 'Product saved successfully.']);
         }
         return Response::json(['errors' => $validator->errors()]);
@@ -114,7 +116,6 @@ class CommodityController extends Controller
                       data-id="' . $row->id . '" data-original-title="حذف"
                        class="deleteProduct">
                        <img src="' . $delete . '" width="25" title="حذف"></a>';
-
         return $btn;
 
     }

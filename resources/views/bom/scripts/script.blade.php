@@ -20,16 +20,14 @@
                 "infoFiltered": "(جستجو از _MAX_ مورد)",
                 "processing": "در حال پردازش اطلاعات"
             },
-            ajax: "{{ route('admin.format.list') }}",
+            ajax: "{{ route('admin.bom.list') }}",
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                {data: 'code', name: 'code'},
-                {data: 'name', name: 'name'},
-                {data: 'models', name: 'models'},
-                {data: 'quetta', name: 'quetta'},
+                {data: 'product', name: 'product'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]
         });
+
         $('#createNewProduct').click(function () {
             $('#productForm').trigger("reset");
             $('#ajaxModel').modal('show');
@@ -37,20 +35,19 @@
         });
         $('body').on('click', '.editProduct', function () {
             var product_id = $(this).data('id');
-            $.get("{{ route('admin.format.update') }}" + '/' + product_id, function (data) {
+            $.get("{{ route('admin.bom.update') }}" + '/' + product_id, function (data) {
                 $('#ajaxModel').modal('show');
                 $('#product').val(data.id);
-                $('#model_id').val(data.model_id);
-                $('#quetta').val(data.quetta);
-                $('#name').val(data.name);
-                $('#code').val(data.code);
-            })
+                $('#product_id').val(data.product_id);
+                $('#bom_id').val(data.bom_id);
+                $('#number').val(data.number);
+            });
         });
         $('#saveBtn').click(function (e) {
             e.preventDefault();
             $.ajax({
                 data: $('#productForm').serialize(),
-                url: "{{ route('admin.format.store') }}",
+                url: "{{ route('admin.bom.store') }}",
                 type: "POST",
                 dataType: 'json',
                 success: function (data) {
@@ -71,25 +68,26 @@
                         table.draw();
                         Swal.fire({
                             title: 'موفق',
-                            text: 'مشخصات قالب با موفقیت در سیستم ثبت شد',
+                            text: 'مشخصات Bom با موفقیت در سیستم ثبت شد',
                             icon: 'success',
                             confirmButtonText: 'تایید',
                         });
-                        $('#quetta').val(data.quetta);
-                        $('#code').val(data.code);
-                        $('#product').val('');
+                        tabl.draw();
                     }
                 }
             });
         });
-        $('#quetta').val(data.quetta);
-        $('#code').val(data.code);
-        $('#product').val('');
+        $('#name').val('');
+        $('#code').val('');
+        $('#characteristics_id').val('');
+        $('#commodity_id').val('');
+        $('#manufacturing').val('');
+        $('#product_id').val('');
     });
     $('body').on('click', '.deleteProduct', function () {
         var id = $(this).data("id");
         Swal.fire({
-            title: 'حذف قالب؟',
+            title: 'حذف Bom؟',
             text: "مشخصات حذف شده قابل بازیابی نیستند!",
             icon: 'warning',
             showCancelButton: true,
@@ -101,15 +99,16 @@
             if (result.value) {
                 $.ajax({
                     type: 'DELETE',
-                    url: "{{route('admin.format.delete')}}" + '/' + id,
+                    url: "{{route('admin.bom.delete')}}" + '/' + id,
                     data: {
                         '_token': $('input[name=_token]').val(),
                     },
                     success: function (data) {
                         $('#data-table').DataTable().ajax.reload();
+                        $('#detail-table').DataTable().ajax.reload();
                         Swal.fire({
                             title: 'موفق',
-                            text: 'مشخصات قالب با موفقیت از سیستم حذف شد',
+                            text: 'مشخصات Bom با موفقیت از سیستم حذف شد',
                             icon: 'success',
                             confirmButtonText: 'تایید'
                         })
@@ -118,4 +117,31 @@
             }
         })
     });
+    $('body').on('click', '.details', function () {
+        var product_id = $(this).data('id');
+        if (product_id) {
+            var tabl = $('.detail-table').DataTable({
+                processing: true,
+                serverSide: true,
+                "language": {
+                    "search": "جستجو:",
+                    "lengthMenu": "نمایش _MENU_",
+                    "zeroRecords": "موردی یافت نشد!",
+                    "info": "نمایش _PAGE_ از _PAGES_",
+                    "infoEmpty": "موردی یافت نشد",
+                    "infoFiltered": "(جستجو از _MAX_ مورد)",
+                    "processing": "در حال پردازش اطلاعات"
+                },
+                ajax: "{{ route('admin.bom.detail') }}" + '/' + product_id,
+                columns: [
+                    {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+                    {data: 'bom', name: 'bom'},
+                    {data: 'number', name: 'number'},
+                    {data: 'action', name: 'action', orderable: false, searchable: false},
+                ]
+            });
+        }
+
+    });
+
 </script>

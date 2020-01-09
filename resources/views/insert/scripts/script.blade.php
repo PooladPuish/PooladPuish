@@ -20,13 +20,13 @@
                 "infoFiltered": "(جستجو از _MAX_ مورد)",
                 "processing": "در حال پردازش اطلاعات"
             },
-            ajax: "{{ route('admin.format.list') }}",
+            ajax: "{{ route('admin.insert.list') }}",
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                 {data: 'code', name: 'code'},
+                {data: 'manufacturer', name: 'manufacturer'},
                 {data: 'name', name: 'name'},
-                {data: 'models', name: 'models'},
-                {data: 'quetta', name: 'quetta'},
+
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]
         });
@@ -37,20 +37,19 @@
         });
         $('body').on('click', '.editProduct', function () {
             var product_id = $(this).data('id');
-            $.get("{{ route('admin.format.update') }}" + '/' + product_id, function (data) {
+            $.get("{{ route('admin.insert.update') }}" + '/' + product_id, function (data) {
                 $('#ajaxModel').modal('show');
                 $('#product').val(data.id);
-                $('#model_id').val(data.model_id);
-                $('#quetta').val(data.quetta);
-                $('#name').val(data.name);
                 $('#code').val(data.code);
-            })
+                $('#name').val(data.name);
+                $('#manufacturer').val(data.manufacturer);
+            });
         });
         $('#saveBtn').click(function (e) {
             e.preventDefault();
             $.ajax({
                 data: $('#productForm').serialize(),
-                url: "{{ route('admin.format.store') }}",
+                url: "{{ route('admin.insert.store') }}",
                 type: "POST",
                 dataType: 'json',
                 success: function (data) {
@@ -71,25 +70,25 @@
                         table.draw();
                         Swal.fire({
                             title: 'موفق',
-                            text: 'مشخصات قالب با موفقیت در سیستم ثبت شد',
+                            text: 'مشخصات insert با موفقیت در سیستم ثبت شد',
                             icon: 'success',
                             confirmButtonText: 'تایید',
                         });
-                        $('#quetta').val(data.quetta);
-                        $('#code').val(data.code);
-                        $('#product').val('');
                     }
                 }
             });
         });
-        $('#quetta').val(data.quetta);
-        $('#code').val(data.code);
-        $('#product').val('');
+        $('#name').val('');
+        $('#code').val('');
+        $('#characteristics_id').val('');
+        $('#commodity_id').val('');
+        $('#manufacturing').val('');
+        $('#product_id').val('');
     });
     $('body').on('click', '.deleteProduct', function () {
         var id = $(this).data("id");
         Swal.fire({
-            title: 'حذف قالب؟',
+            title: 'حذف insert؟',
             text: "مشخصات حذف شده قابل بازیابی نیستند!",
             icon: 'warning',
             showCancelButton: true,
@@ -101,7 +100,7 @@
             if (result.value) {
                 $.ajax({
                     type: 'DELETE',
-                    url: "{{route('admin.format.delete')}}" + '/' + id,
+                    url: "{{route('admin.insert.delete')}}" + '/' + id,
                     data: {
                         '_token': $('input[name=_token]').val(),
                     },
@@ -109,7 +108,7 @@
                         $('#data-table').DataTable().ajax.reload();
                         Swal.fire({
                             title: 'موفق',
-                            text: 'مشخصات قالب با موفقیت از سیستم حذف شد',
+                            text: 'مشخصات insert با موفقیت از سیستم حذف شد',
                             icon: 'success',
                             confirmButtonText: 'تایید'
                         })

@@ -27,6 +27,8 @@
                 {data: 'commodity_id', name: 'commodity_id'},
                 {data: 'characteristics_id', name: 'characteristics_id'},
                 {data: 'name', name: 'name'},
+                {data: 'label', name: 'label'},
+                {data: 'manufacturing', name: 'manufacturing'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]
         });
@@ -46,6 +48,7 @@
                 $('#commodity').val(data.commodity_id);
                 $('#name').val(data.name);
                 $('#code').val(data.code);
+                $('#manufacturing').val(data.manufacturing);
             });
         });
         $('#saveBtn').click(function (e) {
@@ -85,6 +88,7 @@
         $('#code').val('');
         $('#characteristics_id').val('');
         $('#commodity_id').val('');
+        $('#manufacturing').val('');
         $('#product_id').val('');
     });
     $('body').on('click', '.deleteProduct', function () {

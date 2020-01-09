@@ -51,7 +51,6 @@ class UserController extends Controller
                     'avatar' => 'mimes:jpeg,jpg,png',
                     'name' => 'required',
                     'phone' => 'required',
-                    'password' => 'required',
                     'email' => 'required|unique:users',
                 ], [
                     'email.unique' => 'کاربری با این نام کاربری در سیستم موجود است.',
@@ -62,7 +61,6 @@ class UserController extends Controller
                     'avatar' => 'mimes:jpeg,jpg,png',
                     'name' => 'required',
                     'phone' => 'required',
-                    'password' => 'required',
                     'email' => 'required',
                 ], [
                     'email.required' => 'پر کردن فیلد نام کاربری الزامی میباشد.',
@@ -84,16 +82,22 @@ class UserController extends Controller
         } else {
             $avatar = null;
         }
+        if (!empty($request->id)) {
+            if (!empty($request->password)) {
+                $password = Hash::make($request->password);
+            } else
+                $password = $user->password;
+        }
         if ($validator->passes()) {
-            $user = User::updateOrCreate(['id' => $request->id],
+            $users = User::updateOrCreate(['id' => $request->id],
                 [
                     'name' => $request->name,
                     'email' => $request->email,
                     'phone' => $request->phone,
-                    'password' => Hash::make($request->password),
+                    'password' => $password,
                     'avatar' => $avatar,
                 ]);
-            $user->roles()->sync($request->input('roles'));
+            $users->roles()->sync($request->input('roles'));
             return response()->json(['success' => 'Product saved successfully.']);
         }
         return Response::json(['errors' => $validator->errors()]);

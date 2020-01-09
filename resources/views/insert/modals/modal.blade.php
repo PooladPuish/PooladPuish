@@ -5,7 +5,7 @@
                 <div class="portlet box blue">
                     <div class="portlet-title">
                         <div class="caption">
-                            تعریف قالب
+                            Insert
                         </div>
                     </div>
                     <div class="portlet-body form">
@@ -20,42 +20,26 @@
                                             <div class="form-group">
                                                 <label>کد</label>
                                                 <input type="text" id="code" name="code" class="form-control"
-                                                       placeholder="لطفا کد قالب را وارد کنید"
+                                                       placeholder="لطفا کد را وارد کنید"
                                                        required>
                                             </div>
-                                        </div>
-                                        <div class="col-md-12">
+
                                             <div class="form-group">
-                                                <label>نام قالب</label>
-                                                <input type="text" id="name" name="name" class="form-control"
-                                                       placeholder="لطفا نام قالب را وارد کنید"
+                                                <label>نام سازنده</label>
+                                                <input type="text" id="manufacturer" name="manufacturer" class="form-control"
+                                                       placeholder="لطفا نام سازنده را وارد کنید"
                                                        required>
                                             </div>
+                                            <div class="form-group">
+                                                <label>نام insert</label>
+                                                <input type="text" id="name" name="name" class="form-control"
+                                                       placeholder="لطفا نام insert سازنده را وارد کنید"
+                                                       required>
+                                            </div>
+
+
                                         </div>
 
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>قالب ساز</label>
-                                                <select dir="rtl" id="model_id" class="form-control"
-                                                        name="model_id"
-                                                        required>
-                                                    @foreach($models as $model)
-                                                        @if(!empty($model))
-                                                            <option
-                                                                value="{{$model->id}}">{{$model->name}}</option>
-                                                        @endif
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>تعداد کویته</label>
-                                                <input type="text" id="quetta" name="quetta" class="form-control"
-                                                       placeholder="لطفا تعداد کویته را وارد کنید"
-                                                       required>
-                                            </div>
-                                        </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">
@@ -75,4 +59,3 @@
         </div>
     </div>
 </div>
-

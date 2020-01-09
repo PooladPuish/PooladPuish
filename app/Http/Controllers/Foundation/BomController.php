@@ -14,10 +14,11 @@ class BomController extends Controller
 {
     public function list(Request $request)
     {
+
         $products = Product::all();
         if ($request->ajax()) {
-            $data = \DB::table('boms')
-                ->distinct('product_id')->get();
+            $data = Bom::distinct()->select('product_id')->groupBy('product_id')->get();
+
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('product', function ($row) {
@@ -28,10 +29,6 @@ class BomController extends Controller
                       ' . $products->label . '
                       </a>';
                     return $btn;
-                })
-                ->addColumn('bom', function ($row) {
-                    $boms = Product::where('id', $row->bom_id)->first();
-                    return $boms->label;
                 })
                 ->addColumn('action', function ($row) {
                     return $this->actions($row);
@@ -75,7 +72,7 @@ class BomController extends Controller
     public function detail(Request $request, $id)
     {
         if ($request->ajax()) {
-            $data = Bom::where('product_id', $id)->distinct('data.product_id')->get();
+            $data = Bom::where('product_id', $id)->distinct('product_id')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('bom', function ($row) {

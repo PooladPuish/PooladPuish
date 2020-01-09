@@ -123,6 +123,7 @@
             var tabl = $('.detail-table').DataTable({
                 processing: true,
                 serverSide: true,
+                destroy: true,
                 "language": {
                     "search": "جستجو:",
                     "lengthMenu": "نمایش _MENU_",

@@ -88,6 +88,9 @@ Route::group(['middleware' => ['auth', 'web']], function () {
         Route::get('/bom/detail/{id?}', 'BomController@detail')->name('admin.bom.detail');
         Route::delete('/bom/delete/{id?}', 'BomController@delete')->name('admin.bom.delete');
         Route::post('/bom/store', 'BomController@store')->name('admin.bom.store');
+        Route::post('/store/bom', 'BomController@bom')->name('admin.bom.store.bom');
+        Route::delete('/bom/deletep/{id?}', 'BomController@deletep')->name('admin.bom.deletep');
+        Route::get('/bom/list/select', 'BomController@filter')->name('admin.bom.filter');
 
 
         //CommodityController
@@ -101,7 +104,6 @@ Route::group(['middleware' => ['auth', 'web']], function () {
         Route::get('/ProductCharacteristic/list', 'ProductCharacteristicController@list')->name('admin.ProductCharacteristic.list');
         Route::get('/ProductCharacteristic/update/{id?}', 'ProductCharacteristicController@update')->name('admin.ProductCharacteristic.update');
         Route::delete('/ProductCharacteristic/delete/{id?}', 'ProductCharacteristicController@delete')->name('admin.ProductCharacteristic.delete');
-
         Route::post('/ProductCharacteristic/store', 'ProductCharacteristicController@store')->name('admin.ProductCharacteristic.store');
         Route::post('/ProductCharacteristic/edit', 'ProductCharacteristicController@edit')->name('admin.ProductCharacteristic.edit');
         Route::get('/ProductCharacteristic/delete/{id?}', 'ProductCharacteristicController@delete')->name('admin.ProductCharacteristic.delete');

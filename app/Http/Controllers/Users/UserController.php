@@ -44,6 +44,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+
+
         if (!empty($request->id)) {
             $user = User::find($request->id);
             if ($user->email != $request->email) {
@@ -75,6 +77,19 @@ class UserController extends Controller
                 'email.unique' => 'کاربری با این نام کاربری در سیستم موجود است.',
                 'email.required' => 'پر کردن فیلد نام کاربری الزامی میباشد.',
             ]);
+
+
+        if (!empty($request->id)) {
+            if (!empty($request->password)) {
+                $password = \Hash::make($request->password);
+            } else{
+                $password = $user->password;
+            }
+        }else
+        {
+            $password = \Hash::make($request->password);
+
+        }
         if ($request->hasFile('avatar')) {
             $file = $request->file('avatar');
             $name = time() . '.' . $file->getClientOriginalExtension();
@@ -82,12 +97,7 @@ class UserController extends Controller
         } else {
             $avatar = null;
         }
-        if (!empty($request->id)) {
-            if (!empty($request->password)) {
-                $password = Hash::make($request->password);
-            } else
-                $password = $user->password;
-        }
+
         if ($validator->passes()) {
             $users = User::updateOrCreate(['id' => $request->id],
                 [

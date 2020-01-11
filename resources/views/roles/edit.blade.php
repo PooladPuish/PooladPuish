@@ -156,7 +156,7 @@
                                                 <input id="tree-controll1" type="checkbox" class="custom-control-input"><span
                                                     class="tree-control"></span>
                                                 <label>
-                                                    <input type="checkbox"  class="check" id="users" />
+                                                    <input type="checkbox" class="check" id="users"/>
                                                     <i class="fa fa-user light-blue"></i> مدیریت
                                                 </label>
                                                 <ul>
@@ -195,6 +195,34 @@
                                                         </ul>
                                                     </li>
 
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+
+                                    <div class="col-md-4">
+                                        <ul class="trees">
+                                            <li class="has-child">
+                                                <input id="tree-controll1" type="checkbox" class="custom-control-input"><span
+                                                    class="tree-control"></span>
+                                                <label>
+                                                    <input type="checkbox" class="check" id="foundations"/>
+                                                    <i class="fa fa-user light-blue"></i> تعاریف پایه
+                                                </label>
+                                                <ul>
+                                                    @foreach($permissions as $value)
+                                                        @if(!empty($value))
+                                                            @if($value->label == "foundation")
+
+                                                                <li>
+                                                                    <label>{{ Form::checkbox('permission[]',$value->id,in_array($value->id,$rolePermission)? true : false , array('class'=>'foundation')) }}
+                                                                        {{$value->name}}
+                                                                    </label>
+                                                                </li>
+                                                            @endif
+                                                        @endif
+                                                    @endforeach
                                                 </ul>
                                             </li>
                                         </ul>

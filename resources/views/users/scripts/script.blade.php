@@ -70,6 +70,7 @@
                                 confirmButtonText: 'تایید'
                             })
                         });
+
                     }
                     if (data.success) {
                         $('#ajaxModel').modal('hide');

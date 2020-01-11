@@ -91,6 +91,31 @@
         $('#manufacturing').val('');
         $('#product_id').val('');
     });
+    $('#commodity').change(function () {
+        var commodityID = $(this).val();
+        if (commodityID) {
+            $.ajax({
+                type: "GET",
+                url: "{{route('admin.list.product')}}?commodity_id=" + commodityID,
+                success: function (res) {
+                    if (res) {
+                        $("#characteristic").empty();
+                        $("#characteristic").append('<option>مشخصه محصول را انتخاب کنید</option>');
+                        $.each(res, function (key, value) {
+                            $("#characteristic").append('<option value="' + key + '">' + value + '</option>');
+                        });
+
+                    } else {
+                        $("#characteristic").empty();
+                    }
+                }
+            });
+        } else {
+            $("#characteristic").empty();
+        }
+    });
+
+
     $('body').on('click', '.deleteProduct', function () {
         var id = $(this).data("id");
         Swal.fire({
@@ -123,27 +148,5 @@
             }
         })
     });
-    $('#commodity').change(function () {
-        var commodityID = $(this).val();
-        if (commodityID) {
-            $.ajax({
-                type: "GET",
-                url: "{{route('admin.list.product')}}?commodity_id=" + commodityID,
-                success: function (res) {
-                    if (res) {
-                        $("#characteristic").empty();
-                        $("#characteristic").append('<option>مشخصه محصول را انتخاب کنید</option>');
-                        $.each(res, function (key, value) {
-                            $("#characteristic").append('<option value="' + key + '">' + value + '</option>');
-                        });
 
-                    } else {
-                        $("#characteristic").empty();
-                    }
-                }
-            });
-        } else {
-            $("#characteristic").empty();
-        }
-    });
 </script>

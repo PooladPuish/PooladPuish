@@ -18,7 +18,6 @@ class BomController extends Controller
         $products = Product::all();
         if ($request->ajax()) {
             $data = Bom::distinct()->select('product_id')->groupBy('product_id')->get();
-
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('product', function ($row) {
@@ -40,9 +39,9 @@ class BomController extends Controller
 
     }
 
-
     public function store(Request $request)
     {
+
 
         $validator = Validator::make($request->all(), [
             'number' => 'required|integer',
@@ -52,7 +51,7 @@ class BomController extends Controller
         ]);
 
         if ($validator->passes()) {
-            Bom::updateOrCreate(['id' => $request->product],
+            Bom::updateOrCreate(['id' => $request->pr],
                 [
                     'product_id' => $request->product_id,
                     'bom_id' => $request->bom_id,
@@ -72,7 +71,7 @@ class BomController extends Controller
     public function detail(Request $request, $id)
     {
         if ($request->ajax()) {
-            $data = Bom::where('product_id', $id)->distinct('product_id')->get();
+            $data = Bom::where('product_id', $id)->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('bom', function ($row) {
@@ -80,7 +79,7 @@ class BomController extends Controller
                     return $boms->label;
                 })
                 ->addColumn('action', function ($row) {
-                    return $this->actions($row);
+                    return $this->action($row);
                 })
                 ->rawColumns(['action', 'product'])
                 ->make(true);
@@ -95,8 +94,29 @@ class BomController extends Controller
         return response()->json($post);
     }
 
+    public function deletep($id)
+    {
+
+        $boms = Bom::where('product_id', $id)->get();
+        foreach ($boms as $bom)
+            $post = Bom::find($bom->id)->delete();
+        return response()->json($post);
+    }
 
     public function actions($row)
+    {
+        $delete = url('/public/icon/icons8-delete-bin-96.png');
+
+
+        $btn = ' <a href="javascript:void(0)" data-toggle="tooltip"
+                      data-id="' . $row->product_id . '" data-original-title="حذف"
+                       class="deletep">
+                       <img src="' . $delete . '" width="25" title="حذف"></a>';
+        return $btn;
+
+    }
+
+    public function action($row)
     {
         $success = url('/public/icon/icons8-edit-144.png');
         $delete = url('/public/icon/icons8-delete-bin-96.png');
@@ -112,6 +132,42 @@ class BomController extends Controller
                        <img src="' . $delete . '" width="25" title="حذف"></a>';
         return $btn;
 
+    }
+
+    public function filter(Request $request)
+    {
+        $bom_id = \DB::table("products")
+            ->where("id", '!=', $request->product)
+            ->pluck("label", "id");
+        return response()->json($bom_id);
+    }
+
+    public function bom(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'number' => 'required|integer',
+        ], [
+            'number.required' => 'لطفا تعداد را وارد کنید',
+            'number.integer' => 'تعداد باید از نوع عدد باشد',
+        ]);
+
+        $products = Bom::where('product_id', $request->id_product)->get();
+        foreach ($products as $product)
+            if ($product->bom_id == $request->bom_id) {
+                return response()->json(['unm' => 'این زیر مجمعه برای محصول انتخاب شده است']);
+            }
+
+
+        if ($validator->passes()) {
+            Bom::Create(
+                [
+                    'product_id' => $request->id_product,
+                    'bom_id' => $request->bom_id,
+                    'number' => $request->number,
+                ]);
+            return response()->json(['success' => 'Product saved successfully.']);
+        }
+        return Response::json(['errors' => $validator->errors()]);
     }
 
 }

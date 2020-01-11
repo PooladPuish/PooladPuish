@@ -1,10 +1,10 @@
 @php
-        $users = \App\User::all();
-        $alternatives = \App\Alternatives::where('alternate_id',auth()->user()->id)
-        ->whereNull('status')
-        ->whereNull('view')
-        ->get();
-              foreach ($alternatives as $alternative)
+    $users = \App\User::all();
+    $alternatives = \App\Alternatives::where('alternate_id',auth()->user()->id)
+    ->whereNull('status')
+    ->whereNull('view')
+    ->get();
+          foreach ($alternatives as $alternative)
 @endphp
     <!DOCTYPE html>
 <html>
@@ -255,23 +255,23 @@
                                 || Gate::check('نام کاربری')
                                 || Gate::check('شماره تماس')
                                 ||Gate::check('انلاین')
-                                ||Gate::check('تاریخ ایجاد')
                                 ||Gate::check('وضعیت'))
-                                <li><a href="{{route('admin.user.show')}}"><i class="fa fa-circle-o"></i>لیست
-                                        کاربران</a>
+                                <li><a href="{{route('admin.user.show')}}"><i class="fa fa-circle-o"></i>
+                                        لیست کاربران
+                                    </a>
                                 </li>
                             @endif
-                                @can('لیست دسترسی ها')
+                            @can('لیست دسترسی ها')
                                 <li><a href="{{route('admin.user.permission')}}"><i
                                             class="fa fa-circle-o"></i>تعریف دسترسی ها</a>
                                 </li>
                             @endcan
-                            @can('لیست دسترسی ها')
+                            @can('تعریف نقش')
                                 <li><a href="{{route('admin.role.show')}}"><i class="fa fa-circle-o"></i>تعریف نقش
                                         ها</a>
                                 </li>
                             @endcan
-                            @can('تعیین جانشین')
+                            @can('لیست جابجایی')
                                 <li><a href="{{route('admin.user.alternatives')}}"><i
                                             class="fa fa-circle-o"></i>لیست جابجایی ها</a>
                                 </li>
@@ -280,57 +280,94 @@
                     </li>
                 @endif
 
-
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-star"></i> <span>تعاریف پایه</span>
-                        <span class="pull-left-container">
+                @if(Gate::check('گروه کالایی')
+                   || Gate::check('مشخصه محصول')
+                   || Gate::check('تعریف محصول')
+                   || Gate::check('تعریف قالب سازه')
+                   || Gate::check('تعریف قالب')
+                   || Gate::check('تعریف دستگاه')
+                   || Gate::check('تعریف رنگ')
+                   || Gate::check('مواد پلیمیری')
+                   || Gate::check('فروشنده')
+                   || Gate::check('BOM')
+                   || Gate::check('Insert های قالب')
+                   || Gate::check('انتصاب محصول به قالب'))
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-star"></i> <span>تعاریف پایه</span>
+                            <span class="pull-left-container">
               <i class="fa fa-angle-right pull-left"></i>
             </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="{{route('admin.commodity.list')}}"><i
-                                    class="fa fa-circle-o"></i>گروه کالایی</a>
-                        </li>
+                        </a>
+                        <ul class="treeview-menu">
+                            @can('گروه کالایی')
+                                <li><a href="{{route('admin.commodity.list')}}"><i
+                                            class="fa fa-circle-o"></i>گروه کالایی</a>
+                                </li>
+                            @endcan
+                            @can('مشخصه محصول')
+                                <li><a href="{{route('admin.ProductCharacteristic.list')}}"><i
+                                            class="fa fa-circle-o"></i>مشخصه محصول</a>
+                                </li>
+                            @endcan
+                            @can('تعریف محصول')
+                                <li><a href="{{route('admin.product.list')}}"><i
+                                            class="fa fa-circle-o"></i>تعریف محصول</a>
+                                </li>
+                            @endcan
+                            @can('BOM')
+                                <li><a href="{{route('admin.bom.list')}}"><i
+                                            class="fa fa-circle-o"></i>BOM</a>
+                                </li>
+                            @endcan
+                            <hr/>
+                            @can('تعریف قالب سازه')
+                                <li><a href="{{route('admin.models.list')}}"><i
+                                            class="fa fa-circle-o"></i>تعریف قالب سازها</a>
+                                </li>
+                            @endcan
+                            @can('تعریف قالب')
+                                <li><a href="{{route('admin.format.list')}}"><i
+                                            class="fa fa-circle-o"></i>تعریف قالب</a>
+                                </li>
+                            @endcan
+                            @can('Insert های قالب')
+                                <li><a href="{{route('admin.insert.list')}}"><i
+                                            class="fa fa-circle-o"></i>Insert های قالب </a>
+                                </li>
+                            @endcan
+                            @can('انتصاب محصول به قالب')
+                                <li><a href="{{route('admin.model.product.list')}}"><i
+                                            class="fa fa-circle-o"></i>انتصاب محصول به قالب</a>
+                                </li>
+                            @endcan
+                            <hr/>
+                            @can('تعریف رنگ')
+                                <li><a href="{{route('admin.color.list')}}"><i
+                                            class="fa fa-circle-o"></i>تعریف رنگ</a>
+                                </li>
+                            @endcan
+                            @can('مواد پلیمیری')
+                                <li><a href="{{route('admin.polymeric.list')}}"><i
+                                            class="fa fa-circle-o"></i>مواد پلیمیری</a>
+                                </li>
+                            @endcan
+                            @can('فروشنده')
+                                <li><a href="{{route('admin.seller.list')}}"><i
+                                            class="fa fa-circle-o"></i>فروشنده</a>
+                                </li>
+                            @endcan
+                            <hr/>
+                            @can('تعریف دستگاه')
+                                <li><a href="{{route('admin.device.list')}}"><i
+                                            class="fa fa-circle-o"></i>تعریف دستگاه</a>
+                                </li>
+                            @endcan
 
-                        <li><a href="{{route('admin.ProductCharacteristic.list')}}"><i
-                                    class="fa fa-circle-o"></i>مشخصه محصول</a>
-                        </li>
-                        <li><a href="{{route('admin.product.list')}}"><i
-                                    class="fa fa-circle-o"></i>تعریف محصول</a>
-                        </li>
-                        <li><a href="{{route('admin.models.list')}}"><i
-                                    class="fa fa-circle-o"></i>تعریف قالب سازها</a>
-                        </li>
-                        <li><a href="{{route('admin.format.list')}}"><i
-                                    class="fa fa-circle-o"></i>تعریف قالب</a>
-                        </li>
-                        <li><a href="{{route('admin.device.list')}}"><i
-                                    class="fa fa-circle-o"></i>تعریف دستگاه</a>
-                        </li>
-                        <li><a href="{{route('admin.color.list')}}"><i
-                                    class="fa fa-circle-o"></i>تعریف رنگ</a>
-                        </li>
-                        <li><a href="{{route('admin.polymeric.list')}}"><i
-                                    class="fa fa-circle-o"></i>مواد پلیمیری</a>
-                        </li>
-                        <li><a href="{{route('admin.seller.list')}}"><i
-                                    class="fa fa-circle-o"></i>فروشنده</a>
-                        </li>
-                        <li><a href="{{route('admin.bom.list')}}"><i
-                                    class="fa fa-circle-o"></i>BOM</a>
-                        </li>
-                        <li><a href="{{route('admin.insert.list')}}"><i
-                                    class="fa fa-circle-o"></i>Insert های قالب  </a>
-                        </li>
-                        <li><a href="{{route('admin.model.product.list')}}"><i
-                                    class="fa fa-circle-o"></i>انتصاب محصول به قالب</a>
-                        </li>
 
-
-                    </ul>
-                </li>
-
+                        </ul>
+                    </li>
+                @endif
 
                 @if(Gate::check('بازسازی نرم افزار') || Gate::check('شروع به کار نرم افزار'))
                     <li class="treeview">
@@ -697,6 +734,9 @@
     });
     $("#setting").click(function () {
         $(".settings").prop('checked', $(this).prop('checked'));
+    });
+    $("#foundations").click(function () {
+        $(".foundation").prop('checked', $(this).prop('checked'));
     });
 
 </script>

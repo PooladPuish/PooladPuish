@@ -51,12 +51,18 @@
                         <tbody>
                         </tbody>
                     </table>
+                    <a class="btn btn-primary" href="javascript:void(0)" id="createNew">تعریف اجزاء جدید</a>
+
                 </div>
             </div>
             <!-- END EXAMPLE TABLE PORTLET-->
         </div>
 
     </div>
-    @include('bom.scripts.script')
+
+
     @include('bom.modals.modal')
+    @include('bom.scripts.script')
+
+
 @endsection

@@ -995,13 +995,25 @@ h1.block, h2.block, h3.block, h4.block, h5.block, h6.block {
 
 a {
     text-shadow: none;
-    color: #337ab7
+    color: black;
 }
 
 a:hover {
     cursor: pointer;
-    color: #23527c
+    color: red;
 }
+
+a:active {
+    text-shadow: none;
+    color: red;
+    background: red;
+}
+
+a:focus {
+    text-shadow: none;
+    color: red;
+}
+
 
 a:active, a:focus, a:hover {
     outline: 0

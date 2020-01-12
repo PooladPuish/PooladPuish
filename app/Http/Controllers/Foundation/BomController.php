@@ -50,6 +50,12 @@ class BomController extends Controller
             'number.integer' => 'تعداد باید از نوع عدد باشد',
         ]);
 
+        $products = Bom::where('product_id', $request->product_id)->get();
+        foreach ($products as $product)
+            if ($product->bom_id == $request->bom_id) {
+                return response()->json(['unm' => 'این زیر مجمعه برای محصول انتخاب شده است']);
+            }
+
         if ($validator->passes()) {
             Bom::updateOrCreate(['id' => $request->pr],
                 [

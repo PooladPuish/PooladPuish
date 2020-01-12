@@ -32,6 +32,27 @@
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]
         });
+        var tabl = $('.detail-table').DataTable({
+            processing: true,
+            serverSide: true,
+            destroy: true,
+            "language": {
+                "search": "جستجو:",
+                "lengthMenu": "نمایش _MENU_",
+                "zeroRecords": "محصولی را انتخاب کنید",
+                "info": "نمایش _PAGE_ از _PAGES_",
+                "infoEmpty": "موردی یافت نشد",
+                "infoFiltered": "(جستجو از _MAX_ مورد)",
+                "processing": "در حال پردازش اطلاعات",
+            },
+            ajax: "{{ route('admin.bom.detail') }}" + '/' + details,
+            columns: [
+                {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+                {data: 'bom', name: 'bom'},
+                {data: 'number', name: 'number'},
+                {data: 'action', name: 'action', orderable: false, searchable: false},
+            ]
+        });
         $('#createNewProduct').click(function () {
             $('#productForm').trigger("reset");
             $('#ajaxModel').modal('show');
@@ -49,6 +70,8 @@
                 $('#pnumber').val(data.number);
             });
         });
+
+
         $('#saveBtn').click(function (e) {
             e.preventDefault();
             $.ajax({
@@ -57,6 +80,18 @@
                 type: "POST",
                 dataType: 'json',
                 success: function (data) {
+
+                    if (data.unm) {
+                        $('#productForm').trigger("reset");
+                        $('#ajaxModel').modal('hide');
+                        Swal.fire({
+                            title: 'خطا!',
+                            text: 'این زیر مجموعه برای محصول انتخاب شده است',
+                            icon: 'error',
+                            confirmButtonText: 'تایید',
+                        });
+                    }
+
                     if (data.errors) {
                         $('#ajaxModel').modal('hide');
                         jQuery.each(data.errors, function (key, value) {
@@ -80,6 +115,7 @@
                         });
                         $('#detail-table').DataTable().ajax.reload();
                     }
+
                 }
             });
         });
@@ -160,6 +196,7 @@
     });
 
     $('body').on('click', '.details', function () {
+
         var details = $(this).data('id');
         if (details) {
             var tabl = $('.detail-table').DataTable({
@@ -187,15 +224,17 @@
             $('#createNew').click(function () {
                 var product_id = details;
                 var p = product;
-                $('#ajax').modal('show');
-                $('#id_product').val(product_id);
-                $('#bom_id').val('');
-                $('#bom_id')
-                    .find('option')
-                    .remove();
-                for (var i in p) {
-                    if (p[i].id != product_id) {
-                        $("#bom_id").append('<option value="' + p[i].id + '">' + p[i].label + '</option>');
+                if (p) {
+                    $('#ajax').modal('show');
+                    $('#id_product').val(product_id);
+                    $('#bom_id').val('');
+                    $('#bom_id')
+                        .find('option')
+                        .remove();
+                    for (var i in p) {
+                        if (p[i].id != product_id) {
+                            $("#bom_id").append('<option value="' + p[i].id + '">' + p[i].label + '</option>');
+                        }
                     }
                 }
             });

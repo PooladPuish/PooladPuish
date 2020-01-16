@@ -49,13 +49,13 @@ class BomController extends Controller
             'number.required' => 'لطفا تعداد را وارد کنید',
             'number.integer' => 'تعداد باید از نوع عدد باشد',
         ]);
-
         $products = Bom::where('product_id', $request->product_id)->get();
         foreach ($products as $product)
-            if ($product->bom_id == $request->bom_id) {
-                return response()->json(['unm' => 'این زیر مجمعه برای محصول انتخاب شده است']);
+            if (empty($request->pr)) {
+                if ($product->bom_id == $request->bom_id) {
+                    return response()->json(['unm' => 'این زیر مجمعه برای محصول انتخاب شده است']);
+                }
             }
-
         if ($validator->passes()) {
             Bom::updateOrCreate(['id' => $request->pr],
                 [
@@ -159,6 +159,7 @@ class BomController extends Controller
 
         $products = Bom::where('product_id', $request->id_product)->get();
         foreach ($products as $product)
+
             if ($product->bom_id == $request->bom_id) {
                 return response()->json(['unm' => 'این زیر مجمعه برای محصول انتخاب شده است']);
             }

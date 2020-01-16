@@ -14,8 +14,10 @@
             }
         });
         var table = $('.data-table').DataTable({
+
             processing: true,
             serverSide: true,
+
             "language": {
                 "search": "جستجو:",
                 "lengthMenu": "نمایش _MENU_",
@@ -25,12 +27,15 @@
                 "infoFiltered": "(جستجو از _MAX_ مورد)",
                 "processing": "در حال پردازش اطلاعات"
             },
+
+
             ajax: "{{ route('admin.bom.list') }}",
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                 {data: 'product', name: 'product'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]
+
         });
         var tabl = $('.detail-table').DataTable({
             processing: true,
@@ -66,9 +71,20 @@
                 $('#ajaxModel').modal('show');
                 $('#pr').val(data.id);
                 $('#produ').val(data.product_id);
-                $('#bo').val(data.bom_id);
                 $('#pnumber').val(data.number);
+                $('#bo')
+                    .find('option')
+                    .remove();
+                for (var i in product) {
+                    if (product[i].id == data.bom_id){
+
+                        $("#bo").append('<option value="' + product[i].id + '">' + product[i].label + '</option>');
+
+                    }
+
+                }
             });
+
         });
 
 
@@ -195,7 +211,9 @@
         })
     });
 
+
     $('body').on('click', '.details', function () {
+
 
         var details = $(this).data('id');
         if (details) {
@@ -241,6 +259,7 @@
         }
 
     });
+
 
     $('#produ').change(function () {
         var product = $(this).val();
@@ -312,5 +331,23 @@
             }
         });
     });
+
+    $(document).ready(function () {
+        var table = $('#data-table').DataTable();
+
+        $('#data-table tbody').on('click', 'tr', function () {
+            if ($(this).hasClass('selected')) {
+                $(this).removeClass('selected');
+            } else {
+                table.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+            }
+        });
+
+        $('#button').click(function () {
+            table.row('.selected').remove().draw(false);
+        });
+    });
+
 
 </script>

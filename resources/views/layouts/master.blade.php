@@ -369,6 +369,26 @@
                     </li>
                 @endif
 
+
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-user"></i> <span>تعریف مشتریان</span>
+                        <span class="pull-left-container">
+              <i class="fa fa-angle-right pull-left"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{route('admin.customer.type')}}"><i
+                                    class="fa fa-circle-o"></i>انواع مشتریان</a>
+                        </li>
+
+                        <li><a href="{{route('admin.customers.index')}}"><i
+                                    class="fa fa-circle-o"></i>مشتریان</a>
+                        </li>
+                    </ul>
+                </li>
+
+
                 @if(Gate::check('بازسازی نرم افزار') || Gate::check('شروع به کار نرم افزار'))
                     <li class="treeview">
                         <a href="#">
@@ -435,7 +455,6 @@
         </div>
     </div>
 </div>
-
 
 <script src="{{asset('/public/bower_components/jquery/dist/jquery.min.js')}}"></script>
 <script src="{{asset('/public/bower_components/jquery-ui/jquery-ui.min.js')}}"></script>
@@ -549,121 +568,6 @@
             },
         });
     });
-    $(document).ready(function () {
-        $('#select2-examp').select2({
-            width: '100%',
-            placeholder: 'لطفا پرسنل را انتخاب کنید',
-            language: {
-                noResults: function () {
-                    return 'پرسنلی با این نام یافت نشد';
-                },
-            },
-        });
-    });
-
-    $(document).ready(function () {
-        $('#select2-pro').select2({
-            width: '100%',
-            placeholder: 'لطفا گروه کالا را انتخاب کنید',
-            language: {
-                noResults: function () {
-                    return 'گروه کالا با این نام یافت نشد';
-                },
-            },
-        });
-    });
-    $(document).ready(function () {
-        $('#select2-prod').select2({
-            width: '100%',
-            placeholder: 'لطفا گروه کالا را انتخاب کنید',
-            language: {
-                noResults: function () {
-                    return 'گروه کالا با این نام یافت نشد';
-                },
-            },
-        });
-    });
-
-    $(document).ready(function () {
-        $('#select2-prodd').select2({
-            width: '100%',
-            placeholder: 'لطفا گروه کالا را انتخاب کنید',
-            language: {
-                noResults: function () {
-                    return 'گروه کالا با این نام یافت نشد';
-                },
-            },
-        });
-    });
-
-
-    $(document).ready(function () {
-        $('#select2-a').select2({
-            width: '100%',
-            placeholder: 'لطفا قالب ساز را انتخاب کنید',
-            language: {
-                noResults: function () {
-                    return 'قالب ساز با این نام یافت نشد';
-                },
-            },
-        });
-    });
-    $(document).ready(function () {
-        $('#select2-aa').select2({
-            width: '100%',
-            placeholder: 'لطفا قالب ساز را انتخاب کنید',
-            language: {
-                noResults: function () {
-                    return 'قالب ساز با این نام یافت نشد';
-                },
-            },
-        });
-    });
-    $(document).ready(function () {
-        $('#select2-b').select2({
-            width: '100%',
-            placeholder: 'لطفا مشخصه محصول را انتخاب کنید',
-            language: {
-                noResults: function () {
-                    return 'مشخصه محصول با این نام یافت نشد';
-                },
-            },
-        });
-    });
-    $(document).ready(function () {
-        $('#select2-bb').select2({
-            width: '100%',
-            placeholder: 'لطفا مشخصه محصول را انتخاب کنید',
-            language: {
-                noResults: function () {
-                    return 'مشخصه محصول با این نام یافت نشد';
-                },
-            },
-        });
-    });
-    $(document).ready(function () {
-        $('#select2-c').select2({
-            width: '100%',
-            placeholder: 'لطفا محصول را انتخاب کنید',
-            language: {
-                noResults: function () {
-                    return 'محصول با این نام یافت نشد';
-                },
-            },
-        });
-    });
-    $(document).ready(function () {
-        $('#select2-cc').select2({
-            width: '100%',
-            placeholder: 'لطفا محصول را انتخاب کنید',
-            language: {
-                noResults: function () {
-                    return 'محصول با این نام یافت نشد';
-                },
-            },
-        });
-    });
-
 </script>
 <script src="{{asset('/public/assets/sweetalert.js')}}"></script>
 

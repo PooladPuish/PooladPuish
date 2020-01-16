@@ -63,6 +63,7 @@ Route::group(['middleware' => ['auth', 'web']], function () {
         Route::post('/alternatives/store', 'AlternativesController@store')->name('admin.user.alternatives.store');
         Route::get('/alternatives/view', 'AlternativesController@view')->name('admin.user.alternatives.view');
         Route::get('/alternatives/update/{id?}', 'AlternativesController@update')->name('admin.alternatives.update');
+        Route::get('/alternatives/user', 'AlternativesController@user')->name('admin.alternatives.user');
         Route::delete('/alternatives/delete/{id?}', 'AlternativesController@delete')->name('admin.alternatives.delete');
 
     });
@@ -163,7 +164,24 @@ Route::group(['middleware' => ['auth', 'web']], function () {
         Route::delete('/seller/delete/{id?}', 'SellerController@delete')->name('admin.seller.delete');
 
     });
+    Route::group(["namespace" => "Customer"], function () {
 
+        //TypeCustomer
+        Route::get('/customer/index', 'TypeCustomer@index')->name('admin.customer.type');
+        Route::post('/customer/store', 'TypeCustomer@store')->name('admin.customer.store');
+        Route::get('/customer/update/{id?}', 'TypeCustomer@update')->name('admin.customer.update');
+        Route::delete('/customer/delete/{id?}', 'TypeCustomer@delete')->name('admin.customer.delete');
+
+        //Customer
+        Route::get('/customers/index', 'CustomerController@index')->name('admin.customers.index');
+        Route::get('/customers/wizard', 'CustomerController@wizard')->name('admin.customers.wizard');
+        Route::post('/customers/store', 'CustomerController@store')->name('admin.customers.store');
+        Route::post('/customers/edit', 'CustomerController@edit')->name('admin.customers.edit');
+        Route::get('/customers/update/{id?}', 'CustomerController@update')->name('admin.customer.update');
+
+
+
+    });
 });
 
 

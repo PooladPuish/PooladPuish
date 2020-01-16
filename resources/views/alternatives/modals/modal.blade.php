@@ -1,3 +1,6 @@
+<script src="{{asset('/public/bower_components/jquery/dist/jquery.min.js')}}"></script>
+<script src="{{asset('/public/assets/select2.js')}}"></script>
+
 <div class="modal fade" id="ajaxModel" aria-hidden="true">
     <div class="modal-dialog col-md-12">
         <div class="modal-content">
@@ -17,41 +20,36 @@
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-3">
-                                                <label>درخواست دهنده</label>
-                                                <select dir="rtl" id="user_id" class="form-control"
-                                                        name="user_id"
-                                                        required>
-                                                    @foreach($users as $user)
-                                                        @if(!empty($user))
-                                                            <option value="{{$user->id}}">{{$user->name}}</option>
-                                                        @endif
-                                                    @endforeach
-                                                </select>
+                                            <label>درخواست دهنده</label>
+                                            <select dir="rtl" id="user_id" class="itemName form-control"
+                                                    name="user_id"
+                                                    required>
+                                                @foreach($users as $user)
+                                                 <option value="{{$user->id}}">{{$user->name}}</option>
+                                                @endforeach
+
+                                            </select>
                                         </div>
                                         <div class="col-md-3">
-                                                <label>جایگزین</label>
-                                                <br/>
-                                                <select dir="rtl" id="alternate_id" class="form-control"
-                                                        name="alternate_id"
-                                                        required>
-                                                    @foreach($users as $user)
-                                                        @if(!empty($user))
-                                                            <option value="{{$user->id}}">{{$user->name}}</option>
-                                                        @endif
-                                                    @endforeach
-                                                </select>
+                                            <label>جایگزین</label>
+                                            <br/>
+                                            <select dir="rtl" id="alternate_id" class="itemName form-control"
+                                                    name="alternate_id"
+                                                    required>
+
+                                            </select>
                                         </div>
 
 
                                         <div class="col-md-3">
-                                                <label>از تاریخ</label>
-                                                <input type="text" id="from" name="from" class="form-control example1"/>
+                                            <label>از تاریخ</label>
+                                            <input type="text" id="from" name="from" class="form-control example1"/>
 
                                         </div>
 
                                         <div class="col-md-3">
-                                                <label>تا تاریخ</label>
-                                                <input type="text" id="ToDate" name="ToDate" class="form-control example1"/>
+                                            <label>تا تاریخ</label>
+                                            <input type="text" id="ToDate" name="ToDate" class="form-control example1"/>
 
                                         </div>
 
@@ -74,4 +72,37 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $('#user_id').change(function () {
+        var user_id = $(this).val();
+        if (user_id) {
+            $.ajax({
+                type: "GET",
+                url: "{{route('admin.alternatives.user')}}?user_id=" + user_id,
+                success: function (res) {
+                    if (res) {
+                        $("#alternate_id").empty();
+                        $.each(res, function (key, value) {
+                            $("#alternate_id").append('<option value="' + key + '">' + value + '</option>');
+                        });
+
+                    } else {
+                        $("#alternate_id").empty();
+                    }
+                }
+            });
+        } else {
+            $("#alternate_id").empty();
+        }
+    });
+    $('.itemName').select2({
+        width: '100%',
+        language: {
+            noResults: function () {
+                return 'پرسنل با این مشخصات یافت نشد';
+            },
+        }
+    });
+</script>
+
 

@@ -52,45 +52,45 @@ class AlternativesController extends Controller
      */
     public function store(Request $request)
     {
-        if (empty($request->product_id)) {
-            if ($request->user_id == $request->alternate_id) {
-                return Response::json(['errors' => 'انتخاب فرد جایگزین اشتباه است لطفا در انتخاب فرد جایگزین دقت کنید']);
-            }
-            if ($request->from > $request->ToDate or $request->from == $request->ToDate) {
-                return Response::json(['errors' => 'تاریخ انتخاب شده اشتباه است لطفا در انتخاب تاریخ جایگزینی دقت کنید']);
-            }
-            $check_users = Alternatives::whereNull('status')->get();
-            foreach ($check_users as $check_user) {
-                if (!empty($check_user)) {
-                    if ($check_user->user_id == $request->alternate_id) {
-                        return Response::json(['errors' => 'پرسنلی که برای جانشینی انتخاب کرده اید در مرخصی میباشد']);
-                    }
-                    if ($check_user->alternate_id == $request->user_id) {
-                        return Response::json(['errors' => 'پرسنل مرود نظر به عنوان جانشین در سیستم ثبت شده است']);
-                    }
-                    if ($check_user->alternate_id == $request->alternate_id and $check_user->user_id == $request->user_id) {
-                        return Response::json(['errors' => 'این جایگزنی در سیستم ثبت شده است و فعال میباشد']);
-                    }
-                }
-            }
-        }
-        if ($request->user_id == $request->alternate_id) {
-            return Response::json(['errors' => 'انتخاب فرد جایگزین اشتباه است لطفا در انتخاب فرد جایگزین دقت کنید']);
-        }
-        if ($request->from > $request->ToDate or $request->from == $request->ToDate) {
-            return Response::json(['errors' => 'تاریخ انتخاب شده اشتباه است لطفا در انتخاب تاریخ جایگزینی دقت کنید']);
-        }
-        $check_users = Alternatives::whereNull('status')->get();
-        foreach ($check_users as $check_user) {
-            if (!empty($check_user)) {
-                if ($check_user->user_id == $request->alternate_id) {
-                    return Response::json(['errors' => 'پرسنلی که برای جانشینی انتخاب کرده اید در مرخصی میباشد']);
-                }
-                if ($check_user->alternate_id == $request->user_id) {
-                    return Response::json(['errors' => 'پرسنل مرود نظر به عنوان جانشین در سیستم ثبت شده است']);
-                }
-            }
-        }
+//        if (empty($request->product_id)) {
+//            if ($request->user_id == $request->alternate_id) {
+//                return Response::json(['errors' => 'انتخاب فرد جایگزین اشتباه است لطفا در انتخاب فرد جایگزین دقت کنید']);
+//            }
+//            if ($request->from > $request->ToDate or $request->from == $request->ToDate) {
+//                return Response::json(['errors' => 'تاریخ انتخاب شده اشتباه است لطفا در انتخاب تاریخ جایگزینی دقت کنید']);
+//            }
+//            $check_users = Alternatives::whereNull('status')->get();
+//            foreach ($check_users as $check_user) {
+//                if (!empty($check_user)) {
+//                    if ($check_user->user_id == $request->alternate_id) {
+//                        return Response::json(['errors' => 'پرسنلی که برای جانشینی انتخاب کرده اید در مرخصی میباشد']);
+//                    }
+//                    if ($check_user->alternate_id == $request->user_id) {
+//                        return Response::json(['errors' => 'پرسنل مرود نظر به عنوان جانشین در سیستم ثبت شده است']);
+//                    }
+//                    if ($check_user->alternate_id == $request->alternate_id and $check_user->user_id == $request->user_id) {
+//                        return Response::json(['errors' => 'این جایگزنی در سیستم ثبت شده است و فعال میباشد']);
+//                    }
+//                }
+//            }
+//        }
+//        if ($request->user_id == $request->alternate_id) {
+//            return Response::json(['errors' => 'انتخاب فرد جایگزین اشتباه است لطفا در انتخاب فرد جایگزین دقت کنید']);
+//        }
+//        if ($request->from > $request->ToDate or $request->from == $request->ToDate) {
+//            return Response::json(['errors' => 'تاریخ انتخاب شده اشتباه است لطفا در انتخاب تاریخ جایگزینی دقت کنید']);
+//        }
+//        $check_users = Alternatives::whereNull('status')->get();
+//        foreach ($check_users as $check_user) {
+//            if (!empty($check_user)) {
+//                if ($check_user->user_id == $request->alternate_id) {
+//                    return Response::json(['errors' => 'پرسنلی که برای جانشینی انتخاب کرده اید در مرخصی میباشد']);
+//                }
+//                if ($check_user->alternate_id == $request->user_id) {
+//                    return Response::json(['errors' => 'پرسنل مرود نظر به عنوان جانشین در سیستم ثبت شده است']);
+//                }
+//            }
+//        }
 
 
         $success = Alternatives::updateOrCreate(['id' => $request->product_id],
@@ -122,50 +122,6 @@ class AlternativesController extends Controller
             }
         }
 
-//        try {
-//            \DB::transaction(function () use ($request) {
-//                $success = Alternatives::updateOrCreate(['id' => $request->product_id],
-//                    [
-//                        'user_id' => $request->user_id,
-//                        'alternate_id' => $request->alternate_id,
-//                        'from' => $request->from,
-//                        'ToDate' => $request->ToDate,
-//                    ]);
-//                if ($success) {
-//                    $role_users = \DB::table('role_user')
-//                        ->where('user_id', $request->input('user_id'))
-//                        ->get();
-//                    foreach ($role_users as $role_user)
-//                        $duplicate = \DB::table('role_user')
-//                            ->where([
-//                                'user_id' => $request->input('alternate_id'),
-//                                'role_id' => $role_user->role_id,
-//                            ])->first();
-//                    if (!$duplicate) {
-//                        try {
-//                            $role_check = \DB::table('role_user')->insert([
-//                                'user_id' => $request->input('alternate_id'),
-//                                'role_id' => $role_user->role_id,
-//                                'label' => "1",
-//                            ]);
-//                            if ($role_check) {
-//                                return Response::json(['errors' => 'جایگزینی با موفقیت ثبت شد و اعلان برای کاربران ارسال خواهد شد']);
-//                            } else {
-//                                return Response::json(['errors' => 'پرسنل مورد نظر دسترسی های لازم را داراست']);
-//                            }
-//                        } catch (Exception $exception) {
-//                            return Response::json(['errors' => 'پرسنل مورد نظر دسترسی های لازم را داراست']);
-//                        }
-//                    } else {
-//                        return Response::json(['errors' => 'پرسنل مورد نظر دسترسی های لازم را داراست']);
-//                    }
-//                }
-//            });
-//            return response()->json(['success' => 'جایگزینی با موفقیت ثبت شد و اعلان برای کاربران ارسال خواهد شد']);
-//        } catch (Exception $exception) {
-//            \DB::rollBack();
-//            return Response::json(['errors' => 'پرسنل مورد نظر دسترسی های لازم را داراست']);
-//        }
     }
 
     /**
@@ -225,6 +181,15 @@ class AlternativesController extends Controller
                        <img src="' . $delete . '" width="25" title="حذف"></a>';
 
         return $btn;
+
+    }
+
+    public function user(Request $request)
+    {
+        $users = \DB::table("users")
+            ->where("id", '!=', $request->user_id)
+            ->pluck("name", "id");
+        return response()->json($users);
 
     }
 

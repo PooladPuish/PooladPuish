@@ -2,20 +2,17 @@
 <script src="{{asset('/public/js/a2.js')}}" type="text/javascript"></script>
 <meta name="_token" content="{{ csrf_token() }}"/>
 <script type="text/javascript">
-    var product = [];
-    @foreach($users as $user)
-    product.push({'id': '{{$user->id}}', 'name': '{{$user->name}}'});
-    @endforeach
     $(function () {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-
         var table = $('.data-table').DataTable({
+
             processing: true,
             serverSide: true,
+
             "language": {
                 "search": "جستجو:",
                 "lengthMenu": "نمایش _MENU_",
@@ -25,64 +22,58 @@
                 "infoFiltered": "(جستجو از _MAX_ مورد)",
                 "processing": "در حال پردازش اطلاعات"
             },
-            ajax: "{{ route('admin.user.alternatives') }}",
+
+
+            ajax: "{{ route('admin.customers.index') }}",
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                {data: 'user', name: 'user'},
-                {data: 'alternatives', name: 'alternatives'},
-                {data: 'from', name: 'from'},
-                {data: 'ToDate', name: 'ToDate'},
+                {data: 'code', name: 'code'},
+                {data: 'name', name: 'name'},
+                {data: 'state', name: 'state'},
+                {data: 'method', name: 'method'},
+                {data: 'expert', name: 'expert'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]
+
         });
 
         $('#createNewProduct').click(function () {
             $('#productForm').trigger("reset");
             $('#ajaxModel').modal('show');
-            $('#product_id').val('');
-            $('#user_id').val('');
-            $('#alternate_id')
-                .find('option')
-                .remove();
-            $('#from').val('');
-            $('#ToDate').val('');
+            $('#product').val('');
         });
 
         $('body').on('click', '.editProduct', function () {
             var product_id = $(this).data('id');
-            $.get("{{ route('admin.alternatives.update') }}" + '/' + product_id, function (data) {
+            $.get("{{ route('admin.customer.update') }}" + '/' + product_id, function (data) {
                 $('#ajaxModel').modal('show');
-                $('#product_id').val(data.id);
-                $('#from').val(data.from);
-                $('#ToDate').val(data.ToDate);
-                $("#user_id").trigger('change').val(data.user_id);
-                $('#alternate_id')
-                    .find('option')
-                    .remove();
-                for (var i in product) {
-                    if (product[i].id == data.alternate_id) {
-                        $("#alternate_id").append('<option value="' + product[i].id + '">' + product[i].name + '</option>');
-                    }
-                }
-            })
+                $('#product').val(data.id);
+                $('#name').val(data.name);
+                $('#code').val(data.code);
+                $('#type').val(data.type);
+            });
+
         });
+
 
         $('#saveBtn').click(function (e) {
             e.preventDefault();
             $.ajax({
                 data: $('#productForm').serialize(),
-                url: "{{ route('admin.user.alternatives.store') }}",
+                url: "{{ route('admin.customer.store') }}",
                 type: "POST",
                 dataType: 'json',
                 success: function (data) {
                     if (data.errors) {
                         $('#ajaxModel').modal('hide');
-                        Swal.fire({
-                            title: 'خطا!',
-                            text: data.errors,
-                            icon: 'error',
-                            confirmButtonText: 'تایید'
-                        })
+                        jQuery.each(data.errors, function (key, value) {
+                            Swal.fire({
+                                title: 'خطا!',
+                                text: value,
+                                icon: 'error',
+                                confirmButtonText: 'تایید'
+                            })
+                        });
                     }
                     if (data.success) {
                         $('#productForm').trigger("reset");
@@ -90,26 +81,20 @@
                         table.draw();
                         Swal.fire({
                             title: 'موفق',
-                            text: 'مشخصات جابجایی با موفقیت در سیستم ثبت شد',
+                            text: 'مشخصات با موفقیت در سیستم ثبت شد',
                             icon: 'success',
                             confirmButtonText: 'تایید',
                         });
-                        $('#product_id').val('');
-                        $('#user_id').val('');
-                        $('#alternate_id').val('');
-                        $('#from').val('');
-                        $('#ToDate').val('');
                     }
+
                 }
             });
         });
-
     });
-
     $('body').on('click', '.deleteProduct', function () {
         var id = $(this).data("id");
         Swal.fire({
-            title: 'حذف جابجایی؟',
+            title: 'حذف؟',
             text: "مشخصات حذف شده قابل بازیابی نیستند!",
             icon: 'warning',
             showCancelButton: true,
@@ -121,7 +106,7 @@
             if (result.value) {
                 $.ajax({
                     type: 'DELETE',
-                    url: "{{route('admin.alternatives.delete')}}" + '/' + id,
+                    url: "{{route('admin.customer.delete')}}" + '/' + id,
                     data: {
                         '_token': $('input[name=_token]').val(),
                     },
@@ -129,7 +114,7 @@
                         $('#data-table').DataTable().ajax.reload();
                         Swal.fire({
                             title: 'موفق',
-                            text: 'مشخصات جابجایی با موفقیت از سیستم حذف شد',
+                            text: 'مشخصات با موفقیت از سیستم حذف شد',
                             icon: 'success',
                             confirmButtonText: 'تایید'
                         })

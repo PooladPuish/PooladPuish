@@ -177,7 +177,9 @@ Route::group(['middleware' => ['auth', 'web']], function () {
         Route::get('/customers/wizard', 'CustomerController@wizard')->name('admin.customers.wizard');
         Route::post('/customers/store', 'CustomerController@store')->name('admin.customers.store');
         Route::post('/customers/edit', 'CustomerController@edit')->name('admin.customers.edit');
-        Route::get('/customers/update/{id?}', 'CustomerController@update')->name('admin.customer.update');
+        Route::get('/customers/update/{id?}', 'CustomerController@update')->name('admin.customers.update');
+        Route::get('/customers/filter', 'CustomerController@filter')->name('admin.customers.filter');
+        Route::delete('/customers/delete/{id?}', 'CustomerController@delete')->name('admin.customers.delete');
 
 
 

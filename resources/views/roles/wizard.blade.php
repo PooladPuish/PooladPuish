@@ -296,6 +296,38 @@
 
                                     </div>
 
+
+                                    <div class="col-md-4">
+                                        <ul class="trees">
+                                            <li class="has-child">
+                                                <input id="tree-controll1" type="checkbox" class="custom-control-input"><span
+                                                    class="tree-control"></span>
+                                                <label>
+                                                    <input type="checkbox"/>
+                                                    <i class="fa fa-user light-blue"></i>تعریف مشتریان
+                                                </label>
+                                                <ul>
+                                                    @foreach($permissions as $permission)
+                                                        @if(!empty($permission))
+                                                            @if($permission->label == "setting")
+                                                                <li>
+                                                                    <label>
+                                                                        <input type="checkbox" name="permission[]"
+                                                                               value="{{$permission->id}}"/>
+                                                                        {{$permission->name}}
+                                                                    </label>
+                                                                </li>
+                                                            @endif
+                                                        @endif
+                                                    @endforeach
+                                                </ul>
+                                            </li>
+
+                                        </ul>
+
+                                    </div>
+
+
                                 </div>
                             </div>
                         </div>

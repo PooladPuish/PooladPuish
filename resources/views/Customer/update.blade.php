@@ -1,5 +1,4 @@
 @extends('layouts.master')
-
 <style>
     .registercontpage {
         position: relative;
@@ -88,12 +87,10 @@
         padding-top: 1.4rem;
     }
 </style>
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="{{asset('/public/css/1.css')}}" rel="stylesheet" id="bootstrap-css">
+<script src="{{asset('/public/js/1.js')}}"></script>
 <script src="{{asset('/public/assets/sweetalert.js')}}"></script>
 @section('content')
-
-
 
     <div class="row">
         <div class="col-md-12">
@@ -513,7 +510,7 @@
                                                                         <td>نام</td>
                                                                         <td>تلفن</td>
                                                                         <td>داخلی</td>
-                                                                        <td>تبفن همراه</td>
+                                                                        <td>تلفن همراه</td>
                                                                         <td>ایمیل</td>
                                                                         <td>عملیات</td>
                                                                     </tr>
@@ -620,7 +617,7 @@
 
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="{{asset('/public/js/2.js')}}"></script>
     <script>
         $(document).ready(function () {
             $('#nextBtn').click(function () {

@@ -12,7 +12,6 @@ class CustomerController extends Controller
 {
     public function index(Request $request)
     {
-
         if ($request->ajax()) {
             $data = Customer::get();
             return Datatables::of($data)
@@ -30,8 +29,9 @@ class CustomerController extends Controller
 
     public function wizard()
     {
+        $typeCustomers = \App\TypeCustomer::all();
 
-        return view('Customer.wizard');
+        return view('Customer.wizard', compact('typeCustomers'));
 
     }
 
@@ -84,8 +84,8 @@ class CustomerController extends Controller
                     'post_company' => $request->post_company,
                 ]);
                 if ($customer_company) {
-                    $size = count(collect($request)->get('side_company'));
                     try {
+                        $size = count(collect($request)->get('side_company'));
                         for ($i = 0; $i <= $size; $i++) {
                             \DB::table('company_personal')->insert([
                                 'customer_id' => $customer->id,
@@ -145,9 +145,8 @@ class CustomerController extends Controller
                 ]);
             \DB::table('company_personal')
                 ->where('customer_id', $request->id_customer)->delete();
-
-            $size = count(collect($request)->get('side_company'));
             try {
+                $size = count(collect($request)->get('side_company'));
                 for ($i = 0; $i <= $size; $i++) {
                     \DB::table('company_personal')->insert([
                         'customer_id' => $request->id_customer,
@@ -182,12 +181,28 @@ class CustomerController extends Controller
 
     }
 
+    public function delete($id)
+    {
+        $post = Customer::findOrFail($id);
+        $post->delete();
+        return response()->json($post);
+    }
+
+//    public function filter(Request $request)
+//    {
+//        $type = \DB::table("customers")
+//            ->where("id", $request->type)
+//            ->pluck("type", "id");
+//        return response()->json($type);
+//
+//    }
+
     public function actions($row)
     {
         $success = url('/public/icon/icons8-edit-144.png');
         $delete = url('/public/icon/icons8-delete-bin-96.png');
 
-        $btn = '<a href="' . route('admin.customer.update', $row->id) . '">
+        $btn = '<a href="' . route('admin.customers.update', $row->id) . '">
                        <img src="' . $success . '" width="25" title="ویرایش"></a>';
 
         $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"

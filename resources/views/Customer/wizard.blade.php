@@ -1,5 +1,4 @@
 @extends('layouts.master')
-
 <style>
     .registercontpage {
         position: relative;
@@ -88,13 +87,10 @@
         padding-top: 1.4rem;
     }
 </style>
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="{{asset('/public/css/1.css')}}" rel="stylesheet" id="bootstrap-css">
+<script src="{{asset('/public/js/1.js')}}"></script>
 <script src="{{asset('/public/assets/sweetalert.js')}}"></script>
 @section('content')
-
-
-
     <div class="row">
         <div class="col-md-12">
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
@@ -172,8 +168,9 @@
                                             <div class="col-md-8">
                                                 <select class="form-control" name="type" id="type"
                                                         style="background: #fff none repeat scroll 0 0;border-color: #999999;width:100px;">
-                                                    <option value="2">شخصی</option>
-                                                    <option value="1">شرکتی</option>
+                                                    @foreach($typeCustomers as $typeCustomer)
+                                                        <option value="{{$typeCustomer->type}}">{{$typeCustomer->name}}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
@@ -454,7 +451,7 @@
                                                                         <td>نام</td>
                                                                         <td>تلفن</td>
                                                                         <td>داخلی</td>
-                                                                        <td>تبفن همراه</td>
+                                                                        <td>تلفن همراه</td>
                                                                         <td>ایمیل</td>
                                                                         <td>عملیات</td>
                                                                     </tr>
@@ -504,7 +501,7 @@
 
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="{{asset('/public/js/2.js')}}"></script>
     <script>
         $(document).ready(function () {
             $('#nextBtn').click(function () {

@@ -369,25 +369,29 @@
                     </li>
                 @endif
 
-
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-user"></i> <span>تعریف مشتریان</span>
-                        <span class="pull-left-container">
+                @if(Gate::check('انواع مشتریان') || Gate::check('مشتریان'))
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-user"></i> <span>تعریف مشتریان</span>
+                            <span class="pull-left-container">
               <i class="fa fa-angle-right pull-left"></i>
             </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="{{route('admin.customer.type')}}"><i
-                                    class="fa fa-circle-o"></i>انواع مشتریان</a>
-                        </li>
+                        </a>
+                        <ul class="treeview-menu">
+                            @can('انواع مشتریان')
+                                <li><a href="{{route('admin.customer.type')}}"><i
+                                            class="fa fa-circle-o"></i>انواع مشتریان</a>
+                                </li>
+                            @endcan
+                            @can('مشتریان')
 
-                        <li><a href="{{route('admin.customers.index')}}"><i
-                                    class="fa fa-circle-o"></i>مشتریان</a>
-                        </li>
-                    </ul>
-                </li>
-
+                                <li><a href="{{route('admin.customers.index')}}"><i
+                                            class="fa fa-circle-o"></i>مشتریان</a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endif
 
                 @if(Gate::check('بازسازی نرم افزار') || Gate::check('شروع به کار نرم افزار'))
                     <li class="treeview">
@@ -641,6 +645,9 @@
     });
     $("#foundations").click(function () {
         $(".foundation").prop('checked', $(this).prop('checked'));
+    });
+    $("#customers").click(function () {
+        $(".customer").prop('checked', $(this).prop('checked'));
     });
 
 </script>

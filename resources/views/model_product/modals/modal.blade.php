@@ -12,14 +12,18 @@
                         <div class="form-body">
                             <div class="form-group">
 
-                                <form id="productForm" name="productForm" class="form-horizontal">
+                                <form autocomplete="off" id="productForm" name="productForm" class="form-horizontal">
                                     <input type="hidden" name="product" id="product">
                                     @csrf
                                     <div class="col-md-12 form-group">
                                         <div class="col-md-12">
 
                                             <div class="form-group">
-                                                <label for="title">قالب</label>
+                                                <label for="title">قالب
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <select name="format_id" id="format_id"
                                                         class="form-control">
                                                     @foreach($formats as $format)
@@ -29,7 +33,11 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="title">insert</label>
+                                                <label for="title">insert
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <select name="insert_id" id="insert_id"
                                                         class="form-control">
                                                     @foreach($inserts as $insert)
@@ -40,7 +48,11 @@
 
 
                                             <div class="form-group">
-                                                <label for="title">محصول</label>
+                                                <label for="title">محصول
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <select name="product_id" id="product_id"
                                                         class="form-control">
                                                     @foreach($products as $product)
@@ -51,14 +63,22 @@
 
 
                                             <div class="form-group">
-                                                <label>وزن</label>
+                                                <label>وزن
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <input type="text" id="size" name="size" class="form-control"
                                                        placeholder="لطفا وزن را وارد کنید"
                                                        required>
                                             </div>
 
                                             <div class="form-group">
-                                                <label>سایکل تایم</label>
+                                                <label>سایکل تایم
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <input type="text" id="cycletime" name="cycletime" class="form-control"
                                                        placeholder="لطفا سایکل تایم را وارد کنید"
                                                        required>

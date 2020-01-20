@@ -11,13 +11,17 @@
                     <div class="portlet-body form">
                         <div class="form-body">
                             <div class="form-group">
-                                <form id="productForm" name="productForm" class="form-horizontal">
+                                <form autocomplete="off" id="productForm" name="productForm" class="form-horizontal">
                                     <input type="hidden" name="product_id" id="product_id">
                                     @csrf
                                     <div class="col-md-12 form-group">
                                         <div class="col-md-3">
 
-                                                <label>کد</label>
+                                                <label>کد
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <input type="text" id="code" name="code" class="form-control"
                                                        placeholder="لطفا کد فروشنده را وارد کنید"
                                                        required>
@@ -25,7 +29,11 @@
                                         </div>
                                         <div class="col-md-3">
 
-                                                <label>نام شرکت</label>
+                                                <label>نام شرکت
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <input type="text" id="company" name="company" class="form-control"
                                                        placeholder="لطفا نام شرکت را وارد کنید"
                                                        required>
@@ -34,7 +42,11 @@
 
                                         <div class="col-md-3">
 
-                                                <label>رنگ مستربچ</label>
+                                                <label>رنگ مستربچ
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <select dir="rtl" id="color_id" class="form-control"
                                                         name="color_id"
                                                         required>
@@ -50,7 +62,11 @@
 
                                         <div class="col-md-3">
 
-                                                <label>نام شخص رابط</label>
+                                                <label>نام شخص رابط
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <input type="text" id="connector" name="connector" class="form-control"
                                                        placeholder="لطفا نام شخص رابط را وارد کنید"
                                                        required>
@@ -88,7 +104,11 @@
 
                                         <div class="col-md-3">
 
-                                                <label>شماره همراه</label>
+                                                <label>شماره همراه
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <input type="text" id="phone" name="phone" class="form-control"
                                                        placeholder="لطفا شماره همراه را وارد کنید"
                                                        required>

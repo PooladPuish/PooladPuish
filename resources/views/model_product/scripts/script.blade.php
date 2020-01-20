@@ -120,4 +120,5 @@
             }
         })
     });
+    $('#foundation').addClass('active');
 </script>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Response;
+use Validator;
 use Yajra\DataTables\DataTables;
 
 class TypeCustomer extends Controller
@@ -35,14 +37,48 @@ class TypeCustomer extends Controller
 
     public function store(Request $request)
     {
-
-        \App\TypeCustomer::updateOrCreate(['id' => $request->product],
-            [
-                'code' => $request->code,
-                'name' => $request->name,
-                'type' => $request->type,
+        if (!empty($request->product)) {
+            $color = \App\TypeCustomer::find($request->product);
+            if ($color->code != $request->code) {
+                $validator = Validator::make($request->all(), [
+                    'code' => 'required|integer|unique:type_customers',
+                    'name' => 'required',
+                ], [
+                    'code.unique' => 'مشتری با این کد در سیستم موجود میباشد',
+                    'code.required' => 'لطفا کد مشتری را وارد کنید',
+                    'code.integer' => 'کد مشتری باید از نوع عددی باشد',
+                    'name.required' => 'نام مشتری را وارد کنید',
+                ]);
+            } else
+                $validator = Validator::make($request->all(), [
+                    'code' => 'required|integer',
+                    'name' => 'required',
+                ], [
+                    'code.required' => 'لطفا کد مشتری را وارد کنید',
+                    'code.integer' => 'کد مشتری باید از نوع عددی باشد',
+                    'name.required' => 'نام مشتری را وارد کنید',
+                ]);
+        } else
+            $validator = Validator::make($request->all(), [
+                'code' => 'required|integer|unique:type_customers',
+                'name' => 'required',
+            ], [
+                'code.unique' => 'مشتری با این کد در سیستم موجود میباشد',
+                'code.required' => 'لطفا کد مشتری را وارد کنید',
+                'code.integer' => 'کد مشتری باید از نوع عددی باشد',
+                'name.required' => 'نام مشتری را وارد کنید',
             ]);
-        return response()->json(['success' => 'Product saved successfully.']);
+
+        if ($validator->passes()) {
+            \App\TypeCustomer::updateOrCreate(['id' => $request->product],
+                [
+                    'code' => $request->code,
+                    'name' => $request->name,
+                    'type' => $request->type,
+                ]);
+            return response()->json(['success' => 'Product saved successfully.']);
+        }
+        return Response::json(['errors' => $validator->errors()]);
     }
 
     public function update($id)

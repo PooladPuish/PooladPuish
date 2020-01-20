@@ -138,6 +138,6 @@
             }
         })
     });
-
+    $('#admin-user').addClass('active');
 
 </script>

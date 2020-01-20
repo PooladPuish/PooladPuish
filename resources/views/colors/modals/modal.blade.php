@@ -12,13 +12,17 @@
                         <div class="form-body">
                             <div class="form-group">
 
-                                <form id="productForm" name="productForm" class="form-horizontal">
+                                <form autocomplete="off" id="productForm" name="productForm" class="form-horizontal">
                                     <input type="hidden" name="product_id" id="product_id">
                                     @csrf
                                     <div class="col-md-12 form-group">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>کد رنگ</label>
+                                                <label>کد رنگ
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <input type="text" id="code" name="code" class="form-control"
                                                        placeholder="لطفا کد رنگ را وارد کنید"
                                                        required>
@@ -26,7 +30,11 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>نام رنگ</label>
+                                                <label>نام رنگ
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <input type="text" id="name" name="name" class="form-control"
                                                        placeholder="لطفا نام رنگ را وارد کنید"
                                                        required>
@@ -34,7 +42,11 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>نام سازنده رنگ</label>
+                                                <label>نام سازنده رنگ
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <input type="text" id="manufacturer" name="manufacturer" class="form-control"
                                                        placeholder="لطفا نام سازنده رنگ را وارد کنید"
                                                        required>
@@ -44,7 +56,11 @@
 
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>درصد ترکیب مواد</label>
+                                                <label>درصد ترکیب مواد
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <input type="text" id="combination" name="combination" class="form-control"
                                                        placeholder="لطفا درصد ترکیب مواد را وارد کنید"
                                                        required>
@@ -53,7 +69,11 @@
 
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>کد مستربچ</label>
+                                                <label>کد مستربچ
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <input type="text" id="masterbatch" name="masterbatch" class="form-control"
                                                        placeholder="لطفا کد مستربچ را وارد کنید"
                                                        required>

@@ -12,25 +12,37 @@
                         <div class="form-body">
                             <div class="form-group">
 
-                                <form id="productForm" name="productForm" class="form-horizontal">
+                                <form autocomplete="off" id="productForm" name="productForm" class="form-horizontal">
                                     <input type="hidden" name="product" id="product">
                                     @csrf
                                     <div class="col-md-12 form-group">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>کد</label>
+                                                <label>کد
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <input type="text" id="code" name="code" class="form-control"
                                                        placeholder="لطفا کد را وارد کنید"
                                                        required>
                                             </div>
                                             <div class="form-group">
-                                                <label>نام</label>
+                                                <label>نام
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <input type="text" id="name" name="name" class="form-control"
                                                        placeholder="لطفا نام را وارد کنید"
                                                        required>
                                             </div>
                                             <div class="form-group">
-                                                <label for="title">نوع</label>
+                                                <label for="title">نوع
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <select class="form-control"
                                                         name="type"
                                                         id="type"

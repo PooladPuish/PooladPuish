@@ -12,13 +12,17 @@
                         <div class="form-body">
                             <div class="form-group">
 
-                                <form id="productForm" name="productForm" class="form-horizontal">
+                                <form autocomplete="off" id="productForm" name="productForm" class="form-horizontal">
                                     <input type="hidden" name="product" id="product">
                                     @csrf
                                     <div class="col-md-12 form-group">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>کد</label>
+                                                <label>کد
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <input type="text" id="code" name="code" class="form-control"
                                                        placeholder="لطفا کد قالب را وارد کنید"
                                                        required>
@@ -26,7 +30,11 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>نام قالب</label>
+                                                <label>نام قالب
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <input type="text" id="name" name="name" class="form-control"
                                                        placeholder="لطفا نام قالب را وارد کنید"
                                                        required>
@@ -35,7 +43,11 @@
 
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>قالب ساز</label>
+                                                <label>قالب ساز
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <select dir="rtl" id="model_id" class="form-control"
                                                         name="model_id"
                                                         required>
@@ -50,7 +62,11 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>تعداد کویته</label>
+                                                <label>تعداد کویته
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <input type="text" id="quetta" name="quetta" class="form-control"
                                                        placeholder="لطفا تعداد کویته را وارد کنید"
                                                        required>

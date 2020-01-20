@@ -15,12 +15,17 @@
                         <div class="form-body">
                             <div class="form-group">
 
-                                <form id="productForm" name="productForm" class="form-horizontal">
+                                <form id="productForm" name="productForm" class="form-horizontal"
+                                      autocomplete="off">
                                     <input type="hidden" name="product_id" id="product_id">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <label>درخواست دهنده</label>
+                                            <label>درخواست دهنده
+                                                <span
+                                                    style="color: red"
+                                                    class="required-mark">*</span>
+                                            </label>
                                             <select dir="rtl" id="user_id" class="itemName form-control"
                                                     name="user_id"
                                                     required>
@@ -31,7 +36,11 @@
                                             </select>
                                         </div>
                                         <div class="col-md-3">
-                                            <label>جایگزین</label>
+                                            <label>جایگزین
+                                                <span
+                                                    style="color: red"
+                                                    class="required-mark">*</span>
+                                            </label>
                                             <br/>
                                             <select dir="rtl" id="alternate_id" class="itemName form-control"
                                                     name="alternate_id"
@@ -42,13 +51,21 @@
 
 
                                         <div class="col-md-3">
-                                            <label>از تاریخ</label>
+                                            <label>از تاریخ
+                                                <span
+                                                    style="color: red"
+                                                    class="required-mark">*</span>
+                                            </label>
                                             <input type="text" id="from" name="from" class="form-control example1"/>
 
                                         </div>
 
                                         <div class="col-md-3">
-                                            <label>تا تاریخ</label>
+                                            <label>تا تاریخ
+                                                <span
+                                                    style="color: red"
+                                                    class="required-mark">*</span>
+                                            </label>
                                             <input type="text" id="ToDate" name="ToDate" class="form-control example1"/>
 
                                         </div>
@@ -72,6 +89,9 @@
         </div>
     </div>
 </div>
+
+
+
 <script type="text/javascript">
     $('#user_id').change(function () {
         var user_id = $(this).val();

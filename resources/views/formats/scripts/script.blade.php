@@ -118,4 +118,5 @@
             }
         })
     });
+    $('#foundation').addClass('active');
 </script>

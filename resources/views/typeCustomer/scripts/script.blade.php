@@ -121,6 +121,7 @@
             }
         })
     });
+    $('#customer').addClass('active');
 
 
 </script>

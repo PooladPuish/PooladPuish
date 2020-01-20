@@ -12,13 +12,17 @@
                         <div class="form-body">
                             <div class="form-group">
 
-                                <form id="productForm" name="productForm" class="form-horizontal">
+                                <form autocomplete="off" id="productForm" name="productForm" class="form-horizontal">
                                     <input type="hidden" name="product" id="product">
                                     @csrf
                                     <div class="col-md-12 form-group">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>کد دستگاه</label>
+                                                <label>کد دستگاه
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <input type="text" id="code" name="code" class="form-control"
                                                        placeholder="لطفا کد دستگاه را وارد کنید"
                                                        required>
@@ -27,7 +31,11 @@
 
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>نام دستگاه</label>
+                                                <label>نام دستگاه
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <input type="text" id="name" name="name" class="form-control"
                                                        placeholder="لطفا نام دستگاه را وارد کنید"
                                                        required>
@@ -36,7 +44,11 @@
 
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>مدل دستگاه</label>
+                                                <label>مدل دستگاه
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <input type="text" id="model" name="model" class="form-control"
                                                        placeholder="لطفا مدل دستگاه را وارد کنید"
                                                        required>

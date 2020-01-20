@@ -116,4 +116,5 @@
             }
         })
     });
+    $('#foundation').addClass('active');
 </script>

@@ -19,9 +19,9 @@ class CreateSellersTable extends Migration
             $table->unsignedBigInteger('color_id')->index();
             $table->string('company');
             $table->string('connector');
-            $table->string('side');
-            $table->string('tel');
-            $table->string('inside');
+            $table->string('side')->nullable();
+            $table->string('tel')->nullable();
+            $table->string('inside')->nullable();
             $table->string('phone');
             $table->timestamps();
             $table->foreign('color_id')->references('id')->on('colors')

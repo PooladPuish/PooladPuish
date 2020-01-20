@@ -12,26 +12,38 @@
                         <div class="form-body">
                             <div class="form-group">
 
-                                <form id="productForm" name="productForm" class="form-horizontal">
+                                <form autocomplete="off"  id="productForm" name="productForm" class="form-horizontal">
                                     <input type="hidden" name="product" id="product">
                                     @csrf
                                     <div class="col-md-12 form-group">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>کد</label>
+                                                <label>کد
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <input type="text" id="code" name="code" class="form-control"
                                                        placeholder="لطفا کد را وارد کنید"
                                                        required>
                                             </div>
 
                                             <div class="form-group">
-                                                <label>نام سازنده</label>
+                                                <label>نام سازنده
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <input type="text" id="manufacturer" name="manufacturer" class="form-control"
                                                        placeholder="لطفا نام سازنده را وارد کنید"
                                                        required>
                                             </div>
                                             <div class="form-group">
-                                                <label>نام insert</label>
+                                                <label>نام insert
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <input type="text" id="name" name="name" class="form-control"
                                                        placeholder="لطفا نام insert سازنده را وارد کنید"
                                                        required>

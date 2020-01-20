@@ -20,7 +20,7 @@ class CreatePolymericsTable extends Migration
             $table->string('type');
             $table->string('grid');
             $table->string('name');
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->timestamps();
             $table->foreign('product_id')->references('id')->on('products')
                 ->onUpdate('cascade')

@@ -12,13 +12,17 @@
                         <div class="form-body">
                             <div class="form-group">
 
-                                <form id="productForm" name="productForm" class="form-horizontal">
+                                <form autocomplete="off" id="productForm" name="productForm" class="form-horizontal">
                                     <input type="hidden" name="product_id" id="product_id">
                                     @csrf
                                     <div class="col-md-12 form-group">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>کد محصول</label>
+                                                <label>کد محصول
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <input type="text" id="code" name="code" class="form-control"
                                                        placeholder="لطفا کد محصول را وارد کنید"
                                                        required>
@@ -26,7 +30,11 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>گروه کالا</label>
+                                                <label>گروه کالا
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <select class="form-control"
                                                         name="commodity_id"
                                                         id="commodity"
@@ -43,7 +51,11 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="title">مشخصه محصول</label>
+                                                <label for="title">مشخصه محصول
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <select name="characteristic" id="characteristic"
                                                         class="form-control">
                                                 </select>
@@ -51,7 +63,11 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>نام محصول</label>
+                                                <label>نام محصول
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <input type="text" id="name" name="name" class="form-control"
                                                        placeholder="لطفا نام محصول را وارد کنید"
                                                        required>
@@ -59,7 +75,11 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="title">نوع تهیه</label>
+                                                <label for="title">نوع تهیه
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <select name="manufacturing" id="manufacturing"
                                                         class="form-control">
                                                     <option value="1">داخلی</option>

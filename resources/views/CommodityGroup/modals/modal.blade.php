@@ -12,13 +12,18 @@
                         <div class="form-body">
                             <div class="form-group">
 
-                                <form id="productForm" name="productForm" class="form-horizontal">
+                                <form id="productForm" name="productForm" class="form-horizontal"
+                                      autocomplete="off">
                                     <input type="hidden" name="product_id" id="product_id">
                                     @csrf
                                     <div class="col-md-12 form-group">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>کد کالا</label>
+                                                <label>کد کالا
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <input type="text" id="code" name="code" class="form-control"
                                                        placeholder="لطفا کد کالا را وارد کنید"
                                                        required>
@@ -26,7 +31,11 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>نام کالا</label>
+                                                <label>نام کالا
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <input type="text" id="name" name="name" class="form-control"
                                                        placeholder="لطفا نام کالا را وارد کنید"
                                                        required>

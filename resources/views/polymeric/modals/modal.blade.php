@@ -12,14 +12,18 @@
                         <div class="form-body">
                             <div class="form-group">
 
-                                <form id="productForm" name="productForm" class="form-horizontal">
+                                <form autocomplete="off" id="productForm" name="productForm" class="form-horizontal">
                                     <input type="hidden" name="product" id="product">
                                     @csrf
                                     <div class="col-md-12 form-group">
 
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>کد</label>
+                                                <label>کد
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <input type="text" id="code" name="code" class="form-control"
                                                        placeholder="لطفا کد مواد را وارد کنید"
                                                        required>
@@ -27,7 +31,11 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>نوع مواد</label>
+                                                <label>نوع مواد
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <input type="text" id="type" name="type" class="form-control"
                                                        placeholder="لطفا نوع مواد را وارد کنید"
                                                        required>
@@ -35,7 +43,11 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>نام گرید مواد</label>
+                                                <label>نام گرید مواد
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <input type="text" id="grid" name="grid" class="form-control"
                                                        placeholder="لطفا نام گرید مواد را وارد کنید"
                                                        required>
@@ -43,7 +55,11 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>نام سازنده</label>
+                                                <label>نام سازنده
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <input type="text" id="name" name="name" class="form-control"
                                                        placeholder="لطفا نام سازنده را وارد کنید"
                                                        required>
@@ -51,7 +67,11 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>نام محصول</label>
+                                                <label>نام محصول
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <select dir="rtl" id="product_id" class="form-control"
                                                         name="product_id"
                                                         required>

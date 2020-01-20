@@ -180,6 +180,7 @@ Route::group(['middleware' => ['auth', 'web']], function () {
         Route::get('/customers/update/{id?}', 'CustomerController@update')->name('admin.customers.update');
         Route::get('/customers/filter', 'CustomerController@filter')->name('admin.customers.filter');
         Route::delete('/customers/delete/{id?}', 'CustomerController@delete')->name('admin.customers.delete');
+        Route::get('/customers/view/{id?}', 'CustomerController@view')->name('admin.customers.view');
 
 
 

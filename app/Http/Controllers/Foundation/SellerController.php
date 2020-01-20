@@ -49,9 +49,6 @@ class SellerController extends Controller
                     'color_id' => 'required',
                     'company' => 'required',
                     'connector' => 'required',
-                    'side' => 'required',
-                    'tel' => 'required',
-                    'inside' => 'required',
                     'phone' => 'required',
                 ], [
                     'code.unique' => 'فروشنده با این کد در سیستم موجود است.',
@@ -60,9 +57,6 @@ class SellerController extends Controller
                     'color_id.required' => 'رنگ مستربچ را انتخاب کنید',
                     'connector.required' => 'نام شخص رابط را وارد کنید',
                     'grid.required' => 'نام گرید مواد پلیمیری را وارد کنید',
-                    'side.required' => 'سمت را وارد کنید',
-                    'tel.required' => 'شماره تلفن را وارد کنید',
-                    'inside.required' => 'شماره داخلی را وارد کنید',
                     'phone.required' => 'شماره همراه را وارد کنید',
                 ]);
             } else
@@ -71,9 +65,6 @@ class SellerController extends Controller
                     'color_id' => 'required',
                     'company' => 'required',
                     'connector' => 'required',
-                    'side' => 'required',
-                    'tel' => 'required',
-                    'inside' => 'required',
                     'phone' => 'required',
                 ], [
                     'code.required' => 'پرکردن کد فروشنده الزامی میباشد',
@@ -81,9 +72,6 @@ class SellerController extends Controller
                     'color_id.required' => 'رنگ مستربچ را انتخاب کنید',
                     'connector.required' => 'نام شخص رابط را وارد کنید',
                     'grid.required' => 'نام گرید مواد پلیمیری را وارد کنید',
-                    'side.required' => 'سمت را وارد کنید',
-                    'tel.required' => 'شماره تلفن را وارد کنید',
-                    'inside.required' => 'شماره داخلی را وارد کنید',
                     'phone.required' => 'شماره همراه را وارد کنید',
                 ]);
         } else
@@ -92,9 +80,6 @@ class SellerController extends Controller
                 'color_id' => 'required',
                 'company' => 'required',
                 'connector' => 'required',
-                'side' => 'required',
-                'tel' => 'required',
-                'inside' => 'required',
                 'phone' => 'required',
             ], [
                 'code.unique' => 'فروشنده با این کد در سیستم موجود است.',
@@ -103,9 +88,6 @@ class SellerController extends Controller
                 'color_id.required' => 'رنگ مستربچ را انتخاب کنید',
                 'connector.required' => 'نام شخص رابط را وارد کنید',
                 'grid.required' => 'نام گرید مواد پلیمیری را وارد کنید',
-                'side.required' => 'سمت را وارد کنید',
-                'tel.required' => 'شماره تلفن را وارد کنید',
-                'inside.required' => 'شماره داخلی را وارد کنید',
                 'phone.required' => 'شماره همراه را وارد کنید',
             ]);
         if ($validator->passes()) {
@@ -115,9 +97,6 @@ class SellerController extends Controller
                     'color_id' => $request->color_id,
                     'company' => $request->company,
                     'connector' => $request->connector,
-                    'side' => $request->side,
-                    'tel' => $request->tel,
-                    'inside' => $request->inside,
                     'phone' => $request->phone,
                 ]);
             return response()->json(['success' => 'Product saved successfully.']);

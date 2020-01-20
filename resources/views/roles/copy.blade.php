@@ -121,6 +121,7 @@
             padding: 4px 0
         }
     </style>
+
     @include('message.msg')
     <div class="portlet box blue">
         <div class="portlet-title">
@@ -137,7 +138,11 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label>عنوان نقش</label>
+                                    <label>عنوان نقش
+                                        <span
+                                            style="color: red"
+                                            class="required-mark">*</span>
+                                    </label>
                                     <input type="text" id="name" name="name" class="form-control"
                                            required>
                                 </div>
@@ -302,4 +307,8 @@
             </div>
         </div>
     </div>
+@include('roles.scripts.script')
 @endsection
+
+
+

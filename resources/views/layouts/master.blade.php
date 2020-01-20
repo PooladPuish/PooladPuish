@@ -233,7 +233,7 @@
                 </div>
             </div>
             <ul class="sidebar-menu" data-widget="tree">
-                <li class="active">
+                <li>
                     <a href="{{route('home')}}">
                         <i class="fa fa-dashboard"></i> <span>داشبورد</span>
                         <span class="pull-left-container">
@@ -243,7 +243,7 @@
                 @if(Gate::check('ثبت کاربر جدید') || Gate::check('لیست کاربران')
                     || Gate::check('ثبت دسترسی جدید') || Gate::check('لیست دسترسی ها')
                      ||Gate::check('تعیین جانشین'))
-                    <li class="treeview">
+                    <li class="treeview" id="admin-user">
                         <a href="#">
                             <i class="fa fa-user"></i> <span>مدیریت کاربران</span>
                             <span class="pull-left-container">
@@ -256,7 +256,7 @@
                                 || Gate::check('شماره تماس')
                                 ||Gate::check('انلاین')
                                 ||Gate::check('وضعیت'))
-                                <li><a href="{{route('admin.user.show')}}"><i class="fa fa-circle-o"></i>
+                                <li><a  href="{{route('admin.user.show')}}"><i class="fa fa-circle-o"></i>
                                         لیست کاربران
                                     </a>
                                 </li>
@@ -292,7 +292,7 @@
                    || Gate::check('BOM')
                    || Gate::check('Insert های قالب')
                    || Gate::check('انتصاب محصول به قالب'))
-                    <li class="treeview">
+                    <li class="treeview" id="foundation">
                         <a href="#">
                             <i class="fa fa-star"></i> <span>تعاریف پایه</span>
                             <span class="pull-left-container">
@@ -370,7 +370,7 @@
                 @endif
 
                 @if(Gate::check('انواع مشتریان') || Gate::check('مشتریان'))
-                    <li class="treeview">
+                    <li class="treeview" id="customer">
                         <a href="#">
                             <i class="fa fa-user"></i> <span>تعریف مشتریان</span>
                             <span class="pull-left-container">
@@ -394,7 +394,7 @@
                 @endif
 
                 @if(Gate::check('بازسازی نرم افزار') || Gate::check('شروع به کار نرم افزار'))
-                    <li class="treeview">
+                    <li class="treeview" id="setting">
                         <a href="#">
                             <i class="fa fa-hourglass-start"></i> <span>تنظیمات نرم افزار</span>
                             <span class="pull-left-container">
@@ -550,6 +550,36 @@
             },
         });
     });
+
+
+    $(document).ready(function () {
+        $('#select2-exapl').select2({
+            width: '100%',
+            placeholder: 'استان/کشور',
+            tags: true,
+            language: {
+                noResults: function () {
+                    return 'کشور یا استان را انتخاب کنید';
+                },
+            },
+        });
+    });
+
+
+    $(document).ready(function () {
+        $('#select2-eapl').select2({
+            width: '100%',
+            placeholder: 'نحوه آشنایی',
+            tags: true,
+            language: {
+                noResults: function () {
+                    return 'نحوه آشنایی را وارد کنید';
+                },
+            },
+        });
+    });
+
+
     $(document).ready(function () {
         $('#select2-exampled').select2({
             width: '100%',
@@ -649,6 +679,8 @@
     $("#customers").click(function () {
         $(".customer").prop('checked', $(this).prop('checked'));
     });
+
+
 
 </script>
 

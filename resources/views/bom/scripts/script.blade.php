@@ -349,5 +349,5 @@
         });
     });
 
-
+    $('#foundation').addClass('active');
 </script>

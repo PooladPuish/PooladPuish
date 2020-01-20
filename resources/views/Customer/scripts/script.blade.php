@@ -123,6 +123,6 @@
             }
         })
     });
-
+    $('#customer').addClass('active');
 
 </script>

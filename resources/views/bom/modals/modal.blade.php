@@ -12,13 +12,17 @@
                         <div class="form-body">
                             <div class="form-group">
 
-                                <form id="productForm" name="productForm" class="form-horizontal">
+                                <form autocomplete="off" id="productForm" name="productForm" class="form-horizontal">
                                     <input type="hidden" name="pr" id="pr">
                                     @csrf
                                     <div class="col-md-12 form-group">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="title">محصول</label>
+                                                <label for="title">محصول
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <select class="form-control"
                                                         name="product_id"
                                                         id="produ"
@@ -30,13 +34,21 @@
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <label for="title">زیر مجموعه</label>
+                                                <label for="title">زیر مجموعه
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <select name="bom_id" id="bo"
                                                         class="form-control">
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <label>تعداد</label>
+                                                <label>تعداد
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <input type="text" id="pnumber" name="number" class="form-control"
                                                        placeholder="لطفا تعداد را وارد کنید"
                                                        required>
@@ -85,14 +97,22 @@
                                     <div class="col-md-12 form-group">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="title">زیر مجموعه</label>
+                                                <label for="title">زیر مجموعه
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <select name="bom_id" id="bom_id"
                                                         class="form-control">
 
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <label>تعداد</label>
+                                                <label>تعداد
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <input type="text" id="number" name="number" class="form-control"
                                                        placeholder="لطفا تعداد را وارد کنید"
                                                        required>

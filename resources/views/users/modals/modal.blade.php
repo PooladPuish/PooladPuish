@@ -18,32 +18,50 @@
                                     <input type="hidden" id="id" name="id">
                                     <div class="row">
                                         <div class="col-md-3">
-                                                <label>نام و نام خانوادگی</label>
+                                                <label>نام و نام خانوادگی
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <input type="text" id="name" name="name" class="form-control"
                                                        required>
                                         </div>
                                         <div class="col-md-3">
-                                                <label>نام کاربری</label>
+                                                <label>نام کاربری
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <input type="text" id="email" name="email" class="form-control"
                                                        required>
                                         </div>
                                         <div class="col-md-3">
-                                                <label>شماره تماس</label>
+                                                <label>شماره تماس
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <input type="text" id="phone" name="phone" class="form-control"
                                                        required>
                                         </div>
 
                                         <div class="col-md-3">
-                                                <label>تصویر پروفایل</label>
+                                                <label>تصویر پروفایل
+
+                                                </label>
                                                 <input type="file" name="avatar" class="form-control">
                                         </div>
                                         <div class="col-md-3">
-                                                <label>امضا</label>
+                                                <label>امضا
+
+                                                </label>
                                                 <input type="file" name="sign" class="form-control">
                                         </div>
 
                                         <div class="col-md-3">
-                                                <label>نقش</label>
+                                                <label>نقش
+
+                                                </label>
                                                 <br/>
                                                 <select dir="rtl" id="select2-example" class="form-control"
                                                         name="roles[]" multiple
@@ -57,7 +75,11 @@
                                         </div>
 
                                         <div class="col-md-3">
-                                                <label>کلمه عبور</label>
+                                                <label>کلمه عبور
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
                                                 <input type="password" id="password" name="password"
                                                        class="form-control"
                                                        required>

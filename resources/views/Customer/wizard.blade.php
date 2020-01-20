@@ -491,7 +491,4 @@
             </div>
         </div>
     </div>
-
-
-
 @endsection

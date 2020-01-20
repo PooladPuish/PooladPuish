@@ -233,7 +233,7 @@
                                                                 <label>تلفن دفتر مرکزی</label>
                                                                 <div class="col-md-12">
                                                                     <input type="text" id="name"
-                                                                           name="name"
+                                                                           name="tel_company"
                                                                            value="{{$customer_company->tel_company}}"
                                                                            required="required"
                                                                            class="form-control" disabled>

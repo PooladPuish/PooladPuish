@@ -22,7 +22,7 @@
     }
 
     .btn-default[disabled] {
-        background-color: #FFFFFF;
+        background-color: #cccccc;
         border-color: #cccccc;
     }
 
@@ -132,160 +132,162 @@
                             <div class="row setup-content" id="step-1" style="display: block;">
                                 <br/>
                                 <hr/>
-                                <div class="col-md-6 form-group">
-                                    <div class="col-md-12">
-                                        <div class="form-group field ">
-                                            <label class="control-label main col-md-4"> کد مشتری <span
-                                                    style="color: red" class="required-mark">*</span></label>
-                                            <div class="col-md-8">
-                                                <input type="text" id="code"
-                                                       name="code"
-                                                       value="{{$id->code}}"
-                                                       required="required" class="form-control"
-                                                       placeholder="لطفا کد مشتری را وارد کنید">
-                                                <div class="help-block with-errors"></div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group field ">
-                                            <label class="control-label main col-md-4"> نحوه اشنایی <span
-                                                    style="color: red" class="required-mark">*</span></label>
-                                            <div class="col-md-8">
-                                                <select dir="rtl" id="select2-eapl" class="form-control"
-                                                        name="methodd" multiple
-                                                        required>
-                                                    @foreach($methods as $method)
-                                                        <option value="{{$method->method}}"
-
-                                                                @if($id->method == $method->method)
-
-                                                                selected
-                                                            @endif
-                                                        >{{$method->method}}</option>
-                                                    @endforeach
-
-                                                </select>
-                                                <div class="help-block with-errors"></div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group field ">
-                                            <label class="control-label main col-md-4"> استان/کشور <span
-                                                    style="color: red" class="required-mark">*</span></label>
-                                            <div class="col-md-8">
-                                                <select dir="rtl" id="select2-exapl" class="form-control"
-                                                        name="state" multiple
-                                                        required>
-                                                    @foreach($states as $state)
-                                                        <option value="{{$state->state}}"
-
-                                                                @if($id->state == $state->state)
-
-                                                                selected
-                                                            @endif
-                                                        >{{$state->state}}</option>
-                                                    @endforeach
-
-                                                </select>
-
-                                                <div class="help-block with-errors"></div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group field ">
-                                            <label for="sel1" class="control-label main col-md-4"> نوع مشتری <span
-                                                    style="color: red" class="required-mark">*</span></label>
-                                            <div class="col-md-8">
-                                                <select class="form-control" name="type" id="type"
-                                                >
-                                                    @foreach($typeCustomers as $typeCustomer)
-                                                        <option
-                                                            value="{{$typeCustomer->id}}"
-                                                            @if($id->type == $typeCustomer->id)
-                                                            selected
-                                                            @endif
-                                                        >{{$typeCustomer->name}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-
-                                </div>
-
-
-                                <div class="col-md-6 form-group">
-                                    <div class="col-md-12">
-                                        <div class="form-group field ">
-                                            <label class="control-label main col-md-4"> نام مشتری <span
-                                                    style="color: red" class="required-mark">*</span></label>
-                                            <div class="col-md-8">
-                                                <input type="text" id="name"
-                                                       name="name"
-                                                       value="{{$id->name}}"
-                                                       required="required" class="form-control"
-                                                       placeholder="لطفا نام مشتری را وارد کنید">
-                                                <div class="help-block with-errors"></div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group field ">
-                                            <label class="control-label main col-md-4"> تاریخ اشنایی <span
-                                                    style="color: red" class="required-mark">*</span></label>
-                                            <div class="col-md-8">
-                                                <input type="text" id="date"
-                                                       name="date"
-                                                       value="{{$id->date}}"
-                                                       required="required" class="form-control example1"
-                                                       placeholder="لطفا تاریخ اشنایی مشتری را وارد کنید">
-                                                <div class="help-block with-errors"></div>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="form-group field ">
-                                            <label class="control-label main col-md-4"> کارشناس <span style="color: red"
-                                                                                                      class="required-mark">*</span></label>
-                                            <div class="col-md-8">
-                                                <input type="text" id="expert"
-                                                       name="expert"
-                                                       value="{{$id->expert}}"
-                                                       required="required" class="form-control"
-                                                       placeholder="لطفا نام کارشناس را وارد کنید">
-                                                <div class="help-block with-errors"></div>
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-
 
                                 <div class="col-md-12">
-                                    <div class="form-group col-md-12">
-                                        <label class="control-label col-md-2">توضیحات</label>
-                                        <div class="col-md-10">
-                                            <div class="help-block with-errors"></div>
-                                            <textarea name="description" id="description" class="form-control" rows="2"
-                                                      cols="50"
-                                                      placeholder="توضیحات در مورد مشتری">
+                                    <div class="col-md-6 form-group">
+                                        <div class="col-md-12">
+                                            <div class="form-group field ">
+                                                <label class="control-label main col-md-4"> کد مشتری <span
+                                                        style="color: red" class="required-mark">*</span></label>
+                                                <div class="col-md-8">
+                                                    <input type="text" id="code"
+                                                           name="code"
+                                                           value="{{$id->code}}"
+                                                           required="required" class="form-control"
+                                                           placeholder="لطفا کد مشتری را وارد کنید">
+                                                    <div class="help-block with-errors"></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group field ">
+                                                <label class="control-label main col-md-4"> نحوه اشنایی <span
+                                                        style="color: red" class="required-mark">*</span></label>
+                                                <div class="col-md-8">
+                                                    <select dir="rtl" id="select2-eapl" class="form-control"
+                                                            name="methodd" multiple
+                                                            required>
+                                                        @foreach($methods as $method)
+                                                            <option
+                                                                value="{{$method->method}}"
+                                                                @if($id->method == $method->method)
+                                                                selected
+                                                                @endif
+                                                            >{{$method->method}}</option>
+                                                        @endforeach
+
+                                                    </select>
+                                                    <div class="help-block with-errors"></div>
+                                                </div>
+                                            </div>
 
 
-                                                   {!! $id->description !!}
+                                            <div class="form-group field ">
+                                                <label class="control-label main col-md-4"> استان/کشور <span
+                                                        style="color: red" class="required-mark">*</span></label>
+                                                <div class="col-md-8">
+                                                    <select dir="rtl" id="select2-exapl" class="form-control"
+                                                            name="state" multiple
+                                                            required>
+                                                        @foreach($states as $state)
+                                                            <option value="{{$state->state}}"
+
+                                                                    @if($id->state == $state->state)
+                                                                    selected
+                                                                @endif
+                                                            >{{$state->state}}</option>
+                                                        @endforeach
+
+                                                    </select>
+
+                                                    <div class="help-block with-errors"></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group field ">
+                                                <label for="sel1" class="control-label main col-md-4"> نوع مشتری <span
+                                                        style="color: red" class="required-mark">*</span></label>
+                                                <div class="col-md-8">
+                                                    <select class="form-control" name="type" id="type"
+                                                    >
+                                                        @foreach($typeCustomers as $typeCustomer)
+                                                            <option
+                                                                value="{{$typeCustomer->id}}"
+                                                                @if($id->type == $typeCustomer->id)
+                                                                selected
+                                                                @endif
+
+                                                            >{{$typeCustomer->name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
 
 
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="col-md-6 form-group">
+                                        <div class="col-md-12">
+                                            <div class="form-group field ">
+                                                <label class="control-label main col-md-4"> نام مشتری <span
+                                                        style="color: red" class="required-mark">*</span></label>
+                                                <div class="col-md-8">
+                                                    <input type="text" id="name"
+                                                           name="name"
+                                                           value="{{$id->name}}"
+                                                           required="required" class="form-control"
+                                                           placeholder="لطفا نام مشتری را وارد کنید">
+                                                    <div class="help-block with-errors"></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group field ">
+                                                <label class="control-label main col-md-4"> تاریخ اشنایی <span
+                                                        style="color: red" class="required-mark">*</span></label>
+                                                <div class="col-md-8">
+                                                    <input type="text" id="date"
+                                                           name="date"
+                                                           value="{{$id->date}}"
+                                                           required="required" class="form-control example1"
+                                                           placeholder="لطفا تاریخ اشنایی مشتری را وارد کنید">
+                                                    <div class="help-block with-errors"></div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group field ">
+                                                <label class="control-label main col-md-4"> کارشناس <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span></label>
+                                                <div class="col-md-8">
+                                                    <input type="text" id="expert"
+                                                           name="expert"
+                                                           value="{{$id->expert}}"
+                                                           required="required" class="form-control"
+                                                           placeholder="لطفا نام کارشناس را وارد کنید">
+                                                    <div class="help-block with-errors"></div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-12">
+                                        <div class="form-group col-md-12">
+                                            <label class="control-label col-md-2">توضیحات</label>
+                                            <div class="col-md-10">
+                                                <div class="help-block with-errors"></div>
+                                                <textarea name="description" id="description" class="form-control"
+                                                          rows="2" cols="50"
+                                                          placeholder="توضیحات در مورد مشتری">
+                                                            @if(!empty($id->description))
+                                                        {{$id->description}}
+                                                    @endif
                                                 </textarea>
 
 
+                                            </div>
                                         </div>
+
+                                        <button class="btn btn-primary nextBtn" id="nextBtn" type="button">ادامه
+                                        </button>
+
+
                                     </div>
-
-                                    <button class="btn btn-primary nextBtn" id="nextBtn" type="button">ادامه
-                                    </button>
-
-
                                 </div>
 
 
@@ -298,157 +300,169 @@
                                 <div class="col-md-12">
                                     <div class="col-md-12">
                                         <div id="personal" style="display: none">
-
-                                            <div class="col-md-6 form-group">
-                                                <div class="col-md-12">
-
-                                                    <div class="form-group field ">
-                                                        <label for="sel1"
-                                                               class="control-label main col-md-4"> جنسیت <span
-                                                                style="color: red"
-                                                                class="required-mark">*</span></label>
-                                                        <div class="col-md-8">
-                                                            <select class="form-control" name="sex_personel"
-                                                                    id="sex_personel">
-                                                                <option>انتخاب کنید</option>
-                                                                <option value="1"
-                                                                        @if(!empty($customer_personal->sex) and  $customer_personal->sex == 1) selected @endif>
-                                                                    مرد
-                                                                </option>
-                                                                <option value="2"
-                                                                        @if(!empty($customer_personal->sex) and $customer_personal->sex == 2) selected @endif>
-                                                                    زن
-                                                                </option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group field ">
-                                                        <label class="control-label main col-md-4">تاریخ تولد</label>
-                                                        <div class="col-md-8">
-                                                            <input type="text"
-                                                                   id="date_personel"
-                                                                   name="date_personel"
-                                                                   @if(!empty($customer_personal->date_personel))
-                                                                   value="{{$customer_personal->date_personel}}"
-                                                                   @endif
-                                                                   required="required" class="form-control example1"
-                                                                   placeholder="لطفا تاریخ تولد را وارد کنید">
-                                                            <div class="help-block with-errors"></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group field ">
-                                                        <label class="control-label main col-md-4">تلفن ثابت</label>
-                                                        <div class="col-md-8">
-                                                            <input type="text"
-                                                                   id="tel_personel"
-                                                                   name="tel_personel"
-                                                                   @if(!empty($customer_personal->tel_personel))
-                                                                   value="{{$customer_personal->tel_personel}}"
-                                                                   @endif
-                                                                   required="required" class="form-control"
-                                                                   placeholder="لطفا شماره تلفن ثابت را وارد کنید"
-                                                                   data-error="Minimum 3 character required">
-                                                            <div class="help-block with-errors"></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group field ">
-                                                        <label class="control-label main col-md-4">فکس</label>
-                                                        <div class="col-md-8">
-                                                            <input type="text"
-                                                                   id="fax_personel"
-                                                                   name="fax_personel"
-                                                                   @if(!empty($customer_personal->fax_personel))
-                                                                   value="{{$customer_personal->fax_personel}}"
-                                                                   @endif
-                                                                   required="required" class="form-control"
-                                                                   placeholder="لطفا فکس را وارد کنید">
-                                                            <div class="help-block with-errors"></div>
-                                                        </div>
-                                                    </div>
-
-
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6 form-group">
-                                                <div class="col-md-12">
-                                                    <div class="form-group field ">
-                                                        <label class="control-label main col-md-4">کد ملی</label>
-                                                        <div class="col-md-8">
-                                                            <input type="text"
-                                                                   id="codemeli_personel"
-                                                                   name="codemeli_personel"
-                                                                   @if(!empty($customer_personal->codemeli_personel))
-                                                                   value="{{$customer_personal->codemeli_personel}}"
-                                                                   @endif
-                                                                   required="required" class="form-control"
-                                                                   placeholder="لطفا کد ملی را وارد کنید">
-                                                            <div class="help-block with-errors"></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group field ">
-                                                        <label class="control-label main col-md-4">تلفن همراه</label>
-                                                        <div class="col-md-8">
-                                                            <input type="text"
-                                                                   id="phone_personel"
-                                                                   name="phone_personel"
-                                                                   @if(!empty($customer_personal->phone_personel))
-                                                                   value="{{$customer_personal->phone_personel}}"
-                                                                   @endif
-                                                                   required="required" class="form-control"
-                                                                   placeholder="لطفا شماره تلفن همراه را وارد کنید"
-                                                                   data-error="Minimum 3 character required">
-                                                            <div class="help-block with-errors"></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group field ">
-                                                        <label class="control-label main col-md-4">ایمیل</label>
-                                                        <div class="col-md-8">
-                                                            <input type="text"
-                                                                   id="email_personel"
-                                                                   name="email_personel"
-                                                                   @if(!empty($customer_personal->email_personel))
-                                                                   value="{{$customer_personal->email_personel}}"
-                                                                   @endif
-                                                                   required="required" class="form-control"
-                                                                   placeholder="لطفا ایمیل را وارد کنید"
-                                                                   data-error="Minimum 3 character required">
-                                                            <div class="help-block with-errors"></div>
-                                                        </div>
-                                                    </div>
-
-
-                                                </div>
-                                            </div>
-
                                             <div class="col-md-12">
-                                                <div class="form-group col-md-12">
-                                                    <label class="control-label col-md-2">ادرس</label>
-                                                    <div class="col-md-10">
+                                                <div class="col-md-6 form-group">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group field ">
+                                                            <label for="sel1"
+                                                                   class="control-label main col-md-4"> جنسیت <span
+                                                                    style="color: red"
+                                                                    class="required-mark">*</span></label>
+                                                            <div class="col-md-8">
+                                                                <select class="form-control" name="sex_personel"
+                                                                        id="sex_personel">
+                                                                    <option value="1"
+                                                                            @if(!empty($customer_personal->sex) and $customer_personal->sex) selected @endif>
+                                                                        مرد
+                                                                    </option>
+                                                                    <option value="2"
+                                                                            @if(!empty($customer_personal->sex) and $customer_personal->sex) selected @endif>
+                                                                        زن
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="form-group field ">
+                                                            <label class="control-label main col-md-4">تاریخ
+                                                                تولد</label>
+                                                            <div class="col-md-8">
+                                                                <input type="text"
+                                                                       id="date_personel"
+                                                                       name="date_personel"
+                                                                       @if(!empty($customer_personal->date_personel))
+                                                                       value="{{$customer_personal->date_personel}}"
+                                                                       @endif
+                                                                       required="required" class="form-control example1"
+                                                                       placeholder="لطفا تاریخ تولد را وارد کنید">
+                                                                <div class="help-block with-errors"></div>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="form-group field ">
+                                                            <label class="control-label main col-md-4">تلفن ثابت</label>
+                                                            <div class="col-md-8">
+                                                                <input type="text"
+                                                                       id="tel_personel"
+                                                                       name="tel_personel"
+                                                                       @if(!empty($customer_personal->tel_personel))
+                                                                       value="{{$customer_personal->tel_personel}}"
+                                                                       @endif
+                                                                       required="required" class="form-control"
+                                                                       placeholder="لطفا شماره تلفن ثابت را وارد کنید"
+                                                                       data-error="Minimum 3 character required">
+                                                                <div class="help-block with-errors"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group field ">
+                                                            <label class="control-label main col-md-4">فکس</label>
+                                                            <div class="col-md-8">
+                                                                <input type="text"
+                                                                       id="fax_personel"
+                                                                       name="fax_personel"
+                                                                       @if(!empty($customer_personal->fax_personel))
+                                                                       value="{{$customer_personal->fax_personel}}"
+                                                                       @endif
+                                                                       required="required" class="form-control"
+                                                                       placeholder="لطفا فکس را وارد کنید">
+                                                                <div class="help-block with-errors"></div>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 form-group">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group field ">
+                                                            <label class="control-label main col-md-4">کد ملی</label>
+                                                            <div class="col-md-8">
+                                                                <input type="text"
+                                                                       id="codemeli_personel"
+                                                                       name="codemeli_personel"
+                                                                       @if(!empty($customer_personal->codemeli_personel))
+                                                                       value="{{$customer_personal->codemeli_personel}}"
+                                                                       @endif
+                                                                       required="required" class="form-control"
+                                                                       placeholder="لطفا کد ملی را وارد کنید">
+                                                                <div class="help-block with-errors"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group field ">
+                                                            <label class="control-label main col-md-4">تلفن
+                                                                همراه
+
+                                                                <span
+                                                                    style="color: red"
+                                                                    class="required-mark">*</span>
+                                                            </label>
+                                                            <div class="col-md-8">
+                                                                <input type="text"
+                                                                       id="phone_personel"
+                                                                       name="phone_personel"
+                                                                       @if(!empty($customer_personal->phone_personel))
+                                                                       value="{{$customer_personal->phone_personel}}"
+                                                                       @endif
+                                                                       required="required" class="form-control"
+                                                                       placeholder="لطفا شماره تلفن همراه را وارد کنید"
+                                                                       data-error="Minimum 3 character required">
+                                                                <div class="help-block with-errors"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group field ">
+                                                            <label class="control-label main col-md-4">ایمیل</label>
+                                                            <div class="col-md-8">
+                                                                <input type="text"
+                                                                       id="email_personel"
+                                                                       name="email_personel"
+                                                                       @if(!empty($customer_personal->email_personel))
+                                                                       value="{{$customer_personal->email_personel}}"
+                                                                       @endif
+                                                                       required="required" class="form-control"
+                                                                       placeholder="لطفا ایمیل را وارد کنید"
+                                                                       data-error="Minimum 3 character required">
+                                                                <div class="help-block with-errors"></div>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group col-md-12">
+                                                        <label class="control-label col-md-2">ادرس</label>
+                                                        <div class="col-md-10">
                                                     <textarea name="adders_personel" id="adders_personel"
                                                               placeholder="لطفا ادرس را وارد کنید" class="form-control"
                                                               rows="2" cols="50">
-                                                       @if(!empty($customer_personal->email_personel))
+ @if(!empty($customer_personal->adders_personel))
                                                             {!! $customer_personal->adders_personel !!}
                                                         @endif
                                                     </textarea>
-                                                        <div class="help-block with-errors"></div>
+                                                            <div class="help-block with-errors"></div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group col-md-12">
-                                                    <label class="control-label col-md-2">توضیحات</label>
-                                                    <div class="col-md-10">
+                                                    <div class="form-group col-md-12">
+                                                        <label class="control-label col-md-2">توضیحات</label>
+                                                        <div class="col-md-10">
                                                    <textarea name="text_personel" id="text_personel"
                                                              placeholder="لطفا توضیحات را وارد کنید"
                                                              class="form-control" rows="2" cols="50">
-                                                       @if(!empty($customer_personal->email_personel))
+ @if(!empty($customer_personal->email_personel))
                                                            {!! $customer_personal->text_personel !!}
                                                        @endif
                                                     </textarea>
-                                                        <div class="help-block with-errors"></div>
+                                                            <div class="help-block with-errors"></div>
+                                                        </div>
                                                     </div>
+
                                                 </div>
                                             </div>
+
 
                                         </div>
 
@@ -456,120 +470,119 @@
                                         <div id="company" style="display: none">
 
 
-                                            <div class="col-md-6 form-group">
-                                                <div class="col-md-12">
-                                                    <div class="form-group field ">
-                                                        <label class="control-label main col-md-4">کد اقتصادی</label>
-                                                        <div class="col-md-8">
-                                                            <input type="text"
-                                                                   id="code_company"
-                                                                   name="code_company"
-                                                                   @if(!empty($customer_company->code_company))
-
-                                                                   value="{{$customer_company->code_company}}"
-                                                                   @endif
-                                                                   required="required" class="form-control"
-                                                                   placeholder="لطفا کد اقتصادی را وارد کنید">
-                                                            <div class="help-block with-errors"></div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group field ">
-                                                        <label class="control-label main col-md-4">تلفن دفتر
-                                                            مرکزی
-                                                            <span
-                                                                style="color: red" class="required-mark">*</span>
-                                                        </label>
-                                                        <div class="col-md-8">
-                                                            <input type="text"
-                                                                   id="tel_company"
-                                                                   name="tel_company"
-                                                                   @if(!empty($customer_company->tel_company))
-
-                                                                   value="{{$customer_company->tel_company}}"
-                                                                   @endif
-                                                                   required="required" class="form-control"
-                                                                   placeholder="لطفا شماره تلفن دفتر مرکزی را وارد کنید"
-                                                                   data-error="Minimum 3 character required">
-                                                            <div class="help-block with-errors"></div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group field ">
-                                                        <label class="control-label main col-md-4">کد پستی</label>
-                                                        <div class="col-md-8">
-                                                            <input type="text"
-                                                                   id="post_company"
-                                                                   name="post_company"
-                                                                   @if(!empty($customer_company->post_company))
-
-                                                                   value="{{$customer_company->post_company}}"
-                                                                   @endif
-                                                                   required="required" class="form-control"
-                                                                   placeholder="لطفا کد پستی وارد کنید"
-                                                                   data-error="Minimum 3 character required">
-                                                            <div class="help-block with-errors"></div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-
-                                            <div class="col-md-6 form-group">
-                                                <div class="col-md-12">
-                                                    <div class="form-group field ">
-                                                        <label class="control-label main col-md-4">سال تاسیس</label>
-                                                        <div class="col-md-8">
-                                                            <input type="text"
-                                                                   id="Established_company"
-                                                                   name="Established_company"
-                                                                   @if(!empty($customer_company->Established_company))
-
-                                                                   value="{{$customer_company->Established_company}}"
-                                                                   @endif
-                                                                   required="required" class="form-control example1"
-                                                                   placeholder="لطفا سال تاسیس را وارد کنید">
-                                                            <div class="help-block with-errors"></div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group field ">
-                                                        <label class="control-label main col-md-4">فکس دفتر
-                                                            مرکزی</label>
-                                                        <div class="col-md-8">
-                                                            <input type="text"
-                                                                   id="fax_company"
-                                                                   name="fax_company"
-                                                                   @if(!empty($customer_company->fax_company))
-
-                                                                   value="{{$customer_company->fax_company}}"
-                                                                   @endif
-                                                                   required="required" class="form-control"
-                                                                   placeholder="لطفا فکس دفتر مرکزی را وارد کنید"
-                                                                   data-error="Minimum 3 character required">
-                                                            <div class="help-block with-errors"></div>
-                                                        </div>
-                                                    </div>
-
-
-
-                                                </div>
-                                            </div>
-
                                             <div class="col-md-12">
-                                                <div class="form-group col-md-12">
-                                                    <label class="control-label col-md-2">ادرس دفتر مرکزی</label>
-                                                    <div class="col-md-10">
+                                                <div class="col-md-6 form-group">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group field ">
+                                                            <label class="control-label main col-md-4">کد
+                                                                اقتصادی</label>
+                                                            <div class="col-md-8">
+                                                                <input type="text"
+                                                                       id="code_company"
+                                                                       name="code_company"
+                                                                       @if(!empty($customer_company->code_company))
+
+                                                                       value="{{$customer_company->code_company}}"
+                                                                       @endif
+                                                                       required="required" class="form-control"
+                                                                       placeholder="لطفا کد اقتصادی را وارد کنید">
+                                                                <div class="help-block with-errors"></div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group field ">
+                                                            <label class="control-label main col-md-4">تلفن دفتر
+                                                                مرکزی
+                                                                <span
+                                                                    style="color: red" class="required-mark">*</span>
+                                                            </label>
+                                                            <div class="col-md-8">
+                                                                <input maxlength="100" minlength="3" type="text"
+                                                                       id="tel_company"
+                                                                       name="tel_company"
+                                                                       @if(!empty($customer_company->tel_company))
+
+                                                                       value="{{$customer_company->tel_company}}"
+                                                                       @endif
+                                                                       required="required" class="form-control"
+                                                                       placeholder="لطفا شماره تلفن دفتر مرکزی را وارد کنید"
+                                                                       data-error="Minimum 3 character required">
+                                                                <div class="help-block with-errors"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group field ">
+                                                            <label class="control-label main col-md-4">کد پستی</label>
+                                                            <div class="col-md-8">
+                                                                <input type="text"
+                                                                       id="post_company"
+                                                                       name="post_company"
+                                                                       @if(!empty($customer_company->post_company))
+
+                                                                       value="{{$customer_company->post_company}}"
+                                                                       @endif
+                                                                       required="required" class="form-control"
+                                                                       placeholder="لطفا کد پستی وارد کنید"
+                                                                       data-error="Minimum 3 character required">
+                                                                <div class="help-block with-errors"></div>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 form-group">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group field ">
+                                                            <label class="control-label main col-md-4">سال تاسیس</label>
+                                                            <div class="col-md-8">
+                                                                <input type="text"
+                                                                       id="Established_company"
+                                                                       name="Established_company"
+                                                                       @if(!empty($customer_company->Established_company))
+
+                                                                       value="{{$customer_company->Established_company}}"
+                                                                       @endif
+                                                                       required="required" class="form-control example1"
+                                                                       placeholder="لطفا سال تاسیس را وارد کنید">
+                                                                <div class="help-block with-errors"></div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group field ">
+                                                            <label class="control-label main col-md-4">فکس دفتر
+                                                                مرکزی</label>
+                                                            <div class="col-md-8">
+                                                                <input type="text"
+                                                                       id="fax_company"
+                                                                       name="fax_company"
+                                                                       @if(!empty($customer_company->fax_company))
+
+                                                                       value="{{$customer_company->fax_company}}"
+                                                                       @endif
+                                                                       required="required" class="form-control"
+                                                                       placeholder="لطفا فکس دفتر مرکزی را وارد کنید"
+                                                                       data-error="Minimum 3 character required">
+                                                                <div class="help-block with-errors"></div>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group col-md-12">
+                                                        <label class="control-label col-md-2">ادرس دفتر مرکزی</label>
+                                                        <div class="col-md-10">
                                                 <textarea name="adders_company" id="adders_company" class="form-control"
                                                           rows="2" cols="50"
                                                           placeholder="لطفا ادرس دفتر مرکزی را وارد کنید">
-                                                    @if(!empty($customer_company->adders_company))
+ @if(!empty($customer_company->adders_company))
 
-                                                        {!! $customer_company->adders_company !!}
+                                                        {{$customer_company->adders_company}}
                                                     @endif
                                                  </textarea>
-                                                        <div class="help-block with-errors"></div>
+                                                            <div class="help-block with-errors"></div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -678,17 +691,27 @@
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
 
 
                                     </div>
-                                    <button type="submit" class="btn btn-primary" id="saveBtn" value="ثبت">
-                                        ثبت
-                                    </button>
+                                    <input type="submit" class="btn btn-primary" id="saveBtn" value="ثبت">
+
                                 </div>
 
                             </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
                         </form>
@@ -703,23 +726,53 @@
 
     <script src="{{asset('/public/js/2.js')}}"></script>
     <script>
+
+
         $(document).ready(function () {
             $('#nextBtn').click(function () {
+
+
                 var type = $('#type').val();
-                if (type == 1) {
-                    $('#company').show();
-                    $('#personal').hide();
-                    $('#id').val('1');
-                } else {
-                    $('#company').hide();
-                    $('#personal').show();
-                    $('#id').val('2');
-
+                if (type) {
+                    $.ajax({
+                        type: "GET",
+                        url: "{{route('admin.customers.filter')}}?type=" + type,
+                        success: function (res) {
+                            if (res == 1) {
+                                $('#company').show();
+                                $('#personal').hide();
+                                $('#codemeli_personel').val('');
+                                $('#tel_personel').val('');
+                                $('#date_personel').val('');
+                                $('#phone_personel').val('');
+                                $('#email_personel').val('');
+                                $('#adders_personel').val('');
+                                $('#text_personel').val('');
+                                $('#id').val('1');
+                            } else {
+                                $('#company').hide();
+                                $('#personal').show();
+                                $('#Established_company').val('');
+                                $('#tel_company').val('');
+                                $('#fax_company').val('');
+                                $('#adders_company').val('');
+                                $('#post_company').val('');
+                                $('#side_company').val('');
+                                $('#sex_company').val('');
+                                $('#title_company').val('');
+                                $('#name_company').val('');
+                                $('#phone_company').val('');
+                                $('#inside_company').val('');
+                                $('#tel_company_company').val('');
+                                $('#email_company').val('');
+                                $('#id').val('2');
+                            }
+                        }
+                    });
                 }
-
-
             });
         });
+
     </script>
     <script>
         function numberOnly(input) {
@@ -769,6 +822,7 @@
 
             $('div.setup-panel div a.btn-primary').trigger('click');
         });
+
     </script>
     <script type="text/javascript">
         $(function () {
@@ -813,7 +867,6 @@
                 });
             });
         });
-        $('#customer').addClass('active');
 
     </script>
     <script>
@@ -840,9 +893,18 @@
                 '<td><input name = "inside_company[]" type="text" value = "' + value + '" class="form-control" /></td>' +
                 '<td><input name = "email_company[]" type="text" value = "' + value + '" class="form-control" /></td>' +
                 '<td><input name = "tel_company_company[]" type="text" value = "' + value + '" class="form-control" /></td>' +
-                '<td><button type="button" class="btn btn-danger remove"><i class="fa fa-remove"></i></button></td>'
+                '<td><button type="button" data-original-title="حذف پرسنل" class="btn btn-danger remove"><i class="fa fa-remove"></i></button></td>'
         }
-    </script>
 
+    </script>
+    <style>
+        .vertical {
+            border-left: 1px solid black;
+            height: 470px;
+            position:absolute;
+            margin-top: 40px;
+            left: 50%;
+        }
+    </style>
 
 @endsection

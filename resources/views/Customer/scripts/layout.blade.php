@@ -24,7 +24,7 @@
     }
 
     .btn-default[disabled] {
-        background-color: #FFFFFF;
+        background-color: #cccccc;
         border-color: #cccccc;
     }
 

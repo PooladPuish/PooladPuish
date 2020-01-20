@@ -296,7 +296,9 @@
                                                       rows="2"
                                                       cols="50"
                                                       placeholder="توضیحات در مورد مشتری">
-                                                   {!! $customer_personal->adders_personel !!}
+                                                @if(!empty($customer_personal->adders_personel))
+                                                    {!! $customer_personal->adders_personel !!}
+                                                @endif
                                                 </textarea>
                                                         <div class="help-block with-errors"></div>
                                                     </div>
@@ -313,8 +315,10 @@
                                                       rows="2"
                                                       cols="50"
                                                       placeholder="توضیحات در مورد مشتری">
-                                                   {!! $customer_personal->text_personel !!}
-                                                </textarea>
+                                                @if(empty($customer_personal->text_personel))
+                                                    {!! $customer_personal->text_personel !!}
+                                                @endif
+                                            </textarea>
                                                         <div class="help-block with-errors"></div>
                                                     </div>
                                                 </div>

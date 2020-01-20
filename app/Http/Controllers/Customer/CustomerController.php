@@ -42,16 +42,21 @@ class CustomerController extends Controller
 
     public function update(Customer $id)
     {
-        $states = Customer::distinct()->select('state')->groupBy('state')->get();
+
+
+        $types = \App\TypeCustomer::where('id', $id->type)->get();
+        foreach ($types as $type)
+            $states = Customer::distinct()->select('state')->groupBy('state')->get();
         $methods = Customer::distinct()->select('method')->groupBy('method')->get();
         $typeCustomers = \App\TypeCustomer::all();
-        if ($id->type == 1) {
+        if ($type->type == 1) {
             $customer_company = \DB::table('customer_company')
                 ->where('customer_id', $id->id)
                 ->first();
             $company_personal = \DB::table('company_personal')
                 ->where('customer_id', $id->id)
                 ->get();
+
             return view('Customer.update',
                 compact('id', 'customer_company', 'states', 'methods', 'company_personal', 'typeCustomers'));
         } else
@@ -135,7 +140,6 @@ class CustomerController extends Controller
                         'fax_company' => $request->fax_company,
                         'adders_company' => $request->adders_company,
                         'post_company' => $request->post_company,
-                        'name_companyy' => $request->name_companyy,
                     ]);
                     if ($customer_company) {
                         try {
@@ -287,7 +291,6 @@ class CustomerController extends Controller
                         'fax_company' => $request->fax_company,
                         'adders_company' => $request->adders_company,
                         'post_company' => $request->post_company,
-                        'name_companyy' => $request->name_companyy,
                     ]);
                 \DB::table('company_personal')
                     ->where('customer_id', $request->id_customer)->delete();
@@ -347,10 +350,12 @@ class CustomerController extends Controller
 
     public function view(Customer $id)
     {
-        $states = Customer::distinct()->select('state')->groupBy('state')->get();
+        $types = \App\TypeCustomer::where('id', $id->type)->get();
+        foreach ($types as $type)
+            $states = Customer::distinct()->select('state')->groupBy('state')->get();
         $methods = Customer::distinct()->select('method')->groupBy('method')->get();
         $typeCustomers = \App\TypeCustomer::all();
-        if ($id->type == 1) {
+        if ($type->type == 1) {
             $customer_company = \DB::table('customer_company')
                 ->where('customer_id', $id->id)
                 ->first();
@@ -359,7 +364,7 @@ class CustomerController extends Controller
                 ->get();
             return view('Customer.view', compact('id', 'typeCustomers'
                 , 'customer_company', 'company_personal'));
-        }else
+        } else
             $customer_personal = \DB::table('customer_personal')
                 ->where('customer_id', $id->id)
                 ->first();

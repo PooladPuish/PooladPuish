@@ -453,7 +453,7 @@ class UserController extends Controller
 
     public function backup()
     {
-        \Artisan::call('backup:run');
+        \Artisan::call('backup:run --only-db');
         return response()->json(['success' => 'عملیات پشتیبان گیری با موفقیت انجام شد']);
     }
 

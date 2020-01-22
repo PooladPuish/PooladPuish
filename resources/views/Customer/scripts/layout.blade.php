@@ -231,18 +231,72 @@
     function GetDynamicTextBox(value) {
 
 
-        return '<td><input name = "side_company[]" type="text" value = "' + value + '" class="form-control" /></td>' +
-            '<td><select name="sex_company[]"><option>انتخاب کنید</option><option value="1"> مرد</option><option  value="2"> زن</option></select></td>' +
-            '<td><input name = "title_company[]" type="text" value = "' + value + '" class="form-control" /></td>' +
-            '<td><input name = "name_company[]" type="text" value = "' + value + '" class="form-control" /></td>' +
-            '<td><input name = "phone_company[]" type="text" value = "' + value + '" class="form-control" /></td>' +
-            '<td><input name = "inside_company[]" type="text" value = "' + value + '" class="form-control" /></td>' +
-            '<td><input name = "email_company[]" type="text" value = "' + value + '" class="form-control" /></td>' +
-            '<td><input name = "tel_company_company[]" type="text" value = "' + value + '" class="form-control" /></td>' +
+        return '<td><input name = "per_side_company[]" type="text" value = "' + value + '" class="form-control" /></td>' +
+            '<td><select name="per_sex_company[]"><option>انتخاب کنید</option><option value="1"> مرد</option><option  value="2"> زن</option></select></td>' +
+            '<td><input name = "per_title_company[]" type="text" value = "' + value + '" class="form-control" /></td>' +
+            '<td><input name = "per_name_company[]" type="text" value = "' + value + '" class="form-control" /></td>' +
+            '<td><input name = "per_phone_company[]" type="text" value = "' + value + '" class="form-control" /></td>' +
+            '<td><input name = "per_inside_company[]" type="text" value = "' + value + '" class="form-control" /></td>' +
+            '<td><input name = "per_email_company[]" type="text" value = "' + value + '" class="form-control" /></td>' +
+            '<td><input name = "per_tel_company_company[]" type="text" value = "' + value + '" class="form-control" /></td>' +
             '<td><button type="button" data-original-title="حذف پرسنل" class="btn btn-danger remove"><i class="fa fa-remove"></i></button></td>'
     }
 
 </script>
+
+
+<script>
+
+    $(function () {
+        $("#btnAddbank").bind("click", function () {
+            var div = $("<tr />");
+            div.html(GetDynamicTextBoxx(""));
+            $("#TextBoxContainerbank").append(div);
+        });
+        $("body").on("click", ".remove", function () {
+            $(this).closest("tr").remove();
+        });
+    });
+
+    function GetDynamicTextBoxx(value) {
+
+
+        return '<td><input name = "name_bank_company[]" type="text" value = "' + value + '" class="form-control" /></td>' +
+            '<td><input name = "branch_bank_company[]" type="text" value = "' + value + '" class="form-control" /></td>' +
+            '<td><input name = "account_bank_company[]" type="text" value = "' + value + '" class="form-control" /></td>' +
+            '<td><input name = "date_bank_company[]" type="text" value = "' + value + '" class="form-control example1" /></td>' +
+            '<td><button type="button" data-original-title="حذف پرسنل" class="btn btn-danger remove"><i class="fa fa-remove"></i></button></td>'
+    }
+
+</script>
+
+
+<script>
+
+    $(function () {
+        $("#btnAddtamin").bind("click", function () {
+            var div = $("<tr />");
+            div.html(GetDynamicTextBoxxx(""));
+            $("#TextBoxContainertamin").append(div);
+        });
+        $("body").on("click", ".remove", function () {
+            $(this).closest("tr").remove();
+        });
+    });
+
+    function GetDynamicTextBoxxx(value) {
+
+
+        return '<td><input name = "name_securing_company[]" type="text" value = "' + value + '" class="form-control" /></td>' +
+            '<td><input name = "date_securing_company[]" type="text" value = "' + value + '" class="form-control" /></td>' +
+            '<td><button type="button" data-original-title="حذف پرسنل" class="btn btn-danger remove"><i class="fa fa-remove"></i></button></td>'
+    }
+
+</script>
+
+
+
+
 <style>
     .vertical {
         border-left: 1px solid black;

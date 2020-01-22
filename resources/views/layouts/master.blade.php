@@ -413,7 +413,7 @@
                                 </li>
                             @endcan
                                 <li><a href="javascript:void(0)" id="backup"><i
-                                            class="fa fa-circle-o"></i>پشتیبان گیری از اطلاعات</a>
+                                            class="fa fa-circle-o"></i>پشتیبان گیری از دیتابیس</a>
                                 </li>
                         </ul>
                     </li>

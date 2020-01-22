@@ -45,6 +45,9 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
+            'dump' => [
+                'dump_binary_path' => 'C:\xampp\mysql\bin',
+            ],
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
@@ -103,7 +106,7 @@ return [
     | the migrations on disk haven't actually been run in the database.
     |
     */
-    'dump_command_path' => 'C:\xampp\mysql\bin',
+
 
     'migrations' => 'migrations',
 

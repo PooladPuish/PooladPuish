@@ -62,17 +62,14 @@
                                                             name="methodd" multiple
                                                             required>
                                                         @foreach($methods as $method)
-                                                            <option value="{{$method->method}}">{{$method->method}}</option>
+                                                            <option
+                                                                value="{{$method->method}}">{{$method->method}}</option>
                                                         @endforeach
 
                                                     </select>
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>
-
-
-
-
 
 
                                             <div class="form-group field ">
@@ -332,149 +329,993 @@
 
 
                                             <div class="col-md-12">
-                                                <div class="col-md-6 form-group">
-                                                    <div class="col-md-12">
-                                                        <div class="form-group field ">
-                                                            <label class="control-label main col-md-4">کد
-                                                                اقتصادی</label>
-                                                            <div class="col-md-8">
-                                                                <input type="text"
-                                                                       id="code_company"
-                                                                       name="code_company"
-                                                                       required="required" class="form-control"
-                                                                       placeholder="لطفا کد اقتصادی را وارد کنید">
-                                                                <div class="help-block with-errors"></div>
-                                                            </div>
-                                                        </div>
+                                                <div class="nav-tabs-custom">
+                                                    <ul class="nav nav-tabs">
+                                                        <li class="active"><a href="#activity" data-toggle="tab">مشخصات
+                                                                فردی</a></li>
+                                                        <li><a href="#car" data-toggle="tab">مشخصات محل کار</a></li>
+                                                        <li><a href="#bank" data-toggle="tab">وضعیت بانکی و اعتباری</a>
+                                                        </li>
+                                                        <li><a href="#tamin" data-toggle="tab">اسامی تامیین کنندگان</a>
+                                                        </li>
+                                                        <li><a href="#madark" data-toggle="tab">مدارک</a></li>
+                                                        <li><a href="#psh" data-toggle="tab">مشخصات پرسنل شرکت ها</a>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="tab-content">
+                                                        <div class="active tab-pane" id="activity">
+                                                            <div class="col-md-12">
+                                                                <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                                                                <div class="portlet box blue">
+                                                                    <div class="portlet-title">
+                                                                        <div class="caption">
+                                                                            مشخصات فردی
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="portlet-body">
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <div class="col-md-4 form-group">
+                                                                                    <div class="col-md-12">
+                                                                                        <div class="form-group ">
+                                                                                            <label
+                                                                                                class="control-label col-md-6">کد
+                                                                                                اقتصادی</label>
+                                                                                            <div class="col-md-6">
+                                                                                                <input type="text"
+                                                                                                       id="code_company"
+                                                                                                       name="code_company"
+                                                                                                       required="required"
+                                                                                                       class="form-control">
+                                                                                                <div
+                                                                                                    class="help-block with-errors"></div>
+                                                                                            </div>
+                                                                                        </div>
 
-                                                        <div class="form-group field ">
-                                                            <label class="control-label main col-md-4">تلفن دفتر
-                                                                مرکزی
-                                                                <span
-                                                                    style="color: red" class="required-mark">*</span>
-                                                            </label>
-                                                            <div class="col-md-8">
-                                                                <input maxlength="100" minlength="3" type="text"
-                                                                       id="tel_company"
-                                                                       name="tel_company"
-                                                                       required="required" class="form-control"
-                                                                       placeholder="لطفا شماره تلفن دفتر مرکزی را وارد کنید"
-                                                                       data-error="Minimum 3 character required">
-                                                                <div class="help-block with-errors"></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group field ">
-                                                            <label class="control-label main col-md-4">کد پستی</label>
-                                                            <div class="col-md-8">
-                                                                <input type="text"
-                                                                       id="post_company"
-                                                                       name="post_company"
-                                                                       required="required" class="form-control"
-                                                                       placeholder="لطفا کد پستی وارد کنید"
-                                                                       data-error="Minimum 3 character required">
-                                                                <div class="help-block with-errors"></div>
-                                                            </div>
-                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <label
+                                                                                                class="control-label col-md-6">تلفن
+                                                                                                دفتر
+                                                                                                مرکزی
+                                                                                                <span
+                                                                                                    style="color: red"
+                                                                                                    class="required-mark">*</span>
+                                                                                            </label>
+                                                                                            <div class="col-md-6">
+                                                                                                <input maxlength="100"
+                                                                                                       minlength="3"
+                                                                                                       type="text"
+                                                                                                       id="tel_company"
+                                                                                                       name="tel_company"
+                                                                                                       required="required"
+                                                                                                       class="form-control"
+                                                                                                       data-error="Minimum 3 character required">
+                                                                                                <div
+                                                                                                    class="help-block with-errors"></div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <label
+                                                                                                class="control-label col-md-6">کد
+                                                                                                پستی</label>
+                                                                                            <div class="col-md-6">
+                                                                                                <input type="text"
+                                                                                                       id="post_company"
+                                                                                                       name="post_company"
+                                                                                                       required="required"
+                                                                                                       class="form-control"
+                                                                                                       data-error="Minimum 3 character required">
+                                                                                                <div
+                                                                                                    class="help-block with-errors"></div>
+                                                                                            </div>
+                                                                                        </div>
 
 
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 form-group">
-                                                    <div class="col-md-12">
-                                                        <div class="form-group field ">
-                                                            <label class="control-label main col-md-4">سال تاسیس</label>
-                                                            <div class="col-md-8">
-                                                                <input type="text"
-                                                                       id="Established_company"
-                                                                       name="Established_company"
-                                                                       required="required" class="form-control example1"
-                                                                       placeholder="لطفا سال تاسیس را وارد کنید">
-                                                                <div class="help-block with-errors"></div>
-                                                            </div>
-                                                        </div>
+                                                                                    </div>
+                                                                                </div>
 
-                                                        <div class="form-group field ">
-                                                            <label class="control-label main col-md-4">فکس دفتر
-                                                                مرکزی</label>
-                                                            <div class="col-md-8">
-                                                                <input type="text"
-                                                                       id="fax_company"
-                                                                       name="fax_company"
-                                                                       required="required" class="form-control"
-                                                                       placeholder="لطفا فکس دفتر مرکزی را وارد کنید"
-                                                                       data-error="Minimum 3 character required">
-                                                                <div class="help-block with-errors"></div>
-                                                            </div>
-                                                        </div>
+                                                                                <div class="col-md-4 form-group">
+                                                                                    <div class="col-md-12">
+                                                                                        <div class="form-group">
+                                                                                            <label
+                                                                                                class="control-label col-md-6">سال
+                                                                                                تاسیس</label>
+                                                                                            <div class="col-md-6">
+                                                                                                <input type="text"
+                                                                                                       id="Established_company"
+                                                                                                       name="Established_company"
+                                                                                                       required="required"
+                                                                                                       class="form-control example1"
+                                                                                                >
+                                                                                                <div
+                                                                                                    class="help-block with-errors"></div>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <div class="form-group">
+                                                                                            <label
+                                                                                                class="control-label col-md-6">فکس
+                                                                                                دفتر
+                                                                                                مرکزی</label>
+                                                                                            <div class="col-md-6">
+                                                                                                <input type="text"
+                                                                                                       id="fax_company"
+                                                                                                       name="fax_company"
+                                                                                                       required="required"
+                                                                                                       class="form-control"
+                                                                                                       data-error="Minimum 3 character required">
+                                                                                                <div
+                                                                                                    class="help-block with-errors"></div>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <div class="form-group">
+                                                                                            <label
+                                                                                                class="control-label col-md-6">
+                                                                                                تلفن همراه
+                                                                                            </label>
+                                                                                            <div class="col-md-6">
+                                                                                                <input type="text"
+                                                                                                       id="phone_company"
+                                                                                                       name="phone_company"
+                                                                                                       required="required"
+                                                                                                       class="form-control"
+                                                                                                       data-error="Minimum 3 character required">
+                                                                                                <div
+                                                                                                    class="help-block with-errors"></div>
+                                                                                            </div>
+                                                                                        </div>
 
 
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group col-md-12">
-                                                        <label class="control-label col-md-2">ادرس دفتر مرکزی</label>
-                                                        <div class="col-md-10">
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-md-4 form-group">
+                                                                                    <div class="col-md-12">
+                                                                                        <div class="form-group">
+                                                                                            <label
+                                                                                                class="control-label col-md-6">
+                                                                                                تاریخ تولد
+                                                                                            </label>
+                                                                                            <div class="col-md-6">
+                                                                                                <input type="text"
+                                                                                                       id="date_birth"
+                                                                                                       name="date_birth"
+                                                                                                       required="required"
+                                                                                                       class="form-control example1"
+                                                                                                >
+                                                                                                <div
+                                                                                                    class="help-block with-errors"></div>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <div class="form-group">
+                                                                                            <label
+                                                                                                class="control-label col-md-6">
+                                                                                                ایمیل
+                                                                                            </label>
+                                                                                            <div class="col-md-6">
+                                                                                                <input type="text"
+                                                                                                       id="email_company"
+                                                                                                       name="email_company"
+                                                                                                       required="required"
+                                                                                                       class="form-control"
+                                                                                                       data-error="Minimum 3 character required">
+                                                                                                <div
+                                                                                                    class="help-block with-errors"></div>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <div class="form-group">
+                                                                                            <label
+                                                                                                class="control-label col-md-6">
+                                                                                                کد ملی
+                                                                                            </label>
+                                                                                            <div class="col-md-6">
+                                                                                                <input type="text"
+                                                                                                       id="national_company"
+                                                                                                       name="national_company"
+                                                                                                       required="required"
+                                                                                                       class="form-control"
+                                                                                                       data-error="Minimum 3 character required">
+                                                                                                <div
+                                                                                                    class="help-block with-errors"></div>
+                                                                                            </div>
+                                                                                        </div>
+
+
+                                                                                    </div>
+                                                                                </div>
+
+
+                                                                                <div class="col-md-12 form-group">
+                                                                                    <div class="form-group col-md-12">
+                                                                                        <label
+                                                                                            class="control-label col-md-2">ادرس
+                                                                                            دفتر
+                                                                                            مرکزی</label>
+                                                                                        <div class="col-md-10">
                                                 <textarea name="adders_company" id="adders_company" class="form-control"
                                                           rows="2" cols="50"
                                                           placeholder="لطفا ادرس دفتر مرکزی را وارد کنید">
 
                                                  </textarea>
-                                                            <div class="help-block with-errors"></div>
+                                                                                            <div
+                                                                                                class="help-block with-errors"></div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-md-12 form-group">
+                                                                                    <div class="form-group col-md-12">
+                                                                                        <label
+                                                                                            class="control-label col-md-2">
+                                                                                            ادرس منزل
+                                                                                        </label>
+                                                                                        <div class="col-md-10">
+                                                <textarea name="adders_home" id="adders_home" class="form-control"
+                                                          rows="2" cols="50"
+                                                          placeholder="لطفا ادرس منزل را وارد کنید">
+
+                                                 </textarea>
+                                                                                            <div
+                                                                                                class="help-block with-errors"></div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
+
+                                                        <div class="tab-pane" id="car">
+                                                            <div class="col-md-12">
+                                                                <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                                                                <div class="portlet box blue">
+                                                                    <div class="portlet-title">
+                                                                        <div class="caption">
+                                                                            مشخصات محل کار
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="portlet-body">
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <div class="col-md-4 form-group">
+                                                                                    <div class="col-md-12">
+                                                                                        <div class="form-group">
+                                                                                            <label
+                                                                                                class="control-label col-md-6">
+                                                                                                نام فروشگاه/پخش
+                                                                                            </label>
+                                                                                            <div class="col-md-6">
+                                                                                                <input type="text"
+                                                                                                       id="name_work_company"
+                                                                                                       name="name_work_company"
+                                                                                                       required="required"
+                                                                                                       class="form-control">
+                                                                                                <div
+                                                                                                    class="help-block with-errors"></div>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <div class="form-group">
+                                                                                            <label
+                                                                                                class="control-label col-md-6">
+                                                                                                سال تاسیس
+                                                                                                <span
+                                                                                                    style="color: red"
+                                                                                                    class="required-mark">*</span>
+                                                                                            </label>
+                                                                                            <div class="col-md-6">
+                                                                                                <input maxlength="100"
+                                                                                                       minlength="3"
+                                                                                                       type="text"
+                                                                                                       id="date_work_company"
+                                                                                                       name="date_work_company"
+                                                                                                       required="required"
+                                                                                                       class="form-control example1"
+                                                                                                       data-error="Minimum 3 character required">
+                                                                                                <div
+                                                                                                    class="help-block with-errors"></div>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <div class="form-group">
+                                                                                            <label
+                                                                                                class="control-label col-md-6">
+                                                                                                تلفن
+                                                                                            </label>
+                                                                                            <div class="col-md-6">
+                                                                                                <input type="text"
+                                                                                                       id="tel_work_company"
+                                                                                                       name="tel_work_company"
+                                                                                                       required="required"
+                                                                                                       class="form-control"
+                                                                                                       data-error="Minimum 3 character required">
+                                                                                                <div
+                                                                                                    class="help-block with-errors"></div>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <div class="form-group">
+                                                                                            <label
+                                                                                                class="control-label col-md-6">
+                                                                                                فکس
+                                                                                            </label>
+                                                                                            <div class="col-md-6">
+                                                                                                <input type="text"
+                                                                                                       id="fax_work_company"
+                                                                                                       name="fax_work_company"
+                                                                                                       required="required"
+                                                                                                       class="form-control"
+                                                                                                       data-error="Minimum 3 character required">
+                                                                                                <div
+                                                                                                    class="help-block with-errors"></div>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <div class="form-group">
+                                                                                            <label
+                                                                                                class="control-label col-md-6">
+                                                                                                تابلو فروشگاه
+                                                                                            </label>
+                                                                                            <div class="col-md-6">
+                                                                                                <select name="panel_work_company"
+                                                                                                        id="panel_work_company"
+                                                                                                    class="form-control">
+                                                                                                    <option value="1">دارد
+                                                                                                    </option>
+                                                                                                    <option value="2">ندارد
+                                                                                                    </option>
+                                                                                                </select>
+
+                                                                                                <div
+                                                                                                    class="help-block with-errors"></div>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <div class="form-group">
+                                                                                            <label
+                                                                                                class="control-label col-md-6">
+                                                                                                ابعاد تابلو فروشگاه
+                                                                                            </label>
+                                                                                            <div class="col-md-6">
+                                                                                                <input type="text"
+                                                                                                       id="dimensions_work_company"
+                                                                                                       name="dimensions_work_company"
+                                                                                                       required="required"
+                                                                                                       class="form-control"
+                                                                                                >
+                                                                                                <div
+                                                                                                    class="help-block with-errors"></div>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-md-4 form-group">
+                                                                                    <div class="col-md-12">
+                                                                                        <div class="form-group">
+                                                                                            <label
+                                                                                                class="control-label col-md-6">
+                                                                                                کد پستی
+                                                                                            </label>
+                                                                                            <div class="col-md-6">
+                                                                                                <input type="text"
+                                                                                                       id="post_work_company"
+                                                                                                       name="post_work_company"
+                                                                                                       required="required"
+                                                                                                       class="form-control"
+                                                                                                >
+                                                                                                <div
+                                                                                                    class="help-block with-errors"></div>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <div class="form-group">
+                                                                                            <label
+                                                                                                class="control-label col-md-6">
+                                                                                                نوع فعالیت
+                                                                                            </label>
+                                                                                            <div class="col-md-6">
+                                                                                                <select name="type_work_company"
+                                                                                                        id="type_work_company"
+                                                                                                    class="form-control">
+                                                                                                    <option value="1">خرده فروش
+                                                                                                    </option>
+                                                                                                    <option value="2">عمده فروش
+                                                                                                    </option>
+                                                                                                    <option value="3">واسطه
+                                                                                                    </option>
+                                                                                                </select>
+
+                                                                                                <div
+                                                                                                    class="help-block with-errors"></div>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <div class="form-group">
+                                                                                            <label
+                                                                                                class="control-label col-md-6">
+                                                                                                وضعیت فروشگاه
+                                                                                            </label>
+                                                                                            <div class="col-md-6">
+                                                                                                <select name="status_work_company"
+                                                                                                        id="status_work_company"
+                                                                                                    class="form-control">
+                                                                                                    <option value="1">مالک
+                                                                                                    </option>
+                                                                                                    <option value="2">استیجاری
+                                                                                                    </option>
+                                                                                                    <option value="3">سرقفلی
+                                                                                                    </option>
+                                                                                                </select>
+
+                                                                                                <div
+                                                                                                    class="help-block with-errors"></div>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <div class="form-group">
+                                                                                            <label
+                                                                                                class="control-label col-md-6">
+                                                                                                تلفن انبار
+                                                                                            </label>
+                                                                                            <div class="col-md-6">
+                                                                                                <input type="text"
+                                                                                                       id="telstore_work_company"
+                                                                                                       name="telstore_work_company"
+                                                                                                       required="required"
+                                                                                                       class="form-control"
+                                                                                                >
+                                                                                                <div
+                                                                                                    class="help-block with-errors"></div>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <div class="form-group">
+                                                                                            <label
+                                                                                                class="control-label col-md-6">
+                                                                                                نوع مالکیت
+                                                                                            </label>
+                                                                                            <div class="col-md-6">
+                                                                                                <select name="owner_work_company"
+                                                                                                        id="owner_work_company"
+                                                                                                    class="form-control">
+                                                                                                    <option value="1">مالک
+                                                                                                    </option>
+                                                                                                    <option value="2">استیجاری
+                                                                                                    </option>
+                                                                                                    <option value="3">سرقفلی
+                                                                                                    </option>
+                                                                                                </select>
+
+                                                                                                <div
+                                                                                                    class="help-block with-errors"></div>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <div class="form-group">
+                                                                                            <label
+                                                                                                class="control-label col-md-6">
+                                                                                                مربوط به شرکت
+                                                                                            </label>
+                                                                                            <div class="col-md-6">
+                                                                                                <input type="text"
+                                                                                                       id="dec_work_company"
+                                                                                                       name="dec_work_company"
+                                                                                                       required="required"
+                                                                                                       class="form-control"
+                                                                                                >
+                                                                                                <div
+                                                                                                    class="help-block with-errors"></div>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                    </div>
+                                                                                </div>
+
+
+                                                                                <div class="col-md-4 form-group">
+                                                                                    <div class="col-md-12">
+
+                                                                                        <div class="form-group">
+                                                                                            <label
+                                                                                                class="control-label col-md-6">
+                                                                                                جواز کسب
+                                                                                            </label>
+                                                                                            <div class="col-md-6">
+                                                                                                <select name="license_work_company"
+                                                                                                        id="license_work_company"
+                                                                                                    class="form-control">
+                                                                                                    <option value="1">دارد
+                                                                                                    </option>
+                                                                                                    <option value="2">ندارد
+                                                                                                    </option>
+                                                                                                </select>
+
+                                                                                                <div
+                                                                                                    class="help-block with-errors"></div>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <div class="form-group">
+                                                                                            <label
+                                                                                                class="control-label col-md-6">
+                                                                                                شماره جواز کسب
+                                                                                            </label>
+                                                                                            <div class="col-md-6">
+                                                                                                <input type="text"
+                                                                                                       id="numlicense_work_company"
+                                                                                                       name="numlicense_work_company"
+                                                                                                       required="required"
+                                                                                                       class="form-control"
+                                                                                                >
+                                                                                                <div
+                                                                                                    class="help-block with-errors"></div>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <div class="form-group">
+                                                                                            <label
+                                                                                                class="control-label col-md-6">
+                                                                                                اعتبار جواز کسب
+                                                                                            </label>
+                                                                                            <div class="col-md-6">
+                                                                                                <input type="text"
+                                                                                                       id="credibilitylicense_work_company"
+                                                                                                       name="credibilitylicense_work_company"
+                                                                                                       required="required"
+                                                                                                       class="form-control example1"
+                                                                                                >
+                                                                                                <div
+                                                                                                    class="help-block with-errors"></div>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <div class="form-group">
+                                                                                            <label
+                                                                                                class="control-label col-md-6">
+                                                                                                انبار
+                                                                                            </label>
+                                                                                            <div class="col-md-6">
+                                                                                                <select name="store_work_company"
+                                                                                                        id="store_work_company"
+                                                                                                    class="form-control">
+                                                                                                    <option value="1">دارد
+                                                                                                    </option>
+                                                                                                    <option value="2">ندارد
+                                                                                                    </option>
+                                                                                                </select>
+
+                                                                                                <div
+                                                                                                    class="help-block with-errors"></div>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <div class="form-group">
+                                                                                            <label
+                                                                                                class="control-label col-md-6">
+                                                                                                ابعاد انبار
+                                                                                            </label>
+                                                                                            <div class="col-md-6">
+                                                                                                <input type="text"
+                                                                                                       id="dimensionsstore_work_company"
+                                                                                                       name="dimensionsstore_work_company"
+                                                                                                       required="required"
+                                                                                                       class="form-control"
+                                                                                                >
+                                                                                                <div
+                                                                                                    class="help-block with-errors"></div>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                    </div>
+                                                                                </div>
+
+
+                                                                                <div class="col-md-12 form-group">
+                                                                                    <div class="form-group col-md-12">
+                                                                                        <label
+                                                                                            class="control-label col-md-2">
+                                                                                            ادرس محل فعالیت
+                                                                                        </label>
+                                                                                        <div class="col-md-10">
+                                                <textarea name="activity_work_company" id="activity_work_company" class="form-control"
+                                                          rows="2" cols="50"
+                                                          placeholder="لطفا ادرس محل فعالیت را وارد کنید">
+
+                                                 </textarea>
+                                                                                            <div
+                                                                                                class="help-block with-errors"></div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-md-12 form-group">
+                                                                                    <div class="form-group col-md-12">
+                                                                                        <label
+                                                                                            class="control-label col-md-2">
+                                                                                            سایر فعالیت ها
+                                                                                        </label>
+                                                                                        <div class="col-md-10">
+                                                <textarea name="oactivity_work_company" id="oactivity_work_company" class="form-control"
+                                                          rows="2" cols="50"
+                                                          placeholder="لطفا سایر فعالیت ها را وارد کنید">
+
+                                                 </textarea>
+                                                                                            <div
+                                                                                                class="help-block with-errors"></div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-md-12 form-group">
+                                                                                    <div class="form-group col-md-12">
+                                                                                        <label
+                                                                                            class="control-label col-md-2">
+                                                                                            ادرس انبار
+                                                                                        </label>
+                                                                                        <div class="col-md-10">
+                                                <textarea name="addersstore_work_company" id="addersstore_work_company" class="form-control"
+                                                          rows="2" cols="50"
+                                                          placeholder="لطفا ادرس انبار را وارد کنید">
+
+                                                 </textarea>
+                                                                                            <div
+                                                                                                class="help-block with-errors"></div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="tab-pane" id="bank">
+                                                            <div class="col-md-12">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                                                                        <div class="portlet box blue">
+                                                                            <div class="portlet-title">
+                                                                                <div class="caption">
+                                                                                    وضعیت بانکی و اعتباری
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="portlet-body">
+                                                                                <div class="table table-responsive">
+                                                                                    <table
+                                                                                        class="table table-responsive table-striped table-bordered">
+                                                                                        <thead>
+                                                                                        <tr>
+                                                                                            <td>نام بانک</td>
+                                                                                            <td>شعبه</td>
+                                                                                            <td>شماره حساب جاری</td>
+                                                                                            <td>تاریخ افتتاح حساب</td>
+                                                                                            <td>عملیات</td>
+                                                                                        </tr>
+                                                                                        </thead>
+                                                                                        <tbody
+                                                                                            id="TextBoxContainerbank">
+                                                                                        </tbody>
+                                                                                        <tfoot>
+                                                                                        <tr>
+                                                                                            <th colspan="5">
+                                                                                                <button id="btnAddbank"
+                                                                                                        type="button"
+                                                                                                        class="btn btn-primary"
+                                                                                                        data-toggle="tooltip">
+                                                                                                    <i class="fa fa-plus"></i>
+                                                                                                </button>
+                                                                                            </th>
+                                                                                        </tr>
+                                                                                        </tfoot>
+                                                                                    </table>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="tab-pane" id="tamin">
+                                                            <div class="col-md-12">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                                                                        <div class="portlet box blue">
+                                                                            <div class="portlet-title">
+                                                                                <div class="caption">
+                                                                                    اسامی تامیین کنندگان
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="portlet-body">
+                                                                                <div class="table table-responsive">
+                                                                                    <table
+                                                                                        class="table table-responsive table-striped table-bordered">
+                                                                                        <thead>
+                                                                                        <tr>
+                                                                                            <td>نام شرکت/شخص</td>
+                                                                                            <td>تاریخ شروع همکاری</td>
+                                                                                            <td>عملیات</td>
+                                                                                        </tr>
+                                                                                        </thead>
+                                                                                        <tbody
+                                                                                            id="TextBoxContainertamin">
+                                                                                        </tbody>
+                                                                                        <tfoot>
+                                                                                        <tr>
+                                                                                            <th colspan="5">
+                                                                                                <button id="btnAddtamin"
+                                                                                                        type="button"
+                                                                                                        class="btn btn-primary"
+                                                                                                        data-toggle="tooltip">
+                                                                                                    <i class="fa fa-plus"></i>
+                                                                                                </button>
+                                                                                            </th>
+                                                                                        </tr>
+                                                                                        </tfoot>
+                                                                                    </table>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="tab-pane" id="madark">
+                                                            <div class="col-md-12">
+                                                                <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                                                                <div class="portlet box blue">
+                                                                    <div class="portlet-title">
+                                                                        <div class="caption">
+                                                                            مدارک
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="portlet-body">
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <div class="col-md-4 form-group">
+                                                                                    <div class="col-md-12">
+                                                                                        <div class="form-group">
+                                                                                            <label
+                                                                                                class="control-label">
+                                                                                                شناسنامه
+                                                                                            </label>
+                                                                                            <div class="col-md-12">
+                                                                                                <input type="file"
+                                                                                                       id="certificate_documents_company"
+                                                                                                       name="certificate_documents_company"
+                                                                                                       required="required"
+                                                                                                       class="form-control">
+                                                                                                <div
+                                                                                                    class="help-block with-errors"></div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group ">
+                                                                                            <label
+                                                                                                class="control-label">
+                                                                                                کارت ملی
+                                                                                            </label>
+                                                                                            <div class="col-md-12">
+                                                                                                <input type="file"
+                                                                                                       id="cart_documents_company"
+                                                                                                       name="cart_documents_company"
+                                                                                                       required="required"
+                                                                                                       class="form-control">
+                                                                                                <div
+                                                                                                    class="help-block with-errors"></div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group ">
+                                                                                            <label
+                                                                                                class="control-label">
+                                                                                                محل فعالیت
+                                                                                            </label>
+                                                                                            <div class="col-md-12">
+                                                                                                <input type="file"
+                                                                                                       id="activity_documents_company"
+                                                                                                       name="activity_documents_company"
+                                                                                                       required="required"
+                                                                                                       class="form-control">
+                                                                                                <div
+                                                                                                    class="help-block with-errors"></div>
+                                                                                            </div>
+                                                                                        </div>
+
+
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-md-4 form-group">
+                                                                                    <div class="col-md-12">
+                                                                                        <div class="form-group ">
+                                                                                            <label
+                                                                                                class="control-label">
+                                                                                                مالکیت فروشگاه
+                                                                                            </label>
+                                                                                            <div class="col-md-12">
+                                                                                                <input type="file"
+                                                                                                       id="store_documents_company"
+                                                                                                       name="store_documents_company"
+                                                                                                       required="required"
+                                                                                                       class="form-control">
+                                                                                                <div
+                                                                                                    class="help-block with-errors"></div>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <div class="form-group ">
+                                                                                            <label
+                                                                                                class="control-label">
+                                                                                                مالکیت انبار
+                                                                                            </label>
+                                                                                            <div class="col-md-12">
+                                                                                                <input type="file"
+                                                                                                       id="ownership_documents_company"
+                                                                                                       name="ownership_documents_company"
+                                                                                                       required="required"
+                                                                                                       class="form-control">
+                                                                                                <div
+                                                                                                    class="help-block with-errors"></div>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <div class="form-group ">
+                                                                                            <label
+                                                                                                class="control-label">
+                                                                                                تاسیس و بهره برداری
+                                                                                            </label>
+                                                                                            <div class="col-md-12">
+                                                                                                <input type="file"
+                                                                                                       id="established_documents_company"
+                                                                                                       name="established_documents_company"
+                                                                                                       required="required"
+                                                                                                       class="form-control">
+                                                                                                <div
+                                                                                                    class="help-block with-errors"></div>
+                                                                                            </div>
+                                                                                        </div>
+
+
+
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-md-4 form-group">
+                                                                                    <div class="col-md-12">
+                                                                                        <div class="form-group ">
+                                                                                            <label
+                                                                                                class="control-label">
+                                                                                                عکس فروشگاه
+                                                                                            </label>
+                                                                                            <div class="col-md-12">
+                                                                                                <input type="file"
+                                                                                                       id="sstore_documents_company"
+                                                                                                       name="sstore_documents_company"
+                                                                                                       required="required"
+                                                                                                       class="form-control">
+                                                                                                <div
+                                                                                                    class="help-block with-errors"></div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group ">
+                                                                                            <label
+                                                                                                class="control-label">
+                                                                                                عکس انبار
+                                                                                            </label>
+                                                                                            <div class="col-md-12">
+                                                                                                <input type="file"
+                                                                                                       id="pstore_documents_company"
+                                                                                                       name="pstore_documents_company"
+                                                                                                       required="required"
+                                                                                                       class="form-control">
+                                                                                                <div
+                                                                                                    class="help-block with-errors"></div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group ">
+                                                                                            <label
+                                                                                                class="control-label">
+                                                                                                نتیجه استعلام حسابهای
+                                                                                                بانکی
+                                                                                            </label>
+                                                                                            <div class="col-md-12">
+                                                                                                <input type="file"
+                                                                                                       id="final_documents_company"
+                                                                                                       name="final_documents_company"
+                                                                                                       required="required"
+                                                                                                       class="form-control">
+                                                                                                <div
+                                                                                                    class="help-block with-errors"></div>
+                                                                                            </div>
+                                                                                        </div>
+
+
+                                                                                    </div>
+                                                                                </div>
+
+
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="tab-pane" id="psh">
+                                                            <div class="col-md-12">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                                                                        <div class="portlet box blue">
+                                                                            <div class="portlet-title">
+                                                                                <div class="caption">
+                                                                                    مشخصات پرسنل های شرکت
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="portlet-body">
+                                                                                <div class="table table-responsive">
+                                                                                    <table
+                                                                                        class="table table-responsive table-striped table-bordered">
+                                                                                        <thead>
+                                                                                        <tr>
+                                                                                            <td>سمت</td>
+                                                                                            <td>جنسیت</td>
+                                                                                            <td>عنوان</td>
+                                                                                            <td>نام</td>
+                                                                                            <td>تلفن</td>
+                                                                                            <td>داخلی</td>
+                                                                                            <td>تلفن همراه</td>
+                                                                                            <td>ایمیل</td>
+                                                                                            <td>عملیات</td>
+                                                                                        </tr>
+                                                                                        </thead>
+                                                                                        <tbody id="TextBoxContainer">
+                                                                                        </tbody>
+                                                                                        <tfoot>
+                                                                                        <tr>
+                                                                                            <th colspan="5">
+                                                                                                <button id="btnAdd"
+                                                                                                        type="button"
+                                                                                                        class="btn btn-primary"
+                                                                                                        data-toggle="tooltip">
+                                                                                                    <i class="fa fa-plus"></i>
+                                                                                                </button>
+                                                                                            </th>
+                                                                                        </tr>
+                                                                                        </tfoot>
+                                                                                    </table>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
                                                 </div>
                                             </div>
 
-
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <!-- BEGIN EXAMPLE TABLE PORTLET-->
-                                                    <div class="portlet box blue">
-                                                        <div class="portlet-title">
-                                                            <div class="caption">
-                                                                مشخصات پرسنل های شرکت
-                                                            </div>
-                                                        </div>
-                                                        <div class="portlet-body">
-                                                            <div class="table table-responsive">
-                                                                <table
-                                                                    class="table table-responsive table-striped table-bordered">
-                                                                    <thead>
-                                                                    <tr>
-                                                                        <td>سمت</td>
-                                                                        <td>جنسیت</td>
-                                                                        <td>عنوان</td>
-                                                                        <td>نام</td>
-                                                                        <td>تلفن</td>
-                                                                        <td>داخلی</td>
-                                                                        <td>تلفن همراه</td>
-                                                                        <td>ایمیل</td>
-                                                                        <td>عملیات</td>
-                                                                    </tr>
-                                                                    </thead>
-                                                                    <tbody id="TextBoxContainer">
-                                                                    </tbody>
-                                                                    <tfoot>
-                                                                    <tr>
-                                                                        <th colspan="5">
-                                                                            <button id="btnAdd" type="button"
-                                                                                    class="btn btn-primary"
-                                                                                    data-toggle="tooltip">
-                                                                                <i class="fa fa-plus"></i>
-                                                                            </button>
-                                                                        </th>
-                                                                    </tr>
-                                                                    </tfoot>
-                                                                </table>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
 
                                         </div>
-
 
                                     </div>
                                     <input type="submit" class="btn btn-primary" id="saveBtn" value="ثبت">

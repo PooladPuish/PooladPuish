@@ -103,6 +103,7 @@ return [
     | the migrations on disk haven't actually been run in the database.
     |
     */
+    'dump_command_path' => 'C:\xampp\mysql\bin',
 
     'migrations' => 'migrations',
 
@@ -123,7 +124,7 @@ return [
 
         'options' => [
             'cluster' => env('REDIS_CLUSTER', 'predis'),
-            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'),
+            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_') . '_database_'),
         ],
 
         'default' => [

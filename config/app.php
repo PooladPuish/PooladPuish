@@ -167,6 +167,9 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         RenatoMarinho\LaravelPageSpeed\ServiceProvider::class,
         Hekmatinasser\Verta\VertaServiceProvider::class,
+        Spatie\Backup\BackupServiceProvider::class,
+
+
 
         /*
          * Package Service Providers...

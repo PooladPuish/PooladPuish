@@ -98,6 +98,9 @@ class SellerController extends Controller
                     'company' => $request->company,
                     'connector' => $request->connector,
                     'phone' => $request->phone,
+                    'side' => $request->side,
+                    'tel' => $request->tel,
+                    'inside' => $request->inside,
                 ]);
             return response()->json(['success' => 'Product saved successfully.']);
         }

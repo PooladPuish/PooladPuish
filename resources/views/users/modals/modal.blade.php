@@ -12,7 +12,9 @@
                         <div class="form-body">
                             <div class="form-group">
                                 <div class="alert alert-danger" style="display:none"></div>
-                                <form id="productForm" name="productForm" class="form-horizontal">
+                                <form id="productForm"
+                                      autocomplete="off"
+                                      name="productForm" class="form-horizontal">
 
                                     @csrf
                                     <input type="hidden" id="id" name="id">

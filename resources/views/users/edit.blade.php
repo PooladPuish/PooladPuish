@@ -11,7 +11,9 @@
             <div class="form-body">
                 <div class="form-group">
                     <form method="post" action="{{route('admin.user.updates')}}"
-                          class="mt-repeater" enctype="multipart/form-data">
+                          class="mt-repeater"
+                          autocomplete="off"
+                          enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="id" value="{{$id->id}}">
                         <div class="row">

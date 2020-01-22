@@ -403,18 +403,25 @@
                         </a>
                         <ul class="treeview-menu">
                             @can('بازسازی نرم افزار')
-                                <li><a id="stop"><i
+                                <li><a href="javascript:void(0)" id="stop"><i
                                             class="fa fa-circle-o"></i>بازسازی نرم افزار</a>
                                 </li>
                             @endcan
                             @can('شروع به کار نرم افزار')
-                                <li><a id="start_s"><i
+                                <li><a href="javascript:void(0)" id="start_s"><i
                                             class="fa fa-circle-o"></i>شروع به کار نرم افزار</a>
                                 </li>
                             @endcan
+                                <li><a href="javascript:void(0)" id="backup"><i
+                                            class="fa fa-circle-o"></i>پشتیبان گیری از اطلاعات</a>
+                                </li>
                         </ul>
                     </li>
                 @endif
+
+
+
+
 
 
             </ul>
@@ -659,6 +666,34 @@
             }
         });
     });
+
+    $('#backup').click(function () {
+        $.ajax({
+            type: "GET",
+            url: "{{route('admin.users.system.backup')}}",
+            success: function (data) {
+                if (data.errors) {
+                    Swal.fire({
+                        title: 'خطا!',
+                        text: data.errors,
+                        icon: 'error',
+                        confirmButtonText: 'تایید'
+                    })
+                }
+                if (data.success) {
+                    Swal.fire({
+                        title: 'موفق',
+                        text: data.success,
+                        icon: 'success',
+                        confirmButtonText: 'تایید',
+                    });
+
+                }
+
+            }
+        });
+    });
+
 </script>
 <script>
     $("#users").click(function () {

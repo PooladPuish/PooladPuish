@@ -107,30 +107,10 @@
                         if (res == 1) {
                             $('#company').show();
                             $('#personal').hide();
-                            $('#codemeli_personel').val('');
-                            $('#tel_personel').val('');
-                            $('#date_personel').val('');
-                            $('#phone_personel').val('');
-                            $('#email_personel').val('');
-                            $('#adders_personel').val('');
-                            $('#text_personel').val('');
                             $('#id').val('1');
                         } else {
                             $('#company').hide();
                             $('#personal').show();
-                            $('#Established_company').val('');
-                            $('#tel_company').val('');
-                            $('#fax_company').val('');
-                            $('#adders_company').val('');
-                            $('#post_company').val('');
-                            $('#side_company').val('');
-                            $('#sex_company').val('');
-                            $('#title_company').val('');
-                            $('#name_company').val('');
-                            $('#phone_company').val('');
-                            $('#inside_company').val('');
-                            $('#tel_company_company').val('');
-                            $('#email_company').val('');
                             $('#id').val('2');
                         }
                     }

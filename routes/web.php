@@ -42,6 +42,7 @@ Route::group(['middleware' => ['auth', 'web']], function () {
         Route::get('/users/lock', 'UserController@lock')->name('admin.user.lock');
         Route::get('/users/system/stop', 'UserController@stop')->name('admin.users.system.stop');
         Route::get('/users/system/start', 'UserController@start')->name('admin.users.system.start');
+        Route::get('/users/system/backup', 'UserController@backup')->name('admin.users.system.backup');
 
         //RoleController
         Route::get('/role/wizard', 'RoleController@wizard')->name('admin.role.wizard');

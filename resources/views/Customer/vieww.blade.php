@@ -236,7 +236,7 @@
                                                                value="{{$customer_personal->date_personel}}"
                                                                @endif
                                                                required="required"
-                                                               class="form-control example1"
+                                                               class="form-control"
                                                                placeholder="لطفا تاریخ تولد را وارد کنید">
                                                         <div class="help-block with-errors"></div>
                                                     </div>

@@ -147,8 +147,8 @@
                                             style="color: red"
                                             class="required-mark">*</span>
                                     </label>
-                                    <input type="text" id="name" name="name" class="form-control"
-                                           required value="{{$role->name}}">
+                                    <input type="text" value="{{$role->name}}" name="name" class="form-control"
+                                           required>
                                 </div>
                             </div>
                         </div>

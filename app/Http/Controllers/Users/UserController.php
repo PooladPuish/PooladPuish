@@ -82,11 +82,10 @@ class UserController extends Controller
         if (!empty($request->id)) {
             if (!empty($request->password)) {
                 $password = \Hash::make($request->password);
-            } else{
+            } else {
                 $password = $user->password;
             }
-        }else
-        {
+        } else {
             $password = \Hash::make($request->password);
 
         }
@@ -452,7 +451,11 @@ class UserController extends Controller
 //        return str_replace($english, $persian, $input);
 //    }
 
-
+    public function backup()
+    {
+        \Artisan::call('backup:run');
+        return response()->json(['success' => 'عملیات پشتیبان گیری با موفقیت انجام شد']);
+    }
 
 }
 

@@ -18,7 +18,9 @@
         "morilog/jalali": "3.*",
         "renatomarinho/laravel-page-speed": "^1.8",
         "sofa/eloquence": "~5.3",
+        "spatie/db-dumper": "^2.15",
         "spatie/laravel-activitylog": "^3.9",
+        "spatie/laravel-backup": "^6.7",
         "uxweb/sweet-alert": "^2.0",
         "yajra/laravel-datatables-oracle": "~9.0"
     },

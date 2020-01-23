@@ -179,11 +179,18 @@
         });
         $('#saveBtn').click(function (e) {
             e.preventDefault();
+            var form = $('#productForm')[0];
+            var data = new FormData(form);
             $.ajax({
-                data: $('#productForm').serialize(),
-                url: "{{ route('admin.customers.store') }}",
                 type: "POST",
-                dataType: 'json',
+                enctype: 'multipart/form-data',
+                url: "{{ route('admin.customers.store') }}",
+                data: data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                method: 'POST',
+                type: 'POST',
                 success: function (data) {
                     if (data.errors) {
                         $('#ajaxModel').modal('hide');
@@ -215,6 +222,8 @@
     });
 
 </script>
+
+
 <script>
 
     $(function () {
@@ -243,8 +252,6 @@
     }
 
 </script>
-
-
 <script>
 
     $(function () {
@@ -269,8 +276,6 @@
     }
 
 </script>
-
-
 <script>
 
     $(function () {
@@ -293,17 +298,12 @@
     }
 
 </script>
-
-
-
-
 <style>
     .vertical {
         border-left: 1px solid black;
         height: 470px;
-        position:absolute;
+        position: absolute;
         margin-top: 40px;
         left: 50%;
     }
 </style>
-

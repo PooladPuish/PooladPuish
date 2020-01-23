@@ -31,7 +31,10 @@
                         </div>
 
                         <form autocomplete="off" id="productForm"
-                              name="productForm" class="form-horizontal">
+                              name="productForm"
+                              enctype="multipart/form-data"
+                              method="post"
+                        >
                             @csrf
                             <input type="hidden" name="id" id="id">
 
@@ -169,7 +172,8 @@
                                             </div>
                                         </div>
 
-                                        <button class="btn btn-primary nextBtn" id="nextBtn" type="button">ادامه
+                                        <button class="btn btn-primary nextBtn pull-right" id="nextBtn" type="button">
+                                            ادامه
                                         </button>
 
 
@@ -319,6 +323,7 @@
                                                     </div>
 
                                                 </div>
+
                                             </div>
 
 
@@ -365,7 +370,6 @@
                                                                                                 <input type="text"
                                                                                                        id="code_company"
                                                                                                        name="code_company"
-                                                                                                       required="required"
                                                                                                        class="form-control">
                                                                                                 <div
                                                                                                     class="help-block with-errors"></div>
@@ -387,7 +391,6 @@
                                                                                                        type="text"
                                                                                                        id="tel_company"
                                                                                                        name="tel_company"
-                                                                                                       required="required"
                                                                                                        class="form-control"
                                                                                                        data-error="Minimum 3 character required">
                                                                                                 <div
@@ -402,7 +405,6 @@
                                                                                                 <input type="text"
                                                                                                        id="post_company"
                                                                                                        name="post_company"
-                                                                                                       required="required"
                                                                                                        class="form-control"
                                                                                                        data-error="Minimum 3 character required">
                                                                                                 <div
@@ -424,7 +426,6 @@
                                                                                                 <input type="text"
                                                                                                        id="Established_company"
                                                                                                        name="Established_company"
-                                                                                                       required="required"
                                                                                                        class="form-control example1"
                                                                                                 >
                                                                                                 <div
@@ -441,7 +442,6 @@
                                                                                                 <input type="text"
                                                                                                        id="fax_company"
                                                                                                        name="fax_company"
-                                                                                                       required="required"
                                                                                                        class="form-control"
                                                                                                        data-error="Minimum 3 character required">
                                                                                                 <div
@@ -458,7 +458,6 @@
                                                                                                 <input type="text"
                                                                                                        id="phone_company"
                                                                                                        name="phone_company"
-                                                                                                       required="required"
                                                                                                        class="form-control"
                                                                                                        data-error="Minimum 3 character required">
                                                                                                 <div
@@ -481,7 +480,6 @@
                                                                                                 <input type="text"
                                                                                                        id="date_birth"
                                                                                                        name="date_birth"
-                                                                                                       required="required"
                                                                                                        class="form-control example1"
                                                                                                 >
                                                                                                 <div
@@ -498,7 +496,6 @@
                                                                                                 <input type="text"
                                                                                                        id="email_company"
                                                                                                        name="email_company"
-                                                                                                       required="required"
                                                                                                        class="form-control"
                                                                                                        data-error="Minimum 3 character required">
                                                                                                 <div
@@ -515,7 +512,6 @@
                                                                                                 <input type="text"
                                                                                                        id="national_company"
                                                                                                        name="national_company"
-                                                                                                       required="required"
                                                                                                        class="form-control"
                                                                                                        data-error="Minimum 3 character required">
                                                                                                 <div
@@ -594,7 +590,6 @@
                                                                                                 <input type="text"
                                                                                                        id="name_work_company"
                                                                                                        name="name_work_company"
-                                                                                                       required="required"
                                                                                                        class="form-control">
                                                                                                 <div
                                                                                                     class="help-block with-errors"></div>
@@ -615,7 +610,6 @@
                                                                                                        type="text"
                                                                                                        id="date_work_company"
                                                                                                        name="date_work_company"
-                                                                                                       required="required"
                                                                                                        class="form-control example1"
                                                                                                        data-error="Minimum 3 character required">
                                                                                                 <div
@@ -632,7 +626,6 @@
                                                                                                 <input type="text"
                                                                                                        id="tel_work_company"
                                                                                                        name="tel_work_company"
-                                                                                                       required="required"
                                                                                                        class="form-control"
                                                                                                        data-error="Minimum 3 character required">
                                                                                                 <div
@@ -649,7 +642,6 @@
                                                                                                 <input type="text"
                                                                                                        id="fax_work_company"
                                                                                                        name="fax_work_company"
-                                                                                                       required="required"
                                                                                                        class="form-control"
                                                                                                        data-error="Minimum 3 character required">
                                                                                                 <div
@@ -663,12 +655,15 @@
                                                                                                 تابلو فروشگاه
                                                                                             </label>
                                                                                             <div class="col-md-6">
-                                                                                                <select name="panel_work_company"
-                                                                                                        id="panel_work_company"
+                                                                                                <select
+                                                                                                    name="panel_work_company"
+                                                                                                    id="panel_work_company"
                                                                                                     class="form-control">
-                                                                                                    <option value="1">دارد
+                                                                                                    <option value="1">
+                                                                                                        دارد
                                                                                                     </option>
-                                                                                                    <option value="2">ندارد
+                                                                                                    <option value="2">
+                                                                                                        ندارد
                                                                                                     </option>
                                                                                                 </select>
 
@@ -686,7 +681,6 @@
                                                                                                 <input type="text"
                                                                                                        id="dimensions_work_company"
                                                                                                        name="dimensions_work_company"
-                                                                                                       required="required"
                                                                                                        class="form-control"
                                                                                                 >
                                                                                                 <div
@@ -708,7 +702,6 @@
                                                                                                 <input type="text"
                                                                                                        id="post_work_company"
                                                                                                        name="post_work_company"
-                                                                                                       required="required"
                                                                                                        class="form-control"
                                                                                                 >
                                                                                                 <div
@@ -722,14 +715,18 @@
                                                                                                 نوع فعالیت
                                                                                             </label>
                                                                                             <div class="col-md-6">
-                                                                                                <select name="type_work_company"
-                                                                                                        id="type_work_company"
+                                                                                                <select
+                                                                                                    name="type_work_company"
+                                                                                                    id="type_work_company"
                                                                                                     class="form-control">
-                                                                                                    <option value="1">خرده فروش
+                                                                                                    <option value="1">
+                                                                                                        خرده فروش
                                                                                                     </option>
-                                                                                                    <option value="2">عمده فروش
+                                                                                                    <option value="2">
+                                                                                                        عمده فروش
                                                                                                     </option>
-                                                                                                    <option value="3">واسطه
+                                                                                                    <option value="3">
+                                                                                                        واسطه
                                                                                                     </option>
                                                                                                 </select>
 
@@ -744,14 +741,18 @@
                                                                                                 وضعیت فروشگاه
                                                                                             </label>
                                                                                             <div class="col-md-6">
-                                                                                                <select name="status_work_company"
-                                                                                                        id="status_work_company"
+                                                                                                <select
+                                                                                                    name="status_work_company"
+                                                                                                    id="status_work_company"
                                                                                                     class="form-control">
-                                                                                                    <option value="1">مالک
+                                                                                                    <option value="1">
+                                                                                                        مالک
                                                                                                     </option>
-                                                                                                    <option value="2">استیجاری
+                                                                                                    <option value="2">
+                                                                                                        استیجاری
                                                                                                     </option>
-                                                                                                    <option value="3">سرقفلی
+                                                                                                    <option value="3">
+                                                                                                        سرقفلی
                                                                                                     </option>
                                                                                                 </select>
 
@@ -769,7 +770,6 @@
                                                                                                 <input type="text"
                                                                                                        id="telstore_work_company"
                                                                                                        name="telstore_work_company"
-                                                                                                       required="required"
                                                                                                        class="form-control"
                                                                                                 >
                                                                                                 <div
@@ -783,14 +783,18 @@
                                                                                                 نوع مالکیت
                                                                                             </label>
                                                                                             <div class="col-md-6">
-                                                                                                <select name="owner_work_company"
-                                                                                                        id="owner_work_company"
+                                                                                                <select
+                                                                                                    name="owner_work_company"
+                                                                                                    id="owner_work_company"
                                                                                                     class="form-control">
-                                                                                                    <option value="1">مالک
+                                                                                                    <option value="1">
+                                                                                                        مالک
                                                                                                     </option>
-                                                                                                    <option value="2">استیجاری
+                                                                                                    <option value="2">
+                                                                                                        استیجاری
                                                                                                     </option>
-                                                                                                    <option value="3">سرقفلی
+                                                                                                    <option value="3">
+                                                                                                        سرقفلی
                                                                                                     </option>
                                                                                                 </select>
 
@@ -808,7 +812,6 @@
                                                                                                 <input type="text"
                                                                                                        id="dec_work_company"
                                                                                                        name="dec_work_company"
-                                                                                                       required="required"
                                                                                                        class="form-control"
                                                                                                 >
                                                                                                 <div
@@ -829,12 +832,15 @@
                                                                                                 جواز کسب
                                                                                             </label>
                                                                                             <div class="col-md-6">
-                                                                                                <select name="license_work_company"
-                                                                                                        id="license_work_company"
+                                                                                                <select
+                                                                                                    name="license_work_company"
+                                                                                                    id="license_work_company"
                                                                                                     class="form-control">
-                                                                                                    <option value="1">دارد
+                                                                                                    <option value="1">
+                                                                                                        دارد
                                                                                                     </option>
-                                                                                                    <option value="2">ندارد
+                                                                                                    <option value="2">
+                                                                                                        ندارد
                                                                                                     </option>
                                                                                                 </select>
 
@@ -852,7 +858,6 @@
                                                                                                 <input type="text"
                                                                                                        id="numlicense_work_company"
                                                                                                        name="numlicense_work_company"
-                                                                                                       required="required"
                                                                                                        class="form-control"
                                                                                                 >
                                                                                                 <div
@@ -869,7 +874,6 @@
                                                                                                 <input type="text"
                                                                                                        id="credibilitylicense_work_company"
                                                                                                        name="credibilitylicense_work_company"
-                                                                                                       required="required"
                                                                                                        class="form-control example1"
                                                                                                 >
                                                                                                 <div
@@ -883,12 +887,15 @@
                                                                                                 انبار
                                                                                             </label>
                                                                                             <div class="col-md-6">
-                                                                                                <select name="store_work_company"
-                                                                                                        id="store_work_company"
+                                                                                                <select
+                                                                                                    name="store_work_company"
+                                                                                                    id="store_work_company"
                                                                                                     class="form-control">
-                                                                                                    <option value="1">دارد
+                                                                                                    <option value="1">
+                                                                                                        دارد
                                                                                                     </option>
-                                                                                                    <option value="2">ندارد
+                                                                                                    <option value="2">
+                                                                                                        ندارد
                                                                                                     </option>
                                                                                                 </select>
 
@@ -906,7 +913,6 @@
                                                                                                 <input type="text"
                                                                                                        id="dimensionsstore_work_company"
                                                                                                        name="dimensionsstore_work_company"
-                                                                                                       required="required"
                                                                                                        class="form-control"
                                                                                                 >
                                                                                                 <div
@@ -925,7 +931,8 @@
                                                                                             ادرس محل فعالیت
                                                                                         </label>
                                                                                         <div class="col-md-10">
-                                                <textarea name="activity_work_company" id="activity_work_company" class="form-control"
+                                                <textarea name="activity_work_company" id="activity_work_company"
+                                                          class="form-control"
                                                           rows="2" cols="50"
                                                           placeholder="لطفا ادرس محل فعالیت را وارد کنید">
 
@@ -943,7 +950,8 @@
                                                                                             سایر فعالیت ها
                                                                                         </label>
                                                                                         <div class="col-md-10">
-                                                <textarea name="oactivity_work_company" id="oactivity_work_company" class="form-control"
+                                                <textarea name="oactivity_work_company" id="oactivity_work_company"
+                                                          class="form-control"
                                                           rows="2" cols="50"
                                                           placeholder="لطفا سایر فعالیت ها را وارد کنید">
 
@@ -961,7 +969,8 @@
                                                                                             ادرس انبار
                                                                                         </label>
                                                                                         <div class="col-md-10">
-                                                <textarea name="addersstore_work_company" id="addersstore_work_company" class="form-control"
+                                                <textarea name="addersstore_work_company" id="addersstore_work_company"
+                                                          class="form-control"
                                                           rows="2" cols="50"
                                                           placeholder="لطفا ادرس انبار را وارد کنید">
 
@@ -1100,7 +1109,6 @@
                                                                                                 <input type="file"
                                                                                                        id="certificate_documents_company"
                                                                                                        name="certificate_documents_company"
-                                                                                                       required="required"
                                                                                                        class="form-control">
                                                                                                 <div
                                                                                                     class="help-block with-errors"></div>
@@ -1115,7 +1123,6 @@
                                                                                                 <input type="file"
                                                                                                        id="cart_documents_company"
                                                                                                        name="cart_documents_company"
-                                                                                                       required="required"
                                                                                                        class="form-control">
                                                                                                 <div
                                                                                                     class="help-block with-errors"></div>
@@ -1130,13 +1137,11 @@
                                                                                                 <input type="file"
                                                                                                        id="activity_documents_company"
                                                                                                        name="activity_documents_company"
-                                                                                                       required="required"
                                                                                                        class="form-control">
                                                                                                 <div
                                                                                                     class="help-block with-errors"></div>
                                                                                             </div>
                                                                                         </div>
-
 
                                                                                     </div>
                                                                                 </div>
@@ -1152,7 +1157,6 @@
                                                                                                 <input type="file"
                                                                                                        id="store_documents_company"
                                                                                                        name="store_documents_company"
-                                                                                                       required="required"
                                                                                                        class="form-control">
                                                                                                 <div
                                                                                                     class="help-block with-errors"></div>
@@ -1168,7 +1172,6 @@
                                                                                                 <input type="file"
                                                                                                        id="ownership_documents_company"
                                                                                                        name="ownership_documents_company"
-                                                                                                       required="required"
                                                                                                        class="form-control">
                                                                                                 <div
                                                                                                     class="help-block with-errors"></div>
@@ -1184,13 +1187,11 @@
                                                                                                 <input type="file"
                                                                                                        id="established_documents_company"
                                                                                                        name="established_documents_company"
-                                                                                                       required="required"
                                                                                                        class="form-control">
                                                                                                 <div
                                                                                                     class="help-block with-errors"></div>
                                                                                             </div>
                                                                                         </div>
-
 
 
                                                                                     </div>
@@ -1207,7 +1208,6 @@
                                                                                                 <input type="file"
                                                                                                        id="sstore_documents_company"
                                                                                                        name="sstore_documents_company"
-                                                                                                       required="required"
                                                                                                        class="form-control">
                                                                                                 <div
                                                                                                     class="help-block with-errors"></div>
@@ -1222,7 +1222,6 @@
                                                                                                 <input type="file"
                                                                                                        id="pstore_documents_company"
                                                                                                        name="pstore_documents_company"
-                                                                                                       required="required"
                                                                                                        class="form-control">
                                                                                                 <div
                                                                                                     class="help-block with-errors"></div>
@@ -1238,7 +1237,6 @@
                                                                                                 <input type="file"
                                                                                                        id="final_documents_company"
                                                                                                        name="final_documents_company"
-                                                                                                       required="required"
                                                                                                        class="form-control">
                                                                                                 <div
                                                                                                     class="help-block with-errors"></div>
@@ -1311,14 +1309,16 @@
                                                         </div>
 
                                                     </div>
+
                                                 </div>
+
                                             </div>
 
 
                                         </div>
-
+                                        <input type="submit" class="btn btn-primary" id="saveBtn"
+                                               value="ثبت">
                                     </div>
-                                    <input type="submit" class="btn btn-primary" id="saveBtn" value="ثبت">
 
                                 </div>
 
@@ -1332,4 +1332,8 @@
             </div>
         </div>
     </div>
+
+
+
+
 @endsection

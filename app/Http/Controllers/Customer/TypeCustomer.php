@@ -10,15 +10,16 @@ use Yajra\DataTables\DataTables;
 
 class TypeCustomer extends Controller
 {
+    /**
+     * نمایش لیست انواع مشتریان
+     */
     public function index(Request $request)
     {
-
         if ($request->ajax()) {
             $data = \App\TypeCustomer::get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('type', function ($row) {
-
                     if ($row->type == 1) {
                         return 'شرکتی';
                     } else
@@ -31,10 +32,11 @@ class TypeCustomer extends Controller
                 ->make(true);
         }
         return view('typeCustomer.list');
-
-
     }
 
+    /**
+     * ثبت اطلاعات انواع مشتریان
+     */
     public function store(Request $request)
     {
         if (!empty($request->product)) {
@@ -81,12 +83,18 @@ class TypeCustomer extends Controller
         return Response::json(['errors' => $validator->errors()]);
     }
 
+    /**
+     * ویرایش اطلاعات انواع مشتریان
+     */
     public function update($id)
     {
         $product = \App\TypeCustomer::find($id);
         return response()->json($product);
     }
 
+    /**
+     * حذف انواع مشتریان
+     */
     public function delete($id)
     {
         $post = \App\TypeCustomer::findOrFail($id);
@@ -94,6 +102,9 @@ class TypeCustomer extends Controller
         return response()->json($post);
     }
 
+    /**
+     * دکمه عملیات موجود در دیتا تیبل انواع مشتریان
+     */
     public function actions($row)
     {
         $success = url('/public/icon/icons8-edit-144.png');

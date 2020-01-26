@@ -14,6 +14,9 @@ use Yajra\DataTables\DataTables;
 
 class ModelProductController extends Controller
 {
+    /**
+     * نمایش لیست
+     */
     public function list(Request $request)
     {
         $products = Product::all();
@@ -43,7 +46,9 @@ class ModelProductController extends Controller
 
     }
 
-
+    /**
+     * ثبت اطلاعات
+     */
     public function store(Request $request)
     {
 
@@ -68,12 +73,18 @@ class ModelProductController extends Controller
         return Response::json(['errors' => $validator->errors()]);
     }
 
+    /**
+     * ویرایش اطلاعات
+     */
     public function update($id)
     {
         $product = ModelProduct::find($id);
         return response()->json($product);
     }
 
+    /**
+     * حذف اطلاعات
+     */
     public function delete($id)
     {
         $post = ModelProduct::findOrFail($id);
@@ -81,7 +92,9 @@ class ModelProductController extends Controller
         return response()->json($post);
     }
 
-
+    /**
+     * دکمه های موجود در دیتاتیبل
+     */
     public function actions($row)
     {
         $success = url('/public/icon/icons8-edit-144.png');

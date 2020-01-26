@@ -13,6 +13,9 @@ use Yajra\DataTables\DataTables;
 
 class CustomerController extends Controller
 {
+    /**
+     * نمایش لیست مشتریان
+     */
     public function index(Request $request)
     {
         if ($request->ajax()) {
@@ -30,17 +33,21 @@ class CustomerController extends Controller
 
     }
 
+    /**
+     * نمایش صفحه ثبت اطلاعات مشتریان
+     */
     public function wizard()
     {
         $states = Customer::distinct()->select('state')->groupBy('state')->get();
         $methods = Customer::distinct()->select('method')->groupBy('method')->get();
-
         $typeCustomers = \App\TypeCustomer::all();
-
         return view('Customer.wizard', compact('typeCustomers', 'methods', 'states'));
 
     }
 
+    /**
+     * نمایش صفحه ثبت ویرایش مشخصات مشتریان
+     */
     public function update(Customer $id)
     {
         $customer_company = \DB::table('customer_company')
@@ -55,24 +62,21 @@ class CustomerController extends Controller
             ->where('customer_id', $id->id)->get();
         $customer_personal = \DB::table('customer_personal')
             ->where('customer_id', $id->id)->first();
-
         $customer_document = \DB::table('customer_documents')
             ->where('customer_id', $id->id)->first();
-
         $states = Customer::distinct()->select('state')->groupBy('state')->get();
         $methods = Customer::distinct()->select('method')->groupBy('method')->get();
         $typeCustomers = \App\TypeCustomer::all();
-
-
         return view('Customer.update',
             compact('id', 'states', 'methods', 'typeCustomers', 'customer_company'
                 , 'customer_work', 'customer_banks', 'customer_securings', 'company_personals'
                 , 'customer_personal', 'customer_document'
             ));
-
-
     }
 
+    /**
+     * ثبت اطلاعات مشتریان
+     */
     public function store(Request $request)
     {
 
@@ -327,6 +331,9 @@ class CustomerController extends Controller
         return Response::json(['errors' => $validator->errors()]);
     }
 
+    /**
+     * ویرایش مشخصات مشتریان
+     */
     public function edit(Request $request)
     {
         $id = Customer::where('id', $request->id)->first();
@@ -638,6 +645,9 @@ class CustomerController extends Controller
         return Response::json(['errors' => $validator->errors()]);
     }
 
+    /**
+     * حذف اطلاعات مشتریان
+     */
     public function delete($id)
     {
         $post = Customer::findOrFail($id);
@@ -645,6 +655,9 @@ class CustomerController extends Controller
         return response()->json($post);
     }
 
+    /**
+     * فیلتر کردن مشتریان و نمایش صفحه مربوط وارد کردن اطلاعات
+     */
     public function filter(Request $request)
     {
         $type = \DB::table("type_customers")
@@ -654,32 +667,9 @@ class CustomerController extends Controller
 
     }
 
-    public function view(Customer $id)
-    {
-        $types = \App\TypeCustomer::where('id', $id->type)->get();
-        foreach ($types as $type)
-            $states = Customer::distinct()->select('state')->groupBy('state')->get();
-        $methods = Customer::distinct()->select('method')->groupBy('method')->get();
-        $typeCustomers = \App\TypeCustomer::all();
-        if ($type->type == 1) {
-            $customer_company = \DB::table('customer_company')
-                ->where('customer_id', $id->id)
-                ->first();
-            $company_personal = \DB::table('company_personal')
-                ->where('customer_id', $id->id)
-                ->get();
-            return view('Customer.view', compact('id', 'typeCustomers'
-                , 'customer_company', 'company_personal'));
-        } else
-            $customer_personal = \DB::table('customer_personal')
-                ->where('customer_id', $id->id)
-                ->first();
-        return view('Customer.vieww',
-            compact('id', 'customer_personal', 'states', 'methods', 'typeCustomers'));
-
-
-    }
-
+    /**
+     * حذف فایل شناسنامه
+     */
     public function deleteFileCertificate($id)
     {
         $image_path = \DB::table('customer_documents')
@@ -697,6 +687,9 @@ class CustomerController extends Controller
         return response()->json(['success' => 'فایل مشتری با موفقیت در سیستم ثبت شد']);
     }
 
+    /**
+     * حذف فایل کارت ملی
+     */
     public function deleteFileCart($id)
     {
         $image_path = \DB::table('customer_documents')
@@ -714,6 +707,9 @@ class CustomerController extends Controller
 
     }
 
+    /**
+     * حذف فایل فعالیت ها
+     */
     public function deleteFileActivity($id)
     {
         $image_path = \DB::table('customer_documents')
@@ -824,6 +820,9 @@ class CustomerController extends Controller
 
     }
 
+    /**
+     * دکمه عملیات موجود در دیتا تیبل مشتریان
+     */
     public function actions($row)
     {
         $success = url('/public/icon/icons8-edit-144.png');

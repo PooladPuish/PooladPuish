@@ -12,9 +12,11 @@ use Yajra\DataTables\DataTables;
 
 class BomController extends Controller
 {
+    /**
+     * نمایش لیست bom
+     */
     public function list(Request $request)
     {
-
         $products = Product::all();
         if ($request->ajax()) {
             $data = Bom::distinct()->select('product_id')->groupBy('product_id')->get();
@@ -39,6 +41,9 @@ class BomController extends Controller
 
     }
 
+    /**
+     * ثبت اطلاعات
+     */
     public function store(Request $request)
     {
 
@@ -68,12 +73,18 @@ class BomController extends Controller
         return Response::json(['errors' => $validator->errors()]);
     }
 
+    /**
+     * ویرایش اطلاعات
+     */
     public function update($id)
     {
         $product = Bom::find($id);
         return response()->json($product);
     }
 
+    /**
+     * نمایش اطلاعات بر اساس sort
+     */
     public function detail(Request $request, $id)
     {
         if ($request->ajax()) {
@@ -93,6 +104,9 @@ class BomController extends Controller
         return response()->json($data);
     }
 
+    /**
+     * حذف مشخصات bom
+     */
     public function delete($id)
     {
         $post = Bom::findOrFail($id);
@@ -100,6 +114,9 @@ class BomController extends Controller
         return response()->json($post);
     }
 
+    /**
+     * حذف فایل زیر مجوعه
+     */
     public function deletep($id)
     {
 
@@ -109,6 +126,9 @@ class BomController extends Controller
         return response()->json($post);
     }
 
+    /**
+     * دکمه های عملیاتن موجود در دیتا تیبل
+     */
     public function actions($row)
     {
         $delete = url('/public/icon/icons8-delete-bin-96.png');
@@ -122,6 +142,9 @@ class BomController extends Controller
 
     }
 
+    /**
+     * دکمه های عملیاتن موجود در دیتا تیبل
+     */
     public function action($row)
     {
         $success = url('/public/icon/icons8-edit-144.png');
@@ -140,6 +163,9 @@ class BomController extends Controller
 
     }
 
+    /**
+     * فیلتر کردن اطلاعات برای نمایش در بخش زیر مجموعه ها
+     */
     public function filter(Request $request)
     {
         $bom_id = \DB::table("products")

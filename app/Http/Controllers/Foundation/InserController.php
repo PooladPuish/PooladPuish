@@ -11,6 +11,9 @@ use Yajra\DataTables\DataTables;
 
 class InserController extends Controller
 {
+    /**
+     * نمایش لیست insert ها
+     */
     public function list(Request $request)
     {
         if ($request->ajax()) {
@@ -27,7 +30,9 @@ class InserController extends Controller
 
     }
 
-
+    /**
+     * ثبت اطلاعات
+     */
     public function store(Request $request)
     {
         if (!empty($request->product)) {
@@ -81,12 +86,18 @@ class InserController extends Controller
         return Response::json(['errors' => $validator->errors()]);
     }
 
+    /**
+     * ویراش اطلاعات
+     */
     public function update($id)
     {
         $product = Insert::find($id);
         return response()->json($product);
     }
 
+    /**
+     * حذف اطلاعات
+     */
     public function delete($id)
     {
         $post = Insert::findOrFail($id);
@@ -94,7 +105,9 @@ class InserController extends Controller
         return response()->json($post);
     }
 
-
+    /**
+     * دکمه های عملیات موجود در دیتا تیبل insert
+     */
     public function actions($row)
     {
         $success = url('/public/icon/icons8-edit-144.png');

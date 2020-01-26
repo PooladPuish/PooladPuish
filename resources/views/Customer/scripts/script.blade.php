@@ -51,6 +51,7 @@
                 $('#name').val(data.name);
                 $('#code').val(data.code);
                 $('#type').val(data.type);
+
             });
 
         });

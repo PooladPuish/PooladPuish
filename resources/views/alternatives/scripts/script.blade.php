@@ -55,7 +55,7 @@
                 $('#product_id').val(data.id);
                 $('#from').val(data.from);
                 $('#ToDate').val(data.ToDate);
-                $("#user_id").trigger('change').val(data.user_id);
+                $('#user_id').val(data.user_id);
                 $('#alternate_id')
                     .find('option')
                     .remove();

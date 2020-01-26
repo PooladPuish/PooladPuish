@@ -2548,9 +2548,9 @@ a:focus {
 }
 .nav-tabs-custom > .tab-content {
   background: #fff;
-  padding: 10px;
-  border-bottom-left-radius: 3px;
-  border-bottom-right-radius: 3px;
+  padding: 1px;
+  border-bottom-left-radius: 1px;
+  border-bottom-right-radius: 1px;
 }
 .nav-tabs-custom .dropdown.open > a:active,
 .nav-tabs-custom .dropdown.open > a:focus {

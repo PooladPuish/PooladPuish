@@ -126,7 +126,7 @@
                               method="post"
                         >
                             @csrf
-                            <input type="hidden" name="id" id="id">
+                            <input type="hidden" id="id_customer" name="id" value="{{$id->id}}">
 
                             <div class="row setup-content" id="step-1" style="display: block;">
                                 <br/>
@@ -239,10 +239,11 @@
                                                 <div class="col-md-8">
                                                     <input type="text" id="date"
                                                            name="date"
-                                                           value="{{$id->date}}"
-                                                           required="required" class="form-control"
+                                                           required="required" class="form-control example1"
                                                            placeholder="لطفا تاریخ اشنایی مشتری را وارد کنید">
                                                     <div class="help-block with-errors"></div>
+                                                    <input type="hidden" name="D_date" id="D_date"
+                                                           value="{{$id->date}}">
                                                 </div>
                                             </div>
 
@@ -324,22 +325,28 @@
                                                         </div>
 
 
+
                                                         <div class="form-group field ">
-                                                            <label class="control-label main col-md-4">تاریخ
-                                                                تولد</label>
+                                                            <label class="control-label main col-md-4">تلفن
+                                                                همراه
+
+                                                                <span
+                                                                    style="color: red"
+                                                                    class="required-mark">*</span>
+                                                            </label>
                                                             <div class="col-md-8">
                                                                 <input type="text"
-                                                                       id="date_personel"
-                                                                       name="date_personel"
-                                                                       @if(!empty($customer_personal->date_personel))
-                                                                       value="{{$customer_personal->date_personel}}"
+                                                                       id="phone_personel"
+                                                                       name="phone_personel"
+                                                                       @if(!empty($customer_personal->phone_personel))
+                                                                       value="{{$customer_personal->phone_personel}}"
                                                                        @endif
-                                                                       required="required" class="form-control example1"
-                                                                       placeholder="لطفا تاریخ تولد را وارد کنید">
+                                                                       required="required" class="form-control"
+                                                                       placeholder="لطفا شماره تلفن همراه را وارد کنید"
+                                                                       data-error="Minimum 3 character required">
                                                                 <div class="help-block with-errors"></div>
                                                             </div>
                                                         </div>
-
 
                                                         <div class="form-group field ">
                                                             <label class="control-label main col-md-4">تلفن ثابت</label>
@@ -392,26 +399,21 @@
                                                             </div>
                                                         </div>
                                                         <div class="form-group field ">
-                                                            <label class="control-label main col-md-4">تلفن
-                                                                همراه
-
-                                                                <span
-                                                                    style="color: red"
-                                                                    class="required-mark">*</span>
-                                                            </label>
+                                                            <label class="control-label main col-md-4">تاریخ
+                                                                تولد</label>
                                                             <div class="col-md-8">
                                                                 <input type="text"
-                                                                       id="phone_personel"
-                                                                       name="phone_personel"
-                                                                       @if(!empty($customer_personal->phone_personel))
-                                                                       value="{{$customer_personal->phone_personel}}"
-                                                                       @endif
-                                                                       required="required" class="form-control"
-                                                                       placeholder="لطفا شماره تلفن همراه را وارد کنید"
-                                                                       data-error="Minimum 3 character required">
+                                                                       id="date_personel"
+                                                                       name="date_personel"
+                                                                       required="required" class="form-control example1"
+                                                                       placeholder="لطفا تاریخ تولد را وارد کنید">
                                                                 <div class="help-block with-errors"></div>
+                                                                @if(!empty($customer_personal->date_personel))
+                                                                    <input type="hidden" name="D_date_personel" id="D_date_personel" value="{{$customer_personal->date_personel}}">
+                                                                @endif
                                                             </div>
                                                         </div>
+
                                                         <div class="form-group field ">
                                                             <label class="control-label main col-md-4">ایمیل</label>
                                                             <div class="col-md-8">
@@ -482,7 +484,7 @@
                                                         <li><a href="#tamin" data-toggle="tab">اسامی تامیین کنندگان</a>
                                                         </li>
                                                         <li><a href="#madark" data-toggle="tab">مدارک</a></li>
-                                                        <li><a href="#psh" data-toggle="tab">مشخصات پرسنل شرکت ها</a>
+                                                        <li><a href="#psh" data-toggle="tab">مشخصات پرسنل های شرکت</a>
                                                         </li>
                                                     </ul>
                                                     <div class="tab-content">
@@ -519,9 +521,7 @@
 
                                                                                         <div class="form-group">
                                                                                             <label
-                                                                                                class="control-label col-md-6">تلفن
-                                                                                                دفتر
-                                                                                                مرکزی
+                                                                                                class="control-label col-md-6">تلفن دفتر
                                                                                                 <span
                                                                                                     style="color: red"
                                                                                                     class="required-mark">*</span>
@@ -573,11 +573,14 @@
                                                                                                 <input type="text"
                                                                                                        id="Established_company"
                                                                                                        name="Established_company"
-                                                                                                       @if(!empty($customer_company->Established_company))
-                                                                                                       value="{{$customer_company->Established_company}}"
-                                                                                                       @endif
-                                                                                                       class="form-control"
+                                                                                                       class="form-control example1"
                                                                                                 >
+                                                                                                @if(!empty($customer_company->Established_company))
+                                                                                                    <input type="hidden"
+                                                                                                           name="H_Established_company"
+                                                                                                           id="H_Established_company"
+                                                                                                           value="{{$customer_company->Established_company}}">
+                                                                                                @endif
                                                                                                 <div
                                                                                                     class="help-block with-errors"></div>
                                                                                             </div>
@@ -587,7 +590,7 @@
                                                                                             <label
                                                                                                 class="control-label col-md-6">فکس
                                                                                                 دفتر
-                                                                                                مرکزی</label>
+                                                                                                </label>
                                                                                             <div class="col-md-6">
                                                                                                 <input type="text"
                                                                                                        id="fax_company"
@@ -635,12 +638,17 @@
                                                                                             <div class="col-md-6">
                                                                                                 <input type="text"
                                                                                                        id="date_birth"
-                                                                                                       @if(!empty($customer_company->date_birth))
-                                                                                                       value="{{$customer_company->date_birth}}"
-                                                                                                       @endif
+
                                                                                                        name="date_birth"
-                                                                                                       class="form-control"
+                                                                                                       class="form-control example1"
                                                                                                 >
+
+                                                                                                @if(!empty($customer_company->date_birth))
+                                                                                                    <input type="hidden"
+                                                                                                           name="D_date_birth"
+                                                                                                           id="D_date_birth"
+                                                                                                           value="{{$customer_company->date_birth}}">
+                                                                                                @endif
                                                                                                 <div
                                                                                                     class="help-block with-errors"></div>
                                                                                             </div>
@@ -753,7 +761,7 @@
                                                                                         <div class="form-group">
                                                                                             <label
                                                                                                 class="control-label col-md-6">
-                                                                                                نام فروشگاه/پخش
+                                                                                                نام فروشگاه
                                                                                             </label>
                                                                                             <div class="col-md-6">
                                                                                                 <input type="text"
@@ -777,20 +785,27 @@
                                                                                                     class="required-mark">*</span>
                                                                                             </label>
                                                                                             <div class="col-md-6">
+
+
                                                                                                 <input maxlength="100"
                                                                                                        minlength="3"
                                                                                                        type="text"
                                                                                                        id="date_work_company"
                                                                                                        name="date_work_company"
-                                                                                                       @if(!empty($customer_work->date_work_company))
-                                                                                                       value="{{$customer_work->date_work_company}}"
-                                                                                                       @endif
-                                                                                                       class="form-control"
+
+                                                                                                       class="form-control example1"
                                                                                                        data-error="Minimum 3 character required">
                                                                                                 <div
                                                                                                     class="help-block with-errors"></div>
                                                                                             </div>
                                                                                         </div>
+                                                                                        @if(!empty($customer_work->date_work_company))
+                                                                                            <input type="hidden"
+                                                                                                   name="D_date_work_company"
+                                                                                                   id="D_date_work_company"
+                                                                                                   value="{{$customer_work->date_work_company}}">
+                                                                                        @endif
+
 
                                                                                         <div class="form-group">
                                                                                             <label
@@ -1100,7 +1115,7 @@
                                                                                         <div class="form-group">
                                                                                             <label
                                                                                                 class="control-label col-md-6">
-                                                                                                شماره جواز کسب
+                                                                                                شماره جواز
                                                                                             </label>
                                                                                             <div class="col-md-6">
                                                                                                 <input type="text"
@@ -1119,17 +1134,21 @@
                                                                                         <div class="form-group">
                                                                                             <label
                                                                                                 class="control-label col-md-6">
-                                                                                                اعتبار جواز کسب
+                                                                                                اعتبار جواز
                                                                                             </label>
                                                                                             <div class="col-md-6">
                                                                                                 <input type="text"
                                                                                                        id="credibilitylicense_work_company"
                                                                                                        name="credibilitylicense_work_company"
-                                                                                                       @if(!empty($customer_work->credibilitylicense_work_company))
-                                                                                                       value="{{$customer_work->credibilitylicense_work_company}}"
-                                                                                                       @endif
-                                                                                                       class="form-control"
+
+                                                                                                       class="form-control example1"
                                                                                                 >
+                                                                                                @if(!empty($customer_work->credibilitylicense_work_company))
+                                                                                                    <input type="hidden"
+                                                                                                           name="C_credibilitylicense_work_company"
+                                                                                                           id="C_credibilitylicense_work_company"
+                                                                                                           value="{{$customer_work->credibilitylicense_work_company}}">
+                                                                                                @endif
                                                                                                 <div
                                                                                                     class="help-block with-errors"></div>
                                                                                             </div>
@@ -1285,50 +1304,50 @@
                                                                                         </tr>
                                                                                         </thead>
 
-                                                                                                <tbody
-                                                                                                    id="TextBoxContainerbank">
-                                                                                                @if(!empty($customer_banks))
-                                                                                                @foreach($customer_banks as $customer_bank)
+                                                                                        <tbody
+                                                                                            id="TextBoxContainerbank">
+                                                                                        @if(!empty($customer_banks))
+                                                                                            @foreach($customer_banks as $customer_bank)
 
                                                                                                 <tr>
 
-                                                                                                <td><input
-                                                                                                        name="name_bank_company[]"
-                                                                                                        type="text"
-                                                                                                        value="{{$customer_bank->name_bank_company}}"
-                                                                                                        class="form-control"/>
-                                                                                                </td>
-                                                                                                <td><input
-                                                                                                        name="branch_bank_company[]"
-                                                                                                        type="text"
-                                                                                                        value="{{$customer_bank->branch_bank_company}}"
-                                                                                                        class="form-control"/>
-                                                                                                </td>
-                                                                                                <td><input
-                                                                                                        name="account_bank_company[]"
-                                                                                                        type="text"
-                                                                                                        value="{{$customer_bank->account_bank_company}}"
-                                                                                                        class="form-control"/>
-                                                                                                </td>
-                                                                                                <td><input
-                                                                                                        name="date_bank_company[]"
-                                                                                                        type="text"
-                                                                                                        value="{{$customer_bank->date_bank_company}}"
-                                                                                                        class="form-control"/>
-                                                                                                </td>
-                                                                                                <td>
-                                                                                                    <button
-                                                                                                        type="button"
-                                                                                                        data-original-title="حذف پرسنل"
-                                                                                                        class="btn btn-danger remove">
-                                                                                                        <i class="fa fa-remove"></i>
-                                                                                                    </button>
-                                                                                                </td>
+                                                                                                    <td><input
+                                                                                                            name="name_bank_company[]"
+                                                                                                            type="text"
+                                                                                                            value="{{$customer_bank->name_bank_company}}"
+                                                                                                            class="form-control"/>
+                                                                                                    </td>
+                                                                                                    <td><input
+                                                                                                            name="branch_bank_company[]"
+                                                                                                            type="text"
+                                                                                                            value="{{$customer_bank->branch_bank_company}}"
+                                                                                                            class="form-control"/>
+                                                                                                    </td>
+                                                                                                    <td><input
+                                                                                                            name="account_bank_company[]"
+                                                                                                            type="text"
+                                                                                                            value="{{$customer_bank->account_bank_company}}"
+                                                                                                            class="form-control"/>
+                                                                                                    </td>
+                                                                                                    <td><input
+                                                                                                            name="date_bank_company[]"
+                                                                                                            type="text"
+                                                                                                            value="{{$customer_bank->date_bank_company}}"
+                                                                                                            class="form-control"/>
+                                                                                                    </td>
+                                                                                                    <td>
+                                                                                                        <button
+                                                                                                            type="button"
+                                                                                                            data-original-title="حذف پرسنل"
+                                                                                                            class="btn btn-danger remove">
+                                                                                                            <i class="fa fa-remove"></i>
+                                                                                                        </button>
+                                                                                                    </td>
                                                                                                 </tr>
 
-                                                                                                @endforeach
-                                                                                                @endif
-                                                                                                </tbody>
+                                                                                            @endforeach
+                                                                                        @endif
+                                                                                        </tbody>
 
                                                                                         <tfoot>
                                                                                         <tr>
@@ -1376,40 +1395,39 @@
                                                                                         </tr>
                                                                                         </thead>
 
-                                                                                                <tbody
-                                                                                                    id="TextBoxContainertamin">
-                                                                                                @if(!empty($customer_securings))
-                                                                                                @foreach($customer_securings as $customer_securing)
+                                                                                        <tbody
+                                                                                            id="TextBoxContainertamin">
+                                                                                        @if(!empty($customer_securings))
+                                                                                            @foreach($customer_securings as $customer_securing)
 
-                                                                                                        <tr>
+                                                                                                <tr>
 
 
+                                                                                                    <td><input
+                                                                                                            name="name_securing_company[]"
+                                                                                                            type="text"
+                                                                                                            value="{{$customer_securing->name_securing_company}}"
+                                                                                                            class="form-control"/>
+                                                                                                    </td>
+                                                                                                    <td><input
+                                                                                                            name="date_securing_company[]"
+                                                                                                            type="text"
+                                                                                                            value="{{$customer_securing->date_securing_company}}"
+                                                                                                            class="form-control"/>
+                                                                                                    </td>
+                                                                                                    <td>
+                                                                                                        <button
+                                                                                                            type="button"
+                                                                                                            data-original-title="حذف"
+                                                                                                            class="btn btn-danger remove">
+                                                                                                            <i class="fa fa-remove"></i>
+                                                                                                        </button>
+                                                                                                    </td>
+                                                                                                </tr>
 
-                                                                                                <td><input
-                                                                                                        name="name_securing_company[]"
-                                                                                                        type="text"
-                                                                                                        value="{{$customer_securing->name_securing_company}}"
-                                                                                                        class="form-control"/>
-                                                                                                </td>
-                                                                                                <td><input
-                                                                                                        name="date_securing_company[]"
-                                                                                                        type="text"
-                                                                                                        value="{{$customer_securing->date_securing_company}}"
-                                                                                                        class="form-control"/>
-                                                                                                </td>
-                                                                                                <td>
-                                                                                                    <button
-                                                                                                        type="button"
-                                                                                                        data-original-title="حذف"
-                                                                                                        class="btn btn-danger remove">
-                                                                                                        <i class="fa fa-remove"></i>
-                                                                                                    </button>
-                                                                                                </td>
-                                                                                                        </tr>
-
-                                                                                                @endforeach
-                                                                                                @endif
-                                                                                                </tbody>
+                                                                                            @endforeach
+                                                                                        @endif
+                                                                                        </tbody>
 
 
                                                                                         <tfoot>
@@ -1454,11 +1472,32 @@
                                                                                                 class="control-label">
                                                                                                 شناسنامه
                                                                                             </label>
+                                                                                            @if(!empty($customer_document->certificate_documents_company))
+                                                                                                <li style="color: green"
+                                                                                                    class="fa fa-check"
+                                                                                                    id="check_certificate_documents_company"></li>
+                                                                                                <a target="_blank"
+                                                                                                   id="view_certificate_documents_company"
+                                                                                                   href="{{url($customer_document->certificate_documents_company)}}"><span>مشاهده فایل</span></a>
+                                                                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                                <a href="javascript:void(0)"
+                                                                                                   id="delete_certificate_documents_company"><span>حذف فایل</span></a>
+                                                                                                <li style="color: red;visibility: hidden"
+                                                                                                    class="fa fa-remove"
+                                                                                                    id="uncheck_certificate_documents_company"></li>
+                                                                                            @else
+                                                                                                <li style="color: red"
+                                                                                                    class="fa fa-remove"
+                                                                                                    id="uncheck_certificate_documents_company"></li>
+                                                                                            @endif
+
                                                                                             <div class="col-md-12">
                                                                                                 <input type="file"
                                                                                                        id="certificate_documents_company"
                                                                                                        name="certificate_documents_company"
-                                                                                                       class="form-control">
+                                                                                                       class="form-control"
+                                                                                                       value="Send Request"
+                                                                                                >
                                                                                                 <div
                                                                                                     class="help-block with-errors"></div>
                                                                                             </div>
@@ -1468,6 +1507,24 @@
                                                                                                 class="control-label">
                                                                                                 کارت ملی
                                                                                             </label>
+                                                                                            @if(!empty($customer_document->cart_documents_company))
+                                                                                                <li style="color: green"
+                                                                                                    class="fa fa-check"
+                                                                                                    id="check_cart_documents_company"></li>
+                                                                                                <a target="_blank"
+                                                                                                   id="view_cart_documents_company"
+                                                                                                   href="{{url($customer_document->cart_documents_company)}}"><span>مشاهده فایل</span></a>
+                                                                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                                <a href="javascript:void(0)"
+                                                                                                   id="delete_cart_documents_company"><span>حذف فایل</span></a>
+                                                                                                <li style="color: red;visibility: hidden"
+                                                                                                    class="fa fa-remove"
+                                                                                                    id="uncheck_cart_documents_company"></li>
+                                                                                            @else
+                                                                                                <li style="color: red"
+                                                                                                    class="fa fa-remove"
+                                                                                                    id="uncheck_cart_documents_company"></li>
+                                                                                            @endif
                                                                                             <div class="col-md-12">
                                                                                                 <input type="file"
                                                                                                        id="cart_documents_company"
@@ -1482,6 +1539,24 @@
                                                                                                 class="control-label">
                                                                                                 محل فعالیت
                                                                                             </label>
+                                                                                            @if(!empty($customer_document->activity_documents_company))
+                                                                                                <li style="color: green"
+                                                                                                    class="fa fa-check"
+                                                                                                    id="check_activity_documents_company"></li>
+                                                                                                <a target="_blank"
+                                                                                                   id="view_activity_documents_company"
+                                                                                                   href="{{url($customer_document->activity_documents_company)}}"><span>مشاهده فایل</span></a>
+                                                                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                                <a href="javascript:void(0)"
+                                                                                                   id="delete_activity_documents_company"><span>حذف فایل</span></a>
+                                                                                                <li style="color: red;visibility: hidden"
+                                                                                                    class="fa fa-remove"
+                                                                                                    id="uncheck_activity_documents_company"></li>
+                                                                                            @else
+                                                                                                <li style="color: red"
+                                                                                                    class="fa fa-remove"
+                                                                                                    id="uncheck_activity_documents_company"></li>
+                                                                                            @endif
                                                                                             <div class="col-md-12">
                                                                                                 <input type="file"
                                                                                                        id="activity_documents_company"
@@ -1502,6 +1577,24 @@
                                                                                                 class="control-label">
                                                                                                 مالکیت فروشگاه
                                                                                             </label>
+                                                                                            @if(!empty($customer_document->store_documents_company))
+                                                                                                <li style="color: green"
+                                                                                                    class="fa fa-check"
+                                                                                                    id="check_store_documents_company"></li>
+                                                                                                <a target="_blank"
+                                                                                                   id="view_store_documents_company"
+                                                                                                   href="{{url($customer_document->store_documents_company)}}"><span>مشاهده فایل</span></a>
+                                                                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                                <a href="javascript:void(0)"
+                                                                                                   id="delete_store_documents_company"><span>حذف فایل</span></a>
+                                                                                                <li style="color: red;visibility: hidden"
+                                                                                                    class="fa fa-remove"
+                                                                                                    id="uncheck_store_documents_company"></li>
+                                                                                            @else
+                                                                                                <li style="color: red"
+                                                                                                    class="fa fa-remove"
+                                                                                                    id="uncheck_store_documents_company"></li>
+                                                                                            @endif
                                                                                             <div class="col-md-12">
                                                                                                 <input type="file"
                                                                                                        id="store_documents_company"
@@ -1517,6 +1610,24 @@
                                                                                                 class="control-label">
                                                                                                 مالکیت انبار
                                                                                             </label>
+                                                                                            @if(!empty($customer_document->ownership_documents_company))
+                                                                                                <li style="color: green"
+                                                                                                    class="fa fa-check"
+                                                                                                    id="check_ownership_documents_company"></li>
+                                                                                                <a target="_blank"
+                                                                                                   id="view_ownership_documents_company"
+                                                                                                   href="{{url($customer_document->ownership_documents_company)}}"><span>مشاهده فایل</span></a>
+                                                                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                                <a href="javascript:void(0)"
+                                                                                                   id="delete_ownership_documents_company"><span>حذف فایل</span></a>
+                                                                                                <li style="color: red;visibility: hidden"
+                                                                                                    class="fa fa-remove"
+                                                                                                    id="uncheck_ownership_documents_company"></li>
+                                                                                            @else
+                                                                                                <li style="color: red"
+                                                                                                    class="fa fa-remove"
+                                                                                                    id="uncheck_ownership_documents_company"></li>
+                                                                                            @endif
                                                                                             <div class="col-md-12">
                                                                                                 <input type="file"
                                                                                                        id="ownership_documents_company"
@@ -1532,6 +1643,24 @@
                                                                                                 class="control-label">
                                                                                                 تاسیس و بهره برداری
                                                                                             </label>
+                                                                                            @if(!empty($customer_document->established_documents_company))
+                                                                                                <li style="color: green"
+                                                                                                    class="fa fa-check"
+                                                                                                    id="check_established_documents_company"></li>
+                                                                                                <a target="_blank"
+                                                                                                   id="view_established_documents_company"
+                                                                                                   href="{{url($customer_document->established_documents_company)}}"><span>مشاهده فایل</span></a>
+                                                                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                                <a href="javascript:void(0)"
+                                                                                                   id="delete_established_documents_company"><span>حذف فایل</span></a>
+                                                                                                <li style="color: red;visibility: hidden"
+                                                                                                    class="fa fa-remove"
+                                                                                                    id="uncheck_established_documents_company"></li>
+                                                                                            @else
+                                                                                                <li style="color: red"
+                                                                                                    class="fa fa-remove"
+                                                                                                    id="uncheck_established_documents_company"></li>
+                                                                                            @endif
                                                                                             <div class="col-md-12">
                                                                                                 <input type="file"
                                                                                                        id="established_documents_company"
@@ -1553,6 +1682,24 @@
                                                                                                 class="control-label">
                                                                                                 عکس فروشگاه
                                                                                             </label>
+                                                                                            @if(!empty($customer_document->sstore_documents_company))
+                                                                                                <li style="color: green"
+                                                                                                    class="fa fa-check"
+                                                                                                    id="check_sstore_documents_company"></li>
+                                                                                                <a target="_blank"
+                                                                                                   id="view_sstore_documents_company"
+                                                                                                   href="{{url($customer_document->sstore_documents_company)}}"><span>مشاهده فایل</span></a>
+                                                                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                                <a href="javascript:void(0)"
+                                                                                                   id="delete_sstore_documents_company"><span>حذف فایل</span></a>
+                                                                                                <li style="color: red;visibility: hidden"
+                                                                                                    class="fa fa-remove"
+                                                                                                    id="uncheck_sstore_documents_company"></li>
+                                                                                            @else
+                                                                                                <li style="color: red"
+                                                                                                    class="fa fa-remove"
+                                                                                                    id="uncheck_sstore_documents_company"></li>
+                                                                                            @endif
                                                                                             <div class="col-md-12">
                                                                                                 <input type="file"
                                                                                                        id="sstore_documents_company"
@@ -1567,6 +1714,24 @@
                                                                                                 class="control-label">
                                                                                                 عکس انبار
                                                                                             </label>
+                                                                                            @if(!empty($customer_document->pstore_documents_company))
+                                                                                                <li style="color: green"
+                                                                                                    class="fa fa-check"
+                                                                                                    id="check_pstore_documents_company"></li>
+                                                                                                <a target="_blank"
+                                                                                                   id="view_pstore_documents_company"
+                                                                                                   href="{{url($customer_document->pstore_documents_company)}}"><span>مشاهده فایل</span></a>
+                                                                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                                <a href="javascript:void(0)"
+                                                                                                   id="delete_pstore_documents_company"><span>حذف فایل</span></a>
+                                                                                                <li style="color: red;visibility: hidden"
+                                                                                                    class="fa fa-remove"
+                                                                                                    id="uncheck_pstore_documents_company"></li>
+                                                                                            @else
+                                                                                                <li style="color: red"
+                                                                                                    class="fa fa-remove"
+                                                                                                    id="uncheck_pstore_documents_company"></li>
+                                                                                            @endif
                                                                                             <div class="col-md-12">
                                                                                                 <input type="file"
                                                                                                        id="pstore_documents_company"
@@ -1579,9 +1744,26 @@
                                                                                         <div class="form-group ">
                                                                                             <label
                                                                                                 class="control-label">
-                                                                                                نتیجه استعلام حسابهای
-                                                                                                بانکی
+                                                                                                استعلام
                                                                                             </label>
+                                                                                            @if(!empty($customer_document->final_documents_company))
+                                                                                                <li style="color: green"
+                                                                                                    class="fa fa-check"
+                                                                                                    id="check_final_documents_company"></li>
+                                                                                                <a target="_blank"
+                                                                                                   id="view_final_documents_company"
+                                                                                                   href="{{url($customer_document->final_documents_company)}}"><span>مشاهده فایل</span></a>
+                                                                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                                <a href="javascript:void(0)"
+                                                                                                   id="delete_final_documents_company"><span>حذف فایل</span></a>
+                                                                                                <li style="color: red;visibility: hidden"
+                                                                                                    class="fa fa-remove"
+                                                                                                    id="uncheck_final_documents_company"></li>
+                                                                                            @else
+                                                                                                <li style="color: red"
+                                                                                                    class="fa fa-remove"
+                                                                                                    id="uncheck_final_documents_company"></li>
+                                                                                            @endif
                                                                                             <div class="col-md-12">
                                                                                                 <input type="file"
                                                                                                        id="final_documents_company"
@@ -1634,92 +1816,93 @@
                                                                                         </tr>
                                                                                         </thead>
 
-                                                                                                <tbody
-                                                                                                    id="TextBoxContainer">
-                                                                                                @if(!empty($company_personals))
-                                                                                                @foreach($company_personals as $company_personal)
+                                                                                        <tbody
+                                                                                            id="TextBoxContainer">
+                                                                                        @if(!empty($company_personals))
+                                                                                            @foreach($company_personals as $company_personal)
 
                                                                                                 <tr>
 
 
-                                                                                                <td><input
-                                                                                                        name="per_side_company[]"
-                                                                                                        type="text"
-                                                                                                        value="{{$company_personal->per_side_company}}"
-                                                                                                        class="form-control"/>
-                                                                                                </td>
-                                                                                                <td><select
-                                                                                                        name="per_sex_company[]"
-                                                                                                        class="form-control">
-                                                                                                        <option>انتخاب
-                                                                                                            کنید
-                                                                                                        </option>
-                                                                                                        <option
-                                                                                                            value="1"
-                                                                                                            @if($company_personal->per_sex_company == 1)
-                                                                                                            selected
-                                                                                                            @endif
-                                                                                                        >
-                                                                                                            مرد
-                                                                                                        </option>
-                                                                                                        <option
-                                                                                                            value="2"
-                                                                                                            @if($company_personal->per_sex_company == 2)
-                                                                                                            selected
-                                                                                                            @endif
-                                                                                                        >
-                                                                                                            زن
-                                                                                                        </option>
-                                                                                                    </select></td>
-                                                                                                <td><input
-                                                                                                        name="per_title_company[]"
-                                                                                                        type="text"
-                                                                                                        value="{{$company_personal->per_title_company}}"
-                                                                                                        class="form-control"/>
-                                                                                                </td>
-                                                                                                <td><input
-                                                                                                        name="per_name_company[]"
-                                                                                                        type="text"
-                                                                                                        value="{{$company_personal->per_name_company}}"
-                                                                                                        class="form-control"/>
-                                                                                                </td>
-                                                                                                <td><input
-                                                                                                        name="per_phone_company[]"
-                                                                                                        type="text"
-                                                                                                        value="{{$company_personal->per_phone_company}}"
-                                                                                                        class="form-control"/>
-                                                                                                </td>
-                                                                                                <td><input
-                                                                                                        name="per_inside_company[]"
-                                                                                                        type="text"
-                                                                                                        value="{{$company_personal->per_inside_company}}"
-                                                                                                        class="form-control"/>
-                                                                                                </td>
-                                                                                                <td><input
-                                                                                                        name="per_email_company[]"
-                                                                                                        type="text"
-                                                                                                        value="{{$company_personal->per_email_company}}"
-                                                                                                        class="form-control"/>
-                                                                                                </td>
-                                                                                                <td><input
-                                                                                                        name="per_tel_company_company[]"
-                                                                                                        type="text"
-                                                                                                        value="{{$company_personal->per_tel_company_company}}"
-                                                                                                        class="form-control"/>
-                                                                                                </td>
-                                                                                                <td>
-                                                                                                    <button
-                                                                                                        type="button"
-                                                                                                        data-original-title="حذف پرسنل"
-                                                                                                        class="btn btn-danger remove">
-                                                                                                        <i class="fa fa-remove"></i>
-                                                                                                    </button>
-                                                                                                </td>
+                                                                                                    <td><input
+                                                                                                            name="per_side_company[]"
+                                                                                                            type="text"
+                                                                                                            value="{{$company_personal->per_side_company}}"
+                                                                                                            class="form-control"/>
+                                                                                                    </td>
+                                                                                                    <td><select
+                                                                                                            name="per_sex_company[]"
+                                                                                                            class="form-control">
+                                                                                                            <option>
+                                                                                                                انتخاب
+                                                                                                                کنید
+                                                                                                            </option>
+                                                                                                            <option
+                                                                                                                value="1"
+                                                                                                                @if($company_personal->per_sex_company == 1)
+                                                                                                                selected
+                                                                                                                @endif
+                                                                                                            >
+                                                                                                                مرد
+                                                                                                            </option>
+                                                                                                            <option
+                                                                                                                value="2"
+                                                                                                                @if($company_personal->per_sex_company == 2)
+                                                                                                                selected
+                                                                                                                @endif
+                                                                                                            >
+                                                                                                                زن
+                                                                                                            </option>
+                                                                                                        </select></td>
+                                                                                                    <td><input
+                                                                                                            name="per_title_company[]"
+                                                                                                            type="text"
+                                                                                                            value="{{$company_personal->per_title_company}}"
+                                                                                                            class="form-control"/>
+                                                                                                    </td>
+                                                                                                    <td><input
+                                                                                                            name="per_name_company[]"
+                                                                                                            type="text"
+                                                                                                            value="{{$company_personal->per_name_company}}"
+                                                                                                            class="form-control"/>
+                                                                                                    </td>
+                                                                                                    <td><input
+                                                                                                            name="per_phone_company[]"
+                                                                                                            type="text"
+                                                                                                            value="{{$company_personal->per_phone_company}}"
+                                                                                                            class="form-control"/>
+                                                                                                    </td>
+                                                                                                    <td><input
+                                                                                                            name="per_inside_company[]"
+                                                                                                            type="text"
+                                                                                                            value="{{$company_personal->per_inside_company}}"
+                                                                                                            class="form-control"/>
+                                                                                                    </td>
+                                                                                                    <td><input
+                                                                                                            name="per_email_company[]"
+                                                                                                            type="text"
+                                                                                                            value="{{$company_personal->per_email_company}}"
+                                                                                                            class="form-control"/>
+                                                                                                    </td>
+                                                                                                    <td><input
+                                                                                                            name="per_tel_company_company[]"
+                                                                                                            type="text"
+                                                                                                            value="{{$company_personal->per_tel_company_company}}"
+                                                                                                            class="form-control"/>
+                                                                                                    </td>
+                                                                                                    <td>
+                                                                                                        <button
+                                                                                                            type="button"
+                                                                                                            data-original-title="حذف پرسنل"
+                                                                                                            class="btn btn-danger remove">
+                                                                                                            <i class="fa fa-remove"></i>
+                                                                                                        </button>
+                                                                                                    </td>
                                                                                                 </tr>
-                                                                                                @endforeach
-                                                                                                @endif
+                                                                                            @endforeach
+                                                                                        @endif
 
-                                                                                                </tbody>
+                                                                                        </tbody>
 
 
                                                                                         <tfoot>
@@ -1768,8 +1951,12 @@
             </div>
         </div>
     </div>
-
-
+    <script type="text/javascript">
+        $(window).bind("load", function () {
+            var D_date = $('#D_date').val();
+            $('#date').val(D_date);
+        });
+    </script>
 
     <script src="{{asset('/public/js/2.js')}}"></script>
     <script>
@@ -1777,6 +1964,16 @@
 
         $(document).ready(function () {
             $('#nextBtn').click(function () {
+                var H_Established_company = $('#H_Established_company').val();
+                var D_date_birth = $('#D_date_birth').val();
+                var D_date_work_company = $('#D_date_work_company').val();
+                var D_date_personel = $('#D_date_personel').val();
+                var C_credibilitylicense_work_company = $('#C_credibilitylicense_work_company').val();
+                $('#Established_company').val(H_Established_company);
+                $('#date_birth').val(D_date_birth);
+                $('#date_work_company').val(D_date_work_company);
+                $('#date_personel').val(D_date_personel);
+                $('#credibilitylicense_work_company').val(C_credibilitylicense_work_company);
 
 
                 var type = $('#type').val();
@@ -1793,6 +1990,7 @@
                                 $('#company').hide();
                                 $('#personal').show();
                                 $('#id').val('2');
+
                             }
                         }
                     });
@@ -1986,5 +2184,333 @@
             left: 50%;
         }
     </style>
+
+
+    <script>
+
+        $(function () {
+
+
+            $("#delete_certificate_documents_company").bind("click", function () {
+                var id = $('#id_customer').val();
+                Swal.fire({
+                    title: 'حذف فایل شناسنامه؟',
+                    text: "فایل های حذف شده قابل بازیابی نیستند!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'حذف',
+                    cancelButtonText: 'انصراف',
+                }).then((result) => {
+                    if (result.value) {
+                        $.ajax({
+                            type: 'GET',
+                            url: "{{route('admin.customers.delete.fileCertificate')}}" + '/' + id,
+                            data: {
+                                '_token': $('input[name=_token]').val(),
+                            },
+                            success: function (data) {
+                                $('#check_certificate_documents_company').hide();
+                                $('#delete_certificate_documents_company').hide();
+                                $('#view_certificate_documents_company').hide();
+                                document.getElementById("uncheck_certificate_documents_company").style.visibility = "visible";
+                                Swal.fire({
+                                    title: 'موفق',
+                                    text: 'فایل شناسنامه با موفقیت از پرونده ای مشتری حذف شد',
+                                    icon: 'success',
+                                    confirmButtonText: 'تایید'
+                                })
+                            }
+                        });
+                    }
+                })
+            });
+            $("#delete_cart_documents_company").bind("click", function () {
+                var id = $('#id_customer').val();
+                Swal.fire({
+                    title: 'حذف فایل کارت ملی؟',
+                    text: "فایل های حذف شده قابل بازیابی نیستند!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'حذف',
+                    cancelButtonText: 'انصراف',
+                }).then((result) => {
+                    if (result.value) {
+                        $.ajax({
+                            type: 'GET',
+                            url: "{{route('admin.customers.delete.fileCart')}}" + '/' + id,
+                            data: {
+                                '_token': $('input[name=_token]').val(),
+                            },
+                            success: function (data) {
+                                $('#check_cart_documents_company').hide();
+                                $('#delete_cart_documents_company').hide();
+                                $('#view_cart_documents_company').hide();
+                                document.getElementById("uncheck_cart_documents_company").style.visibility = "visible";
+                                Swal.fire({
+                                    title: 'موفق',
+                                    text: 'فایل کارت ملی با موفقیت از پرونده ای مشتری حذف شد',
+                                    icon: 'success',
+                                    confirmButtonText: 'تایید'
+                                })
+                            }
+                        });
+                    }
+                })
+            });
+            $("#delete_activity_documents_company").bind("click", function () {
+                var id = $('#id_customer').val();
+                Swal.fire({
+                    title: 'حذف فایل محل فعالیت؟',
+                    text: "فایل های حذف شده قابل بازیابی نیستند!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'حذف',
+                    cancelButtonText: 'انصراف',
+                }).then((result) => {
+                    if (result.value) {
+                        $.ajax({
+                            type: 'GET',
+                            url: "{{route('admin.customers.delete.fileActivity')}}" + '/' + id,
+                            data: {
+                                '_token': $('input[name=_token]').val(),
+                            },
+                            success: function (data) {
+                                $('#check_activity_documents_company').hide();
+                                $('#delete_activity_documents_company').hide();
+                                $('#view_activity_documents_company').hide();
+                                document.getElementById("uncheck_activity_documents_company").style.visibility = "visible";
+                                Swal.fire({
+                                    title: 'موفق',
+                                    text: 'فایل محل فعالیت با موفقیت از پرونده ای مشتری حذف شد',
+                                    icon: 'success',
+                                    confirmButtonText: 'تایید'
+                                })
+                            }
+                        });
+                    }
+                })
+            });
+            $("#delete_store_documents_company").bind("click", function () {
+                var id = $('#id_customer').val();
+                Swal.fire({
+                    title: 'حذف فایل مالکیت فروشگاه؟',
+                    text: "فایل های حذف شده قابل بازیابی نیستند!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'حذف',
+                    cancelButtonText: 'انصراف',
+                }).then((result) => {
+                    if (result.value) {
+                        $.ajax({
+                            type: 'GET',
+                            url: "{{route('admin.customers.delete.fileStore')}}" + '/' + id,
+                            data: {
+                                '_token': $('input[name=_token]').val(),
+                            },
+                            success: function (data) {
+                                $('#check_store_documents_company').hide();
+                                $('#delete_store_documents_company').hide();
+                                $('#view_store_documents_company').hide();
+                                document.getElementById("uncheck_store_documents_company").style.visibility = "visible";
+                                Swal.fire({
+                                    title: 'موفق',
+                                    text: 'فایل مالکیت فروشگاه با موفقیت از پرونده ای مشتری حذف شد',
+                                    icon: 'success',
+                                    confirmButtonText: 'تایید'
+                                })
+                            }
+                        });
+                    }
+                })
+            });
+            $("#delete_ownership_documents_company").bind("click", function () {
+                var id = $('#id_customer').val();
+                Swal.fire({
+                    title: 'حذف فایل مالکیت انبار؟',
+                    text: "فایل های حذف شده قابل بازیابی نیستند!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'حذف',
+                    cancelButtonText: 'انصراف',
+                }).then((result) => {
+                    if (result.value) {
+                        $.ajax({
+                            type: 'GET',
+                            url: "{{route('admin.customers.delete.fileOwnership')}}" + '/' + id,
+                            data: {
+                                '_token': $('input[name=_token]').val(),
+                            },
+                            success: function (data) {
+                                $('#check_ownership_documents_company').hide();
+                                $('#delete_ownership_documents_company').hide();
+                                $('#view_ownership_documents_company').hide();
+                                document.getElementById("uncheck_ownership_documents_company").style.visibility = "visible";
+                                Swal.fire({
+                                    title: 'موفق',
+                                    text: 'فایل مالکیت انبار با موفقیت از پرونده ای مشتری حذف شد',
+                                    icon: 'success',
+                                    confirmButtonText: 'تایید'
+                                })
+                            }
+                        });
+                    }
+                })
+            });
+            $("#delete_established_documents_company").bind("click", function () {
+                var id = $('#id_customer').val();
+                Swal.fire({
+                    title: 'حذف فایل تاسیس و بهره برداری؟',
+                    text: "فایل های حذف شده قابل بازیابی نیستند!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'حذف',
+                    cancelButtonText: 'انصراف',
+                }).then((result) => {
+                    if (result.value) {
+                        $.ajax({
+                            type: 'GET',
+                            url: "{{route('admin.customers.delete.fileEstablished')}}" + '/' + id,
+                            data: {
+                                '_token': $('input[name=_token]').val(),
+                            },
+                            success: function (data) {
+                                $('#check_established_documents_company').hide();
+                                $('#delete_established_documents_company').hide();
+                                $('#view_established_documents_company').hide();
+                                document.getElementById("uncheck_established_documents_company").style.visibility = "visible";
+                                Swal.fire({
+                                    title: 'موفق',
+                                    text: 'فایل تاسیس و بهره برداری با موفقیت از پرونده ای مشتری حذف شد',
+                                    icon: 'success',
+                                    confirmButtonText: 'تایید'
+                                })
+                            }
+                        });
+                    }
+                })
+            });
+            $("#delete_sstore_documents_company").bind("click", function () {
+                var id = $('#id_customer').val();
+                Swal.fire({
+                    title: 'حذف فایل عکس فروشگاه؟',
+                    text: "فایل های حذف شده قابل بازیابی نیستند!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'حذف',
+                    cancelButtonText: 'انصراف',
+                }).then((result) => {
+                    if (result.value) {
+                        $.ajax({
+                            type: 'GET',
+                            url: "{{route('admin.customers.delete.fileSstore')}}" + '/' + id,
+                            data: {
+                                '_token': $('input[name=_token]').val(),
+                            },
+                            success: function (data) {
+                                $('#check_sstore_documents_company').hide();
+                                $('#delete_sstore_documents_company').hide();
+                                $('#view_sstore_documents_company').hide();
+                                document.getElementById("uncheck_sstore_documents_company").style.visibility = "visible";
+                                Swal.fire({
+                                    title: 'موفق',
+                                    text: 'فایل عکس فروشگاه با موفقیت از پرونده ای مشتری حذف شد',
+                                    icon: 'success',
+                                    confirmButtonText: 'تایید'
+                                })
+                            }
+                        });
+                    }
+                })
+            });
+            $("#delete_pstore_documents_company").bind("click", function () {
+                var id = $('#id_customer').val();
+                Swal.fire({
+                    title: 'حذف فایل عکس انبار؟',
+                    text: "فایل های حذف شده قابل بازیابی نیستند!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'حذف',
+                    cancelButtonText: 'انصراف',
+                }).then((result) => {
+                    if (result.value) {
+                        $.ajax({
+                            type: 'GET',
+                            url: "{{route('admin.customers.delete.filePstore')}}" + '/' + id,
+                            data: {
+                                '_token': $('input[name=_token]').val(),
+                            },
+                            success: function (data) {
+                                $('#check_pstore_documents_company').hide();
+                                $('#delete_pstore_documents_company').hide();
+                                $('#view_pstore_documents_company').hide();
+                                document.getElementById("uncheck_pstore_documents_company").style.visibility = "visible";
+                                Swal.fire({
+                                    title: 'موفق',
+                                    text: 'فایل عکس انبار با موفقیت از پرونده ای مشتری حذف شد',
+                                    icon: 'success',
+                                    confirmButtonText: 'تایید'
+                                })
+                            }
+                        });
+                    }
+                })
+            });
+            $("#delete_final_documents_company").bind("click", function () {
+                var id = $('#id_customer').val();
+                Swal.fire({
+                    title: 'حذف فایل نتیجه استعلام حسابهای بانکی؟',
+                    text: "فایل های حذف شده قابل بازیابی نیستند!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'حذف',
+                    cancelButtonText: 'انصراف',
+                }).then((result) => {
+                    if (result.value) {
+                        $.ajax({
+                            type: 'GET',
+                            url: "{{route('admin.customers.delete.fileFinal')}}" + '/' + id,
+                            data: {
+                                '_token': $('input[name=_token]').val(),
+                            },
+                            success: function (data) {
+                                $('#check_final_documents_company').hide();
+                                $('#delete_final_documents_company').hide();
+                                $('#view_final_documents_company').hide();
+                                document.getElementById("uncheck_final_documents_company").style.visibility = "visible";
+                                Swal.fire({
+                                    title: 'موفق',
+                                    text: 'فایل نتیجه استعلام حسابهای بانکی با موفقیت از پرونده ای مشتری حذف شد',
+                                    icon: 'success',
+                                    confirmButtonText: 'تایید'
+                                })
+                            }
+                        });
+                    }
+                })
+            });
+
+
+        });
+
+
+    </script>
 
 @endsection

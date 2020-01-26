@@ -209,14 +209,20 @@
 
 
                                                         <div class="form-group field ">
-                                                            <label class="control-label main col-md-4">تاریخ
-                                                                تولد</label>
+                                                            <label class="control-label main col-md-4">تلفن
+                                                                همراه
+
+                                                                <span
+                                                                    style="color: red"
+                                                                    class="required-mark">*</span>
+                                                            </label>
                                                             <div class="col-md-8">
                                                                 <input type="text"
-                                                                       id="date_personel"
-                                                                       name="date_personel"
-                                                                       required="required" class="form-control example1"
-                                                                       placeholder="لطفا تاریخ تولد را وارد کنید">
+                                                                       id="phone_personel"
+                                                                       name="phone_personel"
+                                                                       required="required" class="form-control"
+                                                                       placeholder="لطفا شماره تلفن همراه را وارد کنید"
+                                                                       data-error="Minimum 3 character required">
                                                                 <div class="help-block with-errors"></div>
                                                             </div>
                                                         </div>
@@ -263,24 +269,20 @@
                                                                 <div class="help-block with-errors"></div>
                                                             </div>
                                                         </div>
-                                                        <div class="form-group field ">
-                                                            <label class="control-label main col-md-4">تلفن
-                                                                همراه
 
-                                                                <span
-                                                                    style="color: red"
-                                                                    class="required-mark">*</span>
-                                                            </label>
+                                                        <div class="form-group field ">
+                                                            <label class="control-label main col-md-4">تاریخ
+                                                                تولد</label>
                                                             <div class="col-md-8">
                                                                 <input type="text"
-                                                                       id="phone_personel"
-                                                                       name="phone_personel"
-                                                                       required="required" class="form-control"
-                                                                       placeholder="لطفا شماره تلفن همراه را وارد کنید"
-                                                                       data-error="Minimum 3 character required">
+                                                                       id="date_personel"
+                                                                       name="date_personel"
+                                                                       required="required" class="form-control example1"
+                                                                       placeholder="لطفا تاریخ تولد را وارد کنید">
                                                                 <div class="help-block with-errors"></div>
                                                             </div>
                                                         </div>
+
                                                         <div class="form-group field ">
                                                             <label class="control-label main col-md-4">ایمیل</label>
                                                             <div class="col-md-8">
@@ -344,7 +346,7 @@
                                                         <li><a href="#tamin" data-toggle="tab">اسامی تامیین کنندگان</a>
                                                         </li>
                                                         <li><a href="#madark" data-toggle="tab">مدارک</a></li>
-                                                        <li><a href="#psh" data-toggle="tab">مشخصات پرسنل شرکت ها</a>
+                                                        <li><a href="#psh" data-toggle="tab">مشخصات پرسنل های شرکت</a>
                                                         </li>
                                                     </ul>
                                                     <div class="tab-content">
@@ -380,7 +382,6 @@
                                                                                             <label
                                                                                                 class="control-label col-md-6">تلفن
                                                                                                 دفتر
-                                                                                                مرکزی
                                                                                                 <span
                                                                                                     style="color: red"
                                                                                                     class="required-mark">*</span>
@@ -437,7 +438,7 @@
                                                                                             <label
                                                                                                 class="control-label col-md-6">فکس
                                                                                                 دفتر
-                                                                                                مرکزی</label>
+                                                                                                </label>
                                                                                             <div class="col-md-6">
                                                                                                 <input type="text"
                                                                                                        id="fax_company"
@@ -584,7 +585,7 @@
                                                                                         <div class="form-group">
                                                                                             <label
                                                                                                 class="control-label col-md-6">
-                                                                                                نام فروشگاه/پخش
+                                                                                                نام فروشگاه
                                                                                             </label>
                                                                                             <div class="col-md-6">
                                                                                                 <input type="text"
@@ -852,7 +853,7 @@
                                                                                         <div class="form-group">
                                                                                             <label
                                                                                                 class="control-label col-md-6">
-                                                                                                شماره جواز کسب
+                                                                                                شماره جواز
                                                                                             </label>
                                                                                             <div class="col-md-6">
                                                                                                 <input type="text"
@@ -868,7 +869,7 @@
                                                                                         <div class="form-group">
                                                                                             <label
                                                                                                 class="control-label col-md-6">
-                                                                                                اعتبار جواز کسب
+                                                                                                اعتبار جواز
                                                                                             </label>
                                                                                             <div class="col-md-6">
                                                                                                 <input type="text"
@@ -1229,9 +1230,8 @@
                                                                                         </div>
                                                                                         <div class="form-group ">
                                                                                             <label
-                                                                                                class="control-label">
-                                                                                                نتیجه استعلام حسابهای
-                                                                                                بانکی
+                                                                                                class="control-label">استعلام
+
                                                                                             </label>
                                                                                             <div class="col-md-12">
                                                                                                 <input type="file"

@@ -182,6 +182,15 @@ Route::group(['middleware' => ['auth', 'web']], function () {
         Route::get('/customers/filter', 'CustomerController@filter')->name('admin.customers.filter');
         Route::delete('/customers/delete/{id?}', 'CustomerController@delete')->name('admin.customers.delete');
         Route::get('/customers/view/{id?}', 'CustomerController@view')->name('admin.customers.view');
+        Route::get('/customers/deleteFileCertificate/{id?}', 'CustomerController@deleteFileCertificate')->name('admin.customers.delete.fileCertificate');
+        Route::get('/customers/deleteFileCart/{id?}', 'CustomerController@deleteFileCart')->name('admin.customers.delete.fileCart');
+        Route::get('/customers/deleteFileActivity/{id?}', 'CustomerController@deleteFileActivity')->name('admin.customers.delete.fileActivity');
+        Route::get('/customers/deleteFileStore/{id?}', 'CustomerController@deleteFileStore')->name('admin.customers.delete.fileStore');
+        Route::get('/customers/deleteFileOwnership/{id?}', 'CustomerController@deleteFileOwnership')->name('admin.customers.delete.fileOwnership');
+        Route::get('/customers/deleteFileEstablished/{id?}', 'CustomerController@deleteFileEstablished')->name('admin.customers.delete.fileEstablished');
+        Route::get('/customers/deleteFileSstore/{id?}', 'CustomerController@deleteFileSstore')->name('admin.customers.delete.fileSstore');
+        Route::get('/customers/deleteFilePstore/{id?}', 'CustomerController@deleteFilePstore')->name('admin.customers.delete.filePstore');
+        Route::get('/customers/deleteFileFinal/{id?}', 'CustomerController@deleteFileFinal')->name('admin.customers.delete.fileFinal');
 
 
 

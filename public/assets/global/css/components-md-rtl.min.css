@@ -997,15 +997,6 @@ a {
     text-shadow: none;
     color: #0b93d5;
 }
-
-a:active{
-    text-shadow: none;
-    color: white;
-}
-a:focus{
-    text-shadow: none;
-    color: white;
-}
 a:active, a:focus, a:hover {
     outline: 0
 }

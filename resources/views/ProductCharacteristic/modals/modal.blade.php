@@ -5,7 +5,7 @@
                 <div class="portlet box blue">
                     <div class="portlet-title">
                         <div class="caption">
-                           مشخصه محصول
+                            مشخصه محصول
                         </div>
                     </div>
                     <div class="portlet-body form">
@@ -39,7 +39,8 @@
                                                 </label>
                                                 <select dir="rtl" id="commodity_id" class="form-control"
                                                         name="commodity_id"
-                                                        required>
+                                                        required
+                                                >
                                                     @foreach($commoditys as $commodity)
                                                         @if(!empty($commodity))
                                                             <option

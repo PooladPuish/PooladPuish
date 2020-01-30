@@ -2510,6 +2510,7 @@
 
         });
 
+        $('#customer').addClass('active');
 
     </script>
 

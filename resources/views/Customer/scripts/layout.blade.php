@@ -241,7 +241,7 @@
 
 
         return '<td><input name = "per_side_company[]" type="text" value = "' + value + '" class="form-control" /></td>' +
-            '<td><select name="per_sex_company[]"><option>انتخاب کنید</option><option value="1"> مرد</option><option  value="2"> زن</option></select></td>' +
+            '<td><select name="per_sex_company[]" class="form-control"><option>انتخاب کنید</option><option value="1"> مرد</option><option  value="2"> زن</option></select></td>' +
             '<td><input name = "per_title_company[]" type="text" value = "' + value + '" class="form-control" /></td>' +
             '<td><input name = "per_name_company[]" type="text" value = "' + value + '" class="form-control" /></td>' +
             '<td><input name = "per_phone_company[]" type="text" value = "' + value + '" class="form-control" /></td>' +

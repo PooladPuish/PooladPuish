@@ -16,8 +16,6 @@ Route::get('/', function () {
 });
 
 
-
-
 //RestPasswordUser
 Route::post('/users/RestPassword', 'RestPasswordController@RestPassword')->name('admin.user.RestPassword');
 
@@ -193,6 +191,13 @@ Route::group(['middleware' => ['auth', 'web']], function () {
         Route::get('/customers/deleteFileFinal/{id?}', 'CustomerController@deleteFileFinal')->name('admin.customers.delete.fileFinal');
 
 
+    });
+    Route::group(["namespace" => "Sell"], function () {
+
+        //InvoiceController
+        Route::get('/invoice/index', 'InvoiceController@index')->name('admin.invoice.index');
+        Route::get('/invoice/wizard', 'InvoiceController@wizard')->name('admin.invoice.wizard');
+        Route::post('/invoice/store', 'InvoiceController@store')->name('admin.invoice.store');
 
     });
 });

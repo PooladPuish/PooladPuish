@@ -26,10 +26,11 @@
                                                     style="color: red"
                                                     class="required-mark">*</span>
                                             </label>
-                                            <select dir="rtl" id="user_id" class="itemName form-control"
+                                            <select dir="rtl" id="user_id" class="form-control"
                                                     name="user_id"
                                                     required>
-                                                @foreach($users as $user)
+                                                <option>لطفا پرسنل را انتخاب کنید</option>
+                                            @foreach($users as $user)
                                                  <option value="{{$user->id}}">{{$user->name}}</option>
                                                 @endforeach
 
@@ -42,7 +43,7 @@
                                                     class="required-mark">*</span>
                                             </label>
                                             <br/>
-                                            <select dir="rtl" id="alternate_id" class="itemName form-control"
+                                            <select dir="rtl" id="alternate_id" class="form-control"
                                                     name="alternate_id"
                                                     required>
 

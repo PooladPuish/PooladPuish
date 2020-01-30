@@ -393,6 +393,23 @@
                     </li>
                 @endif
 
+
+                <li class="treeview" id="sell">
+                    <a href="#">
+                        <i class="fa fa-line-chart"></i> <span>فروش</span>
+                        <span class="pull-left-container">
+              <i class="fa fa-angle-right pull-left"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{route('admin.invoice.index')}}"><i
+                                    class="fa fa-circle-o"></i>صدور پیش فاکتور</a>
+                        </li>
+                    </ul>
+                </li>
+
+
+
                 @if(Gate::check('بازسازی نرم افزار') || Gate::check('شروع به کار نرم افزار'))
                     <li class="treeview" id="setting">
                         <a href="#">
@@ -418,6 +435,9 @@
                         </ul>
                     </li>
                 @endif
+
+
+
 
 
 

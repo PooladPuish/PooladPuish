@@ -14,26 +14,23 @@
                     <table class="table table-striped table-bordered data-table" id="data-table">
                         <thead>
                         <tr>
-                            <th>شماره پیش فاکتور</th>
-                            <th>تاریخ فروش</th>
-                            <th>نام فروشنده</th>
-                            <th>نام خریدار</th>
-                            <th>نام محصول</th>
-                            <th>رنگ</th>
-                            <th>قیمت فروش</th>
-                            <th>تعداد فروش</th>
-                            <th>مبلغ کل فروش</th>
-                            <th>وزن</th>
-                            <th>نوع فاکتور</th>
-                            <th>مبلغ مالیات</th>
-                            <th>نحوه پرداخت</th>
+                            <th>شماره پیش <br/> فاکتور</th>
+                            <th>تاریخ صدور<br/> پیش فاکتور</th>
+                            <th>نام <br/>فروشنده</th>
+                            <th>نام <br/>خریدار</th>
+                            <th>تعداد<br/> محصول</th>
+                            <th>مبلغ <br/>محصولات</th>
+                            <th>نحوه <br/>پرداخت</th>
+                            <th>نوع <br/>فاکتور</th>
+                            <th>جمع کل <br/>پیش فاکتور</th>
                             <th>عملیات</th>
                         </tr>
                         </thead>
                         <tbody>
                         </tbody>
                     </table>
-                    <a class="btn btn-primary" href="{{route('admin.invoice.wizard')}}" id="createNewProduct">تعریف پیش فاکتور جدید</a>
+                    <a class="btn btn-primary" href="{{route('admin.invoice.wizard')}}" id="createNewProduct">تعریف پیش
+                        فاکتور جدید</a>
                 </div>
             </div>
         </div>

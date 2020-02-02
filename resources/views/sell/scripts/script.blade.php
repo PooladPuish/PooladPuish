@@ -23,82 +23,22 @@
             ajax: "{{ route('admin.invoice.index') }}",
             columns: [
                 {data: 'invoiceNumber', name: 'invoiceNumber'},
-                {data: 'invoiceNumber', name: 'invoiceNumber'},
-                {data: 'invoiceNumber', name: 'invoiceNumber'},
-                {data: 'invoiceNumber', name: 'invoiceNumber'},
-                {data: 'invoiceNumber', name: 'invoiceNumber'},
-                {data: 'invoiceNumber', name: 'invoiceNumber'},
-                {data: 'invoiceNumber', name: 'invoiceNumber'},
-                {data: 'invoiceNumber', name: 'invoiceNumber'},
-                {data: 'invoiceNumber', name: 'invoiceNumber'},
-                {data: 'invoiceNumber', name: 'invoiceNumber'},
-                {data: 'invoiceNumber', name: 'invoiceNumber'},
-                {data: 'invoiceNumber', name: 'invoiceNumber'},
-                {data: 'invoiceNumber', name: 'invoiceNumber'},
-                {data: 'invoiceNumber', name: 'invoiceNumber'},
-
+                {data: 'created_at', name: 'created_at'},
+                {data: 'user_id', name: 'user_id'},
+                {data: 'customer_id', name: 'customer_id'},
+                {data: 'number_sell', name: 'number_sell'},
+                {data: 'sum_sell', name: 'sum_sell'},
+                {data: 'paymentMethod', name: 'paymentMethod'},
+                {data: 'invoiceType', name: 'invoiceType'},
+                {data: 'price_sell', name: 'price_sell'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]
         });
-        $('#createNewProduct').click(function () {
-            $('#productForm').trigger("reset");
-            $('#ajaxModel').modal('show');
-            $('#product').val('');
-        });
-        $('body').on('click', '.editProduct', function () {
-            var product_id = $(this).data('id');
-            $.get("{{ route('admin.insert.update') }}" + '/' + product_id, function (data) {
-                $('#ajaxModel').modal('show');
-                $('#product').val(data.id);
-                $('#code').val(data.code);
-                $('#name').val(data.name);
-                $('#manufacturer').val(data.manufacturer);
-            });
-        });
-        $('#saveBtn').click(function (e) {
-            e.preventDefault();
-            $.ajax({
-                data: $('#productForm').serialize(),
-                url: "{{ route('admin.insert.store') }}",
-                type: "POST",
-                dataType: 'json',
-                success: function (data) {
-                    if (data.errors) {
-                        $('#ajaxModel').modal('hide');
-                        jQuery.each(data.errors, function (key, value) {
-                            Swal.fire({
-                                title: 'خطا!',
-                                text: value,
-                                icon: 'error',
-                                confirmButtonText: 'تایید'
-                            })
-                        });
-                    }
-                    if (data.success) {
-                        $('#productForm').trigger("reset");
-                        $('#ajaxModel').modal('hide');
-                        table.draw();
-                        Swal.fire({
-                            title: 'موفق',
-                            text: 'مشخصات insert با موفقیت در سیستم ثبت شد',
-                            icon: 'success',
-                            confirmButtonText: 'تایید',
-                        });
-                    }
-                }
-            });
-        });
-        $('#name').val('');
-        $('#code').val('');
-        $('#characteristics_id').val('');
-        $('#commodity_id').val('');
-        $('#manufacturing').val('');
-        $('#product_id').val('');
     });
     $('body').on('click', '.deleteProduct', function () {
         var id = $(this).data("id");
         Swal.fire({
-            title: 'حذف insert؟',
+            title: 'حذف پیش فاکتور؟',
             text: "مشخصات حذف شده قابل بازیابی نیستند!",
             icon: 'warning',
             showCancelButton: true,
@@ -110,7 +50,7 @@
             if (result.value) {
                 $.ajax({
                     type: 'DELETE',
-                    url: "{{route('admin.insert.delete')}}" + '/' + id,
+                    url: "{{route('admin.invoice.delete')}}" + '/' + id,
                     data: {
                         '_token': $('input[name=_token]').val(),
                     },
@@ -118,7 +58,7 @@
                         $('#data-table').DataTable().ajax.reload();
                         Swal.fire({
                             title: 'موفق',
-                            text: 'مشخصات insert با موفقیت از سیستم حذف شد',
+                            text: 'مشخصات پیش فاکتور با موفقیت از سیستم حذف شد',
                             icon: 'success',
                             confirmButtonText: 'تایید'
                         })
@@ -127,5 +67,13 @@
             }
         })
     });
+
+    $('body').on('click', '.print', function () {
+        var id = $(this).data("id");
+
+    });
+
+
+
     $('#sell').addClass('active');
 </script>

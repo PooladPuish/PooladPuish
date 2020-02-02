@@ -18,4 +18,9 @@ class Customer extends Model
       'phone_company'=>'array',
       'tel_company_company'=>'array',
     ];
+    public function invoices()
+    {
+        return $this->belongsTo(Invoice::class);
+
+    }
 }

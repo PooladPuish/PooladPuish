@@ -256,7 +256,7 @@
                                 || Gate::check('شماره تماس')
                                 ||Gate::check('انلاین')
                                 ||Gate::check('وضعیت'))
-                                <li><a  href="{{route('admin.user.show')}}"><i class="fa fa-circle-o"></i>
+                                <li><a href="{{route('admin.user.show')}}"><i class="fa fa-circle-o"></i>
                                         لیست کاربران
                                     </a>
                                 </li>
@@ -402,12 +402,13 @@
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{route('admin.invoice.index')}}"><i
-                                    class="fa fa-circle-o"></i>صدور پیش فاکتور</a>
-                        </li>
+                        @can('صدور پیش فاکتور')
+                            <li><a href="{{route('admin.invoice.index')}}"><i
+                                        class="fa fa-circle-o"></i>صدور پیش فاکتور</a>
+                            </li>
+                        @endif
                     </ul>
                 </li>
-
 
 
                 @if(Gate::check('بازسازی نرم افزار') || Gate::check('شروع به کار نرم افزار'))
@@ -429,19 +430,17 @@
                                             class="fa fa-circle-o"></i>شروع به کار نرم افزار</a>
                                 </li>
                             @endcan
-                                <li><a href="javascript:void(0)" id="backup"><i
-                                            class="fa fa-circle-o"></i>پشتیبان گیری از دیتابیس</a>
-                                </li>
+                            <li><a href="javascript:void(0)" id="backup"><i
+                                        class="fa fa-circle-o"></i>پشتیبان گیری از دیتابیس</a>
+                            </li>
+
+                            <li><a href="{{route('admin.setting.wizard')}}"><i
+                                        class="fa fa-circle-o"></i>مشخصات عمومی سیستم</a>
+                            </li>
+
                         </ul>
                     </li>
                 @endif
-
-
-
-
-
-
-
 
 
             </ul>
@@ -607,10 +606,6 @@
     });
 
 
-
-
-
-
     $(document).ready(function () {
         $('#select2-exampled').select2({
             width: '100%',
@@ -738,7 +733,9 @@
     $("#customers").click(function () {
         $(".customer").prop('checked', $(this).prop('checked'));
     });
-
+    $("#sells").click(function () {
+        $(".sell").prop('checked', $(this).prop('checked'));
+    });
 
 
 </script>

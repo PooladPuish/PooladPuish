@@ -197,9 +197,23 @@ Route::group(['middleware' => ['auth', 'web']], function () {
         //InvoiceController
         Route::get('/invoice/index', 'InvoiceController@index')->name('admin.invoice.index');
         Route::get('/invoice/wizard', 'InvoiceController@wizard')->name('admin.invoice.wizard');
+        Route::get('/invoice/detail/{id?}', 'InvoiceController@detail')->name('admin.invoice.detail');
         Route::post('/invoice/store', 'InvoiceController@store')->name('admin.invoice.store');
+        Route::get('/invoice/update/{id?}', 'InvoiceController@update')->name('admin.invoice.update');
+        Route::post('/invoice/edit', 'InvoiceController@edit')->name('admin.invoice.edit');
+        Route::delete('/invoice/delete/{id?}', 'InvoiceController@delete')->name('admin.invoice.delete');
+        Route::get('/invoice/print/{id?}', 'InvoiceController@print')->name('admin.invoice.print');
 
     });
+
+    Route::group(["namespace" => "Setting"], function () {
+
+        //InvoiceController
+        Route::get('/setting/wizard', 'SettingController@wizard')->name('admin.setting.wizard');
+        Route::post('/setting/store', 'SettingController@store')->name('admin.setting.store');
+
+    });
+
 });
 
 

@@ -20,6 +20,10 @@ class CreateInvoicesTable extends Migration
             $table->unsignedBigInteger('customer_id')->index();
             $table->bigInteger('invoiceType');
             $table->string('paymentMethod');
+            $table->string('sum_sell');
+            $table->string('number_sell');
+            $table->string('price_sell');
+            $table->string('created');
             $table->timestamps();
 
             $table->foreign('user_id')

@@ -6,7 +6,7 @@
           method="post"
     >
         @csrf
-        <input type="hidden" name="id" id="id">
+        <input type="hidden" name="id" id="id" value="{{$id->id}}">
         <input type="hidden" name="sum_selll" id="sum_selll">
         <input type="hidden" name="number_selll" id="number_selll">
         <input type="hidden" name="price_selll" id="price_selll">
@@ -16,7 +16,7 @@
                 <div class="portlet box blue">
                     <div class="portlet-title">
                         <div class="caption">
-                            ثبت مشخصات پیش فاکتور
+                            ویرایش مشخصات پیش فاکتور
                         </div>
                     </div>
 
@@ -31,7 +31,11 @@
                                     <select id="user_id" name="user_id" class="form-control"
                                             required>
                                         @foreach($users as $user)
-                                            <option value="{{$user->id}}">{{$user->name}}</option>
+                                            <option value="{{$user->id}}"
+                                                    @if($id->user_id == $user->id)
+                                                    selected
+                                                @endif
+                                            >{{$user->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -44,7 +48,11 @@
                                     <select id="customer_id" name="customer_id" class="form-control"
                                             required>
                                         @foreach($customers as $customer)
-                                            <option value="{{$customer->id}}">{{$customer->name}}</option>
+                                            <option value="{{$customer->id}}"
+                                                    @if($id->customer_id == $customer->id)
+                                                    selected
+                                                @endif
+                                            >{{$customer->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -56,8 +64,8 @@
                                     </label>
                                     <select id="InvoiceType" name="InvoiceType" class="form-control"
                                             required>
-                                        <option value="1">رسمی</option>
-                                        <option value="2">غیر رسمی</option>
+                                        <option value="1" @if($id->invoiceType == 1) selected @endif>رسمی</option>
+                                        <option value="2" @if($id->invoiceType == 2) selected @endif>غیر رسمی</option>
                                     </select>
                                 </div>
                             </div>
@@ -65,7 +73,8 @@
                                 <div class="form-group">
                                     <label>نحوه پرداخت
                                     </label>
-                                    <input type="text" id="paymentMethod" name="paymentMethod" class="form-control"
+                                    <input type="text" value="{{$id->paymentMethod}}" id="paymentMethod"
+                                           name="paymentMethod" class="form-control"
                                            required>
                                 </div>
                             </div>
@@ -89,17 +98,21 @@
                                 </thead>
                                 <tbody
                                     id="TextBoxContainerbank">
+                                @foreach($invoice_products as $invoice_product)
+                                    <tr>
+                                        <td id="productt"></td>
+                                        <td id="color"></td>
+                                        <td id="selll"></td>
+                                        <td id="numberr">
+                                        </td>
+                                        <td id="Price_Selll">
+                                        </td>
 
-                                <tr>
-                                    <td id="productt"></td>
-                                    <td id="color"></td>
-                                    <td id="selll"></td>
-                                    <td id="numberr"></td>
-                                    <td id="Price_Selll"></td>
-                                    <td id="Weightt"></td>
-                                    <td id="Taxx"></td>
-                                    <td id="actiont"></td>
-                                </tr>
+                                        <td id="Weightt"></td>
+                                        <td id="Taxx"></td>
+                                        <td id="actiont"></td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                                 <tfoot>
                                 <tr>
@@ -176,7 +189,7 @@
                 e.preventDefault();
                 var form = $('#productForm').serialize();
                 $.ajax({
-                    url: "{{ route('admin.invoice.store') }}",
+                    url: "{{ route('admin.invoice.edit') }}",
                     data: form,
                     type: 'POST',
                     success: function (data) {
@@ -227,6 +240,17 @@
         for (var i in all_setting)
 
             added_inputs2_array = [];
+            @foreach($invoice_products as $invoice_product)
+
+        var invoice_product = {
+                'product_id': "{{$invoice_product->product_id}}",
+                'color_id': "{{$invoice_product->color_id}}",
+                'salesNumber': "{{$invoice_product->salesNumber}}",
+                'salesPrice': "{{$invoice_product->salesPrice}}",
+                'sumTotal': "{{$invoice_product->sumTotal}}",
+            };
+        added_inputs2_array.push(invoice_product);
+        @endforeach
         if (added_inputs2_array.length >= 1)
             for (var a in added_inputs2_array)
                 added_inputs_array_table2(added_inputs2_array[a], a);
@@ -246,6 +270,12 @@
                 "</select>" +
                 "</div></div></div>";
             document.getElementById('productt').appendChild(myNode);
+            $('#product' + a + '').val(data.product_id);
+
+            var undefined = $('#product' + a + '').val();
+            if (undefined == null) {
+                $('#product' + a + '').val(1)
+            }
 
 
             var myNode = document.createElement('div');
@@ -259,28 +289,41 @@
                 "</select>" +
                 "</div></div></div>";
             document.getElementById('color').appendChild(myNode);
+            $('#color' + a + '').val(data.color_id);
+
+            var undefined = $('#color' + a + '').val();
+            if (undefined == null) {
+                $('#color' + a + '').val(1)
+            }
 
             var myNode = document.createElement('div');
             myNode.id = 'selll' + a;
             myNode.innerHTML += "<div class='form-group'>" +
                 "<input type=\"text\" id=\'sell" + a + "\'  name=\"sell[]\"\n" +
-                "class=\"form-control sell\"/>" +
+                "class=\"form-control sell\" @if($id) value=\"" + data.salesPrice + "\" @endif/>" +
                 "</div></div></div>";
             document.getElementById('selll').appendChild(myNode);
+            var undefined = $('#sell' + a + '').val();
+            if (undefined == 'undefined') {
+                $('#sell' + a + '').val('')
+            }
 
             var myNode = document.createElement('div');
             myNode.id = 'numberr' + a;
             myNode.innerHTML += "<div class='form-group'>" +
                 "<input type=\"text\" id=\'number" + a + "\'  name=\"number[]\"\n" +
-                "class=\"form-control number\"/>" +
+                "class=\"form-control number\" @if($id) value=\"" + data.salesNumber + "\" @endif/>" +
                 "</div></div></div>";
             document.getElementById('numberr').appendChild(myNode);
-
+            var undefined = $('#number' + a + '').val();
+            if (undefined == 'undefined') {
+                $('#number' + a + '').val('')
+            }
             var myNode = document.createElement('div');
             myNode.id = 'Price_Selll' + a;
             myNode.innerHTML += "<div class='form-group'>" +
                 "<input type=\"text\" id=\'Price_Sell" + a + "\' readonly  name=\"Price_Sell[]\"\n" +
-                "class=\"form-control Price_Sell\"/>" +
+                "class=\"form-control Price_Sell\" />" +
                 "</div></div></div>";
             document.getElementById('Price_Selll').appendChild(myNode);
 
@@ -292,7 +335,6 @@
                 "class=\"form-control Weight\"/>" +
                 "</div></div></div>";
             document.getElementById('Weightt').appendChild(myNode);
-
 
             var myNode = document.createElement('div');
             myNode.id = 'Taxx' + a;

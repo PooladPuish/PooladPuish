@@ -95,6 +95,7 @@ class CommodityController extends Controller
      */
     public function update($id)
     {
+
         $product = Commodity::find($id);
         return response()->json($product);
     }

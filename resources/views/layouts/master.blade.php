@@ -111,6 +111,16 @@
             <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
                 <span class="sr-only">Toggle navigation</span>
             </a>
+            <a href="{{route('admin.invoice.wizard')}}" class="btn btn-link">
+
+
+                    <img src="{{asset('public/icon/icons8-profit-growth-64.png')}}"
+                         width="30" title="صدور پیش فاکتور">
+
+
+            </a>
+
+
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <li class="dropdown messages-menu">

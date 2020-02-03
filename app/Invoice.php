@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Invoice extends Model
 {
+    use SoftDeletes;
     protected $guarded = ['id'];
 
 
@@ -14,6 +16,7 @@ class Invoice extends Model
         return $this->belongsTo(User::class);
 
     }
+
     public function customer()
     {
         return $this->belongsTo(Customer::class);

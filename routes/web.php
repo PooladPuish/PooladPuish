@@ -201,8 +201,12 @@ Route::group(['middleware' => ['auth', 'web']], function () {
         Route::post('/invoice/store', 'InvoiceController@store')->name('admin.invoice.store');
         Route::get('/invoice/update/{id?}', 'InvoiceController@update')->name('admin.invoice.update');
         Route::post('/invoice/edit', 'InvoiceController@edit')->name('admin.invoice.edit');
+        Route::post('/invoice/confirm', 'InvoiceController@confirm')->name('admin.invoice.confirm.customer');
         Route::delete('/invoice/delete/{id?}', 'InvoiceController@delete')->name('admin.invoice.delete');
         Route::get('/invoice/print/{id?}', 'InvoiceController@print')->name('admin.invoice.print');
+
+        Route::get('/invoice/UpdateConfirm/{id?}', 'InvoiceController@UpdateConfirm')->name('admin.invoice.update.confirm');
+
 
     });
 

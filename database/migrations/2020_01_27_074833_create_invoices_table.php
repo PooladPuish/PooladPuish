@@ -24,6 +24,8 @@ class CreateInvoicesTable extends Migration
             $table->string('number_sell');
             $table->string('price_sell');
             $table->string('created');
+            $table->string('state')->default('0');
+            $table->softDeletes();
             $table->timestamps();
 
             $table->foreign('user_id')
@@ -70,6 +72,23 @@ class CreateInvoicesTable extends Migration
                 ->onUpdate('cascade');
 
 
+        });
+        Schema::create('invoice_customer', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('invoice_id')->index();
+            $table->string('date');
+            $table->string('name');
+            $table->string('HowConfirm');
+            $table->string('file')->nullable();
+            $table->longText('description')->nullable();
+            $table->timestamps();
+
+
+            $table->foreign('invoice_id')
+                ->references('id')
+                ->on('invoices')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
 
         });
     }

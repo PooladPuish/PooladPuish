@@ -20,6 +20,9 @@ class InvoiceController extends Controller
 {
     public function index(Request $request)
     {
+
+        $invoices = \DB::table('invoice_customer')->get();
+
         if ($request->ajax()) {
             $data = Invoice::orderBy('id', 'desc')->get();
             return Datatables::of($data)
@@ -66,12 +69,21 @@ class InvoiceController extends Controller
                 ->rawColumns(['action', 'invoiceNumber'])
                 ->make(true);
         }
-        return view('sell.list');
+        return view('sell.list', compact('invoices'));
 
     }
 
-    public function detail(Invoice $id, Request $request)
+    public function UpdateConfirm($id)
     {
+
+        $product = \DB::table('invoice_customer')->where('invoice_id', $id)->first();
+        return response()->json($product);
+    }
+
+
+    public function detail(Invoice $id)
+    {
+
         $users = User::all();
         $customers = Customer::all();
         $colors = Color::all();
@@ -79,6 +91,7 @@ class InvoiceController extends Controller
         $details = \DB::table('invoice_product')
             ->where('invoice_id', $id->id)
             ->get();
+
         $weight = \DB::table('invoice_product')
             ->where('invoice_id', $id->id)
             ->sum('weight');
@@ -223,6 +236,29 @@ class InvoiceController extends Controller
 
     }
 
+    public function confirm(Request $request)
+    {
+
+
+        $invoice_customer = \DB::table('invoice_customer')
+            ->updateOrInsert(['invoice_id' => $request->id_in],
+                [
+                    'date' => $request->date,
+                    'name' => $request->name,
+                    'HowConfirm' => $request->HowConfirm,
+                    'file' => $request->file,
+                    'description' => $request->description,
+                    'created_at' => date('Y/m/d'),
+                ]);
+        if ($invoice_customer) {
+            Invoice::find($request->id_in)->update([
+                'state' => 1,
+            ]);
+        }
+        return response()->json(['success' => 'Product saved successfully.']);
+
+    }
+
 
     public function delete($id)
     {
@@ -236,18 +272,25 @@ class InvoiceController extends Controller
         $success = url('/public/icon/icons8-edit-144.png');
         $delete = url('/public/icon/icons8-delete-bin-96.png');
         $print = url('/public/icon/icons8-print-96.png');
+        $success_customer = url('/public/icon/icons8-good-pincode-80.png');
 
-        $btn = '<a href="' . route('admin.invoice.update', $row->id) . '">
-                       <img src="' . $success . '" width="25" title="ویرایش"></a>';
+
+        $btn = ' <a href="javascript:void(0)" data-toggle="tooltip"
+                      data-id="' . $row->id . '" data-original-title="تایید توسط مشتری"
+                       class="SuccessCustomer">
+                       <img src="' . $success_customer . '" width="20" title="تایید توسط مشتری"></a>';
+
+
+        $btn = $btn . '<a href="' . route('admin.invoice.update', $row->id) . '">
+                       <img src="' . $success . '" width="20" title="ویرایش پیش فاکتور"></a>';
 
         $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"
                       data-id="' . $row->id . '" data-original-title="حذف"
                        class="deleteProduct">
-                       <img src="' . $delete . '" width="25" title="حذف"></a>';
+                       <img src="' . $delete . '" width="20" title="حذف"></a>';
 
         $btn = $btn . '<a href="' . route('admin.invoice.print', $row->id) . '" target="_blank">
-                       <img src="' . $print . '" width="25" title="چاپ پیش فاکتور"></a>';
-
+                       <img src="' . $print . '" width="20" title="چاپ پیش فاکتور"></a>';
 
         return $btn;
 

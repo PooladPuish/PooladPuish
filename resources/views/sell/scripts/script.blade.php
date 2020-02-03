@@ -2,6 +2,7 @@
 <script src="{{asset('/public/js/a2.js')}}" type="text/javascript"></script>
 <meta name="_token" content="{{ csrf_token() }}"/>
 <script type="text/javascript">
+
     $(function () {
         $.ajaxSetup({
             headers: {
@@ -34,6 +35,21 @@
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]
         });
+        $('body').on('click', '.SuccessCustomer', function () {
+            var id = $(this).data('id');
+            $.get("{{ route('admin.invoice.update.confirm') }}" + '/' + id, function (data) {
+                $('#ajaxModel').modal('show');
+                $('#name').val(data.name);
+                $('#date').val(data.date);
+                $('#HowConfirm').val(data.HowConfirm);
+                $('#description').val(data.description);
+                $('#invoice_id').val(data.invoice_id);
+                $('#id_in').val(id);
+
+            })
+        });
+
+
     });
     $('body').on('click', '.deleteProduct', function () {
         var id = $(this).data("id");
@@ -68,12 +84,49 @@
         })
     });
 
-    $('body').on('click', '.print', function () {
-        var id = $(this).data("id");
 
+
+
+
+    $('#saveConfirm').click(function (e) {
+        e.preventDefault();
+        var form = $('#CustomerConfirm')[0];
+        var data = new FormData(form);
+        $.ajax({
+            type: "POST",
+            enctype: 'multipart/form-data',
+            data: data,
+            url: "{{ route('admin.invoice.confirm.customer') }}",
+            cache: false,
+            contentType: false,
+            processData: false,
+            method: 'POST',
+            type: 'POST',
+            success: function (data) {
+                if (data.errors) {
+                    $('#ajaxModel').modal('hide');
+                    jQuery.each(data.errors, function (key, value) {
+                        Swal.fire({
+                            title: 'خطا!',
+                            text: value,
+                            icon: 'error',
+                            confirmButtonText: 'تایید'
+                        })
+                    });
+                }
+                if (data.success) {
+                    $('#CustomerConfirm').trigger("reset");
+                    $('#ajaxModel').modal('hide');
+                    Swal.fire({
+                        title: 'موفق',
+                        text: 'تاییده مشتری برای این پیش فاکتور در سیستم ثبت شد',
+                        icon: 'success',
+                        confirmButtonText: 'تایید',
+                    });
+                }
+            }
+        });
     });
-
-
 
     $('#sell').addClass('active');
 </script>

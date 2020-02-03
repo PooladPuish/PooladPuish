@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xml:lang="fa">
 <head>
+
+    <link rel="shortcut icon" type="image/x-icon" href="{{url('/public/icon/logo.png')}}"/>
     <link
         rel="stylesheet"
         href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css"
@@ -25,36 +27,58 @@
     </style>
     <style>
         @font-face {
-            font-family: 'Shahab';
-            src: url('http://cdn.font-store.ir/fonts/shahab/Shahab-Regular.woff2') format('woff2'),
-            url('http://cdn.font-store.ir/fonts/shahab/Shahab-Regular.woff') format('woff'),
-            url('http://cdn.font-store.ir/fonts/shahab/Shahab-Regular.ttf') format('truetype'),
-            url('http://cdn.font-store.ir/fonts/shahab/Shahab-Regular.otf') format('opentype');
+            font-family: 'Far.YagutBold';
+            src: url('http://www.fontfarsi.ir/Content/Fonts/EOT/Far_YagutBold.eot');
+            src: local('☺'),
+            url('http://www.fontfarsi.ir/Content/Fonts/WOFF/Far_YagutBold.woff') format('woff'),
+            url('http://www.fontfarsi.ir/Content/Fonts/TTF/Far_YagutBold.ttf') format('truetype'),
+            url('http://www.fontfarsi.ir/Content/Fonts/SVG/Far_YagutBold.svg') format('svg');
             font-weight: normal;
             font-style: normal;
         }
+
+        .myclass {
+            font-family: 'Far.YagutBold', Tahoma, Sans-Serif;
+            font-size: 14px;
+        }
+
+
     </style>
 
+
 </head>
-<body dir="rtl">
+<body dir="rtl" class="myclass" style="font-family: 'B Yekan'">
+
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 <div class="container-fluid">
     <div class="container-fluid">
-        <br/>
-        <br/>
-        <br/>
+
         <!-- Control the column width, and how they should appear on different devices -->
         <div class="row">
             <div class="col-sm-8">
                 <strong>بسمه تعالی</strong>
                 <br/>
+                <br/>
                 <strong> به : {{$customer->name}}</strong>
+                <br/>
                 <br/>
                 <strong>موضوع : پیش فاکتور</strong>
             </div>
             <div class="col-sm-4">
                 <strong> تاریخ : {{\Morilog\Jalali\Jalalian::forge(date('Y/m/d'))->format('Y/m/d')}}</strong>
                 <br/>
+                <br/>
                 <strong> شماره پیش فاکتور : {{$id->invoiceNumber}}</strong>
+                <br/>
                 <br/>
                 <strong> تاریخ صدور پیش فاکتور
                     : {{\Morilog\Jalali\Jalalian::forge($id->created_at)->format('Y/m/d')}}</strong>
@@ -63,7 +87,7 @@
         <br/>
         <p>احتراما، بدینوسیله پیش فاکتور اقلام مورد نیاز آن شرکت جهت بررسی تقدیم حضور می گردد. خواهشمند است در صورت
             تایید ذیل این برگه را مهر و امضا نموده به شماره 77333337 داخلی 270 نمابر نمایید.</p>
-        <table>
+        <table style="font-family: 'B Yekan'">
             <thead>
             <tr>
                 <th>نوع محصول</th>
@@ -99,10 +123,10 @@
             <tfoot>
             <tr>
                 <th colspan="4">
-                    جمع
+                    <strong>جمع کل</strong>
                 </th>
-                <th colspan="4">
-                    {{number_format($id->price_sell)}}
+                <th>
+                   <strong> {{number_format($id->price_sell)}}</strong>
                 </th>
             </tr>
             </tfoot>
@@ -133,69 +157,27 @@
     </div>
     <br/>
     <br/>
-    <div class="row">
-
-            <div class="col-md-5">
-                <div class="card text-white">
-                    <div class="card-header" style="color: black">در صورت تایید، با درج نام خود مهر و امضا نمایید</div>
-                    <div class="card-body">
-                        <h5 class="card-title"></h5>
-                        <p class="card-text">
-                            <br/>
-                            <br/>
-                            <br/>
-                            <br/>
-                            <br/>
-                            <br/>
-                            <br/>
-                        </p>
-                    </div>
-                </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <textarea rows="15" cols="70">
+                    در صورت تایید با درج نام خود مهر و امضا نمایید
+                </textarea>
             </div>
             <div class="col-md-3"></div>
-            <div class="col-md-4">
+            <div class="col-md-3">
+                <br/>
+                <br/>
+                <br/>
                 <br/>
                 <br/>
                 <p>با تشکر</p>
             </div>
+        </div>
     </div>
 </div>
 </body>
 </html>
-<script>
-    $(document).ready(function() {
-        ConvertNumberToPersion();
-    });
-
-    function ConvertNumberToPersion() {
-        persian = {
-            0: '۰',
-            1: '۱',
-            2: '۲',
-            3: '۳',
-            4: '۴',
-            5: '۵',
-            6: '۶',
-            7: '۷',
-            8: '۸',
-            9: '۹'
-        };
-
-        function traverse(el) {
-            if (el.nodeType == 3) {
-                var list = el.data.match(/[0-9]/g);
-                if (list != null && list.length != 0) {
-                    for (var i = 0; i < list.length; i++)
-                        el.data = el.data.replace(list[i], persian[list[i]]);
-                }
-            }
-            for (var i = 0; i < el.childNodes.length; i++) {
-                traverse(el.childNodes[i]);
-            }
-        }
-        traverse(document.body);
-    }
-</script>
 <script>
     window.print();
 </script>

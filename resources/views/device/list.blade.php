@@ -30,4 +30,5 @@
         </div>
     </div>
     @include('device.modals.modal')
-    @include('device.scripts.script')@endsection
+    @include('device.scripts.script')
+@endsection

@@ -380,6 +380,7 @@ class UserController extends Controller
      */
     public function stop()
     {
+
         $exit = \DB::table('users')->update([
             'exit' => 1,
         ]);

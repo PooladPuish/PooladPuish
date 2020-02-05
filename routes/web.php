@@ -196,16 +196,28 @@ Route::group(['middleware' => ['auth', 'web']], function () {
 
         //InvoiceController
         Route::get('/invoice/index', 'InvoiceController@index')->name('admin.invoice.index');
+        Route::get('/invoice/trash', 'InvoiceController@trash')->name('admin.invoice.trash');
         Route::get('/invoice/wizard', 'InvoiceController@wizard')->name('admin.invoice.wizard');
         Route::get('/invoice/detail/{id?}', 'InvoiceController@detail')->name('admin.invoice.detail');
+        Route::get('/invoice/detailTrash/{id?}', 'InvoiceController@detailTrash')->name('admin.invoice.detailTrash');
+
         Route::post('/invoice/store', 'InvoiceController@store')->name('admin.invoice.store');
         Route::get('/invoice/update/{id?}', 'InvoiceController@update')->name('admin.invoice.update');
         Route::post('/invoice/edit', 'InvoiceController@edit')->name('admin.invoice.edit');
         Route::post('/invoice/confirm', 'InvoiceController@confirm')->name('admin.invoice.confirm.customer');
-        Route::delete('/invoice/delete/{id?}', 'InvoiceController@delete')->name('admin.invoice.delete');
-        Route::get('/invoice/print/{id?}', 'InvoiceController@print')->name('admin.invoice.print');
+        Route::post('/invoice/delete', 'InvoiceController@delete')->name('admin.invoice.delete');
+        Route::get('/invoice/print', 'InvoiceController@print')->name('admin.invoice.print');
+        Route::delete('/invoice/AdminDelete/{id?}', 'InvoiceController@AdminDelete')->name('admin.invoice.AdminDelete');
 
         Route::get('/invoice/UpdateConfirm/{id?}', 'InvoiceController@UpdateConfirm')->name('admin.invoice.update.confirm');
+        Route::get('/invoice/TrashAdmin/{id?}', 'InvoiceController@TrashAdmin')->name('admin.invoice.update.trash');
+        Route::get('/invoice/RestoreDelete/{id?}', 'InvoiceController@RestoreDelete')->name('admin.invoice.RestoreDelete');
+
+        Route::get('/bank/ShowDetail/{id?}', 'InvoiceController@ShowDetail')->name('admin.bank.show.bank');
+        Route::get('/bank/Listprint', 'InvoiceController@Listprint')->name('admin.list.print');
+        Route::get('/bank/Listrint', 'InvoiceController@Listrint')->name('admin.ListPrint.print');
+        Route::get('/bank/listtt/{id?}', 'InvoiceController@listtt')->name('admin.listtt.print');
+
 
 
     });
@@ -215,6 +227,22 @@ Route::group(['middleware' => ['auth', 'web']], function () {
         //InvoiceController
         Route::get('/setting/wizard', 'SettingController@wizard')->name('admin.setting.wizard');
         Route::post('/setting/store', 'SettingController@store')->name('admin.setting.store');
+
+    });
+
+    Route::group(["namespace" => "Admin"], function () {
+
+        //BankController
+        Route::get('/bank/list', 'BankController@list')->name('admin.bank.list');
+        Route::get('/bank/update/{id?}', 'BankController@update')->name('admin.bank.update');
+        Route::delete('/bank/delete/{id?}', 'BankController@delete')->name('admin.bank.delete');
+        Route::post('/bank/store', 'BankController@store')->name('admin.bank.store');
+
+        //SelectStoreController
+        Route::get('/selectstore/list', 'SelectStoreController@list')->name('admin.selectstore.list');
+        Route::post('/selectstore/store', 'SelectStoreController@store')->name('admin.selectstore.store');
+        Route::get('/selectstore/update/{id?}', 'SelectStoreController@update')->name('admin.selectstore.update');
+        Route::delete('/selectstore/delete/{id?}', 'SelectStoreController@delete')->name('admin.selectstore.delete');
 
     });
 

@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html xml:lang="fa">
 <head>
+    <style>
+        @media print {
+            .control-group {
+                display: none;
+            }
+        }
+    </style>
 
     <link rel="shortcut icon" type="image/x-icon" href="{{url('/public/icon/logo.png')}}"/>
     <link
@@ -126,18 +133,23 @@
                     <strong>جمع کل</strong>
                 </th>
                 <th>
-                   <strong> {{number_format($id->price_sell)}}</strong>
+                    <strong> {{number_format($id->price_sell)}}</strong>
                 </th>
             </tr>
             </tfoot>
         </table>
         <br/>
         <br/>
-        <p>نحوه پرداخت : نقدی</p>
-        <p>شماره حساب 0110074921008 و یا شماره کارت 6037691636156531 و یا شماره شبا IR360190000000110074921008 بانک
-            صادرات به نام امیر علی احمدی بختیاری</p>
-        <p>محل تحویل : انبار فروشنده</p>
-        <p>تاریخ اعتبار پیش فاکتور : تا پایان وقت اداری همان روز</p>
+        @if($id->paymentMethod == 0)
+            <p>نحوه پرداخت : نقدی</p>
+        @else
+            <p> نحوه پرداخت : {{$id->paymentMethod}} روز </p>
+        @endif
+        <p> شماره حساب {{$bank->AccountNumber}} و یا شماره کارت {{$bank->CardNumber}} و یا شماره
+            شبا {{$bank->ShabaNumber}}
+            {{$bank->NameBank}} به نام {{$bank->name}}</p>
+        <p> محل تحویل : {{$selectstore->name}}</p>
+        <p> تاریخ اعتبار پیش فاکتور : {{$date}}</p>
         <br/>
         <br/>
 
@@ -174,8 +186,15 @@
                 <p>با تشکر</p>
             </div>
         </div>
+        <hr/>
+        <footer>
+            <p> نشانی : {{$selectstore->address}}</p>
+        </footer>
     </div>
+
 </div>
+
+
 </body>
 </html>
 <script>

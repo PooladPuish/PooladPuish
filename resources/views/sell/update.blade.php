@@ -101,7 +101,7 @@
                                 @foreach($invoice_products as $invoice_product)
                                     <tr>
                                         <td id="productt"></td>
-                                        <td id="color"></td>
+                                        <td id="colorr"></td>
                                         <td id="selll"></td>
                                         <td id="numberr">
                                         </td>
@@ -279,7 +279,7 @@
 
 
             var myNode = document.createElement('div');
-            myNode.id = 'color' + a;
+            myNode.id = 'colorr' + a;
             myNode.innerHTML += "<div class='form-group'>" +
                 "<select id=\'color" + a + "\'  name=\"color[]\"\n" +
                 "class=\"form-control\"/>" +
@@ -288,7 +288,7 @@
                 "+@endforeach+" +
                 "</select>" +
                 "</div></div></div>";
-            document.getElementById('color').appendChild(myNode);
+            document.getElementById('colorr').appendChild(myNode);
             $('#color' + a + '').val(data.color_id);
 
             var undefined = $('#color' + a + '').val();
@@ -524,7 +524,7 @@
 
             event.preventDefault();
             $('#productt' + id).remove();
-            $('#color' + id).remove();
+            $('#colorr' + id).remove();
             $('#selll' + id).remove();
             $('#numberr' + id).remove();
             $('#Taxx' + id).remove();

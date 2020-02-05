@@ -3,6 +3,7 @@
 <meta name="_token" content="{{ csrf_token() }}"/>
 <script type="text/javascript">
 
+
     $(function () {
         $.ajaxSetup({
             headers: {
@@ -48,44 +49,99 @@
 
             })
         });
+    });
 
+
+    $('body').on('click', '.deleteProduct', function () {
+        $('#id_delete').val('');
+        $('#cancellation').val('');
+        $('#description_c').val('');
+        var id = $(this).data("id");
+        $('#id_delete').val(id);
+        $('#ajaxModelDelete').modal('show');
+
+        $('#saveCancel').click(function (e) {
+            e.preventDefault();
+            var form = $('#CustomerCanceled')[0];
+            var data = new FormData(form);
+
+            $('#ajaxModelDelete').modal('hide');
+            Swal.fire({
+                title: 'لغو پیش فاکتور؟',
+                text: "مشخصات پیش فاکتور لغو شده فقط توسط مدیریت قابل بازیابی میباشد!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'حذف',
+                cancelButtonText: 'انصراف',
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        type: "POST",
+                        enctype: 'multipart/form-data',
+                        data: data,
+                        url: "{{ route('admin.invoice.delete') }}",
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        method: 'POST',
+                        type: 'POST',
+                        success: function (data) {
+                            $('#data-table').DataTable().ajax.reload();
+                            Swal.fire({
+                                title: 'موفق',
+                                text: 'مشخصات پیش فاکتور با موفقیت از لیست شما حذف شد',
+                                icon: 'success',
+                                confirmButtonText: 'تایید'
+                            })
+                        }
+                    });
+                    $('#id_delete').val('');
+                    $('#cancellation').val('');
+                    $('#description').val('');
+                }
+
+            });
+
+
+        });
 
     });
-    $('body').on('click', '.deleteProduct', function () {
-        var id = $(this).data("id");
-        Swal.fire({
-            title: 'حذف پیش فاکتور؟',
-            text: "مشخصات حذف شده قابل بازیابی نیستند!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'حذف',
-            cancelButtonText: 'انصراف',
-        }).then((result) => {
-            if (result.value) {
+
+    $('body').on('click', '.Print', function () {
+
+            var id = $(this).data('id');
+            $('#ajaxModelPrint').modal('show');
+            $('#name_bank').val(101);
+            $('#PrintSell').click(function (e) {
+                var user = $('#CustomerPrint').serialize();
                 $.ajax({
-                    type: 'DELETE',
-                    url: "{{route('admin.invoice.delete')}}" + '/' + id,
-                    data: {
-                        '_token': $('input[name=_token]').val(),
-                    },
-                    success: function (data) {
-                        $('#data-table').DataTable().ajax.reload();
-                        Swal.fire({
-                            title: 'موفق',
-                            text: 'مشخصات پیش فاکتور با موفقیت از سیستم حذف شد',
-                            icon: 'success',
-                            confirmButtonText: 'تایید'
-                        })
+                    type: "GET",
+                    url: "{{route('admin.invoice.print')}}?id=" + id,
+                    data: user,
+                    dataType: 'html',
+                    success: function (res) {
+                        if (res) {
+                            w = window.open(window.location.href, "_blank");
+                            w.document.open();
+                            w.document.write(res);
+                            w.document.close();
+                            w.location.reload();
+                            $('#CustomerPrint').trigger("reset");
+                            id = null;
+                        } else {
+                            id = null;
+                        }
                     }
                 });
-            }
-        })
-    });
 
 
+            });
 
+
+        }
+    );
 
 
     $('#saveConfirm').click(function (e) {
@@ -128,5 +184,14 @@
         });
     });
 
+
+    $('#name_bank').change(function () {
+        var name_bank = $(this).val();
+        $('#name_bank').val(name_bank);
+
+    });
+
     $('#sell').addClass('active');
+
+
 </script>

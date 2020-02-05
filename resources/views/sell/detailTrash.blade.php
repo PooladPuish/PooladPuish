@@ -33,18 +33,18 @@
                         @foreach($details as $detail)
                             <tr>
 
-                                <td>{{$id->invoiceNumber}}</td>
-                                <td>{{\Morilog\Jalali\Jalalian::forge($id->created_at)->format('Y/m/d')}}</td>
+                                <td>{{$invoices->invoiceNumber}}</td>
+                                <td>{{\Morilog\Jalali\Jalalian::forge($invoices->created_at)->format('Y/m/d')}}</td>
                                 <td>
                                     @foreach($users as $user)
-                                        @if($user->id == $id->user_id)
+                                        @if($user->id == $invoices->user_id)
                                             {{$user->name}}
                                         @endif
                                     @endforeach
                                 </td>
                                 <td>
                                     @foreach($customers as $customer)
-                                        @if($customer->id == $id->customer_id)
+                                        @if($customer->id == $invoices->customer_id)
                                             {{$customer->name}}
                                         @endif
                                     @endforeach
@@ -68,7 +68,7 @@
                                 <td>{{number_format($detail->sumTotal)}} </td>
                                 <td>{{number_format($detail->weight)}} </td>
                                 <td>
-                                    @if($id->invoiceType == 1)
+                                    @if($invoices->invoiceType == 1)
                                         رسمی
                                     @else
                                         غیر رسمی
@@ -89,21 +89,21 @@
                                 میانگین
                             </th>
                             <th>
-                                {{number_format($id->sum_sell)}}
+                                {{number_format($invoices->sum_sell)}}
                                 <hr/>
-                                {{number_format($id->sum_sell/2)}}
+                                {{number_format($invoices->sum_sell/2)}}
 
                             </th>
                             <th>
-                                {{number_format($id->number_sell)}}
+                                {{number_format($invoices->number_sell)}}
                                 <hr/>
-                                {{number_format($id->number_sell/2)}}
+                                {{number_format($invoices->number_sell/2)}}
 
                             </th>
                             <th>
-                                {{number_format($id->price_sell)}}
+                                {{number_format($invoices->price_sell)}}
                                 <hr/>
-                                {{number_format($id->price_sell/2)}}
+                                {{number_format($invoices->price_sell/2)}}
 
                             </th>
                             <th>

@@ -250,6 +250,10 @@
             </span>
                     </a>
                 </li>
+
+
+
+
                 @if(Gate::check('ثبت کاربر جدید') || Gate::check('لیست کاربران')
                     || Gate::check('ثبت دسترسی جدید') || Gate::check('لیست دسترسی ها')
                      ||Gate::check('تعیین جانشین'))
@@ -416,6 +420,9 @@
                             <li><a href="{{route('admin.invoice.index')}}"><i
                                         class="fa fa-circle-o"></i>صدور پیش فاکتور</a>
                             </li>
+                            <li><a href="{{route('admin.invoice.trash')}}"><i
+                                        class="fa fa-circle-o"></i>پیش فاکتور های حذف شده</a>
+                            </li>
                         @endif
                     </ul>
                 </li>
@@ -447,6 +454,16 @@
                             <li><a href="{{route('admin.setting.wizard')}}"><i
                                         class="fa fa-circle-o"></i>مشخصات عمومی سیستم</a>
                             </li>
+
+                                <li><a href="{{route('admin.bank.list')}}"><i
+                                            class="fa fa-circle-o"></i>لیست حسابهای بانکی</a>
+                                </li>
+
+                                <li><a href="{{route('admin.selectstore.list')}}"><i
+                                            class="fa fa-circle-o"></i>لیست انبارها</a>
+                                </li>
+
+
 
                         </ul>
                     </li>

@@ -203,6 +203,7 @@ Route::group(['middleware' => ['auth', 'web']], function () {
 
         Route::post('/invoice/store', 'InvoiceController@store')->name('admin.invoice.store');
         Route::get('/invoice/update/{id?}', 'InvoiceController@update')->name('admin.invoice.update');
+        Route::get('/invoice/PrintDetail/{id?}', 'InvoiceController@PrintDetail')->name('admin.print.detail');
         Route::post('/invoice/edit', 'InvoiceController@edit')->name('admin.invoice.edit');
         Route::post('/invoice/confirm', 'InvoiceController@confirm')->name('admin.invoice.confirm.customer');
         Route::post('/invoice/delete', 'InvoiceController@delete')->name('admin.invoice.delete');
@@ -216,7 +217,11 @@ Route::group(['middleware' => ['auth', 'web']], function () {
         Route::get('/bank/ShowDetail/{id?}', 'InvoiceController@ShowDetail')->name('admin.bank.show.bank');
         Route::get('/bank/Listprint', 'InvoiceController@Listprint')->name('admin.list.print');
         Route::get('/bank/Listrint', 'InvoiceController@Listrint')->name('admin.ListPrint.print');
-        Route::get('/bank/listtt/{id?}', 'InvoiceController@listtt')->name('admin.listtt.print');
+        Route::get('/bank/CustomerValidate/{id?}', 'InvoiceController@CustomerValidate')->name('admin.invoice.customers.validate');
+        Route::get('/bank/CustomerMany/{id?}', 'InvoiceController@CustomerMany')->name('admin.invoice.customers.many');
+
+        Route::post('/invoice/ValidateStore', 'InvoiceController@ValidateStore')->name('admin.invoice.customer.validate.store');
+        Route::post('/invoice/ManyStore', 'InvoiceController@ManyStore')->name('admin.invoice.customer.many.store');
 
 
 

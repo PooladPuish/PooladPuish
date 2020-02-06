@@ -23,8 +23,6 @@ class InvoiceController extends Controller
 {
 
 
-
-
     public function index(Request $request)
     {
 
@@ -49,6 +47,17 @@ class InvoiceController extends Controller
                 ->addColumn('created_at', function ($row) {
                     $created_at = Jalalian::forge($row->created_at)->format('Y/m/d');
                     return $created_at;
+                })
+                ->addColumn('status', function ($row) {
+                    if ($row->state == 0) {
+                        return 'در حال تکمیل';
+                    } elseif ($row->state == 1) {
+                        return 'تایید مشتری';
+                    } elseif ($row->state == 2) {
+                        return 'تایید نشده';
+                    } elseif ($row->state == 3) {
+                        return 'تکمیل شده';
+                    }
                 })
                 ->addColumn('user_id', function ($row) {
                     return $row->user->name;
@@ -107,6 +116,15 @@ class InvoiceController extends Controller
                 ->addColumn('created_at', function ($row) {
                     $created_at = Jalalian::forge($row->created_at)->format('Y/m/d');
                     return $created_at;
+                })
+                ->addColumn('status', function ($row) {
+                    if ($row->state == 0) {
+                        return 'در حال تکمیل';
+                    } elseif ($row->state == 1) {
+                        return 'تایید مشتری';
+                    } elseif ($row->state == 2) {
+                        return 'تایید نشده';
+                    }
                 })
                 ->addColumn('user_id', function ($row) {
                     return $row->user->name;
@@ -340,6 +358,21 @@ class InvoiceController extends Controller
 
     }
 
+    public function CustomerValidate($id)
+    {
+        $product = \DB::table('customer_validation')->where('customer_id', $id)->first();
+        return response()->json($product);
+
+    }
+
+    public function CustomerMany($id)
+    {
+        $customer_id = Invoice::where('id', $id)->first();
+
+        $product = \DB::table('customer_history_payment')->where('customer_id', $customer_id->customer_id)->first();
+        return response()->json($product);
+
+    }
 
     public function print(Request $request)
     {
@@ -386,6 +419,57 @@ class InvoiceController extends Controller
 
     }
 
+
+    public function ValidateStore(Request $request)
+    {
+
+
+        \DB::table('customer_validation')
+            ->updateOrInsert(['customer_id' => $request->customer_id],
+                [
+                    'Creditceiling' => $request->Creditceiling,
+                    'Openceiling' => $request->Openceiling,
+                    'Yearcount' => $request->Yearcount,
+                    'yearAgoCount' => $request->yearAgoCount,
+                    'Yearturnover' => $request->Yearturnover,
+                    'lastYearturnover' => $request->lastYearturnover,
+                    'created_at' => date('Y/m/d'),
+                ]);
+        return response()->json(['success' => 'Product saved successfully.']);
+
+    }
+
+    public function ManyStore(Request $request)
+    {
+
+        $id = Invoice::where('id', $request->many_id)->first();
+
+
+        $success = \DB::table('customer_history_payment')
+            ->updateOrInsert(['customer_id' => $id->customer_id],
+                [
+                    'user_id' => auth()->user()->id,
+                    'Checkback' => $request->Checkback,
+                    'Checkbackintheflow' => $request->Checkbackintheflow,
+                    'accountbalance' => $request->accountbalance,
+                    'Averagetimedelay' => $request->Averagetimedelay,
+                    'Futurefactors' => $request->Futurefactors,
+                    'Receiveddocuments' => $request->Receiveddocuments,
+                    'Openaccountbalance' => $request->Openaccountbalance,
+                    'paymentmethod' => $request->paymentmethod,
+                    'description' => $request->description,
+                    'created_at' => date('Y/m/d'),
+                ]);
+        if ($success) {
+            Invoice::find($request->many_id)->update([
+                'state' => 3,
+            ]);
+        }
+        return response()->json(['success' => 'Product saved successfully.']);
+
+    }
+
+
     public function TrashAdmin($id)
     {
         $product = \DB::table('invoice_delete')
@@ -429,12 +513,38 @@ class InvoiceController extends Controller
 
     }
 
+    public function PrintDetail(Invoice $id)
+    {
+        $customer_validation = \DB::table('customer_validation')
+            ->where('customer_id',$id->customer_id)
+            ->first();
+
+        $customer_history_payment = \DB::table('customer_history_payment')
+            ->where('customer_id',$id->customer_id)
+            ->first();
+
+        $products = Product::all();
+        $colors = Color::all();
+        $customer = Customer::where('id', $id->customer_id)->first();
+        $user = User::where('id', $id->user_id)->first();
+        $invoice_products = \DB::table('invoice_product')
+            ->where('invoice_id',$id->id)
+            ->get();
+        return view('sell.detail.list',
+            compact('id', 'customer', 'user','invoice_products'
+            ,'products','colors','customer_validation','customer_history_payment'));
+
+    }
+
     public function actions($row)
     {
         $success = url('/public/icon/icons8-edit-144.png');
         $delete = url('/public/icon/icons8-delete-bin-96.png');
         $print = url('/public/icon/icons8-print-96.png');
         $success_customer = url('/public/icon/icons8-good-pincode-80.png');
+        $validate = url('/public/icon/icons8-id-verified-80.png');
+        $many = url('/public/icon/icons8-wallet-96.png');
+        $detail = url('/public/icon/icons8-more-details-96.png');
 
 
         $btn = ' <a href="javascript:void(0)" data-toggle="tooltip"
@@ -455,6 +565,21 @@ class InvoiceController extends Controller
                       data-id="' . $row->id . '" data-original-title="چاپ پیش فاکتور"
                        class="Print">
                        <img src="' . $print . '" width="20" title="چاپ پیش فاکتور"></a>';
+
+
+        $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"
+                      data-id="' . $row->customer_id . '" data-original-title="اعتبار سنجی"
+                       class="validate">
+                       <img src="' . $validate . '" width="20" title="اعتبار سنجی"></a>';
+
+
+        $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"
+                      data-id="' . $row->id . '" data-original-title="سابقه پرداخت مشتری"
+                       class="many">
+                       <img src="' . $many . '" width="20" title="سابقه پرداخت مشتری"></a>';
+
+        $btn = $btn . '<a href="' . route('admin.print.detail', $row->id) . '" target="_blank">
+                       <img src="' . $detail . '" width="20" title="جزییات پیش فاکتور"></a>';
 
 
 //        $btn = $btn . '<a href="' . route('admin.invoice.print', $row->id) . '" target="_blank">

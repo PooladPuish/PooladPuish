@@ -31,6 +31,7 @@
                 {data: 'sum_sell', name: 'sum_sell'},
                 {data: 'paymentMethod', name: 'paymentMethod'},
                 {data: 'invoiceType', name: 'invoiceType'},
+                {data: 'status', name: 'status'},
                 {data: 'price_sell', name: 'price_sell'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]

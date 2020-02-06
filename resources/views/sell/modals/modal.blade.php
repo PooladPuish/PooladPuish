@@ -103,6 +103,194 @@
     </div>
 </div>
 
+<div class="modal fade" id="ajaxModelCustomer" aria-hidden="true">
+    <div class="modal-dialog col-md-12">
+        <div class="modal-content">
+            <div class="modal-body col-md-12">
+                <div class="portlet box blue">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            اعتبار سنجی مشتری
+                        </div>
+                    </div>
+                    <div class="portlet-body form">
+                        <div class="form-body">
+                            <div class="form-group">
+
+                                <form autocomplete="off" id="CustomersValidate" name="CustomersValidate"
+                                      class="form-horizontal">
+                                    <input type="hidden" name="customer_id" id="customer_id">
+                                    @csrf
+                                    <div class="col-md-12 form-group">
+
+
+                                        <div class="col-md-2">
+                                                <label>سقف اعتباری
+                                                </label>
+                                                <input type="text" id="Creditceiling" name="Creditceiling" class="form-control"
+                                                       required>
+                                        </div>
+                                        <div class="col-md-2">
+                                                <label>سقف حساب باز
+                                                </label>
+                                                <input type="text" id="Openceiling" name="Openceiling" class="form-control"
+                                                       required>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <label>تعداد خرید سال جاری
+                                            </label>
+                                            <input type="text" id="Yearcount" name="Yearcount" class="form-control"
+                                                   required>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label>تعداد خرید سال گذشته
+                                            </label>
+                                            <input type="text" id="yearAgoCount" name="yearAgoCount" class="form-control"
+                                                   required>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label>گردش حساب سال جاری
+                                            </label>
+                                            <input type="text" id="Yearturnover" name="Yearturnover" class="form-control"
+                                                   required>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label>گردش حساب سال گذشته
+                                            </label>
+                                            <input type="text" id="lastYearturnover" name="lastYearturnover" class="form-control"
+                                                   required>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">
+                                            انصراف
+                                        </button>
+                                        <button type="submit" class="btn btn-primary" id="saveCustomerValidate" value="ثبت">
+                                            ثبت
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ajaxModelCustomerMany" aria-hidden="true">
+    <div class="modal-dialog col-md-12">
+        <div class="modal-content">
+            <div class="modal-body col-md-12">
+                <div class="portlet box blue">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            سابقه پرداخت مشتری
+                        </div>
+                    </div>
+                    <div class="portlet-body form">
+                        <div class="form-body">
+                            <div class="form-group">
+
+                                <form autocomplete="off" id="CustomersMany" name="CustomersMany"
+                                      class="form-horizontal">
+                                    <input type="hidden" name="many_id" id="many_id">
+                                    @csrf
+                                    <div class="col-md-12 form-group">
+
+
+                                        <div class="col-md-3">
+                                            <label>سابقه چک برگشتی
+                                            </label>
+                                            <input type="text" id="Checkback" name="Checkback" class="form-control"
+                                                   required>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label>چک های برگشتی در جریان
+                                            </label>
+                                            <input type="text" id="Checkbackintheflow" name="Checkbackintheflow" class="form-control"
+                                                   required>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label>مانده حساب معوق
+                                            </label>
+                                            <input type="text" id="accountbalance" name="accountbalance" class="form-control"
+                                                   required>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label>میانگین زمان معوق
+                                            </label>
+                                            <input type="text" id="Averagetimedelay" name="Averagetimedelay" class="form-control"
+                                                   required>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label>فاکتورهای سررسید آتی
+                                            </label>
+                                            <input type="text" id="Futurefactors" name="Futurefactors" class="form-control"
+                                                   required>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label>اسناد دریافتنی
+                                            </label>
+                                            <input type="text" id="Receiveddocuments" name="Receiveddocuments" class="form-control"
+                                                   required>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label>مانده حساب باز
+                                            </label>
+                                            <input type="text" id="Openaccountbalance" name="Openaccountbalance" class="form-control"
+                                                   required>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label>نحوه پرداخت فاکتورهای قبلی
+                                            </label>
+                                            <input type="text" id="paymentmethod" name="paymentmethod" class="form-control"
+                                                   required>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label>توضیحات واحد مالی
+                                            </label>
+                                            <textarea class="form-control" id="description_m" name="description" placeholder="لطفا توضیحات خود را در مورد مشتری وارد کنید">
+
+                                            </textarea>
+                                        </div>
+
+
+
+
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">
+                                            انصراف
+                                        </button>
+                                        <button type="submit" class="btn btn-primary" id="saveCustomerMany" value="ثبت">
+                                            ثبت
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 
 <div class="modal fade" id="ajaxModelDelete" aria-hidden="true">
     <div class="modal-dialog">

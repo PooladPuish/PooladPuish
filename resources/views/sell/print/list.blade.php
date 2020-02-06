@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xml:lang="fa">
 <head>
+    <title>سیستم مدیریت پولاد صنعت</title>
+
     <style>
         @media print {
             .control-group {
@@ -51,7 +53,12 @@
 
 
     </style>
-
+    <style>
+        th,td{
+            border : 1px solid black;
+            text-align :center;
+        }
+    </style>
 
 </head>
 <body dir="rtl" class="myclass" style="font-family: 'B Yekan'">

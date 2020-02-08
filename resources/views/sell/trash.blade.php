@@ -14,7 +14,7 @@
                     <table class="table table-striped table-bordered data-table" id="data-table">
                         <thead>
                         <tr>
-                            <th>شماره فاکتور</th>
+                            <th>شماره پیش فاکتور</th>
                             <th>تاریخ صدور</th>
                             <th>نام فروشنده</th>
                             <th>نام خریدار</th>
@@ -23,7 +23,7 @@
                             <th>نحوه پرداخت</th>
                             <th>نوع فاکتور</th>
                             <th>وضعیت</th>
-                            <th>جمع کل پیش فاکتور</th>
+                            <th>جمع کل</th>
                             <th>عملیات</th>
                         </tr>
                         </thead>

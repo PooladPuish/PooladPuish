@@ -14,12 +14,10 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{url('/public/icon/logo.png')}}"/>
     <link
         rel="stylesheet"
-        href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css"
-        integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8If"
-        crossorigin="anonymous">
+        href="{{asset('/public/css/2.css')}}">
     <style>
         table {
-            font-family: arial, sans-serif;
+            font-family: 'Far.YagutBold', Tahoma, Sans-Serif;
             border-collapse: collapse;
             width: 100%;
         }
@@ -37,11 +35,11 @@
     <style>
         @font-face {
             font-family: 'Far.YagutBold';
-            src: url('http://www.fontfarsi.ir/Content/Fonts/EOT/Far_YagutBold.eot');
+            src: url('{{asset('/public/font/Far_Yagut.eot')}}');
             src: local('☺'),
-            url('http://www.fontfarsi.ir/Content/Fonts/WOFF/Far_YagutBold.woff') format('woff'),
-            url('http://www.fontfarsi.ir/Content/Fonts/TTF/Far_YagutBold.ttf') format('truetype'),
-            url('http://www.fontfarsi.ir/Content/Fonts/SVG/Far_YagutBold.svg') format('svg');
+            url('{{asset('/public/font/Far_Yagut.woff')}}') format('woff'),
+            url('{{asset('/public/font/Far_Yagut.ttf')}}') format('truetype'),
+            url('{{asset('/public/font/Far_Yagut.svg')}}') format('svg');
             font-weight: normal;
             font-style: normal;
         }
@@ -57,6 +55,17 @@
         th,td{
             border : 1px solid black;
             text-align :center;
+        }
+        hr {
+            border-top: 1px solid black;
+            margin-bottom: 0.4em;
+            margin-top: 0.4em;
+        }
+    </style>
+    <style type="text/css">
+        textarea {
+            border: 1px solid black;
+            text-align: center;
         }
     </style>
 
@@ -179,7 +188,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
-                <textarea rows="15" cols="70">
+                <textarea disabled rows="15" cols="70">
                     در صورت تایید با درج نام خود مهر و امضا نمایید
                 </textarea>
             </div>

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCustomerHistoryPaymentTable extends Migration
+class CustomerValidationPayment extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,16 @@ class CreateCustomerHistoryPaymentTable extends Migration
      */
     public function up()
     {
-        Schema::create('customer_history_payment', function (Blueprint $table) {
+        Schema::create('customer_validation_payment', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('customer_id')->index();
             $table->unsignedBigInteger('user_id')->index();
+            $table->string('Creditceiling')->nullable();
+            $table->string('Openceiling')->nullable();
+            $table->string('Yearcount')->nullable();
+            $table->string('yearAgoCount')->nullable();
+            $table->string('Yearturnover')->nullable();
+            $table->string('lastYearturnover')->nullable();
             $table->string('Checkback')->nullable();
             $table->string('Checkbackintheflow')->nullable();
             $table->string('accountbalance')->nullable();
@@ -28,17 +34,18 @@ class CreateCustomerHistoryPaymentTable extends Migration
             $table->string('description')->nullable();
             $table->timestamps();
 
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
             $table->foreign('customer_id')
                 ->references('id')
                 ->on('customers')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
         });
     }
 
@@ -49,6 +56,6 @@ class CreateCustomerHistoryPaymentTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('customer_history_payment');
+        //
     }
 }

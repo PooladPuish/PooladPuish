@@ -28,6 +28,7 @@
                 {data: 'characteristics_id', name: 'characteristics_id'},
                 {data: 'name', name: 'name'},
                 {data: 'label', name: 'label'},
+                {data: 'price', name: 'price'},
                 {data: 'manufacturing', name: 'manufacturing'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]
@@ -49,6 +50,7 @@
                 $('#name').val(data.name);
                 $('#code').val(data.code);
                 $('#manufacturing').val(data.manufacturing);
+                $('#price').val(data.price);
             });
         });
         $('#saveBtn').click(function (e) {
@@ -86,6 +88,7 @@
         });
         $('#name').val('');
         $('#code').val('');
+        $('#price').val('');
         $('#characteristics_id').val('');
         $('#commodity_id').val('');
         $('#manufacturing').val('');

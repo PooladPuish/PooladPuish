@@ -25,7 +25,7 @@
                         <tbody>
                         </tbody>
                     </table>
-                    <a class="btn btn-primary" href="javascript:void(0)" id="createNewProduct">تعریف حساب جدید</a>
+                    <a class="btn btn-primary" href="javascript:void(0)" id="createNewProduct">تعریف انبار جدید</a>
                 </div>
             </div>
         </div>

@@ -21,6 +21,7 @@
                             <th>مشخصه محصول</th>
                             <th>مدل محصول</th>
                             <th>نام محصول</th>
+                            <th>قیمت(ریال)</th>
                             <th>تهیه</th>
                             <th>عملیات</th>
                         </tr>
@@ -28,7 +29,7 @@
                         <tbody>
                         </tbody>
                     </table>
-                    <a class="btn btn-primary" href="javascript:void(0)" id="createNewProduct">تعریف گروه جدید</a>
+                    <a class="btn btn-primary" href="javascript:void(0)" id="createNewProduct">تعریف محصول جدید</a>
                 </div>
             </div>
         </div>

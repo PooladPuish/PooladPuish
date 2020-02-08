@@ -11,8 +11,11 @@
             }
         });
         var table = $('.data-table').DataTable({
+
             processing: true,
             serverSide: true,
+
+
             "language": {
                 "search": "جستجو:",
                 "lengthMenu": "نمایش _MENU_",
@@ -37,6 +40,7 @@
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]
         });
+
         $('body').on('click', '.SuccessCustomer', function () {
             var id = $(this).data('id');
             $.get("{{ route('admin.invoice.update.confirm') }}" + '/' + id, function (data) {
@@ -53,7 +57,6 @@
 
         $('body').on('click', '.deleteProduct', function () {
             $('#id_delete').val('');
-            $('#cancellation').val('');
             $('#description_c').val('');
             var id = $(this).data("id");
             $('#id_delete').val(id);
@@ -97,7 +100,6 @@
                             }
                         });
                         $('#id_delete').val('');
-                        $('#cancellation').val('');
                         $('#description').val('');
                     }
 
@@ -119,6 +121,15 @@
                 $('#yearAgoCount').val(data.yearAgoCount);
                 $('#Yearturnover').val(data.Yearturnover);
                 $('#lastYearturnover').val(data.lastYearturnover);
+                $('#description_m').val(data.description);
+                $('#Checkback').val(data.Checkback);
+                $('#Checkbackintheflow').val(data.Checkbackintheflow);
+                $('#accountbalance').val(data.accountbalance);
+                $('#Averagetimedelay').val(data.Averagetimedelay);
+                $('#Futurefactors').val(data.Futurefactors);
+                $('#Receiveddocuments').val(data.Receiveddocuments);
+                $('#Openaccountbalance').val(data.Openaccountbalance);
+                $('#paymentmethod').val(data.paymentmethod);
                 $('#customer_id').val(id);
 
 
@@ -141,10 +152,7 @@
                 $('#Openaccountbalance').val(data.Openaccountbalance);
                 $('#paymentmethod').val(data.paymentmethod);
 
-                    $('#many_id').val(id);
-
-
-
+                $('#many_id').val(id);
 
 
             })
@@ -153,10 +161,15 @@
 
 
         $('body').on('click', '.Print', function () {
-
             var id = $(this).data('id');
-            $('#ajaxModelPrint').modal('show');
-            $('#name_bank').val(101);
+            $.get("{{ route('admin.invoice.check.print') }}" + '/' + id, function (data) {
+                $('#ajaxModelPrint').modal('show');
+                $('#user_idddd').val(data.user_id);
+                $('#selectstoressss').val(data.selectstores_id);
+                $('#name_bankkk').val(data.bank_id);
+                $('#dateeee').val(data.date);
+                $('#descriptionnn').val(data.description);
+            });
             $('#PrintSell').click(function (e) {
                 var user = $('#CustomerPrint').serialize();
                 $.ajax({
@@ -181,8 +194,6 @@
 
 
             });
-
-
         });
 
 

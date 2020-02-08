@@ -50,7 +50,6 @@ class UserController extends Controller
             $user = User::find($request->id);
             if ($user->email != $request->email) {
                 $validator = Validator::make($request->all(), [
-                    'avatar' => 'mimes:jpeg,jpg,png',
                     'name' => 'required',
                     'phone' => 'required',
                     'email' => 'required|unique:users',
@@ -60,7 +59,6 @@ class UserController extends Controller
                 ]);
             } else
                 $validator = Validator::make($request->all(), [
-                    'avatar' => 'mimes:jpeg,jpg,png',
                     'name' => 'required',
                     'phone' => 'required',
                     'email' => 'required',
@@ -89,6 +87,14 @@ class UserController extends Controller
             $password = \Hash::make($request->password);
 
         }
+        if ($request->hasFile('sign')) {
+            $file = $request->file('sign');
+            $name = time() . '.' . $file->getClientOriginalExtension();
+            $sign = $request->file('sign')->move('public/upload/sign/', $name);
+        } else {
+            $sign = null;
+        }
+
         if ($request->hasFile('avatar')) {
             $file = $request->file('avatar');
             $name = time() . '.' . $file->getClientOriginalExtension();
@@ -96,6 +102,15 @@ class UserController extends Controller
         } else {
             $avatar = null;
         }
+
+
+
+
+
+
+
+
+
 
         if ($validator->passes()) {
             $users = User::updateOrCreate(['id' => $request->id],
@@ -105,6 +120,7 @@ class UserController extends Controller
                     'phone' => $request->phone,
                     'password' => $password,
                     'avatar' => $avatar,
+                    'sign' => $sign,
                 ]);
             $users->roles()->sync($request->input('roles'));
             return response()->json(['success' => 'Product saved successfully.']);
@@ -288,6 +304,7 @@ class UserController extends Controller
      */
     public function updates(Request $request)
     {
+
         $user = User::find($request->input('id'));
         if ($user->email != $request->input('email')) {
             $this->validate($request, [
@@ -322,6 +339,15 @@ class UserController extends Controller
         } else {
             $avatar = $user->avatar;
         }
+
+        if ($request->hasFile('sign')) {
+            $file = $request->file('sign');
+            $name = time() . '.' . $file->getClientOriginalExtension();
+            $sign = $request->file('sign')->move('public/upload/sign/', $name);
+        } else {
+            $sign = null;
+        }
+
         if (!empty($request->input('password'))) {
             $pass = Hash::make($request->input('password'));
         } else {
@@ -333,6 +359,7 @@ class UserController extends Controller
             'phone' => $request['phone'],
             'password' => $pass,
             'avatar' => $avatar,
+            'sign' => $sign,
         ]);
         if ($update) {
             $delete = \DB::table('role_user')->where('user_id', $request->id)->delete();

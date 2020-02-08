@@ -100,7 +100,7 @@ class CustomerController extends Controller
                     'state.required' => 'شهر یا استان مشتری را وارد کنید',
                     'date.required' => 'تاریخ آشنایی مشتری را وارد کنید',
                     'expert.required' => 'کارشناس را وارد کنید',
-                    'tel_company.required' => 'لطفا شماره تلفن دفتر مرکزی را وارد کنید',
+                    'tel_company.required' => 'لطفا شماره تلفن دفتر را وارد کنید',
                     'tel_company.integer' => 'شماره تلفن دفتر مرکزی باید از نوع عددی باشذ',
                 ]);
             } else

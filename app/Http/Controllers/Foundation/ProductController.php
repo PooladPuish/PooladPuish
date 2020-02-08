@@ -31,6 +31,10 @@ class ProductController extends Controller
                 ->addColumn('commodity_id', function ($row) {
                     return $row->commodity->name;
                 })
+                ->addColumn('price', function ($row) {
+                    $price = number_format($row->price);
+                    return $price;
+                })
                 ->addColumn('manufacturing', function ($row) {
                     if ($row->manufacturing == 1) {
                         return 'داخلی';
@@ -71,31 +75,37 @@ class ProductController extends Controller
             if ($products->code != $request->code) {
                 $validator = Validator::make($request->all(), [
                     'name' => 'required',
+                    'price' => 'required',
                     'code' => 'required|integer|unique:products',
                 ], [
                     'code.unique' => 'محصول با این کد در سیستم موجود است.',
                     'code.required' => 'پرکردن کد محصول الزامی میباشد',
                     'code.integer' => 'کد محصول بایستی از نوع عدد باشد',
                     'name.required' => 'پرکردن نام محصول الزامی میباشد',
+                    'price.required' => 'لطفا قیمت محصول را وارد کنید',
                 ]);
             } else
                 $validator = Validator::make($request->all(), [
                     'name' => 'required',
                     'code' => 'required|integer',
+                    'price' => 'required',
                 ], [
                     'code.required' => 'پرکردن کد محصول الزامی میباشد',
                     'code.integer' => 'کد محصول بایستی از نوع عدد باشد',
                     'name.required' => 'پرکردن نام محصول الزامی میباشد',
+                    'price.required' => 'لطفا قیمت محصول را وارد کنید',
                 ]);
         } else
             $validator = Validator::make($request->all(), [
                 'name' => 'required',
+                'price' => 'required',
                 'code' => 'required|integer|unique:products',
             ], [
                 'code.unique' => 'محصول با این کد در سیستم موجود است.',
                 'code.required' => 'پرکردن کد محصول الزامی میباشد',
                 'code.integer' => 'کد محصول بایستی از نوع عدد باشد',
                 'name.required' => 'پرکردن نام محصول الزامی میباشد',
+                'price.required' => 'لطفا قیمت محصول را وارد کنید',
             ]);
 
         $commodity = Commodity::where('id', $request->commodity_id)->first();
@@ -109,6 +119,7 @@ class ProductController extends Controller
                     'commodity_id' => $request->commodity_id,
                     'characteristics_id' => $request->characteristic,
                     'manufacturing' => $request->manufacturing,
+                    'price' => $request->price,
                     'label' => $commodity->name . ' ' . $characteristic->name . ' ' . $request->name,
                 ]);
             return response()->json(['success' => 'Product saved successfully.']);

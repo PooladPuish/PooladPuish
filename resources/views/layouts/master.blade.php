@@ -33,10 +33,10 @@
     <style>
         @font-face {
             font-family: 'Shahab';
-            src: url('http://cdn.font-store.ir/fonts/shahab/Shahab-Regular.woff2') format('woff2'),
-            url('http://cdn.font-store.ir/fonts/shahab/Shahab-Regular.woff') format('woff'),
-            url('http://cdn.font-store.ir/fonts/shahab/Shahab-Regular.ttf') format('truetype'),
-            url('http://cdn.font-store.ir/fonts/shahab/Shahab-Regular.otf') format('opentype');
+            src: url('{{asset('/public/fonts/Shahab-Regular.woff2')}}') format('woff2'),
+            url('{{asset('/public/fonts/Shahab-Regular.woff')}}') format('woff'),
+            url('{{asset('/public/fonts/Shahab-Regular.ttf')}}') format('truetype'),
+            url('{{asset('/public/fonts/Shahab-Regular.otf')}}') format('opentype');
             font-weight: normal;
             font-style: normal;
         }
@@ -114,8 +114,8 @@
             <a href="{{route('admin.invoice.wizard')}}" class="btn btn-link">
 
 
-                    <img src="{{asset('public/icon/icons8-profit-growth-64.png')}}"
-                         width="30" title="صدور پیش فاکتور">
+                <img src="{{asset('public/icon/icons8-profit-growth-64.png')}}"
+                     width="30" title="صدور پیش فاکتور">
 
 
             </a>
@@ -250,8 +250,6 @@
             </span>
                     </a>
                 </li>
-
-
 
 
                 @if(Gate::check('ثبت کاربر جدید') || Gate::check('لیست کاربران')
@@ -407,26 +405,28 @@
                     </li>
                 @endif
 
-
-                <li class="treeview" id="sell">
-                    <a href="#">
-                        <i class="fa fa-line-chart"></i> <span>فروش</span>
-                        <span class="pull-left-container">
+                @if(Gate::check('صدور پیش فاکتور') || Gate::check('پیش فاکتورهای حذف شده'))
+                    <li class="treeview" id="sell">
+                        <a href="#">
+                            <i class="fa fa-line-chart"></i> <span>فروش</span>
+                            <span class="pull-left-container">
               <i class="fa fa-angle-right pull-left"></i>
             </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        @can('صدور پیش فاکتور')
-                            <li><a href="{{route('admin.invoice.index')}}"><i
-                                        class="fa fa-circle-o"></i>صدور پیش فاکتور</a>
-                            </li>
-                            <li><a href="{{route('admin.invoice.trash')}}"><i
-                                        class="fa fa-circle-o"></i>پیش فاکتور های حذف شده</a>
-                            </li>
-                        @endif
-                    </ul>
-                </li>
-
+                        </a>
+                        <ul class="treeview-menu">
+                            @can('صدور پیش فاکتور')
+                                <li><a href="{{route('admin.invoice.index')}}"><i
+                                            class="fa fa-circle-o"></i>صدور پیش فاکتور</a>
+                                </li>
+                                @can('پیش فاکتورهای حذف شده')
+                                    <li><a href="{{route('admin.invoice.trash')}}"><i
+                                                class="fa fa-circle-o"></i>پیش فاکتور های حذف شده</a>
+                                    </li>
+                                @endcan
+                            @endif
+                        </ul>
+                    </li>
+                @endif
 
                 @if(Gate::check('بازسازی نرم افزار') || Gate::check('شروع به کار نرم افزار'))
                     <li class="treeview" id="setting">
@@ -447,23 +447,26 @@
                                             class="fa fa-circle-o"></i>شروع به کار نرم افزار</a>
                                 </li>
                             @endcan
-                            <li><a href="javascript:void(0)" id="backup"><i
-                                        class="fa fa-circle-o"></i>پشتیبان گیری از دیتابیس</a>
-                            </li>
-
-                            <li><a href="{{route('admin.setting.wizard')}}"><i
-                                        class="fa fa-circle-o"></i>مشخصات عمومی سیستم</a>
-                            </li>
-
+                            @can('پشتیبان گیری از دیتابیس')
+                                <li><a href="javascript:void(0)" id="backup"><i
+                                            class="fa fa-circle-o"></i>پشتیبان گیری از دیتابیس</a>
+                                </li>
+                            @endcan
+                            @can('مشخصات عمومی سیستم')
+                                <li><a href="{{route('admin.setting.wizard')}}"><i
+                                            class="fa fa-circle-o"></i>مشخصات عمومی سیستم</a>
+                                </li>
+                            @endcan
+                            @can('لیست حسابهای بانکی')
                                 <li><a href="{{route('admin.bank.list')}}"><i
                                             class="fa fa-circle-o"></i>لیست حسابهای بانکی</a>
                                 </li>
-
+                            @endcan
+                            @can('لیست انبارها')
                                 <li><a href="{{route('admin.selectstore.list')}}"><i
                                             class="fa fa-circle-o"></i>لیست انبارها</a>
                                 </li>
-
-
+                            @endcan
 
                         </ul>
                     </li>
@@ -751,8 +754,17 @@
     $("#list_users").click(function () {
         $(".list_user").prop('checked', $(this).prop('checked'));
     });
-    $("#setting").click(function () {
-        $(".settings").prop('checked', $(this).prop('checked'));
+    $("#sells").click(function () {
+        $(".sell").prop('checked', $(this).prop('checked'));
+    });
+    $("#sell").click(function () {
+        $(".sells").prop('checked', $(this).prop('checked'));
+    });
+    $("#list_sells").click(function () {
+        $(".list_sell").prop('checked', $(this).prop('checked'));
+    });
+    $("#list_settings").click(function () {
+        $(".list_setting").prop('checked', $(this).prop('checked'));
     });
     $("#foundations").click(function () {
         $(".foundation").prop('checked', $(this).prop('checked'));
@@ -760,9 +772,7 @@
     $("#customers").click(function () {
         $(".customer").prop('checked', $(this).prop('checked'));
     });
-    $("#sells").click(function () {
-        $(".sell").prop('checked', $(this).prop('checked'));
-    });
+
 
 
 </script>

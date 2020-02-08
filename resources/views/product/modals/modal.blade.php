@@ -88,6 +88,21 @@
                                             </div>
                                         </div>
 
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>قیمت محصول
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
+                                                <input type="text" id="price" name="price" class="form-control"
+                                                       placeholder="لطفا قیمت محصول را وارد کنید"
+                                                       required>
+                                            </div>
+                                        </div>
+
+
+
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">

@@ -54,11 +54,24 @@
         });
         $('#saveBtn').click(function (e) {
             e.preventDefault();
+            var form = $('#productForm')[0];
+            var data = new FormData(form);
             $.ajax({
-                data: $('#productForm').serialize(),
-                url: "{{ route('admin.user.store') }}",
                 type: "POST",
-                dataType: 'json',
+                enctype: 'multipart/form-data',
+
+                url: "{{ route('admin.user.store') }}",
+                data: data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                method: 'POST',
+                type: 'POST',
+
+
+
+
+
                 success: function (data) {
                     if (data.errors) {
                         $('#ajaxModel').modal('hide');

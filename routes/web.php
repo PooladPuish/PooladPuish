@@ -219,6 +219,8 @@ Route::group(['middleware' => ['auth', 'web']], function () {
         Route::get('/bank/Listrint', 'InvoiceController@Listrint')->name('admin.ListPrint.print');
         Route::get('/bank/CustomerValidate/{id?}', 'InvoiceController@CustomerValidate')->name('admin.invoice.customers.validate');
         Route::get('/bank/CustomerMany/{id?}', 'InvoiceController@CustomerMany')->name('admin.invoice.customers.many');
+        Route::get('/invoice/price', 'InvoiceController@price')->name('admin.product.price');
+        Route::get('/invoice/CheckPrint/{id?}', 'InvoiceController@CheckPrint')->name('admin.invoice.check.print');
 
         Route::post('/invoice/ValidateStore', 'InvoiceController@ValidateStore')->name('admin.invoice.customer.validate.store');
         Route::post('/invoice/ManyStore', 'InvoiceController@ManyStore')->name('admin.invoice.customer.many.store');

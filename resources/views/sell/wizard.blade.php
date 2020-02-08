@@ -240,6 +240,7 @@
             myNode.innerHTML += "<div class='form-group'>" +
                 "<select id=\'product" + a + "\'  name=\"product[]\"\n" +
                 "class=\"form-control\"/>" +
+                "<option>انتخاب کنید</option>" +
                 "+@foreach($products as $product)+" +
                 "<option value=\"{{$product->id}}\">{{$product->label}}</option>" +
                 "+@endforeach+" +
@@ -361,26 +362,6 @@
                 .keyup();
 
 
-            $('#product' + a + '')
-                .change(function () {
-
-                    var id = $('#product' + a + '').val();
-                    for (var i in all_modelProducts) {
-                        if (all_modelProducts[i].product_id == id) {
-                            var number = parseInt($('#number' + a + '').val());
-                            $('#Weight' + a + '').val(all_modelProducts[i].size * number);
-                            Wigt();
-                            calculateSum();
-                            numberSum();
-                            Price_SellSum();
-
-
-                        }
-
-                    }
-                })
-                .change();
-
             $('#InvoiceType')
                 .change(function () {
                     if ($('#InvoiceType').val() == 1) {
@@ -393,6 +374,73 @@
 
                 })
                 .change();
+
+            $('#product' + a + '')
+                .change(function () {
+                    var id = $('#product' + a + '').val();
+                    for (var i in all_modelProducts) {
+                        if (all_modelProducts[i].product_id == id) {
+                            var number = parseInt($('#number' + a + '').val());
+                            $('#Weight' + a + '').val(all_modelProducts[i].size * number);
+                            Wigt();
+
+
+                        }
+
+
+                    }
+
+
+                })
+                .change();
+
+            $('#product' + a + '')
+                .change(function () {
+                    var id = $('#product' + a + '').val();
+                    $.ajax({
+                        type: "GET",
+                        url: "{{route('admin.product.price')}}?id=" + id,
+                        success: function (res) {
+                            if (res) {
+                                $('#sell' + a + '').val(res.price);
+                                var selllll = parseInt($('#sell' + a + '').val());
+                                var numberrr = parseInt($('#number' + a + '').val());
+                                $('#Price_Sell' + a + '').val(selllll * numberrr);
+                                $('#Tax' + a + '').val(parseFloat($('#Price_Sell' + a + '').val() * all_setting[i].Tax / 100) + parseFloat($('#Price_Sell' + a + '').val()));
+                                tax();
+                                calculateSum();
+                                numberSum();
+                                Price_SellSum();
+
+                            } else {
+
+                            }
+                        }
+                    });
+
+
+                })
+                .change();
+
+
+        }
+
+        function deleteService2(id, event) {
+            event.preventDefault();
+            $('#productt' + id).remove();
+            $('#color' + id).remove();
+            $('#selll' + id).remove();
+            $('#numberr' + id).remove();
+            $('#Taxx' + id).remove();
+            $('#Price_Selll' + id).remove();
+            $('#Weightt' + id).remove();
+            $('#actiont' + id).remove();
+
+            tax();
+            calculateSum();
+            numberSum();
+            Price_SellSum();
+            Wigt();
 
         }
 
@@ -477,20 +525,6 @@
             added_inputs_array_table2(data, added_inputs2_array.length - 1);
         }
 
-        function deleteService2(id, event) {
-
-
-            event.preventDefault();
-            $('#productt' + id).remove();
-            $('#color' + id).remove();
-            $('#selll' + id).remove();
-            $('#numberr' + id).remove();
-            $('#Taxx' + id).remove();
-            $('#Price_Selll' + id).remove();
-            $('#Weightt' + id).remove();
-            $('#actiont' + id).remove();
-
-        }
 
     </script>
 

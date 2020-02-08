@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateInvoicePrintTable extends Migration
+class InvoicePrintDate extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateInvoicePrintTable extends Migration
      */
     public function up()
     {
-        Schema::create('invoice_print', function (Blueprint $table) {
+        Schema::create('invoice_print_date', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('invoice_id')->index();
             $table->unsignedBigInteger('user_id')->index();
@@ -47,6 +47,7 @@ class CreateInvoicePrintTable extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });
+
     }
 
     /**
@@ -56,6 +57,6 @@ class CreateInvoicePrintTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invoice_print');
+        //
     }
 }

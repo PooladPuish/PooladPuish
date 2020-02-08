@@ -13,16 +13,14 @@
     <style type="text/css">
         @media print {
             #printbtn {
-                display :  none;
+                display: none;
             }
         }
     </style>
     <link rel="shortcut icon" type="image/x-icon" href="{{url('/public/icon/logo.png')}}"/>
     <link
         rel="stylesheet"
-        href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css"
-        integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8If"
-        crossorigin="anonymous">
+        href="{{asset('/public/css/2.css')}}">
     <style>
         table {
             font-family: arial, sans-serif;
@@ -76,6 +74,10 @@
 <body dir="rtl" class="myclass" style="font-family: 'B Yekan'">
 <br/>
 <br/>
+<br/>
+<br/>
+<br/>
+<br/>
 
 <div class="col-md-12">
     <h4>برگه درخواست کالا و ارزیابی وضعیت اعتباری مشتری</h4>
@@ -88,8 +90,7 @@
             <th>خریدار</th>
             <th>اقدام کننده</th>
             <th>تاریخ اقدام</th>
-            <th>نحوه پرداخت محاسباتی</th>
-            <th>نحوه پرداخت نمایشی</th>
+            <th>نحوه پرداخت</th>
             <th>درصد سود فروش</th>
             <th>محل تحویل</th>
         </tr>
@@ -107,9 +108,15 @@
                     {{$id->paymentMethod}} روزه
                 @endif
             </td>
-            <td></td>
+
             <td>---</td>
-            <td></td>
+            <td>
+                @foreach($select_stores as $select_store)
+                    @if($select_store->id == $id->selectstores)
+                        {{$select_store->name}}
+                    @endif
+                @endforeach
+            </td>
         </tr>
         </tbody>
 
@@ -199,44 +206,44 @@
         </tfoot>
 
     </table>
-    <br/>
-    <br/>
-    <label>نحوه محاسبه قیمت فروش:</label>
-    <table style="font-family: 'B Yekan'">
-        <thead>
-        <tr>
-            <th>گرید مواد</th>
-            <th>بهای پایه مواد</th>
-            <th>هزینه تامین مواد</th>
-            <th>نرخ کارمزد مصوب</th>
-            <th>کارمزد تولید</th>
-            <th>نسبت کارمزد</th>
-            <th>هزینه رنگ</th>
-            <th>کارمزد رنگی کردن</th>
-            <th>هزینه ضایعات رنگ</th>
-            <th>سایر هزینه ها</th>
-            <th>هزینه حمل</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+    {{--    <br/>--}}
+    {{--    <br/>--}}
+    {{--    <label>نحوه محاسبه قیمت فروش:</label>--}}
+    {{--    <table style="font-family: 'B Yekan'">--}}
+    {{--        <thead>--}}
+    {{--        <tr>--}}
+    {{--            <th>گرید مواد</th>--}}
+    {{--            <th>بهای پایه مواد</th>--}}
+    {{--            <th>هزینه تامین مواد</th>--}}
+    {{--            <th>نرخ کارمزد مصوب</th>--}}
+    {{--            <th>کارمزد تولید</th>--}}
+    {{--            <th>نسبت کارمزد</th>--}}
+    {{--            <th>هزینه رنگ</th>--}}
+    {{--            <th>کارمزد رنگی کردن</th>--}}
+    {{--            <th>هزینه ضایعات رنگ</th>--}}
+    {{--            <th>سایر هزینه ها</th>--}}
+    {{--            <th>هزینه حمل</th>--}}
+    {{--        </tr>--}}
+    {{--        </thead>--}}
+    {{--        <tbody>--}}
+    {{--        <tr>--}}
+    {{--            <td></td>--}}
+    {{--            <td></td>--}}
+    {{--            <td></td>--}}
+    {{--            <td></td>--}}
+    {{--            <td></td>--}}
+    {{--            <td></td>--}}
+    {{--            <td></td>--}}
+    {{--            <td></td>--}}
+    {{--            <td></td>--}}
+    {{--            <td></td>--}}
+    {{--            <td></td>--}}
 
-        </tr>
-        </tbody>
+    {{--        </tr>--}}
+    {{--        </tbody>--}}
 
 
-    </table>
+    {{--    </table>--}}
     <br/>
     <br/>
     <label>میزان اعتبار سنجی:</label>
@@ -255,48 +262,48 @@
         <tbody>
         <tr>
             <td>
-                @if($customer_validation->Creditceiling == null)
+                @if($customer_validation_payment->Creditceiling == null)
                     0
                 @else
-                    {{number_format($customer_validation->Creditceiling)}}
+                    {{number_format($customer_validation_payment->Creditceiling)}}
                 @endif
             </td>
             <td>
-                @if($customer_validation->Openceiling == null)
+                @if($customer_validation_payment->Openceiling == null)
                     0
                 @else
-                    {{number_format($customer_validation->Openceiling)}}
-                @endif
-
-            </td>
-            <td>
-                @if($customer_validation->Yearcount == null)
-                    0
-                @else
-                    {{number_format($customer_validation->Yearcount)}}
-                @endif
-            </td>
-            <td>
-
-                @if($customer_validation->yearAgoCount == null)
-                    0
-                @else
-                    {{number_format($customer_validation->yearAgoCount)}}
-                @endif
-            </td>
-            <td>
-                @if($customer_validation->Yearturnover == null)
-                    0
-                @else
-                    {{number_format($customer_validation->Yearturnover)}}
+                    {{number_format($customer_validation_payment->Openceiling)}}
                 @endif
 
             </td>
             <td>
-                @if($customer_validation->lastYearturnover == null)
+                @if($customer_validation_payment->Yearcount == null)
                     0
                 @else
-                    {{number_format($customer_validation->lastYearturnover)}}
+                    {{number_format($customer_validation_payment->Yearcount)}}
+                @endif
+            </td>
+            <td>
+
+                @if($customer_validation_payment->yearAgoCount == null)
+                    0
+                @else
+                    {{number_format($customer_validation_payment->yearAgoCount)}}
+                @endif
+            </td>
+            <td>
+                @if($customer_validation_payment->Yearturnover == null)
+                    0
+                @else
+                    {{number_format($customer_validation_payment->Yearturnover)}}
+                @endif
+
+            </td>
+            <td>
+                @if($customer_validation_payment->lastYearturnover == null)
+                    0
+                @else
+                    {{number_format($customer_validation_payment->lastYearturnover)}}
                 @endif
             </td>
 
@@ -322,95 +329,83 @@
         <tbody>
         <tr>
             <td>
-                @if($customer_history_payment->Checkback == null)
+                @if($customer_validation_payment->Checkback == null)
                     0
                 @else
-                    {{number_format($customer_history_payment->Checkback)}}
+                    {{number_format($customer_validation_payment->Checkback)}}
                 @endif
 
 
             </td>
             <td>
-                @if($customer_history_payment->Checkbackintheflow == null)
+                @if($customer_validation_payment->Checkbackintheflow == null)
                     0
                 @else
-                    {{number_format($customer_history_payment->Checkbackintheflow)}}
+                    {{number_format($customer_validation_payment->Checkbackintheflow)}}
                 @endif
             </td>
             <td>
-                @if($customer_history_payment->accountbalance == null)
+                @if($customer_validation_payment->accountbalance == null)
                     0
                 @else
-                    {{number_format($customer_history_payment->accountbalance)}}
+                    {{number_format($customer_validation_payment->accountbalance)}}
                 @endif
             </td>
             <td>
-                @if($customer_history_payment->Averagetimedelay == null)
+                @if($customer_validation_payment->Averagetimedelay == null)
                     0
                 @else
-                    {{number_format($customer_history_payment->Averagetimedelay)}}
+                    {{number_format($customer_validation_payment->Averagetimedelay)}}
                 @endif
             </td>
             <td>
-                @if($customer_history_payment->Futurefactors == null)
+                @if($customer_validation_payment->Futurefactors == null)
                     0
                 @else
-                    {{number_format($customer_history_payment->Futurefactors)}}
+                    {{number_format($customer_validation_payment->Futurefactors)}}
                 @endif
             </td>
             <td>
-                @if($customer_history_payment->Receiveddocuments == null)
+                @if($customer_validation_payment->Receiveddocuments == null)
                     0
                 @else
-                    {{number_format($customer_history_payment->Receiveddocuments)}}
+                    {{number_format($customer_validation_payment->Receiveddocuments)}}
                 @endif
             </td>
             <td>
-                @if($customer_history_payment->Openaccountbalance == null)
+                @if($customer_validation_payment->Openaccountbalance == null)
                     0
                 @else
-                    {{number_format($customer_history_payment->Openaccountbalance)}}
+                    {{number_format($customer_validation_payment->Openaccountbalance)}}
                 @endif
             </td>
         </tr>
         </tbody>
-        <tfoot>
-        <tr>
-
-            <th height="130" colspan="7">
-                امضا
-            </th>
-
-        </tr>
-
-        </tfoot>
-
-        <tfoot>
-        <tr>
-            <th>
-                توضیحات واحد مالی
-            </th>
-            <th colspan="6">
-                {{$customer_history_payment->description}}
-            </th>
-        </tr>
-
-        </tfoot>
-
-        <tfoot>
-        <tr>
-            <th>
-                نحوه پرداخت فاکتورهای قبلی
-            </th>
-            <th colspan="6">
-                {{$customer_history_payment->paymentmethod}}
-            </th>
-        </tr>
-
-        </tfoot>
-
-
     </table>
+    <table height="100" style="font-family: 'B Yekan'">
+        <thead>
+        </thead>
+        <tbody>
+        <tr>
+            <td width="142">
+                نحوه پرداختهای قبلی
+                <hr/>
+                توضیحات واحد مالی
+            </td>
+            <td>
+                {{$customer_validation_payment->paymentmethod}}
+                <hr/>
+                {{$customer_validation_payment->description}}
+            </td>
+            <td width="121">
+                @if(!empty($users->sign))
+                    <img src="{{url($users->sign)}}" width="100" class="user-image" alt="User Image">
+                @endif
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
     <br/>
     <br/>
     <label>نظر و امضا مدیر فروش:</label>
@@ -425,7 +420,7 @@
         </tbody>
     </table>
     <br/>
-    <input id ="printbtn" class="btn btn-primary" type="button" value="تهیه نسخه چاپی" onclick="window.print();" >
+    <input id="printbtn" class="btn btn-primary" type="button" value="تهیه نسخه چاپی" onclick="window.print();">
 </div>
 
 </body>

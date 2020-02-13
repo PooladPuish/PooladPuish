@@ -4,8 +4,8 @@
             <div class="modal-body">
                 <div class="portlet box blue">
                     <div class="portlet-title">
-                        <div class="caption">
-                            مشخصه محصول
+                        <div class="caption" id="caption">
+
                         </div>
                     </div>
                     <div class="portlet-body form">
@@ -15,7 +15,7 @@
                                 <form autocomplete="off" id="productForm" name="productForm" class="form-horizontal">
                                     <input type="hidden" name="product_id" id="product_id">
                                     @csrf
-                                    <div class="col-md-12 form-group">
+                                    <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>کد مشخصه محصول
@@ -65,13 +65,20 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <br/>
+                                    <hr/>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">
-                                            انصراف
-                                        </button>
-                                        <button type="submit" class="btn btn-primary" id="saveBtn" value="ثبت">
-                                            ثبت
-                                        </button>
+                                        <div class="text-left">
+                                            <button style="width: 130px" type="submit" class="btn btn-success"
+                                                    id="saveBtn" value="ثبت">
+                                                ثبت
+                                            </button>
+                                            <button style="width: 130px" type="button" class="btn btn-danger"
+                                                    data-dismiss="modal">
+                                                انصراف
+                                            </button>
+
+                                        </div>
                                     </div>
                                 </form>
                             </div>

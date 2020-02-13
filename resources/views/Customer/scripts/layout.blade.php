@@ -179,6 +179,8 @@
         });
         $('#saveBtn').click(function (e) {
             e.preventDefault();
+            $('#saveBtn').text('در حال ثبت اطلاعات...');
+            $('#saveBtn').prop("disabled", true);
             var form = $('#productForm')[0];
             var data = new FormData(form);
             $.ajax({
@@ -202,6 +204,8 @@
                                 confirmButtonText: 'تایید'
                             })
                         });
+                        $('#saveBtn').text('ثبت');
+                        $('#saveBtn').prop("disabled", false);
                     }
                     if (data.success) {
                         Swal.fire({
@@ -214,6 +218,8 @@
                             location.reload();
 
                         });
+                        $('#saveBtn').text('ثبت');
+                        $('#saveBtn').prop("disabled", false);
 
                     }
                 }

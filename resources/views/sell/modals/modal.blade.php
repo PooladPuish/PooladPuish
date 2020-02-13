@@ -17,7 +17,7 @@
                                     <input type="hidden" name="invoice_id" id="invoice_id">
                                     <input type="hidden" name="id_in" id="id_in">
                                     @csrf
-                                    <div class="col-md-12 form-group">
+                                    <div class="row">
 
 
                                         <div class="col-md-12">
@@ -84,13 +84,21 @@
 
 
                                     </div>
+                                    <br/>
+                                    <hr/>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">
-                                            انصراف
-                                        </button>
-                                        <button type="submit" class="btn btn-primary" id="saveConfirm" value="ثبت">
-                                            ثبت
-                                        </button>
+                                        <div class="text-left">
+                                            <button style="width: 130px" type="submit" class="btn btn-success"
+                                                    id="saveConfirm" value="ثبت">
+                                                ثبت
+                                            </button>
+
+                                            <button style="width: 130px" type="button" class="btn btn-danger"
+                                                    data-dismiss="modal">
+                                                انصراف
+                                            </button>
+
+                                        </div>
                                     </div>
                                 </form>
                             </div>
@@ -121,7 +129,7 @@
                                       class="form-horizontal">
                                     <input type="hidden" name="customer_id" id="customer_id">
                                     @csrf
-                                    <div class="col-md-12 form-group">
+                                    <div class="row">
 
                                         <div>
                                             <div class="col-md-4">
@@ -166,7 +174,6 @@
                                                        required>
                                             </div>
                                         </div>
-
 
 
                                         <div>
@@ -245,14 +252,23 @@
                                         </div>
 
                                     </div>
+                                    <br/>
+                                    <hr/>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">
-                                            انصراف
-                                        </button>
-                                        <button type="submit" class="btn btn-primary" id="saveCustomerValidate"
-                                                value="ثبت">
-                                            ثبت
-                                        </button>
+                                        <div class="text-left">
+
+                                            <button style="width: 130px" type="submit" class="btn btn-success"
+                                                    id="saveCustomerValidate"
+                                                    value="ثبت">
+                                                ثبت
+                                            </button>
+
+                                            <button style="width: 130px" type="button" class="btn btn-danger"
+                                                    data-dismiss="modal">
+                                                انصراف
+                                            </button>
+
+                                        </div>
                                     </div>
                                 </form>
                             </div>
@@ -264,111 +280,6 @@
         </div>
     </div>
 </div>
-
-{{--<div class="modal fade" id="ajaxModelCustomerMany" aria-hidden="true">--}}
-{{--    <div class="modal-dialog col-md-12">--}}
-{{--        <div class="modal-content">--}}
-{{--            <div class="modal-body col-md-12">--}}
-{{--                <div class="portlet box blue">--}}
-{{--                    <div class="portlet-title">--}}
-{{--                        <div class="caption">--}}
-{{--                            سابقه پرداخت مشتری--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="portlet-body form">--}}
-{{--                        <div class="form-body">--}}
-{{--                            <div class="form-group">--}}
-
-{{--                                <form autocomplete="off" id="CustomersMany" name="CustomersMany"--}}
-{{--                                      class="form-horizontal">--}}
-{{--                                    <input type="hidden" name="many_id" id="many_id">--}}
-{{--                                    @csrf--}}
-{{--                                    <div class="col-md-12 form-group">--}}
-
-
-{{--                                        <div class="col-md-3">--}}
-{{--                                            <label>سابقه چک برگشتی--}}
-{{--                                            </label>--}}
-{{--                                            <input type="text" id="Checkback" name="Checkback" class="form-control"--}}
-{{--                                                   required>--}}
-{{--                                        </div>--}}
-
-{{--                                        <div class="col-md-3">--}}
-{{--                                            <label>چک های برگشتی در جریان--}}
-{{--                                            </label>--}}
-{{--                                            <input type="text" id="Checkbackintheflow" name="Checkbackintheflow" class="form-control"--}}
-{{--                                                   required>--}}
-{{--                                        </div>--}}
-
-{{--                                        <div class="col-md-3">--}}
-{{--                                            <label>مانده حساب معوق--}}
-{{--                                            </label>--}}
-{{--                                            <input type="text" id="accountbalance" name="accountbalance" class="form-control"--}}
-{{--                                                   required>--}}
-{{--                                        </div>--}}
-
-{{--                                        <div class="col-md-3">--}}
-{{--                                            <label>میانگین زمان معوق--}}
-{{--                                            </label>--}}
-{{--                                            <input type="text" id="Averagetimedelay" name="Averagetimedelay" class="form-control"--}}
-{{--                                                   required>--}}
-{{--                                        </div>--}}
-
-{{--                                        <div class="col-md-3">--}}
-{{--                                            <label>فاکتورهای سررسید آتی--}}
-{{--                                            </label>--}}
-{{--                                            <input type="text" id="Futurefactors" name="Futurefactors" class="form-control"--}}
-{{--                                                   required>--}}
-{{--                                        </div>--}}
-
-{{--                                        <div class="col-md-3">--}}
-{{--                                            <label>اسناد دریافتنی--}}
-{{--                                            </label>--}}
-{{--                                            <input type="text" id="Receiveddocuments" name="Receiveddocuments" class="form-control"--}}
-{{--                                                   required>--}}
-{{--                                        </div>--}}
-
-{{--                                        <div class="col-md-3">--}}
-{{--                                            <label>مانده حساب باز--}}
-{{--                                            </label>--}}
-{{--                                            <input type="text" id="Openaccountbalance" name="Openaccountbalance" class="form-control"--}}
-{{--                                                   required>--}}
-{{--                                        </div>--}}
-
-{{--                                        <div class="col-md-3">--}}
-{{--                                            <label>نحوه پرداخت فاکتورهای قبلی--}}
-{{--                                            </label>--}}
-{{--                                            <input type="text" id="paymentmethod" name="paymentmethod" class="form-control"--}}
-{{--                                                   required>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-md-12">--}}
-{{--                                            <label>توضیحات واحد مالی--}}
-{{--                                            </label>--}}
-{{--                                            <textarea class="form-control" id="description_m" name="description" placeholder="لطفا توضیحات خود را در مورد مشتری وارد کنید">--}}
-
-{{--                                            </textarea>--}}
-{{--                                        </div>--}}
-
-
-{{--                                    </div>--}}
-{{--                                    <div class="modal-footer">--}}
-{{--                                        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">--}}
-{{--                                            انصراف--}}
-{{--                                        </button>--}}
-{{--                                        <button type="submit" class="btn btn-primary" id="saveCustomerMany" value="ثبت">--}}
-{{--                                            ثبت--}}
-{{--                                        </button>--}}
-{{--                                    </div>--}}
-{{--                                </form>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-
-{{--        </div>--}}
-{{--    </div>--}}
-{{--</div>--}}
 
 
 <div class="modal fade" id="ajaxModelDelete" aria-hidden="true">
@@ -389,7 +300,7 @@
                                       class="form-horizontal">
                                     <input type="hidden" name="id_delete" id="id_delete">
                                     @csrf
-                                    <div class="col-md-12 form-group">
+                                    <div class="row">
 
 
                                         <div class="col-md-12">
@@ -435,13 +346,20 @@
 
 
                                     </div>
+                                    <br/>
+                                    <hr/>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">
-                                            انصراف
-                                        </button>
-                                        <button type="submit" class="btn btn-primary" id="saveCancel" value="ثبت">
-                                            ثبت
-                                        </button>
+                                        <div class="text-left">
+                                            <button style="width: 130px" type="submit" class="btn btn-success"
+                                                    id="saveCancel" value="ثبت">
+                                                ثبت
+                                            </button>
+
+                                            <button style="width: 130px" type="button" class="btn btn-danger"
+                                                    data-dismiss="modal">
+                                                انصراف
+                                            </button>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
@@ -470,30 +388,18 @@
 
                                 <form autocomplete="off" id="CustomerPrint" name="CustomerPrint"
                                       class="form-horizontal">
-                                    <div class="col-md-12 form-group">
+                                    <div class="row">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="col-md-6">
-
-                                                    <label>امضا کننده:</label>
-                                                    <select name="user_id" id="user_idddd" class="form-control">
-                                                        @foreach($users as $user)
-                                                            <option value="{{$user->id}}">{{$user->name}}</option>
-                                                        @endforeach
-                                                    </select>
-
                                                     <label>انبار:</label>
-                                                    <select name="selectstores" id="selectstoressss" class="form-control">
+                                                    <select name="selectstores" id="selectstoressss"
+                                                            class="form-control">
                                                         @foreach($selectstores as $selectstore)
                                                             <option
                                                                 value="{{$selectstore->id}}">{{$selectstore->name}}</option>
                                                         @endforeach
                                                     </select>
-
-                                                </div>
-                                                <div class="col-md-6">
-
-
                                                     <label>انتخاب بانک:</label>
                                                     <select name="name_bank" id="name_bankkk"
                                                             class="form-control">
@@ -504,6 +410,8 @@
 
 
                                                     </select>
+                                                </div>
+                                                <div class="col-md-6">
 
                                                     <label>تاریخ اعتبار پیش فاکتور:</label>
                                                     <input name="date" id="dateeee" class="form-control">
@@ -522,15 +430,22 @@
 
                                         </div>
                                     </div>
+                                    <br/>
+                                    <hr/>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">
-                                            انصراف
-                                        </button>
+                                        <div class="text-left">
+                                            <button style="width: 130px" type="button" class="btn btn-success"
+                                                    id="PrintSell"
+                                                    data-dismiss="modal">
+                                                پیش نمایش و چاپ
+                                            </button>
+                                            <button style="width: 130px" type="button" class="btn btn-danger"
+                                                    data-dismiss="modal">
+                                                انصراف
+                                            </button>
 
-                                        <button type="button" class="btn btn-primary" id="PrintSell"
-                                                data-dismiss="modal">
-                                            پیش نمایش و چاپ
-                                        </button>
+
+                                        </div>
                                     </div>
                                 </form>
                             </div>

@@ -725,6 +725,9 @@ class CustomerController extends Controller
         return response()->json(['success' => 'فایل مشتری با موفقیت در سیستم ثبت شد']);
     }
 
+    /**
+     * حذف مدارک مشتری به صورت ایجکسی
+     */
     public function deleteFileStore($id)
     {
         $image_path = \DB::table('customer_documents')
@@ -740,6 +743,9 @@ class CustomerController extends Controller
         return response()->json(['success' => 'فایل مشتری با موفقیت در سیستم ثبت شد']);
     }
 
+    /**
+     * حذف مدارک مشتری به صورت ایجکسی
+     */
     public function deleteFileOwnership($id)
     {
         $image_path = \DB::table('customer_documents')
@@ -756,6 +762,9 @@ class CustomerController extends Controller
 
     }
 
+    /**
+     * حذف مدارک مشتری به صورت ایجکسی
+     */
     public function deleteFileEstablished($id)
     {
         $image_path = \DB::table('customer_documents')
@@ -772,6 +781,9 @@ class CustomerController extends Controller
 
     }
 
+    /**
+     * حذف مدارک مشتری به صورت ایجکسی
+     */
     public function deleteFileSstore($id)
     {
         $image_path = \DB::table('customer_documents')
@@ -788,6 +800,9 @@ class CustomerController extends Controller
 
     }
 
+    /**
+     * حذف مدارک مشتری به صورت ایجکسی
+     */
     public function deleteFilePstore($id)
     {
         $image_path = \DB::table('customer_documents')
@@ -804,6 +819,9 @@ class CustomerController extends Controller
 
     }
 
+    /**
+     * حذف مدارک مشتری به صورت ایجکسی
+     */
     public function deleteFileFinal($id)
     {
         $image_path = \DB::table('customer_documents')
@@ -831,12 +849,14 @@ class CustomerController extends Controller
 
 
         $btn = '<a href="' . route('admin.customers.update', $row->id) . '">
-                       <img src="' . $success . '" width="25" title="ویرایش"></a>';
+                       <i class="fa fa-edit fa-lg" title="ویرایش"></i>
+                       </a>&nbsp;&nbsp;';
 
         $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"
                       data-id="' . $row->id . '" data-original-title="حذف"
                        class="deleteProduct">
-                       <img src="' . $delete . '" width="25" title="حذف"></a>';
+                       <i class="fa fa-trash fa-lg" title="حذف"></i>
+                       </a>';
         return $btn;
 
     }

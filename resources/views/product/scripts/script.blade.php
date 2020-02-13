@@ -36,6 +36,7 @@
         $('#createNewProduct').click(function () {
             $('#productForm').trigger("reset");
             $('#ajaxModel').modal('show');
+            $('#caption').text('افزودن محصول');
             $('#name').val('');
             $('#code').val('');
             $('#product_id').val('');
@@ -44,6 +45,7 @@
             var product_id = $(this).data('id');
             $.get("{{ route('admin.product.update') }}" + '/' + product_id, function (data) {
                 $('#ajaxModel').modal('show');
+                $('#caption').text('ویرایش محصول');
                 $('#product_id').val(data.id);
                 $('#characteristic').val(data.characteristics_id);
                 $('#commodity').val(data.commodity_id);
@@ -55,6 +57,8 @@
         });
         $('#saveBtn').click(function (e) {
             e.preventDefault();
+            $('#saveBtn').text('در حال ثبت اطلاعات...');
+            $('#saveBtn').prop( "disabled", true );
             $.ajax({
                 data: $('#productForm').serialize(),
                 url: "{{ route('admin.Product.store') }}",
@@ -71,6 +75,8 @@
                                 confirmButtonText: 'تایید'
                             })
                         });
+                        $('#saveBtn').text('ثبت');
+                        $('#saveBtn').prop( "disabled", false );
                     }
                     if (data.success) {
                         $('#productForm').trigger("reset");
@@ -82,6 +88,8 @@
                             icon: 'success',
                             confirmButtonText: 'تایید',
                         });
+                        $('#saveBtn').text('ثبت');
+                        $('#saveBtn').prop( "disabled", false );
                     }
                 }
             });

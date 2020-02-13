@@ -50,6 +50,8 @@
         });
         $('#saveBtn').click(function (e) {
             e.preventDefault();
+            $('#saveBtn').text('در حال ثبت اطلاعات...');
+            $('#saveBtn').prop("disabled", true);
             $.ajax({
                 data: $('#productForm').serialize(),
                 url: "{{ route('admin.model.product.store') }}",
@@ -66,6 +68,8 @@
                                 confirmButtonText: 'تایید'
                             })
                         });
+                        $('#saveBtn').text('ثبت');
+                        $('#saveBtn').prop("disabled", false);
                     }
                     if (data.success) {
                         $('#productForm').trigger("reset");
@@ -77,6 +81,8 @@
                             icon: 'success',
                             confirmButtonText: 'تایید',
                         });
+                        $('#saveBtn').text('ثبت');
+                        $('#saveBtn').prop("disabled", false);
                     }
                 }
             });

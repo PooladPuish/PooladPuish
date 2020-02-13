@@ -31,18 +31,22 @@
         $('#createNewProduct').click(function () {
             $('#productForm').trigger("reset");
             $('#ajaxModel').modal('show');
+            $('#caption').text('افزودن نقش');
             $('#product_id').val('');
         });
         $('body').on('click', '.editProduct', function () {
             var product_id = $(this).data('id');
             $.get("{{ route('admin.polymeric.update') }}" + '/' + product_id, function (data) {
                 $('#ajaxModel').modal('show');
+                $('#caption').text('ویرایش نقش');
                 $('#product_id').val(data.id);
                 $('#name').val(data.name);
             })
         });
         $('#saveBtn').click(function (e) {
             e.preventDefault();
+            $('#saveBtn').text('در حال ثبت اطلاعات...');
+            $('#saveBtn').prop( "disabled", true );
             $.ajax({
                 data: $('#productForm').serialize(),
                 url: "{{ route('admin.role.store') }}",
@@ -59,6 +63,8 @@
                                 confirmButtonText: 'تایید'
                             })
                         });
+                        $('#saveBtn').text('ثبت');
+                        $('#saveBtn').prop( "disabled", false );
                     }
                     if (data.success) {
                         $('#productForm').trigger("reset");
@@ -70,6 +76,8 @@
                             icon: 'success',
                             confirmButtonText: 'تایید',
                         });
+                        $('#saveBtn').text('ثبت');
+                        $('#saveBtn').prop( "disabled", false );
                         $('#product_id').val('');
                         $('#name').val('');
 

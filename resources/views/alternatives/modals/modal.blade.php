@@ -1,14 +1,13 @@
 <script src="{{asset('/public/bower_components/jquery/dist/jquery.min.js')}}"></script>
 <script src="{{asset('/public/assets/select2.js')}}"></script>
-
 <div class="modal fade" id="ajaxModel" aria-hidden="true">
     <div class="modal-dialog col-md-12">
         <div class="modal-content">
             <div class="modal-body col-md-12">
                 <div class="portlet box blue">
                     <div class="portlet-title">
-                        <div class="caption">
-                            جابجایی
+                        <div class="caption" id="caption">
+
                         </div>
                     </div>
                     <div class="portlet-body form">
@@ -72,13 +71,18 @@
                                         </div>
 
                                     </div>
+                                    <br/>
+                                    <hr/>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">
+                                        <div class="text-left">
+                                            <button style="width: 130px" type="submit" class="btn btn-success" id="saveBtn" value="ثبت">
+                                                ثبت
+                                            </button>
+                                        <button style="width: 130px" type="button" class="btn btn-danger" data-dismiss="modal">
                                             انصراف
                                         </button>
-                                        <button type="submit" class="btn btn-primary" id="saveBtn" value="ثبت">
-                                            ثبت
-                                        </button>
+
+                                    </div>
                                     </div>
                                 </form>
                             </div>

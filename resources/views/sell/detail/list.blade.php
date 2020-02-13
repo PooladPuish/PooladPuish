@@ -1,8 +1,32 @@
 <!DOCTYPE html>
 <html xml:lang="fa">
 <head>
-    <title>سیستم مدیریت پولاد صنعت</title>
 
+    <title>سیستم مدیریت پولاد صنعت</title>
+    <link
+        rel="stylesheet"
+        href="{{asset('/public/css/2.css')}}">
+    <link rel="stylesheet" href="{{asset('/public/dist/css/bootstrap-theme.css')}}">
+    <link rel="stylesheet" href="{{asset('/public/dist/css/rtl.css')}}">
+    <link rel="stylesheet" href="{{asset('/public/dist/css/AdminLTE.css')}}">
+    <link href="{{asset('/public/assets/global/css/components-md-rtl.min.css')}}" rel="stylesheet" id="style_components"
+          type="text/css"/>
+
+    <style>
+        .example-modal .modal {
+            position: relative;
+            top: auto;
+            bottom: auto;
+            right: auto;
+            left: auto;
+            display: block;
+            z-index: 1;
+        }
+
+        .example-modal .modal {
+            background: transparent !important;
+        }
+    </style>
     <style>
         @media print {
             .control-group {
@@ -15,12 +39,21 @@
             #printbtn {
                 display: none;
             }
+
+            #successProduct {
+                display: none;
+            }
+
+            #deleteProduct {
+                display: none;
+            }
+
+            #back {
+                display: none;
+            }
         }
     </style>
     <link rel="shortcut icon" type="image/x-icon" href="{{url('/public/icon/logo.png')}}"/>
-    <link
-        rel="stylesheet"
-        href="{{asset('/public/css/2.css')}}">
     <style>
         table {
             font-family: arial, sans-serif;
@@ -69,7 +102,6 @@
             margin-top: 0.4em;
         }
     </style>
-
 </head>
 <body dir="rtl" class="myclass" style="font-family: 'B Yekan'">
 <br/>
@@ -77,11 +109,10 @@
 <br/>
 <br/>
 <br/>
-<br/>
+
 
 <div class="col-md-12">
     <h4>برگه درخواست کالا و ارزیابی وضعیت اعتباری مشتری</h4>
-    <br/>
     <br/>
     <table style="font-family: 'B Yekan'">
         <thead>
@@ -121,6 +152,7 @@
         </tbody>
 
     </table>
+    <br/>
     <br/>
     <br/>
     <label>خلاصه پیش فاکتور:</label>
@@ -246,6 +278,7 @@
     {{--    </table>--}}
     <br/>
     <br/>
+    <br/>
     <label>میزان اعتبار سنجی:</label>
     <table style="font-family: 'B Yekan'">
         <thead>
@@ -310,6 +343,7 @@
         </tr>
         </tbody>
     </table>
+    <br/>
     <br/>
     <br/>
     <label>سابقه پرداخت مشتری:</label>
@@ -398,8 +432,10 @@
                 {{$customer_validation_payment->description}}
             </td>
             <td width="121">
-                @if(!empty($users->sign))
-                    <img src="{{url($users->sign)}}" width="100" class="user-image" alt="User Image">
+                @if(!empty($id->state == 3 or $id->state == 4))
+                    @if(!empty($users->sign))
+                        <img src="{{url($users->sign)}}" width="100" class="user-image" alt="User Image">
+                    @endif
                 @endif
             </td>
         </tr>
@@ -408,22 +444,196 @@
 
     <br/>
     <br/>
+    <br/>
     <label>نظر و امضا مدیر فروش:</label>
     <table height="130" style="font-family: 'B Yekan'">
         <thead>
         </thead>
         <tbody>
         <tr>
-            <td></td>
-            <td width="250">امضا مدیر فروش</td>
+            <td>
+                @if(!empty($admin_invoice->description))
+                    {{$admin_invoice->description}}
+                @endif
+            </td>
+            <td width="250">
+                @if(!empty($id->state == 4))
+                    @if(!empty($users_s->sign))
+                        <img src="{{url($users_s->sign)}}" width="100" class="user-image" alt="User Image">
+                    @endif
+                @endif
+            </td>
         </tr>
         </tbody>
     </table>
     <br/>
-    <input id="printbtn" class="btn btn-primary" type="button" value="تهیه نسخه چاپی" onclick="window.print();">
+    <br/>
+    <br/>
+    <div class="row">
+        <div class="col-sm-9">
+            <input id="printbtn" class="btn btn-primary" type="button" value="تهیه نسخه چاپی" onclick="window.print();">
+        </div>
+        <div class="col-sm-3">
+
+            <button type="submit" class="btn btn-success" id="successProduct" value="تایید">
+                تایید
+            </button>
+            &nbsp;&nbsp;&nbsp;
+
+            <button type="submit" class="btn btn-danger" id="deleteProduct" value="عدم تایید">
+                عدم تایید
+            </button>
+            &nbsp;&nbsp;&nbsp;
+            <button type="submit" class="btn btn-info" id="back" value="بازگشت به صفحه قبل">
+                بازگشت به صفحه قبل
+            </button>
+        </div>
+
+    </div>
+    <br/>
 </div>
 
 </body>
+@include('sell.detail.modal')
+
+<script src="{{asset('/public/bower_components/jquery/dist/jquery.min.js')}}"></script>
+<script src="{{asset('/public/bower_components/jquery-ui/jquery-ui.min.js')}}"></script>
+<script>
+    $.widget.bridge('uibutton', $.ui.button);
+</script>
+<script src="{{asset('/public/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('/public/assets/sweetalert.js')}}"></script>
+<meta name="_token" content="{{ csrf_token() }}"/>
+
+
+<script type="text/javascript">
+    $(function () {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        var invoices_id = [];
+        invoices_id.push({'id': '{{$id->id}}'});
+        for (var i in invoices_id)
+            var id = invoices_id[i].id;
+
+
+        $('#successProduct').click(function (e) {
+            e.preventDefault();
+
+            $.get("{{ route('admin.invoice.check.success') }}" + '/' + id, function (data) {
+                $('#Success').modal('show');
+                $('#id_invoice').val(id);
+                $('#description_invoice').val(data.description);
+            });
+            $('#saveSuccess').click(function (e) {
+                e.preventDefault();
+                var form = $('#CustomerSuccess').serialize();
+                $('#Success').modal('hide');
+                Swal.fire({
+                    title: 'تایید پیش فاکتور؟',
+                    text: "پیش فاکتورهای تایید شده تبدیل به فاکتور خواهند شد!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'تایید',
+                    cancelButtonText: 'انصراف',
+                }).then((result) => {
+                    if (result.value) {
+                        $.ajax({
+                            data: form,
+                            url: "{{ route('admin.invoice.admin.success') }}",
+                            type: "POST",
+                            dataType: 'json',
+                            success: function (data) {
+                                Swal.fire({
+                                    title: 'موفق',
+                                    text: 'مشخصات پیش فاکتور با موفقیت در سیستم ثبت و تبدیل به فاکتور شد',
+                                    icon: 'success',
+                                    confirmButtonText: 'تایید'
+                                }).then((result) => {
+                                    window.location.replace('{{route('admin.invoice.index')}}');
+                                });
+                            }
+                        });
+                        $('#id_invoice').val('');
+                        $('#description_invoice').val('');
+
+                    }
+
+                });
+
+
+            });
+        });
+
+
+        $('#deleteProduct').click(function (e) {
+            e.preventDefault();
+
+            $.get("{{ route('admin.invoice.check.canceled') }}" + '/' + id, function (data) {
+                $('#Delete').modal('show');
+                $('#id_delete').val(id);
+                $('#cancellation').val(data.cancellation);
+                $('#description_c').val(data.description);
+            });
+            $('#saveCancel').click(function (e) {
+                e.preventDefault();
+                var form = $('#Customer_Canceled').serialize();
+                $('#Delete').modal('hide');
+                Swal.fire({
+                    title: 'لغو پیش فاکتور؟',
+                    text: "پیش فاکتورهای لغو شده توسط مدیریت قابل بازیابی خواهند بود!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'تایید',
+                    cancelButtonText: 'انصراف',
+                }).then((result) => {
+                    if (result.value) {
+                        $.ajax({
+                            data: form,
+                            url: "{{ route('admin.invoice.delete') }}",
+                            type: "POST",
+                            dataType: 'json',
+                            success: function (data) {
+                                Swal.fire({
+                                    title: 'موفق',
+                                    text: 'پیش فاکتور با موفقیت لغو شد',
+                                    icon: 'success',
+                                    confirmButtonText: 'تایید'
+                                }).then((result) => {
+                                    window.location.replace('{{route('admin.invoice.index')}}');
+                                });
+                            }
+                        });
+                        $('#id_delete').val();
+                        $('#cancellation').val();
+                        $('#description_c').val();
+                    }
+
+                });
+
+
+            });
+        });
+
+        $('#back').click(function (e) {
+            e.preventDefault();
+            window.location.replace('{{route('admin.invoice.index')}}');
+
+        });
+
+
+    });
+
+</script>
+
+
 </html>
+
 
 

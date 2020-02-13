@@ -160,7 +160,7 @@
                                                 <input id="tree-controll1" type="checkbox" class="custom-control-input"><span
                                                     class="tree-control"></span>
                                                 <label>
-                                                    <input type="checkbox"  class="check" id="users" />
+                                                    <input type="checkbox" class="check" id="users"/>
                                                     <i class="fa fa-user light-blue"></i> مدیریت
                                                 </label>
                                                 <ul>
@@ -313,33 +313,32 @@
                                                             @endif
                                                         @endif
                                                     @endforeach
-                                                        <li class="has-child">
-                                                            <input type="checkbox"><span
-                                                                class="tree-control"></span>
-                                                            <label>
-                                                                <input type="checkbox" class="sell" id="list_sells"/>
-                                                                <i class="fa fa-tasks orange"></i>لیست صدور پیش فاکتور
-                                                            </label>
-                                                            <ul>
-                                                                @foreach($permissions as $permission)
-                                                                    @if(!empty($permission))
-                                                                        @if($permission->label == "sell/sell")
-                                                                            <li>
-                                                                                <label>{{ Form::checkbox('permission[]',$permission->id,in_array($permission->id,$rolePermission)? true : false , array('class'=>'sell list_sell')) }}
-                                                                                    {{$permission->name}}
-                                                                                </label>
-                                                                            </li>
+                                                    <li class="has-child">
+                                                        <input type="checkbox"><span
+                                                            class="tree-control"></span>
+                                                        <label>
+                                                            <input type="checkbox" class="sell" id="list_sells"/>
+                                                            <i class="fa fa-tasks orange"></i>لیست صدور پیش فاکتور
+                                                        </label>
+                                                        <ul>
+                                                            @foreach($permissions as $permission)
+                                                                @if(!empty($permission))
+                                                                    @if($permission->label == "sell/sell")
+                                                                        <li>
+                                                                            <label>{{ Form::checkbox('permission[]',$permission->id,in_array($permission->id,$rolePermission)? true : false , array('class'=>'sell list_sell')) }}
+                                                                                {{$permission->name}}
+                                                                            </label>
+                                                                        </li>
 
-                                                                        @endif
                                                                     @endif
-                                                                @endforeach
-                                                            </ul>
-                                                        </li>
+                                                                @endif
+                                                            @endforeach
+                                                        </ul>
+                                                    </li>
                                                 </ul>
                                             </li>
                                         </ul>
                                     </div>
-
 
 
                                 </div>
@@ -347,9 +346,12 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="submit" value="تایید" class="btn btn-primary">
-                            &nbsp;
-                            <a href="{{route('admin.role.show')}}" class="btn btn-danger">بازگشت</a>
+                            <div class="text-left">
+                                <input style="width: 130px" type="submit" value="ثبت" class="btn btn-success">
+                                &nbsp;
+                                &nbsp;
+                                <a style="width: 130px" href="{{route('admin.role.show')}}" class="btn btn-danger">بازگشت</a>
+                            </div>
                         </div>
                     </form>
 
@@ -358,7 +360,7 @@
             </div>
         </div>
     </div>
-@include('roles.scripts.script')
+    @include('roles.scripts.script')
 @endsection
 
 

@@ -63,8 +63,6 @@
             $('#ajaxModel').modal('show');
             $('#product').val('');
         });
-
-
         $('body').on('click', '.editProduct', function () {
             var product_id = $(this).data('id');
             $.get("{{ route('admin.bom.update') }}" + '/' + product_id, function (data) {
@@ -76,7 +74,7 @@
                     .find('option')
                     .remove();
                 for (var i in product) {
-                    if (product[i].id == data.bom_id){
+                    if (product[i].id == data.bom_id) {
 
                         $("#bo").append('<option value="' + product[i].id + '">' + product[i].label + '</option>');
 
@@ -86,10 +84,10 @@
             });
 
         });
-
-
         $('#saveBtn').click(function (e) {
             e.preventDefault();
+            $('#saveBtn').text('در حال ثبت اطلاعات...');
+            $('#saveBtn').prop("disabled", true);
             $.ajax({
                 data: $('#productForm').serialize(),
                 url: "{{ route('admin.bom.store') }}",
@@ -106,6 +104,8 @@
                             icon: 'error',
                             confirmButtonText: 'تایید',
                         });
+                        $('#saveBtn').text('ثبت');
+                        $('#saveBtn').prop("disabled", false);
                     }
 
                     if (data.errors) {
@@ -118,6 +118,8 @@
                                 confirmButtonText: 'تایید'
                             })
                         });
+                        $('#saveBtn').text('ثبت');
+                        $('#saveBtn').prop("disabled", false);
                     }
                     if (data.success) {
                         $('#productForm').trigger("reset");
@@ -130,6 +132,8 @@
                             confirmButtonText: 'تایید',
                         });
                         $('#detail-table').DataTable().ajax.reload();
+                        $('#saveBtn').text('ثبت');
+                        $('#saveBtn').prop("disabled", false);
                     }
 
                 }
@@ -175,7 +179,6 @@
             }
         })
     });
-
     $('body').on('click', '.deletep', function () {
         var id = $(this).data("id");
         console.log(id);
@@ -210,8 +213,6 @@
             }
         })
     });
-
-
     $('body').on('click', '.details', function () {
 
 
@@ -259,8 +260,6 @@
         }
 
     });
-
-
     $('#produ').change(function () {
         var product = $(this).val();
         if (product) {
@@ -286,9 +285,10 @@
         }
 
     });
-
     $('#bom').click(function (e) {
         e.preventDefault();
+        $('#bom').text('در حال ثبت اطلاعات...');
+        $('#bom').prop("disabled", true);
         $.ajax({
             data: $('#product').serialize(),
             url: "{{ route('admin.bom.store.bom') }}",
@@ -305,6 +305,8 @@
                             confirmButtonText: 'تایید'
                         })
                     });
+                    $('#bom').text('ثبت');
+                    $('#bom').prop("disabled", false);
                 }
                 if (data.success) {
                     $('#product').trigger("reset");
@@ -316,6 +318,8 @@
                         icon: 'success',
                         confirmButtonText: 'تایید',
                     });
+                    $('#bom').text('ثبت');
+                    $('#bom').prop("disabled", false);
                 }
                 if (data.unm) {
                     $('#product').trigger("reset");
@@ -327,11 +331,12 @@
                         icon: 'error',
                         confirmButtonText: 'تایید',
                     });
+                    $('#bom').text('ثبت');
+                    $('#bom').prop("disabled", false);
                 }
             }
         });
     });
-
     $(document).ready(function () {
         var table = $('#data-table').DataTable();
 

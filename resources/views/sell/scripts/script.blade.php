@@ -64,10 +64,12 @@
 
             $('#saveCancel').click(function (e) {
                 e.preventDefault();
+
                 var form = $('#CustomerCanceled')[0];
                 var data = new FormData(form);
 
                 $('#ajaxModelDelete').modal('hide');
+
                 Swal.fire({
                     title: 'لغو پیش فاکتور؟',
                     text: "مشخصات پیش فاکتور لغو شده فقط توسط مدیریت قابل بازیابی میباشد!",
@@ -96,7 +98,8 @@
                                     text: 'مشخصات پیش فاکتور با موفقیت از لیست شما حذف شد',
                                     icon: 'success',
                                     confirmButtonText: 'تایید'
-                                })
+                                });
+
                             }
                         });
                         $('#id_delete').val('');
@@ -164,7 +167,6 @@
             var id = $(this).data('id');
             $.get("{{ route('admin.invoice.check.print') }}" + '/' + id, function (data) {
                 $('#ajaxModelPrint').modal('show');
-                $('#user_idddd').val(data.user_id);
                 $('#selectstoressss').val(data.selectstores_id);
                 $('#name_bankkk').val(data.bank_id);
                 $('#dateeee').val(data.date);
@@ -199,6 +201,8 @@
 
         $('#saveConfirm').click(function (e) {
             e.preventDefault();
+            $('#saveConfirm').text('در حال ثبت اطلاعات...');
+            $('#saveConfirm').prop("disabled", true);
             var form = $('#CustomerConfirm')[0];
             var data = new FormData(form);
             $.ajax({
@@ -222,6 +226,8 @@
                                 confirmButtonText: 'تایید'
                             })
                         });
+                        $('#saveConfirm').text('ثبت');
+                        $('#saveConfirm').prop("disabled", false);
                     }
                     if (data.success) {
                         $('#CustomerConfirm').trigger("reset");
@@ -233,6 +239,8 @@
                             icon: 'success',
                             confirmButtonText: 'تایید',
                         });
+                        $('#saveConfirm').text('ثبت');
+                        $('#saveConfirm').prop("disabled", false);
                     }
                 }
             });
@@ -248,6 +256,8 @@
 
         $('#saveCustomerValidate').click(function (e) {
             e.preventDefault();
+            $('#saveCustomerValidate').text('در حال ثبت اطلاعات...');
+            $('#saveCustomerValidate').prop("disabled", true);
             var form = $('#CustomersValidate')[0];
             var data = new FormData(form);
             $.ajax({
@@ -271,6 +281,8 @@
                                 confirmButtonText: 'تایید'
                             })
                         });
+                        $('#saveCustomerValidate').text('ثبت');
+                        $('#saveCustomerValidate').prop("disabled", false);
                     }
                     if (data.success) {
                         $('#CustomersValidate').trigger("reset");
@@ -282,6 +294,8 @@
                             icon: 'success',
                             confirmButtonText: 'تایید',
                         });
+                        $('#saveCustomerValidate').text('ثبت');
+                        $('#saveCustomerValidate').prop("disabled", false);
                     }
                 }
             });
@@ -290,6 +304,8 @@
 
         $('#saveCustomerMany').click(function (e) {
             e.preventDefault();
+            $('#saveCustomerMany').text('در حال ثبت اطلاعات...');
+            $('#saveCustomerMany').prop("disabled", true);
             var form = $('#CustomersMany')[0];
             var data = new FormData(form);
             $.ajax({
@@ -313,6 +329,8 @@
                                 confirmButtonText: 'تایید'
                             })
                         });
+                        $('#saveCustomerMany').text('ثبت');
+                        $('#saveCustomerMany').prop("disabled", false);
                     }
                     if (data.success) {
                         $('#CustomersMany').trigger("reset");
@@ -324,6 +342,8 @@
                             icon: 'success',
                             confirmButtonText: 'تایید',
                         });
+                        $('#saveCustomerMany').text('ثبت');
+                        $('#saveCustomerMany').prop("disabled", false);
                     }
                 }
             });

@@ -33,12 +33,14 @@
         $('#createNewProduct').click(function () {
             $('#productForm').trigger("reset");
             $('#ajaxModel').modal('show');
+            $('#caption').text('افزودن Insert');
             $('#product').val('');
         });
         $('body').on('click', '.editProduct', function () {
             var product_id = $(this).data('id');
             $.get("{{ route('admin.insert.update') }}" + '/' + product_id, function (data) {
                 $('#ajaxModel').modal('show');
+                $('#caption').text('ویرایش Insert');
                 $('#product').val(data.id);
                 $('#code').val(data.code);
                 $('#name').val(data.name);
@@ -47,6 +49,8 @@
         });
         $('#saveBtn').click(function (e) {
             e.preventDefault();
+            $('#saveBtn').text('در حال ثبت اطلاعات...');
+            $('#saveBtn').prop("disabled", true);
             $.ajax({
                 data: $('#productForm').serialize(),
                 url: "{{ route('admin.insert.store') }}",
@@ -63,6 +67,8 @@
                                 confirmButtonText: 'تایید'
                             })
                         });
+                        $('#saveBtn').text('ثبت');
+                        $('#saveBtn').prop("disabled", false);
                     }
                     if (data.success) {
                         $('#productForm').trigger("reset");
@@ -74,6 +80,8 @@
                             icon: 'success',
                             confirmButtonText: 'تایید',
                         });
+                        $('#saveBtn').text('ثبت');
+                        $('#saveBtn').prop("disabled", false);
                     }
                 }
             });

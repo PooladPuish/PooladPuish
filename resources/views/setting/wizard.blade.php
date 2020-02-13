@@ -35,8 +35,10 @@
 
                 </div>
                 <div class="col-md-12">
-                    <input type="submit" class="btn btn-primary" id="saveBtn"
-                           value="ثبت">
+                    <div class="text-left">
+                        <input style="width: 130px" type="submit" class="btn btn-success" id="saveBtn"
+                               value="ثبت">
+                    </div>
                 </div>
 
             </div>

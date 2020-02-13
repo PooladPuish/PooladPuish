@@ -31,12 +31,14 @@
         $('#createNewProduct').click(function () {
             $('#productForm').trigger("reset");
             $('#ajaxModel').modal('show');
+            $('#caption').text('افزودن دسترسی');
             $('#product_id').val('');
         });
         $('body').on('click', '.editProduct', function () {
             var product_id = $(this).data('id');
             $.get("{{ route('admin.permission.update') }}" + '/' + product_id, function (data) {
                 $('#ajaxModel').modal('show');
+                $('#caption').text('ویرایش دسترسی');
                 $('#product_id').val(data.id);
                 $('#name').val(data.name);
                 $('#label').val(data.label);
@@ -44,6 +46,8 @@
         });
         $('#saveBtn').click(function (e) {
             e.preventDefault();
+            $('#saveBtn').text('در حال ثبت اطلاعات...');
+            $('#saveBtn').prop( "disabled", true );
             $.ajax({
                 data: $('#productForm').serialize(),
                 url: "{{ route('admin.permission.store') }}",
@@ -60,6 +64,8 @@
                                 confirmButtonText: 'تایید'
                             })
                         });
+                        $('#saveBtn').text('ثبت');
+                        $('#saveBtn').prop( "disabled", false );
                     }
                     if (data.success) {
                         $('#productForm').trigger("reset");
@@ -74,6 +80,8 @@
                         $('#product_id').val('');
                         $('#name').val('');
                         $('#label').val('');
+                        $('#saveBtn').text('ثبت');
+                        $('#saveBtn').prop( "disabled", false );
 
                     }
                 }

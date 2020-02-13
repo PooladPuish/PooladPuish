@@ -4,8 +4,8 @@
             <div class="modal-body">
                 <div class="portlet box blue">
                     <div class="portlet-title">
-                        <div class="caption">
-                            نقش
+                        <div class="caption" id="caption">
+
                         </div>
                     </div>
                     <div class="portlet-body form">
@@ -28,13 +28,18 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <br/>
+                                    <hr/>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">
+                                        <div class="text-left">
+                                            <button style="width: 130px" type="submit" class="btn btn-success" id="saveBtn" value="ثبت">
+                                                ثبت
+                                            </button>
+                                        <button style="width: 130px" type="button" class="btn btn-danger" data-dismiss="modal">
                                             انصراف
                                         </button>
-                                        <button type="submit" class="btn btn-primary" id="saveBtn" value="ثبت">
-                                            ثبت
-                                        </button>
+
+                                        </div>
                                     </div>
                                 </form>
                             </div>

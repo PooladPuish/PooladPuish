@@ -104,14 +104,6 @@ class UserController extends Controller
         }
 
 
-
-
-
-
-
-
-
-
         if ($validator->passes()) {
             $users = User::updateOrCreate(['id' => $request->id],
                 [
@@ -451,12 +443,13 @@ class UserController extends Controller
         $btn = '<a href="javascript:void(0)" data-toggle="tooltip"
                       data-id="' . $row->id . '" data-original-title="ویرایش"
                        class="editProduct">
-                       <img src="' . $success . '" width="25" title="ویرایش"></a>';
+                       <i class="fa fa-edit fa-lg" title="ویرایش"></i>
+                      </a>&nbsp;&nbsp;';
 
         $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"
                       data-id="' . $row->id . '" data-original-title="فعال و غیر فعال کردن کاربر"
                        class="status">
-                       <img src="' . $delete . '" width="25" title="فعال و غیر فعال کردن کاربر">
+                        <i class="fa fa-lock fa-lg" title="فعال و غیر فعال کردن کاربر"></i>
                        </a>';
 
         return $btn;
@@ -467,8 +460,14 @@ class UserController extends Controller
      */
     public function u($id)
     {
+        $role_users = \DB::table('role_user')
+            ->where('user_id', $id)
+            ->get();
+        foreach ($role_users as $role_user)
+            $roles = Role::where('id', $role_user->role_id)->get();
         $product = User::find($id);
-        return response()->json($product);
+        return response()->json(['product' => $product, 'roles' => $roles]);
+
 
     }
 

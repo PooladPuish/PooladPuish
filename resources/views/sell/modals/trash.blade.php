@@ -15,7 +15,7 @@
                                 <form autocomplete="off" id="question" name="question" class="form-horizontal">
                                     <input type="hidden" name="id_trash" id="id_trash">
                                     @csrf
-                                    <div class="col-md-12 form-group">
+                                    <div class="row">
 
 
                                         <div class="col-md-12">
@@ -62,15 +62,23 @@
 
 
                                     </div>
+                                    <br/>
+                                    <hr/>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger pull-left" id="saveDelete" data-dismiss="modal">
-                                            حذف
-                                        </button>
+                                        <div class="text-left">
 
-                                        <button type="button" class="btn btn-primary" id="saveRestore" data-dismiss="modal">
-                                            بازگردانی
-                                        </button>
+                                            <button style="width: 130px" type="button" class="btn btn-info" id="saveRestore"
+                                                    data-dismiss="modal">
+                                                بازگردانی
+                                            </button>
+                                            <button style="width: 130px" type="button" class="btn btn-danger" id="saveDelete"
+                                                    data-dismiss="modal">
+                                                حذف
+                                            </button>
 
+
+
+                                        </div>
                                     </div>
                                 </form>
                             </div>

@@ -33,12 +33,14 @@
         $('#createNewProduct').click(function () {
             $('#productForm').trigger("reset");
             $('#ajaxModel').modal('show');
+            $('#caption').text('افزودن انبار');
             $('#id').val('');
         });
         $('body').on('click', '.editProduct', function () {
             var id = $(this).data('id');
             $.get("{{ route('admin.selectstore.update') }}" + '/' + id, function (data) {
                 $('#ajaxModel').modal('show');
+                $('#caption').text('ویرایش انبار');
                 $('#id').val(data.id);
                 $('#name').val(data.name);
                 $('#tel').val(data.tel);

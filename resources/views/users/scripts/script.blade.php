@@ -11,11 +11,13 @@
         });
         $('#createNewProduct').click(function () {
             $('#ajaxModel').modal('show');
+            $('#caption').text('افزودن کاربر');
             $('#id').val('');
             $('#name').val('');
             $('#email').val('');
             $('#phone').val('');
             $('#password').val('');
+            $('#select2-example').val('');
         });
         var table = $('.data-table').DataTable({
             processing: true,
@@ -45,21 +47,27 @@
             var product_id = $(this).data('id');
             $.get("{{ route('admin.user.u') }}" + '/' + product_id, function (data) {
                 $('#ajaxModel').modal('show');
-                $('#id').val(data.id);
-                $('#name').val(data.name);
-                $('#email').val(data.email);
-                $('#phone').val(data.phone);
+                $('#caption').text('ویرایش کاربر');
+                $('#id').val(data.product.id);
+                $('#name').val(data.product.name);
+                $('#email').val(data.product.email);
+                $('#phone').val(data.product.phone);
+                for (var i in data.roles) {
+                    $('#select2-example').val(data.roles[i].id);
+                }
+
 
             })
         });
         $('#saveBtn').click(function (e) {
             e.preventDefault();
+            $('#saveBtn').text('در حال ثبت اطلاعات...');
+            $('#saveBtn').prop("disabled", true);
             var form = $('#productForm')[0];
             var data = new FormData(form);
             $.ajax({
                 type: "POST",
                 enctype: 'multipart/form-data',
-
                 url: "{{ route('admin.user.store') }}",
                 data: data,
                 cache: false,
@@ -67,11 +75,6 @@
                 processData: false,
                 method: 'POST',
                 type: 'POST',
-
-
-
-
-
                 success: function (data) {
                     if (data.errors) {
                         $('#ajaxModel').modal('hide');
@@ -83,7 +86,8 @@
                                 confirmButtonText: 'تایید'
                             })
                         });
-
+                        $('#saveBtn').text('ثبت');
+                        $('#saveBtn').prop("disabled", false);
                     }
                     if (data.success) {
                         $('#ajaxModel').modal('hide');
@@ -94,6 +98,8 @@
                             icon: 'success',
                             confirmButtonText: 'تایید',
                         });
+                        $('#saveBtn').text('ثبت');
+                        $('#saveBtn').prop("disabled", false);
 
                     }
 

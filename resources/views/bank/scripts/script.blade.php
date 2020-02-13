@@ -35,12 +35,14 @@
         $('#createNewProduct').click(function () {
             $('#productForm').trigger("reset");
             $('#ajaxModel').modal('show');
+            $('#caption').text('افزودن حساب بانکی');
             $('#id').val('');
         });
         $('body').on('click', '.editProduct', function () {
             var id = $(this).data('id');
             $.get("{{ route('admin.bank.update') }}" + '/' + id, function (data) {
                 $('#ajaxModel').modal('show');
+                $('#caption').text('ویرایش حساب بانکی');
                 $('#id').val(data.id);
                 $('#name').val(data.name);
                 $('#NameBank').val(data.NameBank);

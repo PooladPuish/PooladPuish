@@ -1,6 +1,8 @@
 @extends('layouts.master')
 @section('content')
     @include('message.msg')
+    <script
+        src="{{asset('/public/js/5.js')}}"></script>
     <div class="row">
         <div class="col-md-12">
             <div class="portlet box blue">
@@ -8,10 +10,10 @@
                     <div class="caption">
                         جزییات پیش فاکتور
                     </div>
-                    <div class="tools"></div>
                 </div>
                 <div class="portlet-body">
-                    <table class="table table-striped table-bordered data-table" id="data-table">
+                    <table class="table table-fluid" id="myTable">
+                        <thead>
                         <thead>
                         <tr>
                             <th>شماره پیش فاکتور</th>
@@ -126,6 +128,11 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
     @include('sell.scripts.detail')
 
 @endsection

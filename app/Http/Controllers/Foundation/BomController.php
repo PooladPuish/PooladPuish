@@ -137,7 +137,8 @@ class BomController extends Controller
         $btn = ' <a href="javascript:void(0)" data-toggle="tooltip"
                       data-id="' . $row->product_id . '" data-original-title="حذف"
                        class="deletep">
-                       <img src="' . $delete . '" width="25" title="حذف"></a>';
+                        <i class="fa fa-trash fa-lg" title="حذف"></i>
+                       </a>';
         return $btn;
 
     }
@@ -153,12 +154,14 @@ class BomController extends Controller
         $btn = '<a href="javascript:void(0)" data-toggle="tooltip"
                       data-id="' . $row->id . '" data-original-title="ویرایش"
                        class="editProduct">
-                       <img src="' . $success . '" width="25" title="ویرایش"></a>';
+                       <i class="fa fa-edit fa-lg" title="ویرایش"></i>
+                       </a>&nbsp;&nbsp;';
 
         $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"
                       data-id="' . $row->id . '" data-original-title="حذف"
                        class="deleteProduct">
-                       <img src="' . $delete . '" width="25" title="حذف"></a>';
+                       <i class="fa fa-trash fa-lg" title="حذف"></i>
+                       </a>';
         return $btn;
 
     }
@@ -174,6 +177,9 @@ class BomController extends Controller
         return response()->json($bom_id);
     }
 
+    /**
+     * ذخیره اطلاعات bom
+     */
     public function bom(Request $request)
     {
         $validator = Validator::make($request->all(), [

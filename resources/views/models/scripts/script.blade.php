@@ -31,6 +31,7 @@
         $('#createNewProduct').click(function () {
             $('#productForm').trigger("reset");
             $('#ajaxModel').modal('show');
+            $('#caption').text('افزودن قالب ساز');
             $('#product_id').val('');
             $('#name').val('');
             $('#code').val('');
@@ -39,6 +40,7 @@
             var product_id = $(this).data('id');
             $.get("{{ route('admin.models.update') }}" + '/' + product_id, function (data) {
                 $('#ajaxModel').modal('show');
+                $('#caption').text('ویرایش قالب ساز');
                 $('#product_id').val(data.id);
                 $('#name').val(data.name);
                 $('#code').val(data.code);
@@ -46,6 +48,8 @@
         });
         $('#saveBtn').click(function (e) {
             e.preventDefault();
+            $('#saveBtn').text('در حال ثبت اطلاعات...');
+            $('#saveBtn').prop("disabled", true);
             $.ajax({
                 data: $('#productForm').serialize(),
                 url: "{{ route('admin.models.store') }}",
@@ -62,6 +66,8 @@
                                 confirmButtonText: 'تایید'
                             })
                         });
+                        $('#saveBtn').text('ثبت');
+                        $('#saveBtn').prop("disabled", false);
                     }
                     if (data.success) {
                         $('#productForm').trigger("reset");
@@ -73,6 +79,8 @@
                             icon: 'success',
                             confirmButtonText: 'تایید',
                         });
+                        $('#saveBtn').text('ثبت');
+                        $('#saveBtn').prop("disabled", false);
                         $('#name').val('');
                         $('#code').val('');
                         $('#product_id').val('');

@@ -9,6 +9,9 @@ use Yajra\DataTables\DataTables;
 
 class SelectStoreController extends Controller
 {
+    /**
+     * لیست انبارهای موجود در دیتابیس
+     */
     public function list(Request $request)
     {
         if ($request->ajax()) {
@@ -32,6 +35,9 @@ class SelectStoreController extends Controller
 
     }
 
+    /**
+     * ذخیره اطلاعات انبارها در دیتابیس
+     */
     public function store(Request $request)
     {
         SelectStore::updateOrCreate(['id' => $request->id],
@@ -45,7 +51,9 @@ class SelectStoreController extends Controller
 
     }
 
-
+    /**
+     * ویرایش اطلاعات انبار در دیتابیس
+     */
     public function update($id)
     {
         $bank = SelectStore::find($id);
@@ -53,6 +61,9 @@ class SelectStoreController extends Controller
 
     }
 
+    /**
+     * حذف اطلاعات انبار از دیتابیس
+     */
     public function delete($id)
     {
         $delete = SelectStore::find($id);
@@ -61,6 +72,9 @@ class SelectStoreController extends Controller
 
     }
 
+    /**
+     * دکمههای موجود در لیست انبارها
+     */
     public function actions($row)
     {
         $success = url('/public/icon/icons8-edit-144.png');
@@ -70,17 +84,22 @@ class SelectStoreController extends Controller
         $btn = ' <a href="javascript:void(0)" data-toggle="tooltip"
                       data-id="' . $row->id . '" data-original-title="ویرایش"
                        class="editProduct">
-                       <img src="' . $success . '" width="25" title="ویرایش"></a>';
+                       <i class="fa fa-edit fa-lg" title="ویرایش"></i>
+                      </a>&nbsp;&nbsp;';
 
         $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"
                       data-id="' . $row->id . '" data-original-title="حذف"
                        class="deleteProduct">
-                       <img src="' . $delete . '" width="25" title="حذف"></a>';
+                       <i class="fa fa-trash fa-lg" title="حذف"></i>
+                       </a>';
 
         return $btn;
 
     }
 
+    /**
+     * دکمههای موجود در لیست انبارها
+     */
     public function action($row)
     {
         $success = url('/public/icon/icons8-edit-144.png');
@@ -90,12 +109,14 @@ class SelectStoreController extends Controller
         $btn = ' <a href="javascript:void(0)" data-toggle="tooltip"
                       data-id="' . $row->id . '" data-original-title="ویرایش"
                        class="editProduct">
-                       <img src="' . $success . '" width="25" title="ویرایش"></a>';
+                       <i class="fa fa-edit fa-lg" title="ویرایش"></i>
+                       </a>&nbsp;&nbsp;';
 
         $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"
                       data-id="' . $row->id . '" data-original-title="حذف"
                        class="deleteProduct">
-                       <img src="' . $delete . '" width="25" title="حذف"></a>';
+                       <i class="fa fa-trash fa-lg" title="حذف"></i>
+                       </a>';
 
         return $btn;
 

@@ -4,18 +4,17 @@
             <div class="modal-body">
                 <div class="portlet box blue">
                     <div class="portlet-title">
-                        <div class="caption">
-                            Insert
+                        <div class="caption" id="caption">
                         </div>
                     </div>
                     <div class="portlet-body form">
                         <div class="form-body">
                             <div class="form-group">
 
-                                <form autocomplete="off"  id="productForm" name="productForm" class="form-horizontal">
+                                <form autocomplete="off" id="productForm" name="productForm" class="form-horizontal">
                                     <input type="hidden" name="product" id="product">
                                     @csrf
-                                    <div class="col-md-12 form-group">
+                                    <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>کد
@@ -34,7 +33,8 @@
                                                         style="color: red"
                                                         class="required-mark">*</span>
                                                 </label>
-                                                <input type="text" id="manufacturer" name="manufacturer" class="form-control"
+                                                <input type="text" id="manufacturer" name="manufacturer"
+                                                       class="form-control"
                                                        placeholder="لطفا نام سازنده را وارد کنید"
                                                        required>
                                             </div>
@@ -53,13 +53,21 @@
                                         </div>
 
                                     </div>
+                                    <br/>
+                                    <hr/>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">
-                                            انصراف
-                                        </button>
-                                        <button type="submit" class="btn btn-primary" id="saveBtn" value="ثبت">
-                                            ثبت
-                                        </button>
+                                        <div class="text-left">
+                                            <button style="width: 130px" type="submit" class="btn btn-success"
+                                                    id="saveBtn" value="ثبت">
+                                                ثبت
+                                            </button>
+
+                                            <button style="width: 130px" type="button" class="btn btn-danger"
+                                                    data-dismiss="modal">
+                                                انصراف
+                                            </button>
+
+                                        </div>
                                     </div>
                                 </form>
                             </div>

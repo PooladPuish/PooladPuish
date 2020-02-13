@@ -423,7 +423,14 @@
                                                 class="fa fa-circle-o"></i>پیش فاکتور های حذف شده</a>
                                     </li>
                                 @endcan
+                                <li><a href="{{route('admin.invoice.success')}}"><i
+                                            class="fa fa-circle-o"></i>پیش فاکتور های تایید شده</a>
+                                </li>
                             @endif
+
+
+
+
                         </ul>
                     </li>
                 @endif
@@ -576,6 +583,7 @@
         type="text/javascript"></script>
 <script src="{{asset('/public/assets/pages/scripts/table-datatables-colreorder.js')}}"
         type="text/javascript"></script>
+
 <script src="{{asset('/public/assets/persian-date.js')}}"></script>
 <script src="{{asset('/public/assets/persian-datepicker.js')}}"></script>
 <script type="text/javascript">
@@ -660,8 +668,6 @@
     });
 </script>
 <script src="{{asset('/public/assets/sweetalert.js')}}"></script>
-
-
 <script type="text/javascript">
     $('#stop').click(function () {
         $.ajax({

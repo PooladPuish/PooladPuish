@@ -197,6 +197,7 @@ Route::group(['middleware' => ['auth', 'web']], function () {
         //InvoiceController
         Route::get('/invoice/index', 'InvoiceController@index')->name('admin.invoice.index');
         Route::get('/invoice/trash', 'InvoiceController@trash')->name('admin.invoice.trash');
+        Route::get('/invoice/success', 'InvoiceController@success')->name('admin.invoice.success');
         Route::get('/invoice/wizard', 'InvoiceController@wizard')->name('admin.invoice.wizard');
         Route::get('/invoice/detail/{id?}', 'InvoiceController@detail')->name('admin.invoice.detail');
         Route::get('/invoice/detailTrash/{id?}', 'InvoiceController@detailTrash')->name('admin.invoice.detailTrash');
@@ -220,12 +221,19 @@ Route::group(['middleware' => ['auth', 'web']], function () {
         Route::get('/bank/CustomerValidate/{id?}', 'InvoiceController@CustomerValidate')->name('admin.invoice.customers.validate');
         Route::get('/bank/CustomerMany/{id?}', 'InvoiceController@CustomerMany')->name('admin.invoice.customers.many');
         Route::get('/invoice/price', 'InvoiceController@price')->name('admin.product.price');
+
         Route::get('/invoice/CheckPrint/{id?}', 'InvoiceController@CheckPrint')->name('admin.invoice.check.print');
+        Route::get('/invoice/CheckSuccess/{id?}', 'InvoiceController@CheckSuccess')->name('admin.invoice.check.success');
+        Route::get('/invoice/CheckCanceled/{id?}', 'InvoiceController@CheckCanceled')->name('admin.invoice.check.canceled');
+
+        Route::post('/invoice/AdminSuccess', 'InvoiceController@AdminSuccess')->name('admin.invoice.admin.success');
 
         Route::post('/invoice/ValidateStore', 'InvoiceController@ValidateStore')->name('admin.invoice.customer.validate.store');
         Route::post('/invoice/ManyStore', 'InvoiceController@ManyStore')->name('admin.invoice.customer.many.store');
 
+        Route::get('ajaxdata/massremove', 'InvoiceController@massremove')->name('ajaxdata.massremove');
 
+        Route::get('invoice/trash/search', 'InvoiceController@search')->name('admin.invoice.trash.search');
 
     });
 

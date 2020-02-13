@@ -1316,8 +1316,11 @@
 
 
                                         </div>
-                                        <input type="submit" class="btn btn-primary" id="saveBtn"
-                                               value="ثبت">
+                                        <div class="text-left">
+                                        <button style="width: 130px" type="submit" class="btn btn-success" id="saveBtn" value="ثبت">
+                                            ثبت
+                                        </button>
+                                    </div>
                                     </div>
 
                                 </div>

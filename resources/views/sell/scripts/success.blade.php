@@ -26,11 +26,10 @@
                     "processing": "در حال پردازش اطلاعات"
                 },
                 ajax: {
-                    ajax: "{{ route('admin.invoice.trash') }}",
+                    ajax: "{{ route('admin.invoice.success') }}",
                     data:{from_date:from_date, to_date:to_date}
                 },
                 columns: [
-                    {data: 'checkbox', orderable: false, searchable: false},
                     {data: 'invoiceNumber', name: 'invoiceNumber'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'user_id', name: 'user_id'},
@@ -41,7 +40,6 @@
                     {data: 'invoiceType', name: 'invoiceType'},
                     {data: 'status', name: 'status'},
                     {data: 'price_sell', name: 'price_sell'},
-                    {data: 'action', name: 'action', orderable: false, searchable: false},
 
                 ]
             });

@@ -348,9 +348,11 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="submit" value="تایید" class="btn btn-primary">
-                            &nbsp;
-                            <a href="{{route('admin.role.show')}}" class="btn btn-danger">بازگشت</a>
+                            <div class="text-left">
+                            <input style="width: 130px" type="submit" value="ثبت" class="btn btn-success">
+                                &nbsp;&nbsp;
+                            <a style="width: 130px" href="{{route('admin.role.show')}}" class="btn btn-danger">بازگشت</a>
+                        </div>
                         </div>
                     </form>
 

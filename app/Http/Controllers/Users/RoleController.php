@@ -203,19 +203,19 @@ class RoleController extends Controller
         $copy = url('/public/icon/icons8-copy-96.png');
 
         $btn = '<a href="' . route('admin.role.edit', $row->id) . '">
-                       <img src="' . $success . '" width="25" title="ویرایش">
-                       </a>';
+                       <i class="fa fa-edit fa-lg" title="ویرایش"></i>
+                       </a>&nbsp;&nbsp;';
 
         $btn .= '<a href="' . route('admin.role.copy', $row->id) . '">
-                       <img src="' . $copy . '" width="25" title="کپی">
-                       </a>';
+        <i class="fa fa-copy fa-lg" title="کپی"></i>
+                       </a>&nbsp;&nbsp;';
 
         $ro = DB::table('role_user')->where('role_id', $row->id)->first();
         if (empty($ro)) {
             $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"
                       data-id="' . $row->id . '" data-original-title="حذف"
                        class="deleteProduct">
-                       <img src="' . $delete . '" width="25" title="حذف">
+                        <i class="fa fa-trash fa-lg" title="حذف"></i>
                        </a>';
         }
 
@@ -232,13 +232,15 @@ class RoleController extends Controller
         $btn = '<a href="javascript:void(0)" data-toggle="tooltip"
                       data-id="' . $row->id . '" data-original-title="ویرایش"
                        class="editProduct">
-                       <img src="' . $success . '" width="25" title="ویرایش"></a>';
+                       <i class="fa fa-edit fa-lg" title="ویرایش"></i>
+                       </a>&nbsp;&nbsp;';
         $pers = DB::table('permission_role')->where('permission_id', $row->id)->first();
         if (empty($pers)) {
             $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"
                       data-id="' . $row->id . '" data-original-title="حذف"
                        class="deleteProduct">
-                       <img src="' . $delete . '" width="25" title="حذف"></a>';
+                       <i class="fa fa-trash fa-lg" title="حذف"></i>
+                       </a>';
         }
         return $btn;
 

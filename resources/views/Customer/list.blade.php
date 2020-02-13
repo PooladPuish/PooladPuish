@@ -1,7 +1,6 @@
 @extends('layouts.master')
 @section('content')
     @include('message.msg')
-
     <div class="row">
         <div class="col-md-12">
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
@@ -33,10 +32,7 @@
             </div>
             <!-- END EXAMPLE TABLE PORTLET-->
         </div>
-
-
     </div>
-
 @include('Customer.scripts.script')
 
 @endsection

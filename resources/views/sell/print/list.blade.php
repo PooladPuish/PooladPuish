@@ -52,10 +52,11 @@
 
     </style>
     <style>
-        th,td{
-            border : 1px solid black;
-            text-align :center;
+        th, td {
+            border: 1px solid black;
+            text-align: center;
         }
+
         hr {
             border-top: 1px solid black;
             margin-bottom: 0.4em;
@@ -73,11 +74,6 @@
 <body dir="rtl" class="myclass" style="font-family: 'B Yekan'">
 
 
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
 <br/>
 <br/>
 <br/>
@@ -200,6 +196,11 @@
                 <br/>
                 <br/>
                 <p>با تشکر</p>
+                <p>
+                    @if(!empty($user_id->sign))
+                        <img src="{{url($user_id->sign)}}" width="100" class="user-image" alt="User Image">
+                    @endif
+                </p>
             </div>
         </div>
         <hr/>

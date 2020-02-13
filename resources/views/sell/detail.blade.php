@@ -1,6 +1,8 @@
 @extends('layouts.master')
 @section('content')
     @include('message.msg')
+    <script
+        src="{{asset('/public/js/5.js')}}"></script>
     <div class="row">
         <div class="col-md-12">
             <div class="portlet box blue">
@@ -11,22 +13,20 @@
                     <div class="tools"></div>
                 </div>
                 <div class="portlet-body">
-                    <table class="table table-striped table-bordered data-table" id="data-table">
-                        <thead>
+                    <table class="table table-fluid" id="mTable">                        <thead>
                         <tr>
-                            <th>شماره پیش فاکتور</th>
-                            <th>تاریخ فروش</th>
-                            <th>نام فروشنده</th>
-                            <th>نام خریدار</th>
-                            <th>نام محصول</th>
+                            <th>شماره<br/> پیش فاکتور</th>
+                            <th>تاریخ <br/>فروش</th>
+                            <th>نام<br/> فروشنده</th>
+                            <th>نام<br/> خریدار</th>
+                            <th>نام<br/> محصول</th>
                             <th>رنگ</th>
-                            <th>قیمت فروش</th>
-                            <th>تعداد فروش</th>
-                            <th>مبلغ کل فروش</th>
-                            <th>وزن محصول فروخته شده</th>
-                            <th>نوع فاکتور</th>
-                            <th>مالیات مبلغ</th>
-                            <th>عملیات</th>
+                            <th>قیمت <br/>فروش</th>
+                            <th>تعداد<br/> فروش</th>
+                            <th>مبلغ کل <br/>فروش</th>
+                            <th>وزن محصول <br/>فروخته شده</th>
+                            <th>نوع <br/>فاکتور</th>
+                            <th>مالیات <br/>مبلغ</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -75,8 +75,7 @@
                                     @endif
                                 </td>
                                 <td>{{number_format($detail->taxAmount)}} </td>
-                                <td>
-                                </td>
+
 
                             </tr>
                         @endforeach
@@ -126,6 +125,10 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+            $('#mTable').DataTable();
+        });
+    </script>
     @include('sell.scripts.detail')
-
 @endsection

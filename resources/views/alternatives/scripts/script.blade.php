@@ -12,7 +12,6 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-
         var table = $('.data-table').DataTable({
             processing: true,
             serverSide: true,
@@ -35,10 +34,10 @@
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]
         });
-
         $('#createNewProduct').click(function () {
             $('#productForm').trigger("reset");
             $('#ajaxModel').modal('show');
+            $('#caption').text('افزودن جابجایی');
             $('#product_id').val('');
             $('#alternate_id')
                 .find('option')
@@ -46,11 +45,11 @@
             $('#from').val('');
             $('#ToDate').val('');
         });
-
         $('body').on('click', '.editProduct', function () {
             var product_id = $(this).data('id');
             $.get("{{ route('admin.alternatives.update') }}" + '/' + product_id, function (data) {
                 $('#ajaxModel').modal('show');
+                $('#caption').text('ویرایش جابجایی');
                 $('#product_id').val(data.id);
                 $('#from').val(data.from);
                 $('#ToDate').val(data.ToDate);
@@ -65,9 +64,10 @@
                 }
             })
         });
-
         $('#saveBtn').click(function (e) {
             e.preventDefault();
+            $('#saveBtn').text('در حال ثبت اطلاعات...');
+            $('#saveBtn').prop("disabled", true);
             $.ajax({
                 data: $('#productForm').serialize(),
                 url: "{{ route('admin.user.alternatives.store') }}",
@@ -81,7 +81,9 @@
                             text: data.errors,
                             icon: 'error',
                             confirmButtonText: 'تایید'
-                        })
+                        });
+                        $('#saveBtn').text('ثبت');
+                        $('#saveBtn').prop("disabled", false);
                     }
                     if (data.success) {
                         $('#productForm').trigger("reset");
@@ -93,6 +95,8 @@
                             icon: 'success',
                             confirmButtonText: 'تایید',
                         });
+                        $('#saveBtn').text('ثبت');
+                        $('#saveBtn').prop("disabled", false);
                         $('#product_id').val('');
                         $('#user_id').val('');
                         $('#alternate_id').val('');
@@ -104,7 +108,6 @@
         });
 
     });
-
     $('body').on('click', '.deleteProduct', function () {
         var id = $(this).data("id");
         Swal.fire({

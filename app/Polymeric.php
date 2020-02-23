@@ -13,4 +13,11 @@ class Polymeric extends Model
         return $this->belongsTo(Product::class);
 
     }
+
+    public function barnmaterial()
+    {
+        return $this->belongsTo(BarnMaterial::class);
+
+    }
+
 }

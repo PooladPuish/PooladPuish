@@ -1,12 +1,17 @@
 <div class="modal fade" id="ajaxModel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
             <div class="modal-body">
                 <div class="portlet box blue">
                     <div class="portlet-title">
                         <div class="caption">
                             انتصاب محصول به قالب
                         </div>
+                        <div class="caption pull-left">
+                            <a data-dismiss="modal">
+                                <i style="color: white" class="pull-left fa fa-close"></i>
+                            </a>
+                        </div>
+
                     </div>
                     <div class="portlet-body form">
                         <div class="form-body">
@@ -18,7 +23,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
 
-                                            <div class="form-group">
+
                                                 <label for="title">قالب
                                                     <span
                                                         style="color: red"
@@ -32,7 +37,7 @@
                                                 </select>
                                             </div>
 
-                                            <div class="form-group">
+                                            <div class="col-md-12">
                                                 <label for="title">insert
                                                     <span
                                                         style="color: red"
@@ -47,7 +52,7 @@
                                             </div>
 
 
-                                            <div class="form-group">
+                                            <div class="col-md-12">
                                                 <label for="title">محصول
                                                     <span
                                                         style="color: red"
@@ -62,7 +67,7 @@
                                             </div>
 
 
-                                            <div class="form-group">
+                                            <div class="col-md-12">
                                                 <label>وزن
                                                     <span
                                                         style="color: red"
@@ -73,7 +78,7 @@
                                                        required>
                                             </div>
 
-                                            <div class="form-group">
+                                            <div class="col-md-12">
                                                 <label>سایکل تایم
                                                     <span
                                                         style="color: red"
@@ -87,7 +92,6 @@
 
                                         </div>
 
-                                    </div>
                                     <br/>
                                     <hr/>
                                     <div class="modal-footer">
@@ -111,6 +115,5 @@
                 </div>
             </div>
 
-        </div>
     </div>
 </div>

@@ -47,7 +47,6 @@
 </script>
 
 
-
 <script language="javascript">
     var all_modelProducts = [];
     var all_settings = [];
@@ -95,6 +94,9 @@
             "</select>" +
             "</div></div></div>";
         document.getElementById('color').appendChild(myNode);
+
+
+
 
         var myNode = document.createElement('div');
         myNode.id = 'selll' + a;
@@ -236,8 +238,23 @@
                     type: "GET",
                     url: "{{route('admin.product.price')}}?id=" + id,
                     success: function (res) {
+
                         if (res) {
-                            $('#sell' + a + '').val(res.price);
+
+                            if (res.product) {
+                                $('#type' + a + '').empty();
+                                $.each(res.product, function (key, value) {
+                                    $('#type' + a + '').append('<option value="' + value.id + '">' + value.title + '</option>');
+                                });
+
+                            } else {
+                                $('#type' + a + '').empty();
+                            }
+
+
+
+
+                            $('#sell' + a + '').val(res.id.price);
                             var selllll = parseInt($('#sell' + a + '').val());
                             var numberrr = parseInt($('#number' + a + '').val());
                             $('#Price_Sell' + a + '').val(selllll * numberrr);
@@ -278,8 +295,6 @@
         Wigt();
 
     }
-
-
 
 
     function formatNumber(num) {

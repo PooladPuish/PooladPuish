@@ -1,12 +1,17 @@
 <div class="modal fade" id="ajaxModel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
             <div class="modal-body">
                 <div class="portlet box blue">
                     <div class="portlet-title">
                         <div class="caption">
                             Bom
                         </div>
+                        <div class="caption pull-left">
+                            <a data-dismiss="modal">
+                                <i style="color: white" class="pull-left fa fa-close"></i>
+                            </a>
+                        </div>
+
                     </div>
                     <div class="portlet-body form">
                         <div class="form-body">
@@ -17,7 +22,7 @@
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="form-group">
+
                                                 <label for="title">محصول
                                                     <span
                                                         style="color: red"
@@ -33,7 +38,7 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="col-md-12">
                                                 <label for="title">زیر مجموعه
                                                     <span
                                                         style="color: red"
@@ -43,7 +48,7 @@
                                                         class="form-control">
                                                 </select>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="col-md-12">
                                                 <label>تعداد
                                                     <span
                                                         style="color: red"
@@ -57,7 +62,6 @@
 
                                         </div>
 
-                                    </div>
                                     <br/>
                                     <hr/>
                                     <div class="modal-footer">
@@ -78,19 +82,23 @@
                 </div>
             </div>
 
-        </div>
     </div>
 </div>
 
 <div class="modal fade" id="ajax" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
             <div class="modal-body">
                 <div class="portlet box blue">
                     <div class="portlet-title">
                         <div class="caption">
                             Bom
                         </div>
+                        <div class="caption pull-left">
+                            <a data-dismiss="modal">
+                                <i style="color: white" class="pull-left fa fa-close"></i>
+                            </a>
+                        </div>
+
                     </div>
                     <div class="portlet-body form">
                         <div class="form-body">
@@ -101,7 +109,7 @@
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="form-group">
+
                                                 <label for="title">زیر مجموعه
                                                     <span
                                                         style="color: red"
@@ -112,7 +120,7 @@
 
                                                 </select>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="col-md-12">
                                                 <label>تعداد
                                                     <span
                                                         style="color: red"
@@ -124,7 +132,6 @@
                                             </div>
                                         </div>
 
-                                    </div>
                                     <br/>
                                     <hr/>
                                     <div class="modal-footer">
@@ -145,7 +152,6 @@
                 </div>
             </div>
 
-        </div>
     </div>
 </div>
 

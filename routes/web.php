@@ -22,6 +22,8 @@ Route::post('/users/RestPassword', 'RestPasswordController@RestPassword')->name(
 Auth::routes();
 //HomeController
 Route::get('/home', 'HomeController@index')->name('home')->middleware('checkUser');
+Route::get('/home/chart', 'HomeController@Chart')->name('home.chart')->middleware('checkUser');
+Route::get('/home/chartsell', 'HomeController@ChartSell')->name('home.chart.sell')->middleware('checkUser');
 
 Route::group(['middleware' => ['auth', 'web']], function () {
     Route::group(["namespace" => "Users"], function () {
@@ -64,6 +66,7 @@ Route::group(['middleware' => ['auth', 'web']], function () {
         Route::get('/alternatives/update/{id?}', 'AlternativesController@update')->name('admin.alternatives.update');
         Route::get('/alternatives/user', 'AlternativesController@user')->name('admin.alternatives.user');
         Route::delete('/alternatives/delete/{id?}', 'AlternativesController@delete')->name('admin.alternatives.delete');
+
 
     });
     Route::group(["namespace" => "Foundation"], function () {
@@ -162,6 +165,15 @@ Route::group(['middleware' => ['auth', 'web']], function () {
         Route::get('/seller/update/{id?}', 'SellerController@update')->name('admin.seller.update');
         Route::delete('/seller/delete/{id?}', 'SellerController@delete')->name('admin.seller.delete');
 
+        //MaterialsProduct
+        Route::get('/matrial/list', 'MaterialsProduct@list')->name('admin.matrial.list');
+        Route::post('/matrial/store', 'MaterialsProduct@store')->name('admin.matrial.store');
+        Route::get('/matrial/update/{id?}', 'MaterialsProduct@update')->name('admin.matrial.update');
+        Route::post('/matrial/edit', 'MaterialsProduct@edit')->name('admin.matrial.edit');
+        Route::delete('/matrial/delete/{id?}', 'MaterialsProduct@delete')->name('admin.matrial.delete');
+        Route::get('/matrial/checkbox/{id?}', 'MaterialsProduct@checkbox')->name('admin.matrial.checkbox');
+
+
     });
     Route::group(["namespace" => "Customer"], function () {
 
@@ -230,13 +242,16 @@ Route::group(['middleware' => ['auth', 'web']], function () {
 
         Route::post('/invoice/ValidateStore', 'InvoiceController@ValidateStore')->name('admin.invoice.customer.validate.store');
         Route::post('/invoice/ManyStore', 'InvoiceController@ManyStore')->name('admin.invoice.customer.many.store');
-
         Route::get('ajaxdata/massremove', 'InvoiceController@massremove')->name('ajaxdata.massremove');
-
         Route::get('invoice/trash/search', 'InvoiceController@search')->name('admin.invoice.trash.search');
 
-    });
+        //TargetController
+        Route::get('/target/list', 'TargetController@list')->name('admin.target.list');
+        Route::post('/target/store', 'TargetController@store')->name('admin.target.store');
+        Route::get('/target/update/{id?}', 'TargetController@update')->name('admin.target.update');
+        Route::delete('/target/delete/{id?}', 'TargetController@delete')->name('admin.target.delete');
 
+    });
     Route::group(["namespace" => "Setting"], function () {
 
         //InvoiceController
@@ -244,7 +259,6 @@ Route::group(['middleware' => ['auth', 'web']], function () {
         Route::post('/setting/store', 'SettingController@store')->name('admin.setting.store');
 
     });
-
     Route::group(["namespace" => "Admin"], function () {
 
         //BankController
@@ -259,7 +273,26 @@ Route::group(['middleware' => ['auth', 'web']], function () {
         Route::get('/selectstore/update/{id?}', 'SelectStoreController@update')->name('admin.selectstore.update');
         Route::delete('/selectstore/delete/{id?}', 'SelectStoreController@delete')->name('admin.selectstore.delete');
 
+
     });
+
+
+    Route::group(["namespace" => "Barn"], function () {
+
+        //BarnColorController
+        Route::get('/carncolor/list', 'BarnColorController@list')->name('admin.barncolor.list');
+        Route::post('/carncolor/store', 'BarnColorController@store')->name('admin.barncolor.store');
+        Route::get('/update/list/{id?}', 'BarnColorController@update')->name('admin.barncolor.update');
+
+        //BarnMaterialController
+        Route::get('/barnmaterial/list', 'BarnMaterialController@list')->name('admin.barnmaterial.list');
+        Route::post('/barnmaterial/store', 'BarnMaterialController@store')->name('admin.barnmaterial.store');
+        Route::get('/barnmaterial/update/list/{id?}', 'BarnMaterialController@update')->name('admin.barnmaterial.update');
+
+
+
+    });
+
 
 });
 

@@ -17,16 +17,16 @@
                         @csrf
                     </form>
                     <table class="table table-striped table-bordered data-table" id="data-table">
-                        <thead>
+                        <thead style="background-color: #e8ecff">
                         <tr>
-                            <th>شماره<br/> فاکتور</th>
-                            <th>تاریخ <br/>صدور</th>
-                            <th>نام<br/> فروشنده</th>
-                            <th>نام <br/>خریدار</th>
+                            <th>شماره فاکتور</th>
+                            <th>تاریخ صدور</th>
+                            <th>نام فروشنده</th>
+                            <th>نام خریدار</th>
                             <th>تعداد</th>
-                            <th>مبلغ<br/> محصولات</th>
-                            <th>نحوه<br/> پرداخت</th>
-                            <th>نوع <br/>فاکتور</th>
+                            <th>مبلغ محصولات</th>
+                            <th>نحوه پرداخت</th>
+                            <th>نوع فاکتور</th>
                             <th>وضعیت</th>
                             <th>جمع کل</th>
                         </tr>

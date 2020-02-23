@@ -28,6 +28,9 @@
                 {data: 'manufacturer', name: 'manufacturer'},
                 {data: 'combination', name: 'combination'},
                 {data: 'masterbatch', name: 'masterbatch'},
+                {data: 'price', name: 'price'},
+                {data: 'minimum', name: 'minimum'},
+                {data: 'maximum', name: 'maximum'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]
         });
@@ -48,6 +51,9 @@
                 $('#manufacturer').val(data.manufacturer);
                 $('#combination').val(data.combination);
                 $('#masterbatch').val(data.masterbatch);
+                $('#price').val(data.price);
+                $('#minimum').val(data.minimum);
+                $('#maximum').val(data.maximum);
             })
         });
         $('#saveBtn').click(function (e) {
@@ -91,6 +97,9 @@
                         $('#combination').val('');
                         $('#masterbatch').val('');
                         $('#product_id').val('');
+                        $('#price').val('');
+                        $('#minimum').val('');
+                        $('#maximum').val('');
                     }
                 }
             });
@@ -101,6 +110,9 @@
         $('#combination').val('');
         $('#masterbatch').val('');
         $('#product_id').val('');
+        $('#price').val('');
+        $('#minimum').val('');
+        $('#maximum').val('');
     });
     $('body').on('click', '.deleteProduct', function () {
         var id = $(this).data("id");
@@ -135,4 +147,5 @@
         })
     });
     $('#foundation').addClass('active');
+    $('#foundation_c').addClass('active');
 </script>

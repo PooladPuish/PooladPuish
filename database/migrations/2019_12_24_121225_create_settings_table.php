@@ -16,6 +16,8 @@ class CreateSettingsTable extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('Tax')->default('0');
+            $table->string('year')->nullable();
+            $table->string('targeting')->nullable();
             $table->timestamps();
         });
     }

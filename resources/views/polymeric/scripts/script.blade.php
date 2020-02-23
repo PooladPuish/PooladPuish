@@ -27,7 +27,9 @@
                 {data: 'type', name: 'type'},
                 {data: 'grid', name: 'grid'},
                 {data: 'name', name: 'name'},
-                {data: 'product', name: 'product'},
+                {data: 'price', name: 'price'},
+                {data: 'minimum', name: 'minimum'},
+                {data: 'maximum', name: 'maximum'},
                 {data: 'description', name: 'description'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]
@@ -48,8 +50,10 @@
                 $('#code').val(data.code);
                 $('#type').val(data.type);
                 $('#grid').val(data.grid);
-                $('#product_id').val(data.product_id);
                 $('#description').val(data.description);
+                $('#price').val(data.price);
+                $('#minimum').val(data.minimum);
+                $('#maximum').val(data.maximum);
             })
         });
         $('#saveBtn').click(function (e) {
@@ -92,8 +96,10 @@
                         $('#code').val('');
                         $('#type').val('');
                         $('#grid').val('');
-                        $('#product_id').val('');
                         $('#description').val('');
+                        $('#price').val('');
+                        $('#minimum').val('');
+                        $('#maximum').val('');
                     }
                 }
             });
@@ -103,8 +109,10 @@
         $('#code').val('');
         $('#type').val('');
         $('#grid').val('');
-        $('#product_id').val('');
         $('#description').val('');
+        $('#price').val('');
+        $('#minimum').val('');
+        $('#maximum').val('');
     });
     $('body').on('click', '.deleteProduct', function () {
         var id = $(this).data("id");
@@ -139,4 +147,5 @@
         })
     });
     $('#foundation').addClass('active');
+    $('#foundation_c').addClass('active');
 </script>

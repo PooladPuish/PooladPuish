@@ -7,6 +7,12 @@
                         <div class="caption">
                             لغو پیش فاکتور
                         </div>
+                        <div class="caption pull-left">
+                            <a data-dismiss="modal">
+                                <i style="color: white" class="pull-left fa fa-close"></i>
+                            </a>
+                        </div>
+
                     </div>
                     <div class="portlet-body form">
                         <div class="form-body">
@@ -20,7 +26,7 @@
 
 
                                         <div class="col-md-12">
-                                            <div class="form-group">
+
                                                 <label>دلیل لغو
                                                     <span
                                                         style="color: red"
@@ -46,12 +52,12 @@
 
 
                                                 </select>
-                                            </div>
+
                                         </div>
 
 
                                         <div class="col-md-12">
-                                            <div class="form-group">
+
                                                 <label>بازگردانی به بخش:
                                                     <span
                                                         style="color: red"
@@ -62,18 +68,18 @@
                                                     <option value="2">مالی</option>
                                                     <option value="3">پیش فاکتورهای تایید نشده</option>
                                                 </select>
-                                            </div>
+
                                         </div>
 
 
                                         <div class="col-md-12">
-                                            <div class="form-group">
+
                                                 <label>توضیحات
                                                 </label>
                                                 <textarea name="description" id="description_c" rows="5"
                                                           class="form-control" placeholder="لطفا توضیحات را وارد کنید">
                                                  </textarea>
-                                            </div>
+
                                         </div>
 
 

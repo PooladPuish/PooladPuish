@@ -25,7 +25,6 @@
                 {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                 {data: 'code', name: 'code'},
                 {data: 'company', name: 'company'},
-                {data: 'color', name: 'color'},
                 {data: 'connector', name: 'connector'},
                 {data: 'side', name: 'side'},
                 {data: 'tel', name: 'tel'},
@@ -48,7 +47,6 @@
                 $('#product_id').val(data.id);
                 $('#company').val(data.company);
                 $('#code').val(data.code);
-                $('#color_id').val(data.color_id);
                 $('#connector').val(data.connector);
                 $('#side').val(data.side);
                 $('#tel').val(data.tel);
@@ -94,7 +92,6 @@
                         $('#product_id').val('');
                         $('#company').val('');
                         $('#code').val('');
-                        $('#color_id').val('');
                         $('#connector').val('');
                         $('#side').val('');
                         $('#tel').val('');
@@ -107,7 +104,6 @@
         $('#product_id').val('');
         $('#company').val('');
         $('#code').val('');
-        $('#color_id').val('');
         $('#connector').val('');
         $('#side').val('');
         $('#tel').val('');
@@ -147,4 +143,5 @@
         })
     });
     $('#foundation').addClass('active');
+    $('#foundation_c').addClass('active');
 </script>

@@ -1,11 +1,16 @@
 <div class="modal fade" id="ajaxModel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
             <div class="modal-body">
                 <div class="portlet box blue">
                     <div class="portlet-title">
                         <div class="caption" id="caption">
                         </div>
+                        <div class="caption pull-left">
+                            <a data-dismiss="modal">
+                                <i style="color: white" class="pull-left fa fa-close"></i>
+                            </a>
+                        </div>
+
                     </div>
                     <div class="portlet-body form">
                         <div class="form-body">
@@ -16,7 +21,7 @@
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="form-group">
+
                                                 <label>کد
                                                     <span
                                                         style="color: red"
@@ -27,7 +32,7 @@
                                                        required>
                                             </div>
 
-                                            <div class="form-group">
+                                            <div class="col-md-12">
                                                 <label>نام سازنده
                                                     <span
                                                         style="color: red"
@@ -38,7 +43,7 @@
                                                        placeholder="لطفا نام سازنده را وارد کنید"
                                                        required>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="col-md-12">
                                                 <label>نام insert
                                                     <span
                                                         style="color: red"
@@ -52,7 +57,6 @@
 
                                         </div>
 
-                                    </div>
                                     <br/>
                                     <hr/>
                                     <div class="modal-footer">
@@ -76,6 +80,5 @@
                 </div>
             </div>
 
-        </div>
     </div>
 </div>

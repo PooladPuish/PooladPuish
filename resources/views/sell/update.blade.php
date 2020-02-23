@@ -98,7 +98,6 @@
                                 </thead>
                                 <tbody
                                     id="TextBoxContainerbank">
-                                @foreach($invoice_products as $invoice_product)
                                     <tr>
                                         <td id="productt"></td>
                                         <td id="colorr"></td>
@@ -112,7 +111,6 @@
                                         <td id="Taxx"></td>
                                         <td id="actiont"></td>
                                     </tr>
-                                @endforeach
                                 </tbody>
                                 <tfoot>
                                 <tr>

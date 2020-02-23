@@ -1,11 +1,16 @@
 <div class="modal fade" id="ajaxModel" aria-hidden="true">
     <div class="modal-dialog  col-md-12">
-        <div class="modal-content">
             <div class="modal-body  col-md-12">
                 <div class="portlet box blue">
                     <div class="portlet-title">
                         <div class="caption" id="caption">
                         </div>
+                        <div class="caption pull-left">
+                            <a data-dismiss="modal">
+                                <i style="color: white" class="pull-left fa fa-close"></i>
+                            </a>
+                        </div>
+
                     </div>
                     <div class="portlet-body form">
                         <div class="form-body">
@@ -39,25 +44,6 @@
 
                                         </div>
 
-                                        <div class="col-md-3">
-
-                                                <label>رنگ مستربچ
-                                                    <span
-                                                        style="color: red"
-                                                        class="required-mark">*</span>
-                                                </label>
-                                                <select dir="rtl" id="color_id" class="form-control"
-                                                        name="color_id"
-                                                        required>
-                                                    @foreach($colors as $color)
-                                                        @if(!empty($color))
-                                                            <option
-                                                                value="{{$color->id}}">{{$color->name}}</option>
-                                                        @endif
-                                                    @endforeach
-                                                </select>
-
-                                        </div>
 
                                         <div class="col-md-3">
 
@@ -136,7 +122,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </div>
 </div>
 

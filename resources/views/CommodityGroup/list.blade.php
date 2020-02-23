@@ -12,7 +12,7 @@
                 </div>
                 <div class="portlet-body">
                     <table class="table table-striped table-bordered data-table" id="data-table">
-                        <thead>
+                        <thead style="background-color: #e8ecff">
                         <tr>
                             <th>ردیف</th>
                             <th>کد</th>

@@ -30,6 +30,8 @@
                 {data: 'label', name: 'label'},
                 {data: 'price', name: 'price'},
                 {data: 'manufacturing', name: 'manufacturing'},
+                {data: 'minimum', name: 'minimum'},
+                {data: 'maximum', name: 'maximum'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]
         });
@@ -53,6 +55,8 @@
                 $('#code').val(data.code);
                 $('#manufacturing').val(data.manufacturing);
                 $('#price').val(data.price);
+                $('#minimum').val(data.minimum);
+                $('#maximum').val(data.maximum);
             });
         });
         $('#saveBtn').click(function (e) {
@@ -101,6 +105,8 @@
         $('#commodity_id').val('');
         $('#manufacturing').val('');
         $('#product_id').val('');
+        $('#minimum').val('');
+        $('#maximum').val('');
     });
     $('#commodity').change(function () {
         var commodityID = $(this).val();
@@ -115,6 +121,8 @@
                         $.each(res, function (key, value) {
                             $("#characteristic").append('<option value="' + key + '">' + value + '</option>');
                         });
+                        $("#characteristic").append('<option value="">بدون مشخصه</option>');
+
 
                     } else {
                         $("#characteristic").empty();
@@ -160,4 +168,5 @@
         })
     });
     $('#foundation').addClass('active');
+    $('#foundation_a').addClass('active');
 </script>

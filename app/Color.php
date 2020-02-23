@@ -13,4 +13,12 @@ class Color extends Model
         return $this->hasMany(Seller::class);
 
     }
+
+
+    public function barncolor()
+    {
+        return $this->belongsTo(BarnColor::class);
+
+    }
+
 }

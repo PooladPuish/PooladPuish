@@ -1,12 +1,17 @@
 <div class="modal fade" id="ajaxModel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
             <div class="modal-body">
                 <div class="portlet box blue">
                     <div class="portlet-title">
                         <div class="caption">
                             انواع مشتریان
                         </div>
+                        <div class="caption pull-left">
+                            <a data-dismiss="modal">
+                                <i style="color: white" class="pull-left fa fa-close"></i>
+                            </a>
+                        </div>
+
                     </div>
                     <div class="portlet-body form">
                         <div class="form-body">
@@ -17,7 +22,7 @@
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="form-group">
+
                                                 <label>کد
                                                     <span
                                                         style="color: red"
@@ -27,7 +32,7 @@
                                                        placeholder="لطفا کد را وارد کنید"
                                                        required>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="col-md-12">
                                                 <label>نام
                                                     <span
                                                         style="color: red"
@@ -37,7 +42,7 @@
                                                        placeholder="لطفا نام را وارد کنید"
                                                        required>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="col-md-12">
                                                 <label for="title">نوع
                                                     <span
                                                         style="color: red"
@@ -52,7 +57,6 @@
                                                 </select>
                                             </div>
                                         </div>
-                                    </div>
                                     <br/>
                                     <hr/>
                                     <div class="modal-footer">
@@ -73,7 +77,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </div>
 </div>
 

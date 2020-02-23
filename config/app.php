@@ -168,6 +168,7 @@ return [
         RenatoMarinho\LaravelPageSpeed\ServiceProvider::class,
         Hekmatinasser\Verta\VertaServiceProvider::class,
         Spatie\Backup\BackupServiceProvider::class,
+        ConsoleTVs\Charts\ChartsServiceProvider::class,
 
 
 
@@ -239,6 +240,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Verta' => Hekmatinasser\Verta\Verta::class,
+        'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
 
     ],
 

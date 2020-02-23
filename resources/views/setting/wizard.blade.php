@@ -20,12 +20,30 @@
                         <div class="row">
 
 
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="form-group">
                                     <label>درصد مالیات
                                     </label>
                                     <input id="Tax" name="Tax" class="form-control"
                                            value="{{$setting->Tax}}">
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>سال جاری
+                                    </label>
+                                    <input id="year" name="year" class="form-control"
+                                           value="{{$setting->year}}">
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>حداکثر زمان برای هدف گذاری
+                                    </label>
+                                    <input id="targeting" name="targeting" class="form-control"
+                                           value="{{$setting->targeting}}">
                                 </div>
                             </div>
 

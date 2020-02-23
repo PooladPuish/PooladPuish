@@ -16,15 +16,13 @@ class CreatePolymericsTable extends Migration
         Schema::create('polymerics', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('code')->unique()->index();
-            $table->unsignedBigInteger('product_id')->index();
             $table->string('type');
             $table->string('grid');
             $table->string('name');
+            $table->string('price');
             $table->longText('description')->nullable();
             $table->timestamps();
-            $table->foreign('product_id')->references('id')->on('products')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
+
         });
     }
 

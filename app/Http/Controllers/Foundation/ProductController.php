@@ -45,7 +45,13 @@ class ProductController extends Controller
                 })
                 ->addColumn('characteristics_id', function ($row) {
                     $characteristics_id = ProductCharacteristic::find($row->characteristics_id);
-                    return $characteristics_id->name;
+                    if (!empty($characteristics_id)) {
+                        return $characteristics_id->name;
+
+                    } else {
+                        return 'بدون مشخصه';
+
+                    }
                 })
                 ->rawColumns(['action', 'commodity_id', 'characteristics_id'])
                 ->make(true);
@@ -110,6 +116,11 @@ class ProductController extends Controller
 
         $commodity = Commodity::where('id', $request->commodity_id)->first();
         $characteristic = ProductCharacteristic::where('id', $request->characteristic)->first();
+        if ($characteristic) {
+            $name = $characteristic->name;
+        } else {
+            $name = null;
+        }
 
         if ($validator->passes()) {
             Product::updateOrCreate(['id' => $request->product_id],
@@ -120,7 +131,9 @@ class ProductController extends Controller
                     'characteristics_id' => $request->characteristic,
                     'manufacturing' => $request->manufacturing,
                     'price' => $request->price,
-                    'label' => $commodity->name . ' ' . $characteristic->name . ' ' . $request->name,
+                    'minimum' => $request->minimum,
+                    'maximum' => $request->maximum,
+                    'label' => $commodity->name . ' ' . $name . ' ' . $request->name,
                 ]);
             return response()->json(['success' => 'Product saved successfully.']);
         }

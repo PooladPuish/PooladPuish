@@ -64,4 +64,10 @@ class User extends Authenticatable
 
     }
 
+    public function target()
+    {
+        return $this->belongsTo(Target::class);
+
+    }
+
 }

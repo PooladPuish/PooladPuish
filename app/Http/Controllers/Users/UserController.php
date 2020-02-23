@@ -227,17 +227,17 @@ class UserController extends Controller
                     $online = url('/public/icon/online.png');
                     $offline = url('/public/icon/offline.png');
                     if (\Cache::has('active' . $row->id)) {
-                        return '<img src="' . $online . '" title="انلاین" width="25">';
+                        return '<img src="' . $online . '" title="انلاین" width="20">';
                     } else
-                        return '<img src="' . $offline . '" title="افلاین" width="25">';
+                        return '<img src="' . $offline . '" title="افلاین" width="20">';
                 })
                 ->addColumn('status', function ($row) {
                     $active = url('/public/icon/icons8-checked-user-male.png');
                     $notActive = url('/public/icon/icons8-checked-user-male-40.png');
                     if ($row->status == null) {
-                        return '<img src="' . $active . '" title="فعال" width="25">';
+                        return '<img src="' . $active . '" title="فعال" width="20">';
                     } else
-                        return '<img src="' . $notActive . '" title="غیرفعال" width="25">';
+                        return '<img src="' . $notActive . '" title="غیرفعال" width="20">';
                 })
                 ->addColumn('action', function ($row) {
                     return $this->actions($row);

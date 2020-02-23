@@ -13,20 +13,21 @@
                     <div class="tools"></div>
                 </div>
                 <div class="portlet-body">
-                    <table class="table table-fluid" id="mTable">                        <thead>
+                    <table class="table table-fluid" id="mTable">
+                        <thead style="background-color: #e8ecff">
                         <tr>
-                            <th>شماره<br/> پیش فاکتور</th>
-                            <th>تاریخ <br/>فروش</th>
-                            <th>نام<br/> فروشنده</th>
-                            <th>نام<br/> خریدار</th>
-                            <th>نام<br/> محصول</th>
+                            <th>شماره پیش فاکتور</th>
+                            <th>تاریخ فروش</th>
+                            <th>نام فروشنده</th>
+                            <th>نام خریدار</th>
+                            <th>نام محصول</th>
                             <th>رنگ</th>
-                            <th>قیمت <br/>فروش</th>
-                            <th>تعداد<br/> فروش</th>
-                            <th>مبلغ کل <br/>فروش</th>
-                            <th>وزن محصول <br/>فروخته شده</th>
-                            <th>نوع <br/>فاکتور</th>
-                            <th>مالیات <br/>مبلغ</th>
+                            <th>قیمت فروش</th>
+                            <th>تعداد فروش</th>
+                            <th>مبلغ کل فروش</th>
+                            <th>وزن محصول فروخته شده</th>
+                            <th>نوع فاکتور</th>
+                            <th>مالیات مبلغ</th>
                         </tr>
                         </thead>
                         <tbody>

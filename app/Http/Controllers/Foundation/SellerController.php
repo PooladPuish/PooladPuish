@@ -23,9 +23,6 @@ class SellerController extends Controller
             $data = Seller::orderBy('id', 'desc')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
-                ->addColumn('color', function ($row) {
-                    return $row->color->name;
-                })
                 ->addColumn('action', function ($row) {
                     return $this->actions($row);
                 })
@@ -46,7 +43,6 @@ class SellerController extends Controller
             if ($sellers->code != $request->code) {
                 $validator = Validator::make($request->all(), [
                     'code' => 'required|integer|unique:sellers',
-                    'color_id' => 'required',
                     'company' => 'required',
                     'connector' => 'required',
                     'phone' => 'required',
@@ -54,7 +50,6 @@ class SellerController extends Controller
                     'code.unique' => 'فروشنده با این کد در سیستم موجود است.',
                     'code.required' => 'پرکردن کد فروشنده الزامی میباشد',
                     'code.integer' => 'کد فروشنده بایستی از نوع عدد باشد',
-                    'color_id.required' => 'رنگ مستربچ را انتخاب کنید',
                     'connector.required' => 'نام شخص رابط را وارد کنید',
                     'grid.required' => 'نام گرید مواد پلیمیری را وارد کنید',
                     'phone.required' => 'شماره همراه را وارد کنید',
@@ -62,14 +57,12 @@ class SellerController extends Controller
             } else
                 $validator = Validator::make($request->all(), [
                     'code' => 'required|integer',
-                    'color_id' => 'required',
                     'company' => 'required',
                     'connector' => 'required',
                     'phone' => 'required',
                 ], [
                     'code.required' => 'پرکردن کد فروشنده الزامی میباشد',
                     'code.integer' => 'کد فروشنده بایستی از نوع عدد باشد',
-                    'color_id.required' => 'رنگ مستربچ را انتخاب کنید',
                     'connector.required' => 'نام شخص رابط را وارد کنید',
                     'grid.required' => 'نام گرید مواد پلیمیری را وارد کنید',
                     'phone.required' => 'شماره همراه را وارد کنید',
@@ -77,7 +70,6 @@ class SellerController extends Controller
         } else
             $validator = Validator::make($request->all(), [
                 'code' => 'required|integer|unique:sellers',
-                'color_id' => 'required',
                 'company' => 'required',
                 'connector' => 'required',
                 'phone' => 'required',
@@ -85,7 +77,6 @@ class SellerController extends Controller
                 'code.unique' => 'فروشنده با این کد در سیستم موجود است.',
                 'code.required' => 'پرکردن کد فروشنده الزامی میباشد',
                 'code.integer' => 'کد فروشنده بایستی از نوع عدد باشد',
-                'color_id.required' => 'رنگ مستربچ را انتخاب کنید',
                 'connector.required' => 'نام شخص رابط را وارد کنید',
                 'grid.required' => 'نام گرید مواد پلیمیری را وارد کنید',
                 'phone.required' => 'شماره همراه را وارد کنید',
@@ -94,7 +85,6 @@ class SellerController extends Controller
             Seller::updateOrCreate(['id' => $request->product_id],
                 [
                     'code' => $request->code,
-                    'color_id' => $request->color_id,
                     'company' => $request->company,
                     'connector' => $request->connector,
                     'phone' => $request->phone,

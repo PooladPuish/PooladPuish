@@ -1,11 +1,16 @@
 <div class="modal fade" id="ajaxModel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
             <div class="modal-body">
                 <div class="portlet box blue">
                     <div class="portlet-title">
                         <div class="caption" id="caption">
                         </div>
+                        <div class="caption pull-left">
+                            <a data-dismiss="modal">
+                                <i style="color: white" class="pull-left fa fa-close"></i>
+                            </a>
+                        </div>
+
                     </div>
                     <div class="portlet-body form">
                         <div class="form-body">
@@ -16,7 +21,7 @@
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="form-group">
+
                                                 <label>کد رنگ
                                                     <span
                                                         style="color: red"
@@ -25,10 +30,10 @@
                                                 <input type="text" id="code" name="code" class="form-control"
                                                        placeholder="لطفا کد رنگ را وارد کنید"
                                                        required>
-                                            </div>
+
                                         </div>
                                         <div class="col-md-12">
-                                            <div class="form-group">
+
                                                 <label>نام رنگ
                                                     <span
                                                         style="color: red"
@@ -37,10 +42,10 @@
                                                 <input type="text" id="name" name="name" class="form-control"
                                                        placeholder="لطفا نام رنگ را وارد کنید"
                                                        required>
-                                            </div>
+
                                         </div>
                                         <div class="col-md-12">
-                                            <div class="form-group">
+
                                                 <label>نام سازنده رنگ
                                                     <span
                                                         style="color: red"
@@ -50,12 +55,12 @@
                                                        class="form-control"
                                                        placeholder="لطفا نام سازنده رنگ را وارد کنید"
                                                        required>
-                                            </div>
+
                                         </div>
 
 
                                         <div class="col-md-12">
-                                            <div class="form-group">
+
                                                 <label>درصد ترکیب مواد
                                                     <span
                                                         style="color: red"
@@ -65,11 +70,11 @@
                                                        class="form-control"
                                                        placeholder="لطفا درصد ترکیب مواد را وارد کنید"
                                                        required>
-                                            </div>
+
                                         </div>
 
                                         <div class="col-md-12">
-                                            <div class="form-group">
+
                                                 <label>کد مستربچ
                                                     <span
                                                         style="color: red"
@@ -79,8 +84,48 @@
                                                        class="form-control"
                                                        placeholder="لطفا کد مستربچ را وارد کنید"
                                                        required>
-                                            </div>
+
                                         </div>
+                                        <div class="col-md-12">
+
+                                                <label>قیمت
+                                                    <span
+                                                        style="color: red"
+                                                        class="required-mark">*</span>
+                                                </label>
+                                                <input type="text" id="price" name="price"
+                                                       class="form-control"
+                                                       placeholder="لطفا قیمت را وارد کنید"
+                                                       required>
+
+                                        </div>
+
+
+
+                                                <div class="col-md-6">
+
+                                                    <label>حداقل
+                                                        <span
+                                                            style="color: red"
+                                                            class="required-mark">*</span>
+                                                    </label>
+                                                    <input type="text" id="minimum" name="minimum" class="form-control"
+                                                           placeholder="لطفا حداقل را وارد کنید"
+                                                           required>
+
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>حداکثر
+                                                        <span
+                                                            style="color: red"
+                                                            class="required-mark">*</span>
+                                                    </label>
+                                                    <input type="text" id="maximum" name="maximum" class="form-control"
+                                                           placeholder="لطفا حداکثر را وارد کنید"
+                                                           required>
+                                                </div>
+
+
 
 
                                     </div>
@@ -107,7 +152,6 @@
                 </div>
             </div>
 
-        </div>
     </div>
 </div>
 

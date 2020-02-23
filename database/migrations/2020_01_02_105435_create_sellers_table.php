@@ -16,7 +16,6 @@ class CreateSellersTable extends Migration
         Schema::create('sellers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('code')->unique()->index();
-            $table->unsignedBigInteger('color_id')->index();
             $table->string('company');
             $table->string('connector');
             $table->string('side')->nullable();
@@ -24,9 +23,7 @@ class CreateSellersTable extends Migration
             $table->string('inside')->nullable();
             $table->string('phone');
             $table->timestamps();
-            $table->foreign('color_id')->references('id')->on('colors')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+
         });
     }
 

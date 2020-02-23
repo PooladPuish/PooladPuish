@@ -20,6 +20,7 @@ class CreateColorsTable extends Migration
             $table->string('manufacturer');
             $table->string('combination');
             $table->bigInteger('masterbatch');
+            $table->string('price');
 
             $table->timestamps();
         });

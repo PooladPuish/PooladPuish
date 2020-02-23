@@ -33,10 +33,10 @@
     <style>
         @font-face {
             font-family: 'Shahab';
-            src: url('{{asset('/public/fonts/Shahab-Regular.woff2')}}') format('woff2'),
-            url('{{asset('/public/fonts/Shahab-Regular.woff')}}') format('woff'),
-            url('{{asset('/public/fonts/Shahab-Regular.ttf')}}') format('truetype'),
-            url('{{asset('/public/fonts/Shahab-Regular.otf')}}') format('opentype');
+            src: url('{{asset('/public/f/Yekan.woff2')}}') format('woff2'),
+            url('{{asset('/public/f/Yekan.woff')}}') format('woff'),
+            url('{{asset('/public/f/Yekan.ttf')}}') format('truetype'),
+            url('{{asset('/public/f/Yekan.otf')}}') format('opentype');
             font-weight: normal;
             font-style: normal;
         }
@@ -112,7 +112,6 @@
                 <span class="sr-only">Toggle navigation</span>
             </a>
             <a href="{{route('admin.invoice.wizard')}}" class="btn btn-link">
-
 
                 <img src="{{asset('public/icon/icons8-profit-growth-64.png')}}"
                      width="30" title="صدور پیش فاکتور">
@@ -312,70 +311,106 @@
             </span>
                         </a>
                         <ul class="treeview-menu">
-                            @can('گروه کالایی')
-                                <li><a href="{{route('admin.commodity.list')}}"><i
-                                            class="fa fa-circle-o"></i>گروه کالایی</a>
-                                </li>
-                            @endcan
-                            @can('مشخصه محصول')
-                                <li><a href="{{route('admin.ProductCharacteristic.list')}}"><i
-                                            class="fa fa-circle-o"></i>مشخصه محصول</a>
-                                </li>
-                            @endcan
-                            @can('تعریف محصول')
-                                <li><a href="{{route('admin.product.list')}}"><i
-                                            class="fa fa-circle-o"></i>تعریف محصول</a>
-                                </li>
-                            @endcan
-                            @can('BOM')
-                                <li><a href="{{route('admin.bom.list')}}"><i
-                                            class="fa fa-circle-o"></i>BOM</a>
-                                </li>
-                            @endcan
-                            <hr/>
-                            @can('تعریف قالب سازه')
-                                <li><a href="{{route('admin.models.list')}}"><i
-                                            class="fa fa-circle-o"></i>تعریف قالب سازها</a>
-                                </li>
-                            @endcan
-                            @can('تعریف قالب')
-                                <li><a href="{{route('admin.format.list')}}"><i
-                                            class="fa fa-circle-o"></i>تعریف قالب</a>
-                                </li>
-                            @endcan
-                            @can('Insert های قالب')
-                                <li><a href="{{route('admin.insert.list')}}"><i
-                                            class="fa fa-circle-o"></i>Insert های قالب </a>
-                                </li>
-                            @endcan
-                            @can('انتصاب محصول به قالب')
-                                <li><a href="{{route('admin.model.product.list')}}"><i
-                                            class="fa fa-circle-o"></i>انتصاب محصول به قالب</a>
-                                </li>
-                            @endcan
-                            <hr/>
-                            @can('تعریف رنگ')
-                                <li><a href="{{route('admin.color.list')}}"><i
-                                            class="fa fa-circle-o"></i>تعریف رنگ</a>
-                                </li>
-                            @endcan
-                            @can('مواد پلیمیری')
-                                <li><a href="{{route('admin.polymeric.list')}}"><i
-                                            class="fa fa-circle-o"></i>مواد پلیمیری</a>
-                                </li>
-                            @endcan
-                            @can('فروشنده')
-                                <li><a href="{{route('admin.seller.list')}}"><i
-                                            class="fa fa-circle-o"></i>فروشنده</a>
-                                </li>
-                            @endcan
-                            <hr/>
-                            @can('تعریف دستگاه')
-                                <li><a href="{{route('admin.device.list')}}"><i
-                                            class="fa fa-circle-o"></i>تعریف دستگاه</a>
-                                </li>
-                            @endcan
 
+                            <li class="treeview" id="foundation_a">
+                                <a href="#">
+                                    <span>محصولات</span>
+                                    <span class="pull-left-container">
+              <i class="fa fa-angle-right pull-left"></i>
+            </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    @can('گروه کالایی')
+                                        <li><a href="{{route('admin.commodity.list')}}"><i
+                                                    class="fa fa-circle-o"></i>گروه کالایی</a>
+                                        </li>
+                                    @endcan
+                                    @can('مشخصه محصول')
+                                        <li><a href="{{route('admin.ProductCharacteristic.list')}}"><i
+                                                    class="fa fa-circle-o"></i>مشخصه محصول</a>
+                                        </li>
+                                    @endcan
+                                    @can('تعریف محصول')
+                                        <li><a href="{{route('admin.product.list')}}"><i
+                                                    class="fa fa-circle-o"></i>تعریف محصول</a>
+                                        </li>
+                                    @endcan
+                                    @can('BOM')
+                                        <li><a href="{{route('admin.bom.list')}}"><i
+                                                    class="fa fa-circle-o"></i>BOM</a>
+                                        </li>
+                                    @endcan
+
+                                        <li><a href="{{route('admin.matrial.list')}}"><i
+                                                    class="fa fa-circle-o"></i>انتصاب مواد به محصول</a>
+                                        </li>
+
+
+
+                                </ul>
+                            </li>
+
+                            <li class="treeview" id="foundation_b">
+                                <a href="#">
+                                    <span>قالب ها</span>
+                                    <span class="pull-left-container">
+              <i class="fa fa-angle-right pull-left"></i>
+            </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    @can('تعریف قالب سازه')
+                                        <li><a href="{{route('admin.models.list')}}"><i
+                                                    class="fa fa-circle-o"></i>تعریف قالب سازها</a>
+                                        </li>
+                                    @endcan
+                                    @can('تعریف قالب')
+                                        <li><a href="{{route('admin.format.list')}}"><i
+                                                    class="fa fa-circle-o"></i>تعریف قالب</a>
+                                        </li>
+                                    @endcan
+                                    @can('Insert های قالب')
+                                        <li><a href="{{route('admin.insert.list')}}"><i
+                                                    class="fa fa-circle-o"></i>Insert های قالب </a>
+                                        </li>
+                                    @endcan
+                                    @can('انتصاب محصول به قالب')
+                                        <li><a href="{{route('admin.model.product.list')}}"><i
+                                                    class="fa fa-circle-o"></i>انتصاب محصول به قالب</a>
+                                        </li>
+                                    @endcan
+                                </ul>
+                            </li>
+
+                            <li class="treeview" id="foundation_c">
+                                <a href="#">
+                                    <span>تعاریف دیگر</span>
+                                    <span class="pull-left-container">
+              <i class="fa fa-angle-right pull-left"></i>
+            </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    @can('تعریف رنگ')
+                                        <li><a href="{{route('admin.color.list')}}"><i
+                                                    class="fa fa-circle-o"></i>تعریف رنگ</a>
+                                        </li>
+                                    @endcan
+                                    @can('مواد پلیمیری')
+                                        <li><a href="{{route('admin.polymeric.list')}}"><i
+                                                    class="fa fa-circle-o"></i>مواد پلیمیری</a>
+                                        </li>
+                                    @endcan
+                                    @can('فروشنده')
+                                        <li><a href="{{route('admin.seller.list')}}"><i
+                                                    class="fa fa-circle-o"></i>فروشندگان</a>
+                                        </li>
+                                    @endcan
+                                    @can('تعریف دستگاه')
+                                        <li><a href="{{route('admin.device.list')}}"><i
+                                                    class="fa fa-circle-o"></i>تعریف دستگاه</a>
+                                        </li>
+                                    @endcan
+                                </ul>
+                            </li>
 
                         </ul>
                     </li>
@@ -405,6 +440,30 @@
                     </li>
                 @endif
 
+
+                <li class="treeview" id="barn">
+                    <a href="#">
+                        <i class="fa fa-archive"></i> <span>انبار</span>
+                        <span class="pull-left-container">
+              <i class="fa fa-angle-right pull-left"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+
+                            <li><a href="{{route('admin.barncolor.list')}}"><i
+                                        class="fa fa-circle-o"></i>انبار رنگ</a>
+                            </li>
+                        <li><a href="{{route('admin.barnmaterial.list')}}"><i
+                                    class="fa fa-circle-o"></i>انبار مواد پلیمری</a>
+                        </li>
+                        <li><a href="#"><i
+                                    class="fa fa-circle-o"></i>انبار کالاهای ساخته شده</a>
+                        </li>
+                    </ul>
+                </li>
+
+
+
                 @if(Gate::check('صدور پیش فاکتور') || Gate::check('پیش فاکتورهای حذف شده'))
                     <li class="treeview" id="sell">
                         <a href="#">
@@ -429,7 +488,9 @@
                             @endif
 
 
-
+                                <li><a href="{{route('admin.target.list')}}"><i
+                                            class="fa fa-circle-o"></i>هدف گذاری فروش</a>
+                                </li>
 
                         </ul>
                     </li>
@@ -444,6 +505,9 @@
             </span>
                         </a>
                         <ul class="treeview-menu">
+
+
+
                             @can('بازسازی نرم افزار')
                                 <li><a href="javascript:void(0)" id="stop"><i
                                             class="fa fa-circle-o"></i>بازسازی نرم افزار</a>
@@ -540,6 +604,7 @@
 <script src="{{asset('/public/dist/js/demo.js')}}"></script>
 <script src="{{asset('/public/assets/sweetalert.js')}}"></script>
 <script src="{{asset('/public/assets/select2.js')}}"></script>
+
 <script>
     $("#single").select2({
         language: {

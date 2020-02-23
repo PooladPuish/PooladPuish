@@ -49,7 +49,6 @@
 </script>
 
 
-
 <script language="javascript">
     var all_modelProducts = [];
     var all_settings = [];
@@ -238,7 +237,7 @@
                     url: "{{route('admin.product.price')}}?id=" + id,
                     success: function (res) {
                         if (res) {
-                            $('#sell' + a + '').val(res.price);
+                            $('#sell' + a + '').val(res.id.price);
                             var selllll = parseInt($('#sell' + a + '').val());
                             var numberrr = parseInt($('#number' + a + '').val());
                             $('#Price_Sell' + a + '').val(selllll * numberrr);

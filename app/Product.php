@@ -29,6 +29,12 @@ class Product extends Model
 
     }
 
+    public function producttitle()
+    {
+        return $this->hasMany(ProductTitle::class);
+
+    }
+
     public function boms()
     {
         return $this->belongsToMany(Bom::class);

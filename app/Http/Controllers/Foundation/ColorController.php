@@ -24,6 +24,9 @@ class ColorController extends Controller
                 ->addColumn('action', function ($row) {
                     return $this->actions($row);
                 })
+                ->addColumn('price', function ($row) {
+                    return number_format($row->price);
+                })
                 ->rawColumns(['action'])
                 ->make(true);
         }
@@ -95,6 +98,9 @@ class ColorController extends Controller
                     'manufacturer' => $request->manufacturer,
                     'combination' => $request->combination,
                     'masterbatch' => $request->masterbatch,
+                    'price' => $request->price,
+                    'minimum' => $request->minimum,
+                    'maximum' => $request->maximum,
                 ]);
             return response()->json(['success' => 'Product saved successfully.']);
         }

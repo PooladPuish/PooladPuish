@@ -6,18 +6,17 @@
             <div class="portlet box blue">
                 <div class="portlet-title">
                     <div class="caption">
-                        فروشنده
+                        فروشندگان
                     </div>
                     <div class="tools"></div>
                 </div>
                 <div class="portlet-body">
                     <table class="table table-striped table-bordered data-table" id="data-table">
-                        <thead>
+                        <thead style="background-color: #e8ecff">
                         <tr>
                             <th>ردیف</th>
                             <th>کد</th>
                             <th>نام شرکت</th>
-                            <th>رنگ مستربچ</th>
                             <th>نام شخص رابط</th>
                             <th>سمت</th>
                             <th>شماره تلفن</th>

@@ -113,7 +113,7 @@
                                             <i class="fa fa-plus"></i>
                                         </button>
                                     </th>
-                                    <th>
+                                    <th colspan="1">
                                         جمع
                                         <hr/>
                                         میانگین

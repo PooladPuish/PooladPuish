@@ -16,17 +16,26 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('characteristics_id')->index();
-            $table->bigInteger('commodity_id')->index();
+            $table->unsignedBigInteger('commodity_id')->index();
             $table->bigInteger('code')->unique()->index();
             $table->string('name');
             $table->string('label');
             $table->integer('manufacturing');
             $table->timestamps();
 
-            $table->foreign('characteristics_id')->references('id')
+
+            $table->foreign('characteristics_id')
+                ->references('id')
                 ->on('product_characteristics')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            $table->foreign('commodity_id')
+                ->references('id')
+                ->on('commodities')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
 
         });
     }

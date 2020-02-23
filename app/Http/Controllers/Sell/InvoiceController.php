@@ -9,10 +9,12 @@ use App\Http\Controllers\Controller;
 use App\Invoice;
 use App\ModelProduct;
 use App\Product;
+use App\ProductTitle;
 use App\Role;
 use App\SelectStore;
 use App\Setting;
 use App\User;
+use Carbon\Carbon;
 use DB;
 use Gate;
 use Hekmatinasser\Verta\Verta;
@@ -897,6 +899,7 @@ class InvoiceController extends Controller
     public function store(Request $request)
     {
         $date = Jalalian::forge(date('Y/m/d'))->format('Y/m/d');
+        $to = Carbon::parse($date);
         $now_date = new Verta();
         $year = substr($now_date->year, strpos($now_date->year, '://') + 2, 6);
         $count = Invoice::where('created', date("Y/m/d"))
@@ -918,6 +921,8 @@ class InvoiceController extends Controller
             'price_sell' => $request->price_selll,
             'created' => date("Y/m/d"),
             'date' => $date,
+            'Month' => $to->month,
+            'Year' => $to->year,
         ]);
         if ($invoice) {
             try {
@@ -1117,7 +1122,6 @@ class InvoiceController extends Controller
                 'invoice_id' => $request->id_delete,
                 'cancellation' => $request->cancellation,
                 'description' => $request->description,
-                'created_at' => date('Y/d/m'),
             ]);
             $update = Invoice::find($request->id_delete)->update([
                 'state' => 2,
@@ -1191,8 +1195,12 @@ class InvoiceController extends Controller
 
     public function price(Request $request)
     {
+
+        $product = ProductTitle::where('product_id', $request->id)->get();
+
+
         $id = Product::where('id', $request->id)->first();
-        return response()->json($id);
+        return response()->json(['id' => $id, 'product' => $product]);
 
     }
 

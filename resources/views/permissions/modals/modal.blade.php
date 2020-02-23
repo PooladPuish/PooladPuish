@@ -1,12 +1,17 @@
 <div class="modal fade" id="ajaxModel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
             <div class="modal-body">
                 <div class="portlet box blue">
                     <div class="portlet-title">
                         <div class="caption" id="caption">
 
                         </div>
+                        <div class="caption pull-left">
+                            <a data-dismiss="modal">
+                                <i style="color: white" class="pull-left fa fa-close"></i>
+                            </a>
+                        </div>
+
                     </div>
                     <div class="portlet-body form">
                         <div class="form-body">
@@ -16,8 +21,9 @@
                                     <input type="hidden" name="product_id" id="product_id">
                                     @csrf
                                     <div class="row">
+
                                         <div class="col-md-12">
-                                            <div class="form-group">
+
                                                 <label>دسترسی
                                                     <span
                                                         style="color: red"
@@ -25,10 +31,12 @@
                                                 </label>
                                                 <input type="text" id="name" name="name" class="form-control"
                                                        required>
-                                            </div>
+
                                         </div>
+
+
                                         <div class="col-md-12">
-                                            <div class="form-group">
+
                                                 <label>قسمت
                                                     <span
                                                         style="color: red"
@@ -37,7 +45,7 @@
                                                 <input type="text" id="label" name="label" class="form-control"
                                                        required>
                                             </div>
-                                        </div>
+
 
                                     </div>
                                     <br/>
@@ -63,7 +71,6 @@
                 </div>
             </div>
 
-        </div>
     </div>
 </div>
 

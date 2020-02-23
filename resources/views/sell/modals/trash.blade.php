@@ -1,12 +1,17 @@
 <div class="modal fade" id="ajaxModelQuestion" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
             <div class="modal-body">
                 <div class="portlet box blue">
                     <div class="portlet-title">
                         <div class="caption">
                             ثبت نهایی پیش فاکتور
                         </div>
+                        <div class="caption pull-left">
+                            <a data-dismiss="modal">
+                                <i style="color: white" class="pull-left fa fa-close"></i>
+                            </a>
+                        </div>
+
                     </div>
                     <div class="portlet-body form">
                         <div class="form-body">
@@ -19,7 +24,7 @@
 
 
                                         <div class="col-md-12">
-                                            <div class="form-group">
+
                                                 <label>دلیل لغو
                                                     <span
                                                         style="color: red"
@@ -46,18 +51,18 @@
 
 
                                                 </select>
-                                            </div>
+
                                         </div>
 
 
                                         <div class="col-md-12">
-                                            <div class="form-group">
+
                                                 <label>توضیحات
                                                 </label>
                                                 <textarea disabled name="description" id="description_c" rows="5"
                                                           class="form-control" placeholder="لطفا توضیحات را وارد کنید">
                                                  </textarea>
-                                            </div>
+
                                         </div>
 
 
@@ -87,7 +92,6 @@
                 </div>
             </div>
 
-        </div>
     </div>
 </div>
 

@@ -17,6 +17,7 @@
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^5.2.0",
         "laraveldaily/laravel-charts": "^0.1.13",
+        "milon/barcode": "^6.0",
         "morilog/jalali": "3.*",
         "renatomarinho/laravel-page-speed": "^1.8",
         "sofa/eloquence": "~5.3",

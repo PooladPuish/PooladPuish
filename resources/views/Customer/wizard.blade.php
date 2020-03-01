@@ -172,9 +172,10 @@
                                             </div>
                                         </div>
 
-                                        <button class="btn btn-primary nextBtn pull-right" id="nextBtn" type="button">
-                                            ادامه
-                                        </button>
+                                            <button class="btn btn-primary nextBtn pull-right" id="nextBtn"
+                                                    type="button">
+                                                ادامه
+                                            </button>
 
 
                                     </div>
@@ -438,7 +439,7 @@
                                                                                             <label
                                                                                                 class="control-label col-md-6">فکس
                                                                                                 دفتر
-                                                                                                </label>
+                                                                                            </label>
                                                                                             <div class="col-md-6">
                                                                                                 <input type="text"
                                                                                                        id="fax_company"
@@ -1316,11 +1317,16 @@
 
 
                                         </div>
-                                        <div class="text-left">
-                                        <button style="width: 130px" type="submit" class="btn btn-success" id="saveBtn" value="ثبت">
-                                            ثبت
-                                        </button>
-                                    </div>
+                                        <div class="pull-left">
+                                            <button style="width: 130px" type="submit" class="btn btn-success"
+                                                    id="saveBtn" value="ثبت">
+                                                ثبت
+                                            </button>
+                                            &nbsp;&nbsp;
+                                            <a href="{{route('admin.customers.index')}}" style="width: 130px" type="submit" class="btn btn-danger">
+                                                برگشت
+                                            </a>
+                                        </div>
                                     </div>
 
                                 </div>
@@ -1337,6 +1343,9 @@
     </div>
 
 
+<script>
+    $('#customer').addClass('active');
 
+</script>
 
 @endsection

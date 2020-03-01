@@ -23,6 +23,11 @@ class Product extends Model
         return $this->hasMany(Format::class);
     }
 
+    public function productionorder()
+    {
+        return $this->hasMany(ProductionOrder::class);
+    }
+
     public function polymerics()
     {
         return $this->hasMany(Polymeric::class);

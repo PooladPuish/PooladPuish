@@ -275,8 +275,6 @@ Route::group(['middleware' => ['auth', 'web']], function () {
 
 
     });
-
-
     Route::group(["namespace" => "Barn"], function () {
 
         //BarnColorController
@@ -289,9 +287,48 @@ Route::group(['middleware' => ['auth', 'web']], function () {
         Route::post('/barnmaterial/store', 'BarnMaterialController@store')->name('admin.barnmaterial.store');
         Route::get('/barnmaterial/update/list/{id?}', 'BarnMaterialController@update')->name('admin.barnmaterial.update');
 
+        //BarnProductController
+        Route::get('/barnproduct/list', 'BarnProductController@list')->name('admin.barnproduct.list');
 
 
     });
+    Route::group(["namespace" => "Manufacturing"], function () {
+
+        //ProductionOrderController
+        Route::get('/productionorder/list', 'ProductionOrderController@list')->name('admin.productionorder.list');
+        Route::get('/productionorder/edit/{id?}', 'ProductionOrderController@edit')->name('admin.productionorder.edit');
+        Route::get('/productionorder/wizard', 'ProductionOrderController@wizard')->name('admin.productionorder.wizard');
+        Route::get('/productionorder/detail', 'ProductionOrderController@detail')->name('admin.productionorder.detail');
+        Route::post('/productionorder/store', 'ProductionOrderController@store')->name('admin.productionorder.store');
+        Route::post('/productionorder/update', 'ProductionOrderController@update')->name('admin.productionorder.update');
+        Route::delete('/productionorder/delete/{id?}', 'ProductionOrderController@delete')->name('admin.productionorder.delete');
+
+
+        //EventsMachineController
+        Route::get('/eventsmachine/list', 'EventsMachineController@list')->name('admin.eventsmachine.list');
+        Route::post('/eventsmachine/store', 'EventsMachineController@store')->name('admin.eventsmachine.store');
+        //EventsFormatController
+        Route::get('/eventsformat/list', 'EventsFormatController@list')->name('admin.eventsformat.list');
+        Route::post('/eventsformat/store', 'EventsFormatController@store')->name('admin.eventsformat.store');
+        //PMMachineController
+        Route::get('/pmmachine/list', 'PMMachineController@list')->name('admin.pmmachine.list');
+        Route::post('/pmmachine/store', 'PMMachineController@store')->name('admin.pmmachine.store');
+        Route::get('/pmmachine/update/{id?}', 'PMMachineController@update')->name('admin.pmmachine.update');
+        Route::delete('/pmmachine/delete/{id?}', 'PMMachineController@delete')->name('admin.pmmachine.delete');
+        //PMFormatController
+        Route::get('/pmformat/list', 'PMFormatController@list')->name('admin.pmformat.list');
+        Route::post('/pmformat/store', 'PMFormatController@store')->name('admin.pmformat.store');
+        Route::get('/pmformat/update/{id?}', 'PMFormatController@update')->name('admin.pmformat.update');
+        Route::delete('/pmformat/delete/{id?}', 'PMFormatController@delete')->name('admin.pmformat.delete');
+
+        //ProductionPlanningController
+        Route::get('/pPlanning/list', 'ProductionPlanningController@list')->name('admin.pPlanning.list');
+
+
+    });
+
+
+    Route::get('/testttt', 'TestController@testttt');
 
 
 });

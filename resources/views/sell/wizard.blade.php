@@ -146,17 +146,22 @@
                                 </tr>
                                 </tfoot>
                             </table>
+
                         </div>
+
                     </div>
 
                 </div>
-                <div class="col-md-12">
-                    <div class="text-left">
-                        <button style="width: 130px" type="submit" class="btn btn-success" id="saveBtn" value="ثبت">
-                            ثبت
-                        </button>
-                    </div>
+                <div class="pull-left">
+                    <button style="width: 130px" type="submit" class="btn btn-success" id="saveBtn" value="ثبت">
+                        ثبت
+                    </button>
+                    &nbsp;&nbsp;
+                    <a href="{{route('admin.invoice.index')}}" style="width: 130px" type="submit" class="btn btn-danger">
+                        برگشت
+                    </a>
                 </div>
+
 
             </div>
 

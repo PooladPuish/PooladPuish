@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Test;
 use App\User;
 use Illuminate\Http\Request;
+use Milon\Barcode\DNS1D;
+use Milon\Barcode\DNS2D;
 use Yajra\DataTables\DataTables;
 
 class TestController extends Controller
@@ -47,6 +49,13 @@ class TestController extends Controller
         }
 
         return view('users.show');
+    }
+
+
+    public function testttt()
+    {
+        $a = DNS1D::getBarcodeHTML('P-98121167', 'C93');
+        return view('barcode',compact('a'));
     }
 
 

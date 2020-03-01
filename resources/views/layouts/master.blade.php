@@ -341,9 +341,6 @@
                                         </li>
                                     @endcan
 
-                                        <li><a href="{{route('admin.matrial.list')}}"><i
-                                                    class="fa fa-circle-o"></i>انتصاب مواد به محصول</a>
-                                        </li>
 
 
 
@@ -456,8 +453,71 @@
                         <li><a href="{{route('admin.barnmaterial.list')}}"><i
                                     class="fa fa-circle-o"></i>انبار مواد پلیمری</a>
                         </li>
-                        <li><a href="#"><i
+                        <li><a href="{{route('admin.barnproduct.list')}}"><i
                                     class="fa fa-circle-o"></i>انبار کالاهای ساخته شده</a>
+                        </li>
+                    </ul>
+                </li>
+
+
+
+
+
+                <li class="treeview" id="manufacturing">
+                    <a href="#">
+                        <i class="fa fa-pie-chart"></i> <span>تولید</span>
+                        <span class="pull-left-container">
+              <i class="fa fa-angle-right pull-left"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+
+                        <li class="treeview" id="manufacturing_m">
+                            <a href="#">
+                                <i class="fa fa-circle-o"></i> <span>ثبت اتفاقات تولید</span>
+                                <span class="pull-left-container">
+              <i class="fa fa-angle-right pull-left"></i>
+            </span>
+                            </a>
+                            <ul class="treeview-menu">
+
+                                <li><a href="{{route('admin.eventsmachine.list')}}"><i
+                                            class="fa fa-circle-o"></i>اتفاقات ماشین</a>
+                                </li>
+                                <li><a href="{{route('admin.eventsformat.list')}}"><i
+                                            class="fa fa-circle-o"></i>اتفاقات قالب</a>
+                                </li>
+                            </ul>
+                        </li>
+
+
+                        <li class="treeview" id="manufacturing_n">
+                            <a href="#">
+                                <i class="fa fa-circle-o"></i> <span>PM</span>
+                                <span class="pull-left-container">
+              <i class="fa fa-angle-right pull-left"></i>
+            </span>
+                            </a>
+                            <ul class="treeview-menu">
+
+                                <li><a href="{{route('admin.pmmachine.list')}}"><i
+                                            class="fa fa-circle-o"></i>PM ماشین</a>
+                                </li>
+                                <li><a href="{{route('admin.pmformat.list')}}"><i
+                                            class="fa fa-circle-o"></i>PM قالب</a>
+                                </li>
+                            </ul>
+                        </li>
+
+
+                        <li><a href="{{route('admin.pPlanning.list')}}"><i
+                                    class="fa fa-circle-o"></i>برنامه ریزی خطوط تولید</a>
+                        </li>
+
+
+
+                        <li><a href="{{route('admin.productionorder.list')}}"><i
+                                    class="fa fa-circle-o"></i>سفارش تولید</a>
                         </li>
                     </ul>
                 </li>

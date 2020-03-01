@@ -34,5 +34,15 @@ class Format extends Model
         return $this->hasMany(ModelProduct::class);
     }
 
+    public function eventformat()
+    {
+        return $this->hasMany(EventsFormat::class);
+
+    }
+    public function pmformat()
+    {
+        return $this->hasMany(PMFormat::class);
+
+    }
 
 }

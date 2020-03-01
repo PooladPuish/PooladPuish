@@ -169,6 +169,7 @@ return [
         Hekmatinasser\Verta\VertaServiceProvider::class,
         Spatie\Backup\BackupServiceProvider::class,
         ConsoleTVs\Charts\ChartsServiceProvider::class,
+        Milon\Barcode\BarcodeServiceProvider::class,
 
 
 
@@ -241,7 +242,8 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Verta' => Hekmatinasser\Verta\Verta::class,
         'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
-
+        'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
+        'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
     ],
 
 ];

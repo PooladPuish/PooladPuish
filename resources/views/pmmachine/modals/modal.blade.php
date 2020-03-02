@@ -75,19 +75,6 @@
 
                                     </div>
 
-                                    <div class="col-md-12">
-
-                                        <label>وضعیت
-                                            <span
-                                                style="color: red"
-                                                class="required-mark">*</span>
-                                        </label>
-                                        <select name="status" id="status" class="form-control">
-                                           <option value="1">فعال</option>
-                                           <option value="2">غیرفعال</option>
-                                        </select>
-
-                                    </div>
 
                                     <div class="col-md-12">
 

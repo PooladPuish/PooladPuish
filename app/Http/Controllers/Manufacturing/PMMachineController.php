@@ -26,9 +26,9 @@ class PMMachineController extends Controller
                 })
                 ->addColumn('status', function ($row) {
                     if ($row->status == 1) {
-                        return 'فعال';
+                        return 'پایان یافته';
                     } else {
-                        return 'غیرفعال';
+                        return 'در انتظار اجرا';
 
                     }
                 })
@@ -53,7 +53,6 @@ class PMMachineController extends Controller
                 'totime' => $request->totime,
                 'date' => $this->convert2english($request->date),
                 'todate' => $this->convert2english($request->todate),
-                'status' => $request->status,
                 'cause' => $request->cause,
             ]);
         return response()->json(['success' => 'Product saved successfully.']);

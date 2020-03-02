@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Morilog\Jalali\Jalalian;
 
 class PMMachine extends Model
 {
@@ -14,4 +15,9 @@ class PMMachine extends Model
         return $this->belongsTo(Device::class);
 
     }
+
+
+
+
+
 }

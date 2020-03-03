@@ -21,8 +21,8 @@ class ProductionPlanningController extends Controller
 
         $dt = Carbon::now()->timezone('Asia/Tehran');
         $time = Jalalian::forge($dt)->format('H:i');
-
         $date = Jalalian::forge(date('Y/m/d'))->format('Y/m/d');
+
         $this->device1($date, $time);
         $this->device2($date, $time);
         $this->device3($date, $time);
@@ -586,162 +586,192 @@ class ProductionPlanningController extends Controller
 
     public function device1($date, $time)
     {
-        $ds1 = PMMachine::where('device_id', 1)
+        $dss1 = PMMachine::where('device_id', 1)
             ->whereNull('status')
-            ->where('date', '<=', $date)
-            ->where('time', '<=', $time)
-            ->first();
-        if (!empty($ds1)) {
-            if ($date >= $ds1->todate and $time >= $ds1->totime) {
-                PMMachine::find($ds1->id)->update([
-                    'status' => 1,
-                ]);
+            ->where('date', '>=', $date and 'todate', '<=', $date)
+            ->where('time', '>=', $time and 'totime', '<=', $time)
+            ->get();
+        foreach ($dss1 as $ds1) {
+            if (!empty($ds1)) {
+                if ($date >= $ds1->todate and $time >= $ds1->totime) {
+                    PMMachine::find($ds1->id)->update([
+                        'status' => 1,
+                    ]);
+                }
             }
         }
+
     }
 
     public function device2($date, $time)
     {
-        $ds2 = PMMachine::where('device_id', 2)
+        $dss2 = PMMachine::where('device_id', 2)
             ->whereNull('status')
-            ->where('date', '<=', $date)
-            ->where('time', '<=', $time)
-            ->first();
-        if (!empty($ds2)) {
-            if ($date >= $ds2->todate and $time >= $ds2->totime) {
-                PMMachine::find($ds2->id)->update([
-                    'status' => 1,
-                ]);
+            ->where('date', '>=', $date and 'todate', '<=', $date)
+            ->where('time', '>=', $time and 'totime', '<=', $time)
+            ->get();
+        foreach ($dss2 as $ds2) {
+            if (!empty($ds2)) {
+                if ($date >= $ds2->todate and $time >= $ds2->totime) {
+                    PMMachine::find($ds2->id)->update([
+                        'status' => 1,
+                    ]);
+                }
             }
         }
+
     }
 
     public function device3($date, $time)
     {
-        $ds3 = PMMachine::where('device_id', 3)
+        $dss3 = PMMachine::where('device_id', 3)
             ->whereNull('status')
-            ->where('date', '<=', $date)
-            ->where('time', '<=', $time)
-            ->first();
-        if (!empty($ds3)) {
-            if ($date >= $ds3->todate and $time >= $ds3->totime) {
-                PMMachine::find($ds3->id)->update([
-                    'status' => 1,
-                ]);
+            ->where('date', '>=', $date and 'todate', '<=', $date)
+            ->where('time', '>=', $time and 'totime', '<=', $time)
+            ->get();
+        foreach ($dss3 as $ds3) {
+            if (!empty($ds3)) {
+                if ($date >= $ds3->todate and $time >= $ds3->totime) {
+                    PMMachine::find($ds3->id)->update([
+                        'status' => 1,
+                    ]);
+                }
             }
         }
+
     }
 
     public function device4($date, $time)
     {
-        $ds4 = PMMachine::where('device_id', 4)
+        $dss4 = PMMachine::where('device_id', 4)
             ->whereNull('status')
-            ->where('date', '<=', $date)
-            ->where('time', '<=', $time)
-            ->first();
-        if (!empty($ds4)) {
-            if ($date >= $ds4->todate and $time >= $ds4->totime) {
-                PMMachine::find($ds4->id)->update([
-                    'status' => 1,
-                ]);
+            ->where('date', '>=', $date and 'todate', '<=', $date)
+            ->where('time', '>=', $time and 'totime', '<=', $time)
+            ->get();
+        foreach ($dss4 as $ds4) {
+            if (!empty($ds4)) {
+                if ($date >= $ds4->todate and $time >= $ds4->totime) {
+                    PMMachine::find($ds4->id)->update([
+                        'status' => 1,
+                    ]);
+                }
             }
         }
+
     }
 
     public function device5($date, $time)
     {
-        $ds5 = PMMachine::where('device_id', 5)
+        $dss5 = PMMachine::where('device_id', 5)
             ->whereNull('status')
-            ->where('date', '<=', $date)
-            ->where('time', '<=', $time)
-            ->first();
-        if (!empty($ds5)) {
-            if ($date >= $ds5->todate and $time >= $ds5->totime) {
-                PMMachine::find($ds5->id)->update([
-                    'status' => 1,
-                ]);
+            ->where('date', '>=', $date and 'todate', '<=', $date)
+            ->where('time', '>=', $time and 'totime', '<=', $time)
+            ->get();
+        foreach ($dss5 as $ds5) {
+            if (!empty($ds5)) {
+                if ($date >= $ds5->todate and $time >= $ds5->totime) {
+                    PMMachine::find($ds5->id)->update([
+                        'status' => 1,
+                    ]);
+                }
             }
         }
+
     }
 
     public function device6($date, $time)
     {
-        $ds6 = PMMachine::where('device_id', 6)
+        $dss6 = PMMachine::where('device_id', 6)
             ->whereNull('status')
-            ->where('date', '<=', $date)
-            ->where('time', '<=', $time)
-            ->first();
-        if (!empty($ds6)) {
-            if ($date >= $ds6->todate and $time >= $ds6->totime) {
-                PMMachine::find($ds6->id)->update([
-                    'status' => 1,
-                ]);
+            ->where('date', '>=', $date and 'todate', '<=', $date)
+            ->where('time', '>=', $time and 'totime', '<=', $time)
+            ->get();
+        foreach ($dss6 as $ds6) {
+            if (!empty($ds6)) {
+                if ($date >= $ds6->todate and $time >= $ds6->totime) {
+                    PMMachine::find($ds6->id)->update([
+                        'status' => 1,
+                    ]);
+                }
             }
         }
+
     }
 
     public function device7($date, $time)
     {
-        $ds7 = PMMachine::where('device_id', 7)
+        $dss7 = PMMachine::where('device_id', 7)
             ->whereNull('status')
-            ->where('date', '<=', $date)
-            ->where('time', '<=', $time)
-            ->first();
-        if (!empty($ds7)) {
-            if ($date >= $ds7->todate and $time >= $ds7->totime) {
-                PMMachine::find($ds7->id)->update([
-                    'status' => 1,
-                ]);
+            ->where('date', '>=', $date and 'todate', '<=', $date)
+            ->where('time', '>=', $time and 'totime', '<=', $time)
+            ->get();
+        foreach ($dss7 as $ds7) {
+            if (!empty($ds7)) {
+                if ($date >= $ds7->todate and $time >= $ds7->totime) {
+                    PMMachine::find($ds7->id)->update([
+                        'status' => 1,
+                    ]);
+                }
             }
         }
+
     }
 
     public function device8($date, $time)
     {
-        $ds8 = PMMachine::where('device_id', 8)
+        $dss8 = PMMachine::where('device_id', 8)
             ->whereNull('status')
-            ->where('date', '<=', $date)
-            ->where('time', '<=', $time)
-            ->first();
-        if (!empty($ds8)) {
-            if ($date >= $ds8->todate and $time >= $ds8->totime) {
-                PMMachine::find($ds8->id)->update([
-                    'status' => 1,
-                ]);
+            ->where('date', '>=', $date and 'todate', '<=', $date)
+            ->where('time', '>=', $time and 'totime', '<=', $time)
+            ->get();
+        foreach ($dss8 as $ds8) {
+            if (!empty($ds8)) {
+                if ($date >= $ds8->todate and $time >= $ds8->totime) {
+                    PMMachine::find($ds8->id)->update([
+                        'status' => 1,
+                    ]);
+                }
             }
         }
+
     }
 
     public function device9($date, $time)
     {
-        $ds9 = PMMachine::where('device_id', 9)
+        $dss9 = PMMachine::where('device_id', 9)
             ->whereNull('status')
-            ->where('date', '<=', $date)
-            ->where('time', '<=', $time)
-            ->first();
-        if (!empty($ds9)) {
-            if ($date >= $ds9->todate and $time >= $ds9->totime) {
-                PMMachine::find($ds9->id)->update([
-                    'status' => 1,
-                ]);
+            ->where('date', '>=', $date and 'todate', '<=', $date)
+            ->where('time', '>=', $time and 'totime', '<=', $time)
+            ->get();
+        foreach ($dss9 as $ds9) {
+            if (!empty($ds9)) {
+                if ($date >= $ds9->todate and $time >= $ds9->totime) {
+                    PMMachine::find($ds9->id)->update([
+                        'status' => 1,
+                    ]);
+                }
             }
         }
+
     }
 
     public function device10($date, $time)
     {
-        $ds10 = PMMachine::where('device_id', 10)
+        $dss10 = PMMachine::where('device_id', 10)
             ->whereNull('status')
-            ->where('date', '<=', $date)
-            ->where('time', '<=', $time)
-            ->first();
-        if (!empty($ds10)) {
-            if ($date >= $ds10->todate and $time >= $ds10->totime) {
-                PMMachine::find($ds10->id)->update([
-                    'status' => 1,
-                ]);
+            ->where('date', '>=', $date and 'todate', '<=', $date)
+            ->where('time', '>=', $time and 'totime', '<=', $time)
+            ->get();
+        foreach ($dss10 as $ds10) {
+            if (!empty($ds10)) {
+                if ($date >= $ds10->todate and $time >= $ds10->totime) {
+                    PMMachine::find($ds10->id)->update([
+                        'status' => 1,
+                    ]);
+                }
             }
         }
+
     }
 
 

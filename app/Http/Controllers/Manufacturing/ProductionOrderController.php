@@ -151,8 +151,7 @@ class ProductionOrderController extends Controller
 
     }
 
-    public
-    function actions($row)
+    public function actions($row)
     {
 
         $btn = '<a href="' . route('admin.productionorder.edit', $row->id) . '">

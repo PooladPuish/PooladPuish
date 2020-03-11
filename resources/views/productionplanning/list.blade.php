@@ -67,7 +67,8 @@
                                     @if($Status_Device1 == 'true')
                                         <div class="col-md-4">
                                             <label>{{$Name_Device1->name}}</label>
-                                            <a href="#">
+                                            <a href="javascript:void(0)" id="device1"
+                                            >
                                                 <img class="shake" title="فعال"
                                                      src="{{asset('/public/icon/BT-order.png')}}"
                                                      width="100">
@@ -88,7 +89,7 @@
                                     @if($Status_Device2 == 'true')
                                         <div class="col-md-4">
                                             <label>{{$Name_Device2->name}}</label>
-                                            <a href="#">
+                                            <a href="javascript:void(0)" id="device2">
                                                 <img class="shake" title="فعال"
                                                      src="{{asset('/public/icon/BT-order.png')}}"
                                                      width="100">
@@ -109,7 +110,7 @@
                                     @if($Status_Device3 == 'true')
                                         <div class="col-md-4">
                                             <label>{{$Name_Device3->name}}</label>
-                                            <a href="#">
+                                            <a href="javascript:void(0)" id="device3">
                                                 <img class="shake" title="فعال"
                                                      src="{{asset('/public/icon/BT-order.png')}}"
                                                      width="100">
@@ -132,7 +133,7 @@
                                         <div class="col-md-4">
                                             <br/>
                                             <label>{{$Name_Device4->name}}</label>
-                                            <a href="#">
+                                            <a href="javascript:void(0)" id="device4">
                                                 <img class="shake" title="فعال"
                                                      src="{{asset('/public/icon/BT-order.png')}}"
                                                      width="100">
@@ -153,8 +154,8 @@
                                     @if($Status_Device5 == 'true')
                                         <div class="col-md-4">
                                             <label>{{$Name_Device5->name}}</label>
-                                            <a href="#">
-                                                <img class="shake" title="فعال"
+                                            <a href="javascript:void(0)" id="device5">
+                                            <img class="shake" title="فعال"
                                                      src="{{asset('/public/icon/BT-order.png')}}"
                                                      width="100">
                                             </a>

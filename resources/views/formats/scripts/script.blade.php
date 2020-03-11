@@ -26,6 +26,7 @@
                 {data: 'code', name: 'code'},
                 {data: 'name', name: 'name'},
                 {data: 'models', name: 'models'},
+                {data: 'time', name: 'time'},
                 {data: 'quetta', name: 'quetta'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]
@@ -46,6 +47,7 @@
                 $('#quetta').val(data.quetta);
                 $('#name').val(data.name);
                 $('#code').val(data.code);
+                $('#time').val(data.time);
             })
         });
         $('#saveBtn').click(function (e) {

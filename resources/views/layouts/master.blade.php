@@ -406,6 +406,9 @@
                                                     class="fa fa-circle-o"></i>تعریف دستگاه</a>
                                         </li>
                                     @endcan
+                                        <li><a href="{{route('admin.colorscrap.list')}}"><i
+                                                    class="fa fa-circle-o"></i>ضایعات رنگ</a>
+                                        </li>
                                 </ul>
                             </li>
 
@@ -456,6 +459,10 @@
                         <li><a href="{{route('admin.barnproduct.list')}}"><i
                                     class="fa fa-circle-o"></i>انبار کالاهای ساخته شده</a>
                         </li>
+                        <li><a href="{{route('admin.barntemporary.list')}}"><i
+                                    class="fa fa-circle-o"></i>انبار موقت</a>
+                        </li>
+
                     </ul>
                 </li>
 
@@ -487,6 +494,7 @@
                                 <li><a href="{{route('admin.eventsformat.list')}}"><i
                                             class="fa fa-circle-o"></i>اتفاقات قالب</a>
                                 </li>
+
                             </ul>
                         </li>
 
@@ -519,6 +527,10 @@
                         <li><a href="{{route('admin.productionorder.list')}}"><i
                                     class="fa fa-circle-o"></i>سفارش تولید</a>
                         </li>
+                        <li><a href="{{route('admin.viewproduct.list')}}"><i
+                                    class="fa fa-circle-o"></i>برنامه ریزی تولید</a>
+                        </li>
+
                     </ul>
                 </li>
 

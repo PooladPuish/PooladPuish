@@ -50,4 +50,22 @@ class Product extends Model
     {
         return $this->hasMany(ModelProduct::class);
     }
+
+    public function barntemporary()
+    {
+        return $this->hasMany(BarnTemporary::class);
+
+    }
+
+    public function barnproduct()
+    {
+        return $this->hasMany(BarnsProduct::class);
+
+    }
+
+    public function color()
+    {
+        return $this->hasMany(Color::class);
+
+    }
 }

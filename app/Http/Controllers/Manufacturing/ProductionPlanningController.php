@@ -2,20 +2,35 @@
 
 namespace App\Http\Controllers\Manufacturing;
 
+use App\Color;
 use App\Device;
+use App\DeviceOrders;
 use App\EventsFormat;
 use App\EventsMachine;
+use App\Format;
 use App\Http\Controllers\Controller;
+use App\Insert;
 use App\PMMachine;
+use App\Product;
+use App\ProductionOrder;
 use Carbon\Carbon;
+use Carbon\CarbonInterval;
 use DB;
+use Faker\Provider\DateTime;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use Mockery\Exception;
 use Morilog\Jalali\Jalalian;
+use Yajra\DataTables\DataTables;
 
 class ProductionPlanningController extends Controller
 {
+    private $count1;
+    private $count2;
+    private $count3;
+    private $count4;
+    private $count5;
+
     public function list()
     {
 
@@ -39,25 +54,19 @@ class ProductionPlanningController extends Controller
             ->where('date', '<=', $date)
             ->first();
         $Name_Device1 = Device::where('id', 1)->first();
-        $device = EventsMachine::where('device_id', 1)
-            ->latest('id')->first();
+
 
         $pm_device2 = PMMachine::where('device_id', 2)
             ->whereNull('status')
             ->where('date', '<=', $date)
             ->first();
         $Name_Device2 = Device::where('id', 2)->first();
-        $device1 = EventsMachine::where('device_id', 2)
-            ->latest('id')->first();
-
 
         $pm_device3 = PMMachine::where('device_id', 3)
             ->whereNull('status')
             ->where('date', '<=', $date)
             ->first();
         $Name_Device3 = Device::where('id', 3)->first();
-        $device2 = EventsMachine::where('device_id', 3)
-            ->latest('id')->first();
 
 
         $pm_device4 = PMMachine::where('device_id', 4)
@@ -65,42 +74,30 @@ class ProductionPlanningController extends Controller
             ->where('date', '<=', $date)
             ->first();
         $Name_Device4 = Device::where('id', 4)->first();
-        $device4 = EventsMachine::where('device_id', 4)
-            ->latest('id')->first();
 
         $pm_device5 = PMMachine::where('device_id', 5)
             ->whereNull('status')
             ->where('date', '<=', $date)
             ->first();
         $Name_Device5 = Device::where('id', 5)->first();
-        $device5 = EventsMachine::where('device_id', 5)
-            ->latest('id')->first();
-
 
         $pm_device6 = PMMachine::where('device_id', 6)
             ->whereNull('status')
             ->where('date', '<=', $date)
             ->first();
         $Name_Device6 = Device::where('id', 6)->first();
-        $device6 = EventsMachine::where('device_id', 6)
-            ->latest('id')->first();
-
 
         $pm_device7 = PMMachine::where('device_id', 7)
             ->whereNull('status')
             ->where('date', '<=', $date)
             ->first();
         $Name_Device7 = Device::where('id', 7)->first();
-        $device7 = EventsMachine::where('device_id', 7)
-            ->latest('id')->first();
 
         $pm_device8 = PMMachine::where('device_id', 8)
             ->whereNull('status')
             ->where('date', '<=', $date)
             ->first();
         $Name_Device8 = Device::where('id', 8)->first();
-        $device8 = EventsMachine::where('device_id', 8)
-            ->latest('id')->first();
 
         $pm_device9 = PMMachine::where('device_id', 9)
             ->whereNull('status')
@@ -108,60 +105,29 @@ class ProductionPlanningController extends Controller
             ->first();
 
         $Name_Device9 = Device::where('id', 9)->first();
-        $device9 = EventsMachine::where('device_id', 9)
-            ->latest('id')->first();
 
         $pm_device10 = PMMachine::where('device_id', 10)
             ->whereNull('status')
             ->where('date', '<=', $date)
             ->first();
         $Name_Device10 = Device::where('id', 10)->first();
-        $device10 = EventsMachine::where('device_id', 10)
-            ->latest('id')->first();
 
 
         if (!empty($Name_Device1)) {
-            if (empty($pm_device1) and empty($device)) {
+            if (empty($pm_device1)) {
                 $Status_Device1 = 'true';
             } else {
                 if (!empty($pm_device1)) {
                     if ($date >= $pm_device1->date and $date <= $pm_device1->todate
                         and $time >= $pm_device1->time) {
-                        if (!empty($device)) {
-                            if ($device->status == 1) {
-                                $Status_Device1 = 'true';
-                            } else {
-                                $Status_Device1 = 'false';
-                            }
-                        } else {
-                            $Status_Device1 = 'false';
-                        }
-                    } else {
-                        if (!empty($device)) {
-                            if ($device->status == 1) {
-                                $Status_Device1 = 'true';
-                            } else {
-                                $Status_Device1 = 'false';
-                            }
-                        } else {
-                            $Status_Device1 = 'true';
-                        }
-                    }
-                } else {
-                    if (!empty($device)) {
-                        if ($device->status == 1) {
-                            $Status_Device1 = 'true';
-                        } else {
-                            $Status_Device1 = 'false';
-                        }
+                        $Status_Device1 = 'false';
                     } else {
                         $Status_Device1 = 'true';
                     }
+                } else {
+                    $Status_Device1 = 'true';
                 }
-
-
             }
-
         } else {
             $Name_Device1 = null;
             $Status_Device1 = null;
@@ -169,88 +135,39 @@ class ProductionPlanningController extends Controller
         }
 
         if (!empty($Name_Device2)) {
-            if (empty($pm_device2) and empty($device1)) {
+            if (empty($pm_device2)) {
                 $Status_Device2 = 'true';
             } else {
                 if (!empty($pm_device2)) {
                     if ($date >= $pm_device2->date and $date <= $pm_device2->todate
                         and $time >= $pm_device2->time) {
-                        if (!empty($device1)) {
-                            if ($device1->status == 1) {
-                                $Status_Device2 = 'true';
-                            } else {
-                                $Status_Device2 = 'false';
-                            }
-                        } else {
-                            $Status_Device2 = 'false';
-                        }
+                        $Status_Device2 = 'false';
                     } else {
-                        if (!empty($device1)) {
-                            if ($device1->status == 1) {
-                                $Status_Device2 = 'true';
-                            } else {
-                                $Status_Device2 = 'false';
-                            }
-                        } else {
-                            $Status_Device2 = 'true';
-                        }
+                        $Status_Device2 = 'true';
                     }
                 } else {
-                    if (!empty($device1)) {
-                        if ($device1->status == 1) {
-                            $Status_Device2 = 'true';
-                        } else {
-                            $Status_Device2 = 'false';
-                        }
-                    }
+                    $Status_Device2 = 'true';
                 }
-
-
             }
-
         } else {
             $Name_Device2 = null;
             $Status_Device2 = null;
         }
 
         if (!empty($Name_Device3)) {
-            if (empty($pm_device3) and empty($device2)) {
+            if (empty($pm_device3)) {
                 $Status_Device3 = 'true';
             } else {
                 if (!empty($pm_device3)) {
                     if ($date >= $pm_device3->date and $date <= $pm_device3->todate
                         and $time >= $pm_device3->time) {
-                        if (!empty($device2)) {
-                            if ($device2->status == 1) {
-                                $Status_Device3 = 'true';
-                            } else {
-                                $Status_Device3 = 'false';
-                            }
-                        } else {
-                            $Status_Device3 = 'false';
-                        }
+                        $Status_Device3 = 'false';
                     } else {
-                        if (!empty($device2)) {
-                            if ($device2->status == 1) {
-                                $Status_Device3 = 'true';
-                            } else {
-                                $Status_Device3 = 'false';
-                            }
-                        } else {
-                            $Status_Device3 = 'true';
-                        }
+                        $Status_Device3 = 'true';
                     }
                 } else {
-                    if (!empty($device2)) {
-                        if ($device2->status == 1) {
-                            $Status_Device3 = 'true';
-                        } else {
-                            $Status_Device3 = 'false';
-                        }
-                    }
+                    $Status_Device3 = 'true';
                 }
-
-
             }
         } else {
             $Name_Device3 = null;
@@ -258,133 +175,59 @@ class ProductionPlanningController extends Controller
         }
 
         if (!empty($Name_Device4)) {
-            if (empty($pm_device4) and empty($device4)) {
+            if (empty($pm_device4)) {
                 $Status_Device4 = 'true';
             } else {
                 if (!empty($pm_device4)) {
                     if ($date >= $pm_device4->date and $date <= $pm_device4->todate
                         and $time >= $pm_device4->time) {
-                        if (!empty($device4)) {
-                            if ($device4->status == 1) {
-                                $Status_Device4 = 'true';
-                            } else {
-                                $Status_Device4 = 'false';
-                            }
-                        } else {
-                            $Status_Device4 = 'false';
-                        }
+                        $Status_Device4 = 'false';
                     } else {
-                        if (!empty($device4)) {
-                            if ($device4->status == 1) {
-                                $Status_Device4 = 'true';
-                            } else {
-                                $Status_Device4 = 'false';
-                            }
-                        } else {
-                            $Status_Device4 = 'true';
-                        }
+                        $Status_Device4 = 'true';
                     }
                 } else {
-                    if (!empty($device4)) {
-                        if ($device4->status == 1) {
-                            $Status_Device4 = 'true';
-                        } else {
-                            $Status_Device4 = 'false';
-                        }
-                    }
+                    $Status_Device4 = 'true';
                 }
-
-
             }
         } else {
-
             $Status_Device4 = null;
             $Name_Device4 = null;
         }
 
         if (!empty($Name_Device5)) {
-            if (empty($pm_device5) and empty($device5)) {
+            if (empty($pm_device5)) {
                 $Status_Device5 = 'true';
             } else {
                 if (!empty($pm_device5)) {
                     if ($date >= $pm_device5->date and $date <= $pm_device5->todate
                         and $time >= $pm_device5->time) {
-                        if (!empty($device5)) {
-                            if ($device5->status == 1) {
-                                $Status_Device5 = 'true';
-                            } else {
-                                $Status_Device5 = 'false';
-                            }
-                        } else {
-                            $Status_Device5 = 'false';
-                        }
+                        $Status_Device5 = 'false';
                     } else {
-                        if (!empty($device5)) {
-                            if ($device5->status == 1) {
-                                $Status_Device5 = 'true';
-                            } else {
-                                $Status_Device5 = 'false';
-                            }
-                        } else {
-                            $Status_Device5 = 'true';
-                        }
+                        $Status_Device5 = 'true';
                     }
                 } else {
-                    if (!empty($device5)) {
-                        if ($device5->status == 1) {
-                            $Status_Device5 = 'true';
-                        } else {
-                            $Status_Device5 = 'false';
-                        }
-                    }
+                    $Status_Device5 = 'true';
                 }
-
-
             }
         } else {
-
             $Status_Device5 = null;
             $Name_Device5 = null;
         }
 
         if (!empty($Name_Device6)) {
-            if (empty($pm_device6) and empty($device6)) {
+            if (empty($pm_device6)) {
                 $Status_Device6 = 'true';
             } else {
                 if (!empty($pm_device6)) {
                     if ($date >= $pm_device6->date and $date <= $pm_device6->todate
                         and $time >= $pm_device6->time) {
-                        if (!empty($device6)) {
-                            if ($device6->status == 1) {
-                                $Status_Device6 = 'true';
-                            } else {
-                                $Status_Device6 = 'false';
-                            }
-                        } else {
-                            $Status_Device6 = 'false';
-                        }
+                        $Status_Device6 = 'false';
                     } else {
-                        if (!empty($device6)) {
-                            if ($device6->status == 1) {
-                                $Status_Device6 = 'true';
-                            } else {
-                                $Status_Device6 = 'false';
-                            }
-                        } else {
-                            $Status_Device6 = 'true';
-                        }
+                        $Status_Device6 = 'true';
                     }
                 } else {
-                    if (!empty($device6)) {
-                        if ($device6->status == 1) {
-                            $Status_Device6 = 'true';
-                        } else {
-                            $Status_Device6 = 'false';
-                        }
-                    }
+                    $Status_Device6 = 'true';
                 }
-
-
             }
         } else {
 
@@ -393,88 +236,39 @@ class ProductionPlanningController extends Controller
         }
 
         if (!empty($Name_Device7)) {
-            if (empty($pm_device7) and empty($device7)) {
+            if (empty($pm_device7)) {
                 $Status_Device7 = 'true';
             } else {
                 if (!empty($pm_device7)) {
                     if ($date >= $pm_device7->date and $date <= $pm_device7->todate
                         and $time >= $pm_device7->time) {
-                        if (!empty($device7)) {
-                            if ($device7->status == 1) {
-                                $Status_Device7 = 'true';
-                            } else {
-                                $Status_Device7 = 'false';
-                            }
-                        } else {
-                            $Status_Device7 = 'false';
-                        }
+                        $Status_Device7 = 'false';
                     } else {
-                        if (!empty($device7)) {
-                            if ($device7->status == 1) {
-                                $Status_Device7 = 'true';
-                            } else {
-                                $Status_Device7 = 'false';
-                            }
-                        } else {
-                            $Status_Device7 = 'true';
-                        }
+                        $Status_Device7 = 'true';
                     }
                 } else {
-                    if (!empty($device7)) {
-                        if ($device7->status == 1) {
-                            $Status_Device7 = 'true';
-                        } else {
-                            $Status_Device7 = 'false';
-                        }
-                    }
+                    $Status_Device7 = 'true';
                 }
-
-
             }
         } else {
-
             $Status_Device7 = null;
             $Name_Device7 = null;
         }
 
         if (!empty($Name_Device8)) {
-            if (empty($pm_device8) and empty($device8)) {
+            if (empty($pm_device8)) {
                 $Status_Device8 = 'true';
             } else {
                 if (!empty($pm_device8)) {
                     if ($date >= $pm_device8->date and $date <= $pm_device8->todate
                         and $time >= $pm_device8->time) {
-                        if (!empty($device8)) {
-                            if ($device8->status == 1) {
-                                $Status_Device8 = 'true';
-                            } else {
-                                $Status_Device8 = 'false';
-                            }
-                        } else {
-                            $Status_Device8 = 'false';
-                        }
+                        $Status_Device8 = 'false';
                     } else {
-                        if (!empty($device8)) {
-                            if ($device8->status == 1) {
-                                $Status_Device8 = 'true';
-                            } else {
-                                $Status_Device8 = 'false';
-                            }
-                        } else {
-                            $Status_Device8 = 'true';
-                        }
+                        $Status_Device8 = 'true';
                     }
                 } else {
-                    if (!empty($device8)) {
-                        if ($device8->status == 1) {
-                            $Status_Device8 = 'true';
-                        } else {
-                            $Status_Device8 = 'false';
-                        }
-                    }
+                    $Status_Device8 = 'true';
                 }
-
-
             }
         } else {
 
@@ -483,88 +277,39 @@ class ProductionPlanningController extends Controller
         }
 
         if (!empty($Name_Device9)) {
-            if (empty($pm_device9) and empty($device9)) {
+            if (empty($pm_device9)) {
                 $Status_Device9 = 'true';
             } else {
                 if (!empty($pm_device9)) {
                     if ($date >= $pm_device9->date and $date <= $pm_device9->todate
                         and $time >= $pm_device9->time) {
-                        if (!empty($device9)) {
-                            if ($device9->status == 1) {
-                                $Status_Device9 = 'true';
-                            } else {
-                                $Status_Device9 = 'false';
-                            }
-                        } else {
-                            $Status_Device9 = 'false';
-                        }
+                        $Status_Device9 = 'false';
                     } else {
-                        if (!empty($device9)) {
-                            if ($device9->status == 1) {
-                                $Status_Device9 = 'true';
-                            } else {
-                                $Status_Device9 = 'false';
-                            }
-                        } else {
-                            $Status_Device9 = 'true';
-                        }
+                        $Status_Device9 = 'true';
                     }
                 } else {
-                    if (!empty($device9)) {
-                        if ($device9->status == 1) {
-                            $Status_Device9 = 'true';
-                        } else {
-                            $Status_Device9 = 'false';
-                        }
-                    }
+                    $Status_Device9 = 'true';
                 }
-
-
             }
         } else {
-
             $Status_Device9 = null;
             $Name_Device9 = null;
         }
 
         if (!empty($Name_Device10)) {
-            if (empty($pm_device10) and empty($device10)) {
+            if (empty($pm_device10)) {
                 $Status_Device10 = 'true';
             } else {
                 if (!empty($pm_device10)) {
                     if ($date >= $pm_device10->date and $date <= $pm_device10->todate
                         and $time >= $pm_device10->time) {
-                        if (!empty($device10)) {
-                            if ($device10->status == 1) {
-                                $Status_Device10 = 'true';
-                            } else {
-                                $Status_Device10 = 'false';
-                            }
-                        } else {
-                            $Status_Device10 = 'false';
-                        }
+                        $Status_Device10 = 'false';
                     } else {
-                        if (!empty($device10)) {
-                            if ($device10->status == 1) {
-                                $Status_Device10 = 'true';
-                            } else {
-                                $Status_Device10 = 'false';
-                            }
-                        } else {
-                            $Status_Device10 = 'true';
-                        }
+                        $Status_Device10 = 'true';
                     }
                 } else {
-                    if (!empty($device10)) {
-                        if ($device10->status == 1) {
-                            $Status_Device10 = 'true';
-                        } else {
-                            $Status_Device10 = 'false';
-                        }
-                    }
+                    $Status_Device10 = 'true';
                 }
-
-
             }
         } else {
 
@@ -578,11 +323,13 @@ class ProductionPlanningController extends Controller
                 , 'Status_Device2', 'Name_Device2'
                 , 'Status_Device3', 'Name_Device3'
                 , 'Status_Device4', 'Name_Device4'
-                , 'Status_Device5', 'Name_Device5'));
-
-
+                , 'Status_Device5', 'Name_Device5'
+                , 'Status_Device6', 'Name_Device6'
+                , 'Status_Device7', 'Name_Device7'
+                , 'Status_Device8', 'Name_Device8'
+                , 'Status_Device9', 'Name_Device9'
+                , 'Status_Device10', 'Name_Device10'));
     }
-
 
     public function device1($date, $time)
     {
@@ -774,5 +521,1275 @@ class ProductionPlanningController extends Controller
 
     }
 
+
+    public function deviceproduct1(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = ProductionOrder::orderBy('id', 'desc')
+                ->where('status', 0)
+                ->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('product_id', function ($row) {
+                    return $row->product->label;
+                })
+                ->addColumn('addTOdevice1', function ($row) {
+                    return $this->addTOdevice1($row);
+                })
+                ->addColumn('color_id', function ($row) {
+                    $name = '<span>' . $row->color->manufacturer . ' - ' . $row->color->name . '</span>';
+                    return $name;
+                })
+                ->addColumn('created_at', function ($row) {
+                    return Jalalian::forge($row->created_at)->format('Y/m/d');
+                })
+                ->rawColumns(['addTOdevice1', 'color_id'])
+                ->make(true);
+        }
+        return view('ProductionOrder.list');
+    }
+
+    public function Ldevice1(Request $request)
+    {
+
+
+        if ($request->ajax()) {
+            $data = DeviceOrders::where('device_id', 1)
+                ->orderBy('Order', 'ASC')->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('product', function ($row) {
+                    $product = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    $name = Product::where('id', $product->product_id)->first();
+                    return $name->label;
+                })
+                ->addColumn('deleteINdevice1', function ($row) {
+                    return $this->deleteINdevice1($row);
+                })
+                ->addColumn('color', function ($row) {
+                    $color = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    $name = Color::where('id', $color->color_id)->first();
+                    return $name->manufacturer . ' - ' . $name->name;
+                })
+                ->addColumn('number', function ($row) {
+                    $number = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    return $number->number;
+                })
+                ->addColumn('format', function ($row) {
+                    $product_id = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    $format = DB::table('model_products')
+                        ->where('product_id', $product_id->product_id)
+                        ->first();
+                    $name = Format::where('id', $format->format_id)->first();
+                    return $name->name;
+                })
+                ->addColumn('insert', function ($row) {
+                    $product_id = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    $format = DB::table('model_products')
+                        ->where('product_id', $product_id->product_id)
+                        ->first();
+                    $name = Insert::where('id', $format->insert_id)->first();
+                    if (!empty($name)) {
+                        return $name->name;
+                    } else {
+                        return '---';
+                    }
+                })
+                ->addColumn('cycletime', function ($row) {
+                    $product_id = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    $format = DB::table('model_products')
+                        ->where('product_id', $product_id->product_id)
+                        ->first();
+                    return $format->cycletime;
+                })
+                ->addColumn('size', function ($row) {
+                    $product_id = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    $format = DB::table('model_products')
+                        ->where('product_id', $product_id->product_id)
+                        ->first();
+                    return $format->size;
+                })
+                ->addColumn('productiontime', function ($row) {
+                    $days = intval(intval($row->productiontime) / (3600 * 24));
+                    $h = intval($row->productiontime % (24 * 3600));
+                    $hour = intval($h / 3600);
+                    $m = intval($h % 3600);
+                    $minutes = intval($m / 60);
+                    $seconds = intval($m % 60);
+                    if ($row->productiontime >= 86400) {
+                        return $days . ' روز ' . $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+                    } elseif ($row->productiontime >= 3600) {
+                        return $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+                    } else {
+                        return $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+                    }
+
+                })
+                ->addColumn('remainingtime', function ($row) {
+                    $days = intval(intval($row->productiontime) / (3600 * 24));
+                    $h = intval($row->productiontime % (24 * 3600));
+                    $hour = intval($h / 3600);
+                    $m = intval($h % 3600);
+                    $minutes = intval($m / 60);
+                    $seconds = intval($m % 60);
+                    if ($row->productiontime >= 86400) {
+                        return $days . ' روز ' . $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+                    } elseif ($row->productiontime >= 3600) {
+                        return $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+                    } else {
+                        return $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+                    }
+
+                })
+                ->addColumn('productionqueue', function ($row) {
+                    return $this->productionqueue1($row);
+
+                })
+                ->addColumn('numberproduced', function ($row) {
+                    return 0;
+
+                })
+                ->addColumn('Productionbalance', function ($row) {
+                    $number = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    return $number->number;
+                })
+                ->rawColumns(['deleteINdevice1'])
+                ->make(true);
+        }
+        return view('productionplanning.list');
+    }
+
+    public function AddDevice1($id)
+    {
+
+        $product_id = ProductionOrder::where('id', $id)
+            ->first();
+        $format = DB::table('model_products')
+            ->where('product_id', $product_id->product_id)
+            ->first();
+        $name = Format::where('id', $format->format_id)->first();
+        $number = ProductionOrder::where('id', $id)
+            ->first();
+        $t = $number->number / $name->quetta;
+        $v = $t * $format->cycletime;
+        ProductionOrder::find($id)->update([
+            'status' => 1,
+        ]);
+        $device = DeviceOrders::create([
+            'device_id' => 1,
+            'order_id' => $id,
+            'productiontime' => $v,
+        ]);
+        DeviceOrders::find($device->id)->update([
+            'Order' => $device->id,
+        ]);
+
+        return response()->json();
+    }
+
+    public function DeleteDevice1($id)
+    {
+
+        $update = DeviceOrders::where('id', $id)
+            ->first();
+        ProductionOrder::find($update->order_id)->update([
+            'status' => 0,
+        ]);
+        DeviceOrders::where('id', $id)
+            ->delete();
+        return response()->json();
+    }
+
+    public function SortDevice1(Request $request)
+    {
+        foreach ($request->input('rows', []) as $row) {
+            $data = DeviceOrders::find($row['id'])->update([
+                'Order' => $row['position']
+            ]);
+        }
+
+        return response()->json($data);
+    }
+
+    public function deviceproduct2(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = ProductionOrder::orderBy('id', 'desc')
+                ->where('status', 0)
+                ->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('product_id', function ($row) {
+                    return $row->product->label;
+                })
+                ->addColumn('addTOdevice2', function ($row) {
+                    return $this->addTOdevice2($row);
+                })
+                ->addColumn('color_id', function ($row) {
+                    $name = '<span>' . $row->color->manufacturer . ' - ' . $row->color->name . '</span>';
+                    return $name;
+                })
+                ->addColumn('created_at', function ($row) {
+                    return Jalalian::forge($row->created_at)->format('Y/m/d');
+                })
+                ->rawColumns(['addTOdevice2', 'color_id'])
+                ->make(true);
+        }
+        return view('ProductionOrder.list');
+    }
+
+    public function Ldevice2(Request $request)
+    {
+
+
+        if ($request->ajax()) {
+            $data = DeviceOrders::where('device_id', 2)
+                ->orderBy('Order', 'ASC')->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('product', function ($row) {
+                    $product = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    $name = Product::where('id', $product->product_id)->first();
+                    return $name->label;
+                })
+                ->addColumn('deleteINdevice2', function ($row) {
+                    return $this->deleteINdevice2($row);
+                })
+                ->addColumn('color', function ($row) {
+                    $color = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    $name = Color::where('id', $color->color_id)->first();
+                    return $name->manufacturer . ' - ' . $name->name;
+                })
+                ->addColumn('number', function ($row) {
+                    $number = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    return $number->number;
+                })
+                ->addColumn('format', function ($row) {
+                    $product_id = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    $format = DB::table('model_products')
+                        ->where('product_id', $product_id->product_id)
+                        ->first();
+                    $name = Format::where('id', $format->format_id)->first();
+                    return $name->name;
+                })
+                ->addColumn('insert', function ($row) {
+                    $product_id = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    $format = DB::table('model_products')
+                        ->where('product_id', $product_id->product_id)
+                        ->first();
+                    $name = Insert::where('id', $format->insert_id)->first();
+                    if (!empty($name)) {
+                        return $name->name;
+                    } else {
+                        return '---';
+                    }
+                })
+                ->addColumn('cycletime', function ($row) {
+                    $product_id = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    $format = DB::table('model_products')
+                        ->where('product_id', $product_id->product_id)
+                        ->first();
+                    return $format->cycletime;
+                })
+                ->addColumn('size', function ($row) {
+                    $product_id = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    $format = DB::table('model_products')
+                        ->where('product_id', $product_id->product_id)
+                        ->first();
+                    return $format->size;
+                })
+                ->addColumn('productiontime', function ($row) {
+                    $days = intval(intval($row->productiontime) / (3600 * 24));
+                    $h = intval($row->productiontime % (24 * 3600));
+                    $hour = intval($h / 3600);
+                    $m = intval($h % 3600);
+                    $minutes = intval($m / 60);
+                    $seconds = intval($m % 60);
+                    if ($row->productiontime >= 86400) {
+                        return $days . ' روز ' . $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+                    } elseif ($row->productiontime >= 3600) {
+                        return $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+                    } else {
+                        return $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+                    }
+
+                })
+                ->addColumn('remainingtime', function ($row) {
+                    $days = intval(intval($row->productiontime) / (3600 * 24));
+                    $h = intval($row->productiontime % (24 * 3600));
+                    $hour = intval($h / 3600);
+                    $m = intval($h % 3600);
+                    $minutes = intval($m / 60);
+                    $seconds = intval($m % 60);
+                    if ($row->productiontime >= 86400) {
+                        return $days . ' روز ' . $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+                    } elseif ($row->productiontime >= 3600) {
+                        return $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+                    } else {
+                        return $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+                    }
+
+                })
+                ->addColumn('productionqueue2', function ($row) {
+                    return $this->productionqueue2($row);
+
+                })
+                ->addColumn('numberproduced', function ($row) {
+                    return 0;
+
+                })
+                ->addColumn('Productionbalance', function ($row) {
+                    $number = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    return $number->number;
+                })
+                ->rawColumns(['deleteINdevice2'])
+                ->make(true);
+        }
+        return view('productionplanning.list');
+    }
+
+    public function AddDevice2($id)
+    {
+
+        $product_id = ProductionOrder::where('id', $id)
+            ->first();
+        $format = DB::table('model_products')
+            ->where('product_id', $product_id->product_id)
+            ->first();
+        $name = Format::where('id', $format->format_id)->first();
+        $number = ProductionOrder::where('id', $id)
+            ->first();
+        $t = $number->number / $name->quetta;
+        $v = $t * $format->cycletime;
+        ProductionOrder::find($id)->update([
+            'status' => 1,
+        ]);
+        $device = DeviceOrders::create([
+            'device_id' => 2,
+            'order_id' => $id,
+            'productiontime' => $v,
+        ]);
+        DeviceOrders::find($device->id)->update([
+            'Order' => $device->id,
+        ]);
+
+        return response()->json();
+    }
+
+    public function DeleteDevice2($id)
+    {
+
+        $update = DeviceOrders::where('id', $id)
+            ->first();
+        ProductionOrder::find($update->order_id)->update([
+            'status' => 0,
+        ]);
+        DeviceOrders::where('id', $id)
+            ->delete();
+        return response()->json();
+    }
+
+    public function SortDevice2(Request $request)
+    {
+        foreach ($request->input('rows', []) as $row) {
+            $data = DeviceOrders::find($row['id'])->update([
+                'Order' => $row['position']
+            ]);
+        }
+
+        return response()->json($data);
+    }
+
+
+    public function deviceproduct3(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = ProductionOrder::orderBy('id', 'desc')
+                ->where('status', 0)
+                ->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('product_id', function ($row) {
+                    return $row->product->label;
+                })
+                ->addColumn('addTOdevice3', function ($row) {
+                    return $this->addTOdevice3($row);
+                })
+                ->addColumn('color_id', function ($row) {
+                    $name = '<span>' . $row->color->manufacturer . ' - ' . $row->color->name . '</span>';
+                    return $name;
+                })
+                ->addColumn('created_at', function ($row) {
+                    return Jalalian::forge($row->created_at)->format('Y/m/d');
+                })
+                ->rawColumns(['addTOdevice3', 'color_id'])
+                ->make(true);
+        }
+        return view('ProductionOrder.list');
+    }
+
+    public function Ldevice3(Request $request)
+    {
+
+
+        if ($request->ajax()) {
+            $data = DeviceOrders::where('device_id', 3)
+                ->orderBy('Order', 'ASC')->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('product', function ($row) {
+                    $product = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    $name = Product::where('id', $product->product_id)->first();
+                    return $name->label;
+                })
+                ->addColumn('deleteINdevice3', function ($row) {
+                    return $this->deleteINdevice3($row);
+                })
+                ->addColumn('color', function ($row) {
+                    $color = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    $name = Color::where('id', $color->color_id)->first();
+                    return $name->manufacturer . ' - ' . $name->name;
+                })
+                ->addColumn('number', function ($row) {
+                    $number = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    return $number->number;
+                })
+                ->addColumn('format', function ($row) {
+                    $product_id = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    $format = DB::table('model_products')
+                        ->where('product_id', $product_id->product_id)
+                        ->first();
+                    $name = Format::where('id', $format->format_id)->first();
+                    return $name->name;
+                })
+                ->addColumn('insert', function ($row) {
+                    $product_id = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    $format = DB::table('model_products')
+                        ->where('product_id', $product_id->product_id)
+                        ->first();
+                    $name = Insert::where('id', $format->insert_id)->first();
+                    if (!empty($name)) {
+                        return $name->name;
+                    } else {
+                        return '---';
+                    }
+                })
+                ->addColumn('cycletime', function ($row) {
+                    $product_id = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    $format = DB::table('model_products')
+                        ->where('product_id', $product_id->product_id)
+                        ->first();
+                    return $format->cycletime;
+                })
+                ->addColumn('size', function ($row) {
+                    $product_id = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    $format = DB::table('model_products')
+                        ->where('product_id', $product_id->product_id)
+                        ->first();
+                    return $format->size;
+                })
+                ->addColumn('productiontime', function ($row) {
+                    $days = intval(intval($row->productiontime) / (3600 * 24));
+                    $h = intval($row->productiontime % (24 * 3600));
+                    $hour = intval($h / 3600);
+                    $m = intval($h % 3600);
+                    $minutes = intval($m / 60);
+                    $seconds = intval($m % 60);
+                    if ($row->productiontime >= 86400) {
+                        return $days . ' روز ' . $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+                    } elseif ($row->productiontime >= 3600) {
+                        return $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+                    } else {
+                        return $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+                    }
+
+                })
+                ->addColumn('remainingtime', function ($row) {
+                    $days = intval(intval($row->productiontime) / (3600 * 24));
+                    $h = intval($row->productiontime % (24 * 3600));
+                    $hour = intval($h / 3600);
+                    $m = intval($h % 3600);
+                    $minutes = intval($m / 60);
+                    $seconds = intval($m % 60);
+                    if ($row->productiontime >= 86400) {
+                        return $days . ' روز ' . $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+                    } elseif ($row->productiontime >= 3600) {
+                        return $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+                    } else {
+                        return $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+                    }
+
+                })
+                ->addColumn('productionqueue3', function ($row) {
+                    return $this->productionqueue3($row);
+
+                })
+                ->addColumn('numberproduced', function ($row) {
+                    return 0;
+
+                })
+                ->addColumn('Productionbalance', function ($row) {
+                    $number = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    return $number->number;
+                })
+                ->rawColumns(['deleteINdevice3'])
+                ->make(true);
+        }
+        return view('productionplanning.list');
+    }
+
+    public function AddDevice3($id)
+    {
+
+        $product_id = ProductionOrder::where('id', $id)
+            ->first();
+        $format = DB::table('model_products')
+            ->where('product_id', $product_id->product_id)
+            ->first();
+        $name = Format::where('id', $format->format_id)->first();
+        $number = ProductionOrder::where('id', $id)
+            ->first();
+        $t = $number->number / $name->quetta;
+        $v = $t * $format->cycletime;
+        ProductionOrder::find($id)->update([
+            'status' => 1,
+        ]);
+        $device = DeviceOrders::create([
+            'device_id' => 3,
+            'order_id' => $id,
+            'productiontime' => $v,
+        ]);
+        DeviceOrders::find($device->id)->update([
+            'Order' => $device->id,
+        ]);
+
+        return response()->json();
+    }
+
+    public function DeleteDevice3($id)
+    {
+
+        $update = DeviceOrders::where('id', $id)
+            ->first();
+        ProductionOrder::find($update->order_id)->update([
+            'status' => 0,
+        ]);
+        DeviceOrders::where('id', $id)
+            ->delete();
+        return response()->json();
+    }
+
+    public function SortDevice3(Request $request)
+    {
+        foreach ($request->input('rows', []) as $row) {
+            $data = DeviceOrders::find($row['id'])->update([
+                'Order' => $row['position']
+            ]);
+        }
+
+        return response()->json($data);
+    }
+
+
+    public function deviceproduct4(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = ProductionOrder::orderBy('id', 'desc')
+                ->where('status', 0)
+                ->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('product_id', function ($row) {
+                    return $row->product->label;
+                })
+                ->addColumn('addTOdevice4', function ($row) {
+                    return $this->addTOdevice4($row);
+                })
+                ->addColumn('color_id', function ($row) {
+                    $name = '<span>' . $row->color->manufacturer . ' - ' . $row->color->name . '</span>';
+                    return $name;
+                })
+                ->addColumn('created_at', function ($row) {
+                    return Jalalian::forge($row->created_at)->format('Y/m/d');
+                })
+                ->rawColumns(['addTOdevice4', 'color_id'])
+                ->make(true);
+        }
+        return view('ProductionOrder.list');
+    }
+
+    public function Ldevice4(Request $request)
+    {
+
+
+        if ($request->ajax()) {
+            $data = DeviceOrders::where('device_id', 4)
+                ->orderBy('Order', 'ASC')->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('product', function ($row) {
+                    $product = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    $name = Product::where('id', $product->product_id)->first();
+                    return $name->label;
+                })
+                ->addColumn('deleteINdevice4', function ($row) {
+                    return $this->deleteINdevice4($row);
+                })
+                ->addColumn('color', function ($row) {
+                    $color = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    $name = Color::where('id', $color->color_id)->first();
+                    return $name->manufacturer . ' - ' . $name->name;
+                })
+                ->addColumn('number', function ($row) {
+                    $number = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    return $number->number;
+                })
+                ->addColumn('format', function ($row) {
+                    $product_id = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    $format = DB::table('model_products')
+                        ->where('product_id', $product_id->product_id)
+                        ->first();
+                    $name = Format::where('id', $format->format_id)->first();
+                    return $name->name;
+                })
+                ->addColumn('insert', function ($row) {
+                    $product_id = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    $format = DB::table('model_products')
+                        ->where('product_id', $product_id->product_id)
+                        ->first();
+                    $name = Insert::where('id', $format->insert_id)->first();
+                    if (!empty($name)) {
+                        return $name->name;
+                    } else {
+                        return '---';
+                    }
+                })
+                ->addColumn('cycletime', function ($row) {
+                    $product_id = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    $format = DB::table('model_products')
+                        ->where('product_id', $product_id->product_id)
+                        ->first();
+                    return $format->cycletime;
+                })
+                ->addColumn('size', function ($row) {
+                    $product_id = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    $format = DB::table('model_products')
+                        ->where('product_id', $product_id->product_id)
+                        ->first();
+                    return $format->size;
+                })
+                ->addColumn('productiontime', function ($row) {
+                    $days = intval(intval($row->productiontime) / (3600 * 24));
+                    $h = intval($row->productiontime % (24 * 3600));
+                    $hour = intval($h / 3600);
+                    $m = intval($h % 3600);
+                    $minutes = intval($m / 60);
+                    $seconds = intval($m % 60);
+                    if ($row->productiontime >= 86400) {
+                        return $days . ' روز ' . $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+                    } elseif ($row->productiontime >= 3600) {
+                        return $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+                    } else {
+                        return $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+                    }
+
+                })
+                ->addColumn('remainingtime', function ($row) {
+                    $days = intval(intval($row->productiontime) / (3600 * 24));
+                    $h = intval($row->productiontime % (24 * 3600));
+                    $hour = intval($h / 3600);
+                    $m = intval($h % 3600);
+                    $minutes = intval($m / 60);
+                    $seconds = intval($m % 60);
+                    if ($row->productiontime >= 86400) {
+                        return $days . ' روز ' . $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+                    } elseif ($row->productiontime >= 3600) {
+                        return $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+                    } else {
+                        return $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+                    }
+
+                })
+                ->addColumn('productionqueue4', function ($row) {
+                    return $this->productionqueue4($row);
+
+                })
+                ->addColumn('numberproduced', function ($row) {
+                    return 0;
+
+                })
+                ->addColumn('Productionbalance', function ($row) {
+                    $number = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    return $number->number;
+                })
+                ->rawColumns(['deleteINdevice4'])
+                ->make(true);
+        }
+        return view('productionplanning.list');
+    }
+
+    public function AddDevice4($id)
+    {
+
+        $product_id = ProductionOrder::where('id', $id)
+            ->first();
+        $format = DB::table('model_products')
+            ->where('product_id', $product_id->product_id)
+            ->first();
+        $name = Format::where('id', $format->format_id)->first();
+        $number = ProductionOrder::where('id', $id)
+            ->first();
+        $t = $number->number / $name->quetta;
+        $v = $t * $format->cycletime;
+        ProductionOrder::find($id)->update([
+            'status' => 1,
+        ]);
+        $device = DeviceOrders::create([
+            'device_id' => 4,
+            'order_id' => $id,
+            'productiontime' => $v,
+        ]);
+        DeviceOrders::find($device->id)->update([
+            'Order' => $device->id,
+        ]);
+
+        return response()->json();
+    }
+
+    public function DeleteDevice4($id)
+    {
+
+        $update = DeviceOrders::where('id', $id)
+            ->first();
+        ProductionOrder::find($update->order_id)->update([
+            'status' => 0,
+        ]);
+        DeviceOrders::where('id', $id)
+            ->delete();
+        return response()->json();
+    }
+
+    public function SortDevice4(Request $request)
+    {
+        foreach ($request->input('rows', []) as $row) {
+            $data = DeviceOrders::find($row['id'])->update([
+                'Order' => $row['position']
+            ]);
+        }
+
+        return response()->json($data);
+    }
+
+
+    public function deviceproduct5(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = ProductionOrder::orderBy('id', 'desc')
+                ->where('status', 0)
+                ->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('product_id', function ($row) {
+                    return $row->product->label;
+                })
+                ->addColumn('addTOdevice5', function ($row) {
+                    return $this->addTOdevice5($row);
+                })
+                ->addColumn('color_id', function ($row) {
+                    $name = '<span>' . $row->color->manufacturer . ' - ' . $row->color->name . '</span>';
+                    return $name;
+                })
+                ->addColumn('created_at', function ($row) {
+                    return Jalalian::forge($row->created_at)->format('Y/m/d');
+                })
+                ->rawColumns(['addTOdevice5', 'color_id'])
+                ->make(true);
+        }
+        return view('ProductionOrder.list');
+    }
+
+    public function Ldevice5(Request $request)
+    {
+
+
+        if ($request->ajax()) {
+            $data = DeviceOrders::where('device_id', 5)
+                ->orderBy('Order', 'ASC')->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('product', function ($row) {
+                    $product = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    $name = Product::where('id', $product->product_id)->first();
+                    return $name->label;
+                })
+                ->addColumn('deleteINdevice5', function ($row) {
+                    return $this->deleteINdevice5($row);
+                })
+                ->addColumn('color', function ($row) {
+                    $color = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    $name = Color::where('id', $color->color_id)->first();
+                    return $name->manufacturer . ' - ' . $name->name;
+                })
+                ->addColumn('number', function ($row) {
+                    $number = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    return $number->number;
+                })
+                ->addColumn('format', function ($row) {
+                    $product_id = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    $format = DB::table('model_products')
+                        ->where('product_id', $product_id->product_id)
+                        ->first();
+                    $name = Format::where('id', $format->format_id)->first();
+                    return $name->name;
+                })
+                ->addColumn('insert', function ($row) {
+                    $product_id = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    $format = DB::table('model_products')
+                        ->where('product_id', $product_id->product_id)
+                        ->first();
+                    $name = Insert::where('id', $format->insert_id)->first();
+                    if (!empty($name)) {
+                        return $name->name;
+                    } else {
+                        return '---';
+                    }
+                })
+                ->addColumn('cycletime', function ($row) {
+                    $product_id = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    $format = DB::table('model_products')
+                        ->where('product_id', $product_id->product_id)
+                        ->first();
+                    return $format->cycletime;
+                })
+                ->addColumn('size', function ($row) {
+                    $product_id = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    $format = DB::table('model_products')
+                        ->where('product_id', $product_id->product_id)
+                        ->first();
+                    return $format->size;
+                })
+                ->addColumn('productiontime', function ($row) {
+                    $days = intval(intval($row->productiontime) / (3600 * 24));
+                    $h = intval($row->productiontime % (24 * 3600));
+                    $hour = intval($h / 3600);
+                    $m = intval($h % 3600);
+                    $minutes = intval($m / 60);
+                    $seconds = intval($m % 60);
+                    if ($row->productiontime >= 86400) {
+                        return $days . ' روز ' . $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+                    } elseif ($row->productiontime >= 3600) {
+                        return $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+                    } else {
+                        return $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+                    }
+
+                })
+                ->addColumn('remainingtime', function ($row) {
+                    $days = intval(intval($row->productiontime) / (3600 * 24));
+                    $h = intval($row->productiontime % (24 * 3600));
+                    $hour = intval($h / 3600);
+                    $m = intval($h % 3600);
+                    $minutes = intval($m / 60);
+                    $seconds = intval($m % 60);
+                    if ($row->productiontime >= 86400) {
+                        return $days . ' روز ' . $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+                    } elseif ($row->productiontime >= 3600) {
+                        return $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+                    } else {
+                        return $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+                    }
+
+                })
+                ->addColumn('productionqueue5', function ($row) {
+                    return $this->productionqueue5($row);
+
+                })
+                ->addColumn('numberproduced', function ($row) {
+                    return 0;
+
+                })
+                ->addColumn('Productionbalance', function ($row) {
+                    $number = ProductionOrder::where('id', $row->order_id)
+                        ->first();
+                    return $number->number;
+                })
+                ->rawColumns(['deleteINdevice5'])
+                ->make(true);
+        }
+        return view('productionplanning.list');
+    }
+
+    public function AddDevice5($id)
+    {
+
+        $product_id = ProductionOrder::where('id', $id)
+            ->first();
+        $format = DB::table('model_products')
+            ->where('product_id', $product_id->product_id)
+            ->first();
+        $name = Format::where('id', $format->format_id)->first();
+        $number = ProductionOrder::where('id', $id)
+            ->first();
+        $t = $number->number / $name->quetta;
+        $v = $t * $format->cycletime;
+        ProductionOrder::find($id)->update([
+            'status' => 1,
+        ]);
+        $device = DeviceOrders::create([
+            'device_id' => 5,
+            'order_id' => $id,
+            'productiontime' => $v,
+        ]);
+        DeviceOrders::find($device->id)->update([
+            'Order' => $device->id,
+        ]);
+
+        return response()->json();
+    }
+
+    public function DeleteDevice5($id)
+    {
+
+        $update = DeviceOrders::where('id', $id)
+            ->first();
+        ProductionOrder::find($update->order_id)->update([
+            'status' => 0,
+        ]);
+        DeviceOrders::where('id', $id)
+            ->delete();
+        return response()->json();
+    }
+
+    public function SortDevice5(Request $request)
+    {
+        foreach ($request->input('rows', []) as $row) {
+            $data = DeviceOrders::find($row['id'])->update([
+                'Order' => $row['position']
+            ]);
+        }
+
+        return response()->json($data);
+    }
+
+
+    public function productionqueue1($row)
+    {
+
+        $count = $this->count1 += $row->productiontime;
+        $days = intval(intval($count) / (3600 * 24));
+        $h = intval($count % (24 * 3600));
+        $hour = intval($h / 3600);
+        $m = intval($h % 3600);
+        $minutes = intval($m / 60);
+        $seconds = intval($m % 60);
+        if ($count >= 86400) {
+            return $days . ' روز ' . $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+        } elseif ($count >= 3600) {
+            return $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+        } else {
+            return $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+        }
+
+
+    }
+
+    public function productionqueue2($row)
+    {
+
+        $count2 = $this->count2 += $row->productiontime;
+        $days = intval(intval($count2) / (3600 * 24));
+        $h = intval($count2 % (24 * 3600));
+        $hour = intval($h / 3600);
+        $m = intval($h % 3600);
+        $minutes = intval($m / 60);
+        $seconds = intval($m % 60);
+        if ($count2 >= 86400) {
+            return $days . ' روز ' . $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+        } elseif ($count2 >= 3600) {
+            return $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+        } else {
+            return $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+        }
+
+
+    }
+
+    public function productionqueue3($row)
+    {
+
+        $count3 = $this->count3 += $row->productiontime;
+        $days = intval(intval($count3) / (3600 * 24));
+        $h = intval($count3 % (24 * 3600));
+        $hour = intval($h / 3600);
+        $m = intval($h % 3600);
+        $minutes = intval($m / 60);
+        $seconds = intval($m % 60);
+        if ($count3 >= 86400) {
+            return $days . ' روز ' . $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+        } elseif ($count3 >= 3600) {
+            return $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+        } else {
+            return $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+        }
+
+
+    }
+
+    public function productionqueue4($row)
+    {
+
+        $count4 = $this->count4 += $row->productiontime;
+        $days = intval(intval($count4) / (3600 * 24));
+        $h = intval($count4 % (24 * 3600));
+        $hour = intval($h / 3600);
+        $m = intval($h % 3600);
+        $minutes = intval($m / 60);
+        $seconds = intval($m % 60);
+        if ($count4 >= 86400) {
+            return $days . ' روز ' . $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+        } elseif ($count4 >= 3600) {
+            return $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+        } else {
+            return $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+        }
+
+
+    }
+
+    public function productionqueue5($row)
+    {
+
+        $count5 = $this->count5 += $row->productiontime;
+        $days = intval(intval($count5) / (3600 * 24));
+        $h = intval($count5 % (24 * 3600));
+        $hour = intval($h / 3600);
+        $m = intval($h % 3600);
+        $minutes = intval($m / 60);
+        $seconds = intval($m % 60);
+        if ($count5 >= 86400) {
+            return $days . ' روز ' . $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+        } elseif ($count5 >= 3600) {
+            return $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+        } else {
+            return $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
+
+        }
+
+
+    }
+
+    public function addTOdevice1($row)
+    {
+
+        $btn = '<a href="javascript:void(0)" data-toggle="tooltip"
+                      data-id="' . $row->id . '" data-original-title="ویرایش"
+                       class="addTOdevice1">
+                       <i class="fa fa-arrow-right fa-lg" title="انتصاب به ماشین"></i>
+                       </a>&nbsp;&nbsp;';
+
+        return $btn;
+
+    }
+
+    public function addTOdevice2($row)
+    {
+
+        $btn = '<a href="javascript:void(0)" data-toggle="tooltip"
+                      data-id="' . $row->id . '" data-original-title="ویرایش"
+                       class="addTOdevice2">
+                       <i class="fa fa-arrow-right fa-lg" title="انتصاب به ماشین"></i>
+                       </a>&nbsp;&nbsp;';
+
+        return $btn;
+
+    }
+
+    public function addTOdevice3($row)
+    {
+
+        $btn = '<a href="javascript:void(0)" data-toggle="tooltip"
+                      data-id="' . $row->id . '" data-original-title="ویرایش"
+                       class="addTOdevice3">
+                       <i class="fa fa-arrow-right fa-lg" title="انتصاب به ماشین"></i>
+                       </a>&nbsp;&nbsp;';
+
+        return $btn;
+
+    }
+
+    public function addTOdevice4($row)
+    {
+
+        $btn = '<a href="javascript:void(0)" data-toggle="tooltip"
+                      data-id="' . $row->id . '" data-original-title="ویرایش"
+                       class="addTOdevice4">
+                       <i class="fa fa-arrow-right fa-lg" title="انتصاب به ماشین"></i>
+                       </a>&nbsp;&nbsp;';
+
+        return $btn;
+
+    }
+
+    public function addTOdevice5($row)
+    {
+
+        $btn = '<a href="javascript:void(0)" data-toggle="tooltip"
+                      data-id="' . $row->id . '" data-original-title="ویرایش"
+                       class="addTOdevice5">
+                       <i class="fa fa-arrow-right fa-lg" title="انتصاب به ماشین"></i>
+                       </a>&nbsp;&nbsp;';
+
+        return $btn;
+
+    }
+
+
+    public function deleteINdevice1($row)
+    {
+
+        $btn = '<a href="javascript:void(0)" data-toggle="tooltip"
+                      data-id="' . $row->id . '" data-original-title="ویرایش"
+                       class="deleteINdevice1">
+                       <i class="fa fa-arrow-left fa-lg" title="ازاد کردن سفارش"></i>
+                       </a>&nbsp;&nbsp;';
+
+        return $btn;
+
+    }
+
+    public function deleteINdevice2($row)
+    {
+
+        $btn = '<a href="javascript:void(0)" data-toggle="tooltip"
+                      data-id="' . $row->id . '" data-original-title="ویرایش"
+                       class="deleteINdevice2">
+                       <i class="fa fa-arrow-left fa-lg" title="ازاد کردن سفارش"></i>
+                       </a>&nbsp;&nbsp;';
+
+        return $btn;
+
+    }
+
+    public function deleteINdevice3($row)
+    {
+
+        $btn = '<a href="javascript:void(0)" data-toggle="tooltip"
+                      data-id="' . $row->id . '" data-original-title="ویرایش"
+                       class="deleteINdevice3">
+                       <i class="fa fa-arrow-left fa-lg" title="ازاد کردن سفارش"></i>
+                       </a>&nbsp;&nbsp;';
+
+        return $btn;
+
+    }
+
+    public function deleteINdevice4($row)
+    {
+
+        $btn = '<a href="javascript:void(0)" data-toggle="tooltip"
+                      data-id="' . $row->id . '" data-original-title="ویرایش"
+                       class="deleteINdevice4">
+                       <i class="fa fa-arrow-left fa-lg" title="ازاد کردن سفارش"></i>
+                       </a>&nbsp;&nbsp;';
+
+        return $btn;
+
+    }
+
+    public function deleteINdevice5($row)
+    {
+
+        $btn = '<a href="javascript:void(0)" data-toggle="tooltip"
+                      data-id="' . $row->id . '" data-original-title="ویرایش"
+                       class="deleteINdevice5">
+                       <i class="fa fa-arrow-left fa-lg" title="ازاد کردن سفارش"></i>
+                       </a>&nbsp;&nbsp;';
+
+        return $btn;
+
+    }
 
 }

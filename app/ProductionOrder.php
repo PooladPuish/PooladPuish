@@ -17,5 +17,9 @@ class ProductionOrder extends Model
     {
         return $this->belongsTo(Color::class);
     }
+    public function colore()
+    {
+        return $this->hasMany(Color::class);
+    }
 
 }

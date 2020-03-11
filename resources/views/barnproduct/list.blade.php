@@ -16,13 +16,10 @@
                         <tr>
                             <th>ردیف</th>
                             <th>محصول</th>
-                            <th>مواد</th>
                             <th>رنگ</th>
                             <th>موجودی فزیکی</th>
                             <th>تعداد فروخته شده</th>
                             <th>تعداد تایید نشده</th>
-                            <th>موجودی قابل فروش</th>
-                            <th>عملیات</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -32,5 +29,6 @@
             </div>
         </div>
     </div>
-
+    @include('barnproduct.modals.modal')
+    @include('barnproduct.scripts.script')
 @endsection

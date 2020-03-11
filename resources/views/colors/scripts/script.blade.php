@@ -29,6 +29,7 @@
                 {data: 'combination', name: 'combination'},
                 {data: 'masterbatch', name: 'masterbatch'},
                 {data: 'price', name: 'price'},
+                {data: 'time', name: 'time'},
                 {data: 'minimum', name: 'minimum'},
                 {data: 'maximum', name: 'maximum'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
@@ -52,6 +53,7 @@
                 $('#combination').val(data.combination);
                 $('#masterbatch').val(data.masterbatch);
                 $('#price').val(data.price);
+                $('#time').val(data.time);
                 $('#minimum').val(data.minimum);
                 $('#maximum').val(data.maximum);
             })

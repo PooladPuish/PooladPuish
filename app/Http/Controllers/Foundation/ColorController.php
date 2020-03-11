@@ -99,6 +99,7 @@ class ColorController extends Controller
                     'combination' => $request->combination,
                     'masterbatch' => $request->masterbatch,
                     'price' => $request->price,
+                    'time' => $request->time,
                     'minimum' => $request->minimum,
                     'maximum' => $request->maximum,
                 ]);

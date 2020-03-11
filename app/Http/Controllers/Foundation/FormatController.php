@@ -104,6 +104,7 @@ class FormatController extends Controller
                     'quetta' => $request->quetta,
                     'code' => $request->code,
                     'name' => $request->name,
+                    'time' => $request->time,
                 ]);
             return response()->json(['success' => 'Product saved successfully.']);
         }

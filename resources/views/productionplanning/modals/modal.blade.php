@@ -1,9 +1,10 @@
-<div class="modal fade" id="ajaxModel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal fade" id="showDevice1" aria-hidden="true">
+    <div class="modal-dialog col-md-12">
         <div class="modal-body">
             <div class="portlet box blue">
                 <div class="portlet-title">
                     <div class="caption" id="caption">
+                        افزودن محصول به دستگاه
                     </div>
                     <div class="caption pull-left">
                         <a data-dismiss="modal">
@@ -20,125 +21,63 @@
                                 <input type="hidden" name="product" id="product">
                                 @csrf
                                 <div class="row">
-
                                     <div class="col-md-12">
+                                        <div class="nav-tabs-custom">
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a href="#productdevice1" data-toggle="tab">محصولات
+                                                        ماشین</a></li>
+                                                <li><a href="#product1" data-toggle="tab">محصولات</a></li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="active tab-pane" id="productdevice1">
+                                                    <table class="table table-striped table-bordered device1"
+                                                           id="device1">
+                                                        <thead style="background-color: #e8ecff">
+                                                        <tr>
+                                                            <th>اولویت</th>
+                                                            <th>محصول</th>
+                                                            <th>رنگ</th>
+                                                            <th>تعداد</th>
+                                                            <th>قالب</th>
+                                                            <th>Insert</th>
+                                                            <th>سایکل تایم</th>
+                                                            <th>وزن</th>
+                                                            <th>زمان تولید</th>
+                                                            <th>زمان تولید در صف</th>
+                                                            <th>تعداد تولید شده</th>
+                                                            <th>مانده تولید</th>
+                                                            <th>زمان باقی مانده</th>
+                                                            <th>عملیات</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
 
-                                            <label>کد
-                                                <span
-                                                    style="color: red"
-                                                    class="required-mark">*</span>
-                                            </label>
-                                            <input type="text" id="code" name="code" class="form-control"
-                                                   placeholder="لطفا کد مواد را وارد کنید"
-                                                   required>
+                                                </div>
+                                                <div class="tab-pane" id="product1">
+                                                    <table class="table table-striped table-bordered listdevice1"
+                                                           id="listdevice1">
+                                                        <thead style="background-color: #e8ecff">
+                                                        <tr>
+                                                            <th>ردیف</th>
+                                                            <th>کد سفارش</th>
+                                                            <th>نام محصول</th>
+                                                            <th>رنگ</th>
+                                                            <th>تعداد تولید</th>
+                                                            <th>تاریخ سفارش</th>
+                                                            <th>عملیات</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
 
-                                    </div>
-                                    <div class="col-md-12">
-
-                                            <label>نوع مواد
-                                                <span
-                                                    style="color: red"
-                                                    class="required-mark">*</span>
-                                            </label>
-                                            <input type="text" id="type" name="type" class="form-control"
-                                                   placeholder="لطفا نوع مواد را وارد کنید"
-                                                   required>
-
-                                    </div>
-                                    <div class="col-md-12">
-
-                                            <label>نام گرید مواد
-                                                <span
-                                                    style="color: red"
-                                                    class="required-mark">*</span>
-                                            </label>
-                                            <input type="text" id="grid" name="grid" class="form-control"
-                                                   placeholder="لطفا نام گرید مواد را وارد کنید"
-                                                   required>
-
-                                    </div>
-                                    <div class="col-md-12">
-
-                                            <label>نام سازنده
-                                                <span
-                                                    style="color: red"
-                                                    class="required-mark">*</span>
-                                            </label>
-                                            <input type="text" id="name" name="name" class="form-control"
-                                                   placeholder="لطفا نام سازنده را وارد کنید"
-                                                   required>
-
-                                    </div>
-
-                                    <div class="col-md-12">
-
-                                            <label>قیمت
-                                                <span
-                                                    style="color: red"
-                                                    class="required-mark">*</span>
-                                            </label>
-                                            <input type="text" id="price" name="price" class="form-control"
-                                                   placeholder="لطفا قیمت را وارد کنید"
-                                                   required>
+                                                </div>
+                                            </div>
                                         </div>
-
-
-
-
-
-
-                                            <div class="col-md-6">
-
-                                                <label>حداقل
-                                                    <span
-                                                        style="color: red"
-                                                        class="required-mark">*</span>
-                                                </label>
-                                                <input type="text" id="minimum" name="minimum" class="form-control"
-                                                       placeholder="لطفا حداقل را وارد کنید"
-                                                       required>
-
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label>حداکثر
-                                                    <span
-                                                        style="color: red"
-                                                        class="required-mark">*</span>
-                                                </label>
-                                                <input type="text" id="maximum" name="maximum" class="form-control"
-                                                       placeholder="لطفا حداکثر را وارد کنید"
-                                                       required>
-                                            </div>
-
-
-
-
-                                    <div class="col-md-12">
-
-                                            <label>توضیحات</label>
-                                            <textarea id="description" name="description" class="form-control" rows="4"
-                                                      cols="50" placeholder="متن خود را وارد کنید">
-                                                </textarea>
-
                                     </div>
 
-
-                                </div>
-                                <br/>
-                                <hr/>
-                                <div class="modal-footer">
-                                    <div class="text-left">
-                                        <button style="width: 130px" type="submit" class="btn btn-success" id="saveBtn"
-                                                value="ثبت">
-                                            ثبت
-                                        </button>
-
-                                        <button style="width: 130px" type="button" class="btn btn-danger"
-                                                data-dismiss="modal">
-                                            انصراف
-                                        </button>
-
-                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -149,4 +88,373 @@
 
     </div>
 </div>
+
+
+<div class="modal fade" id="showDevice2" aria-hidden="true">
+    <div class="modal-dialog col-md-12">
+        <div class="modal-body">
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption" id="caption">
+                        افزودن محصول به دستگاه
+                    </div>
+                    <div class="caption pull-left">
+                        <a data-dismiss="modal">
+                            <i style="color: white" class="pull-left fa fa-close"></i>
+                        </a>
+                    </div>
+
+                </div>
+                <div class="portlet-body form">
+                    <div class="form-body">
+                        <div class="form-group">
+
+                            <form autocomplete="off" id="productForm" name="productForm" class="form-horizontal">
+                                <input type="hidden" name="product" id="product">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="nav-tabs-custom">
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a href="#deviceproduct2" data-toggle="tab">محصولات
+                                                        ماشین</a></li>
+                                                <li><a href="#product2" data-toggle="tab">محصولات</a></li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="active tab-pane" id="deviceproduct2">
+                                                    <table class="table table-striped table-bordered device2"
+                                                           id="device2">
+                                                        <thead style="background-color: #e8ecff">
+                                                        <tr>
+                                                            <th>اولویت</th>
+                                                            <th>محصول</th>
+                                                            <th>رنگ</th>
+                                                            <th>تعداد</th>
+                                                            <th>قالب</th>
+                                                            <th>Insert</th>
+                                                            <th>سایکل تایم</th>
+                                                            <th>وزن</th>
+                                                            <th>زمان تولید</th>
+                                                            <th>زمان تولید در صف</th>
+                                                            <th>تعداد تولید شده</th>
+                                                            <th>مانده تولید</th>
+                                                            <th>زمان باقی مانده</th>
+                                                            <th>عملیات</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+
+                                                </div>
+                                                <div class="tab-pane" id="product2">
+                                                    <table class="table table-striped table-bordered listdevice2"
+                                                           id="listdevice2">
+                                                        <thead style="background-color: #e8ecff">
+                                                        <tr>
+                                                            <th>ردیف</th>
+                                                            <th>کد سفارش</th>
+                                                            <th>نام محصول</th>
+                                                            <th>رنگ</th>
+                                                            <th>تعداد تولید</th>
+                                                            <th>تاریخ سفارش</th>
+                                                            <th>عملیات</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="showDevice3" aria-hidden="true">
+    <div class="modal-dialog col-md-12">
+        <div class="modal-body">
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption" id="caption">
+                        افزودن محصول به دستگاه
+                    </div>
+                    <div class="caption pull-left">
+                        <a data-dismiss="modal">
+                            <i style="color: white" class="pull-left fa fa-close"></i>
+                        </a>
+                    </div>
+
+                </div>
+                <div class="portlet-body form">
+                    <div class="form-body">
+                        <div class="form-group">
+
+                            <form autocomplete="off" id="productForm" name="productForm" class="form-horizontal">
+                                <input type="hidden" name="product" id="product">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="nav-tabs-custom">
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a href="#deviceproduct3" data-toggle="tab">محصولات
+                                                        ماشین</a></li>
+                                                <li><a href="#product3" data-toggle="tab">محصولات</a></li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="active tab-pane" id="deviceproduct3">
+                                                    <table class="table table-striped table-bordered device3"
+                                                           id="device3">
+                                                        <thead style="background-color: #e8ecff">
+                                                        <tr>
+                                                            <th>اولویت</th>
+                                                            <th>محصول</th>
+                                                            <th>رنگ</th>
+                                                            <th>تعداد</th>
+                                                            <th>قالب</th>
+                                                            <th>Insert</th>
+                                                            <th>سایکل تایم</th>
+                                                            <th>وزن</th>
+                                                            <th>زمان تولید</th>
+                                                            <th>زمان تولید در صف</th>
+                                                            <th>تعداد تولید شده</th>
+                                                            <th>مانده تولید</th>
+                                                            <th>زمان باقی مانده</th>
+                                                            <th>عملیات</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+
+                                                </div>
+                                                <div class="tab-pane" id="product3">
+                                                    <table class="table table-striped table-bordered listdevice3"
+                                                           id="listdevice3">
+                                                        <thead style="background-color: #e8ecff">
+                                                        <tr>
+                                                            <th>ردیف</th>
+                                                            <th>کد سفارش</th>
+                                                            <th>نام محصول</th>
+                                                            <th>رنگ</th>
+                                                            <th>تعداد تولید</th>
+                                                            <th>تاریخ سفارش</th>
+                                                            <th>عملیات</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="modal fade" id="showDevice4" aria-hidden="true">
+    <div class="modal-dialog col-md-12">
+        <div class="modal-body">
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption" id="caption">
+                        افزودن محصول به دستگاه
+                    </div>
+                    <div class="caption pull-left">
+                        <a data-dismiss="modal">
+                            <i style="color: white" class="pull-left fa fa-close"></i>
+                        </a>
+                    </div>
+
+                </div>
+                <div class="portlet-body form">
+                    <div class="form-body">
+                        <div class="form-group">
+
+                            <form autocomplete="off" id="productForm" name="productForm" class="form-horizontal">
+                                <input type="hidden" name="product" id="product">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="nav-tabs-custom">
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a href="#deviceproduct4" data-toggle="tab">محصولات
+                                                        ماشین</a></li>
+                                                <li><a href="#product4" data-toggle="tab">محصولات</a></li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="active tab-pane" id="deviceproduct4">
+                                                    <table class="table table-striped table-bordered device4"
+                                                           id="device4">
+                                                        <thead style="background-color: #e8ecff">
+                                                        <tr>
+                                                            <th>اولویت</th>
+                                                            <th>محصول</th>
+                                                            <th>رنگ</th>
+                                                            <th>تعداد</th>
+                                                            <th>قالب</th>
+                                                            <th>Insert</th>
+                                                            <th>سایکل تایم</th>
+                                                            <th>وزن</th>
+                                                            <th>زمان تولید</th>
+                                                            <th>زمان تولید در صف</th>
+                                                            <th>تعداد تولید شده</th>
+                                                            <th>مانده تولید</th>
+                                                            <th>زمان باقی مانده</th>
+                                                            <th>عملیات</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+
+                                                </div>
+                                                <div class="tab-pane" id="product4">
+                                                    <table class="table table-striped table-bordered listdevice4"
+                                                           id="listdevice4">
+                                                        <thead style="background-color: #e8ecff">
+                                                        <tr>
+                                                            <th>ردیف</th>
+                                                            <th>کد سفارش</th>
+                                                            <th>نام محصول</th>
+                                                            <th>رنگ</th>
+                                                            <th>تعداد تولید</th>
+                                                            <th>تاریخ سفارش</th>
+                                                            <th>عملیات</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="showDevice5" aria-hidden="true">
+    <div class="modal-dialog col-md-12">
+        <div class="modal-body">
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption" id="caption">
+                        افزودن محصول به دستگاه
+                    </div>
+                    <div class="caption pull-left">
+                        <a data-dismiss="modal">
+                            <i style="color: white" class="pull-left fa fa-close"></i>
+                        </a>
+                    </div>
+
+                </div>
+                <div class="portlet-body form">
+                    <div class="form-body">
+                        <div class="form-group">
+
+                            <form autocomplete="off" id="productForm" name="productForm" class="form-horizontal">
+                                <input type="hidden" name="product" id="product">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="nav-tabs-custom">
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a href="#deviceproduct5" data-toggle="tab">محصولات
+                                                        ماشین</a></li>
+                                                <li><a href="#product5" data-toggle="tab">محصولات</a></li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="active tab-pane" id="deviceproduct5">
+                                                    <table class="table table-striped table-bordered device5"
+                                                           id="device5">
+                                                        <thead style="background-color: #e8ecff">
+                                                        <tr>
+                                                            <th>اولویت</th>
+                                                            <th>محصول</th>
+                                                            <th>رنگ</th>
+                                                            <th>تعداد</th>
+                                                            <th>قالب</th>
+                                                            <th>Insert</th>
+                                                            <th>سایکل تایم</th>
+                                                            <th>وزن</th>
+                                                            <th>زمان تولید</th>
+                                                            <th>زمان تولید در صف</th>
+                                                            <th>تعداد تولید شده</th>
+                                                            <th>مانده تولید</th>
+                                                            <th>زمان باقی مانده</th>
+                                                            <th>عملیات</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+
+                                                </div>
+                                                <div class="tab-pane" id="product5">
+                                                    <table class="table table-striped table-bordered listdevice5"
+                                                           id="listdevice5">
+                                                        <thead style="background-color: #e8ecff">
+                                                        <tr>
+                                                            <th>ردیف</th>
+                                                            <th>کد سفارش</th>
+                                                            <th>نام محصول</th>
+                                                            <th>رنگ</th>
+                                                            <th>تعداد تولید</th>
+                                                            <th>تاریخ سفارش</th>
+                                                            <th>عملیات</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
 

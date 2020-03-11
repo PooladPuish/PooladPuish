@@ -44,5 +44,9 @@ class Format extends Model
         return $this->hasMany(PMFormat::class);
 
     }
+    public function colorscrap()
+    {
+        return $this->hasMany(ColorScrap::class);
+    }
 
 }

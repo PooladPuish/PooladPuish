@@ -102,7 +102,7 @@
 
 
 
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
 
                                                     <label>حداقل
                                                         <span
@@ -114,7 +114,7 @@
                                                            required>
 
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <label>حداکثر
                                                         <span
                                                             style="color: red"
@@ -124,6 +124,16 @@
                                                            placeholder="لطفا حداکثر را وارد کنید"
                                                            required>
                                                 </div>
+                                        <div class="col-md-4">
+                                            <label>زمان تغیر رنگ
+                                                <span
+                                                    style="color: red"
+                                                    class="required-mark">*</span>
+                                            </label>
+                                            <input type="text" id="time" name="time" class="form-control"
+                                                   required>
+                                        </div>
+
 
 
 

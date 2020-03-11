@@ -19,5 +19,10 @@ class Device extends Model
         return $this->hasMany(PMMachine::class);
 
     }
+    public function barntemporary()
+    {
+        return $this->hasMany(BarnTemporary::class);
+
+    }
 
 }

@@ -64,6 +64,21 @@
                                                 </select>
 
                                         </div>
+
+                                        <div class="col-md-12">
+
+                                            <label>زمان تغیر قالب
+                                                <span
+                                                    style="color: red"
+                                                    class="required-mark">*</span>
+                                            </label>
+                                            <input type="text" id="time" name="time" class="form-control"
+                                                   placeholder="زمان تغیر قالب را وارد کنید"
+                                                   required>
+
+                                        </div>
+
+
                                         <div class="col-md-12">
 
                                                 <label>تعداد کویته

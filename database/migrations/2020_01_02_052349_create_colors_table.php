@@ -21,6 +21,9 @@ class CreateColorsTable extends Migration
             $table->string('combination');
             $table->bigInteger('masterbatch');
             $table->string('price');
+            $table->string('time');
+            $table->string('minimum');
+            $table->string('maximum');
 
             $table->timestamps();
         });

@@ -12,16 +12,6 @@
         var table = $('.data-table').DataTable({
             processing: true,
             serverSide: true,
-            "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-                if (parseInt(aData.PhysicalInventory) <= parseInt(aData.minimum)) {
-                    $('td', nRow).css('background-color', '#fb8000');
-                } else if (parseInt(aData.PhysicalInventory) >= parseInt(aData.maximum)) {
-                    $('td', nRow).css('background-color', '#00d1fb');
-                }else{
-                    $('td', nRow).css('background-color', 'white');
-
-                }
-            },
             "language": {
                 "search": "جستجو:",
                 "lengthMenu": "نمایش _MENU_",
@@ -34,14 +24,11 @@
             ajax: "{{ route('admin.barnproduct.list') }}",
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                {data: '1', name: '1'},
-                {data: '1', name: '1'},
-                {data: '1', name: '1'},
-                {data: '1', name: '1'},
-                {data: '1', name: '1'},
-                {data: '1', name: '1'},
-                {data: '1', name: '1'},
-                {data: '1', name: '1'},
+                {data: 'product_id', name: 'product_id'},
+                {data: 'color_id', name: 'color_id'},
+                {data: 'Inventory', name: 'Inventory'},
+                {data: 'NumberSold', name: 'NumberSold'},
+                {data: 'Numbernotsold', name: 'Numbernotsold'},
             ]
         });
 

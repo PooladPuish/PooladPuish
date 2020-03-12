@@ -6,7 +6,7 @@
             <div class="portlet box blue">
                 <div class="portlet-title">
                     <div class="caption">
-                        Insert
+                       زمان های تغیر رنگ
                     </div>
                     <div class="tools"></div>
                 </div>
@@ -15,21 +15,20 @@
                         <thead style="background-color: #e8ecff">
                         <tr>
                             <th>ردیف</th>
-                            <th>کد</th>
-                            <th>نام سازنده</th>
-                            <th>نام insert</th>
-                            <th>زمان تغیر</th>
+                            <th>از رنگ</th>
+                            <th>به رنگ</th>
+                            <th>زمان</th>
                             <th>عملیات</th>
                         </tr>
                         </thead>
                         <tbody>
                         </tbody>
                     </table>
-                    <a class="btn btn-primary" href="javascript:void(0)" id="createNewProduct">تعریف Insert جدید</a>
+                    <a class="btn btn-primary" href="javascript:void(0)" id="createNewProduct">تعریف جدید</a>
                 </div>
             </div>
         </div>
     </div>
-    @include('insert.modals.modal')
-    @include('insert.scripts.script')
+    @include('colorchange.modals.modal')
+    @include('colorchange.scripts.script')
 @endsection

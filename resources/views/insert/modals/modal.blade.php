@@ -53,6 +53,16 @@
                                                        placeholder="لطفا نام insert سازنده را وارد کنید"
                                                        required>
                                             </div>
+                                        <div class="col-md-12">
+                                            <label>زمان تغیر
+                                                <span
+                                                    style="color: red"
+                                                    class="required-mark">*</span>
+                                            </label>
+                                            <input type="text" id="time" name="time" class="form-control"
+                                                   placeholder="لطفا زمان تغیر insert را وارد کنید"
+                                                   required>
+                                        </div>
 
 
                                         </div>

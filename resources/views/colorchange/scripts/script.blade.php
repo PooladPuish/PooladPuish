@@ -1,5 +1,7 @@
 <script src="{{asset('/public/js/a1.js')}}" type="text/javascript"></script>
 <script src="{{asset('/public/js/a2.js')}}" type="text/javascript"></script>
+<script src="{{asset('/public/js/jquery.maskedinput.js')}}" type="text/javascript"></script>
+
 <meta name="_token" content="{{ csrf_token() }}"/>
 <script type="text/javascript">
     $(function () {
@@ -20,42 +22,42 @@
                 "infoFiltered": "(جستجو از _MAX_ مورد)",
                 "processing": "در حال پردازش اطلاعات"
             },
-            ajax: "{{ route('admin.insert.list') }}",
+            ajax: "{{ route('admin.colorchange.list') }}",
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                {data: 'code', name: 'code'},
-                {data: 'manufacturer', name: 'manufacturer'},
-                {data: 'name', name: 'name'},
+                {data: 'ofColor_id', name: 'ofColor_id'},
+                {data: 'toColor_id', name: 'toColor_id'},
                 {data: 'time', name: 'time'},
-
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]
         });
         $('#createNewProduct').click(function () {
             $('#productForm').trigger("reset");
             $('#ajaxModel').modal('show');
-            $('#caption').text('افزودن Insert');
-            $('#product').val('');
+            $('#caption').text('تعریف تغیر رنگ');
+            $('#id').val('');
         });
+
+
         $('body').on('click', '.editProduct', function () {
-            var product_id = $(this).data('id');
-            $.get("{{ route('admin.insert.update') }}" + '/' + product_id, function (data) {
+            var id = $(this).data('id');
+            $.get("{{ route('admin.colorchange.update') }}" + '/' + id, function (data) {
                 $('#ajaxModel').modal('show');
-                $('#caption').text('ویرایش Insert');
-                $('#product').val(data.id);
-                $('#code').val(data.code);
-                $('#name').val(data.name);
+                $('#caption').text('ویرایش ضایعات رنگ');
+                $('#id').val(data.id);
+                $('#ofColor_id').val(data.ofColor_id);
+                $('#toColor_id').val(data.toColor_id);
                 $('#time').val(data.time);
-                $('#manufacturer').val(data.manufacturer);
-            });
+            })
         });
+
+
+
         $('#saveBtn').click(function (e) {
             e.preventDefault();
-            $('#saveBtn').text('در حال ثبت اطلاعات...');
-            $('#saveBtn').prop("disabled", true);
             $.ajax({
                 data: $('#productForm').serialize(),
-                url: "{{ route('admin.insert.store') }}",
+                url: "{{ route('admin.colorchange.store') }}",
                 type: "POST",
                 dataType: 'json',
                 success: function (data) {
@@ -69,8 +71,6 @@
                                 confirmButtonText: 'تایید'
                             })
                         });
-                        $('#saveBtn').text('ثبت');
-                        $('#saveBtn').prop("disabled", false);
                     }
                     if (data.success) {
                         $('#productForm').trigger("reset");
@@ -78,27 +78,20 @@
                         table.draw();
                         Swal.fire({
                             title: 'موفق',
-                            text: 'مشخصات insert با موفقیت در سیستم ثبت شد',
+                            text: 'مشخصات با موفقیت در سیستم ثبت شد',
                             icon: 'success',
                             confirmButtonText: 'تایید',
                         });
-                        $('#saveBtn').text('ثبت');
-                        $('#saveBtn').prop("disabled", false);
                     }
                 }
             });
         });
-        $('#name').val('');
-        $('#code').val('');
-        $('#characteristics_id').val('');
-        $('#commodity_id').val('');
-        $('#manufacturing').val('');
-        $('#product_id').val('');
     });
+
     $('body').on('click', '.deleteProduct', function () {
         var id = $(this).data("id");
         Swal.fire({
-            title: 'حذف insert؟',
+            title: 'حذف؟',
             text: "مشخصات حذف شده قابل بازیابی نیستند!",
             icon: 'warning',
             showCancelButton: true,
@@ -110,7 +103,7 @@
             if (result.value) {
                 $.ajax({
                     type: 'DELETE',
-                    url: "{{route('admin.insert.delete')}}" + '/' + id,
+                    url: "{{route('admin.colorchange.delete')}}" + '/' + id,
                     data: {
                         '_token': $('input[name=_token]').val(),
                     },
@@ -118,7 +111,7 @@
                         $('#data-table').DataTable().ajax.reload();
                         Swal.fire({
                             title: 'موفق',
-                            text: 'مشخصات insert با موفقیت از سیستم حذف شد',
+                            text: 'مشخصات با موفقیت از سیستم حذف شد',
                             icon: 'success',
                             confirmButtonText: 'تایید'
                         })
@@ -127,6 +120,9 @@
             }
         })
     });
+
+
     $('#foundation').addClass('active');
-    $('#foundation_b').addClass('active');
+    $('#foundation_c').addClass('active');
+
 </script>

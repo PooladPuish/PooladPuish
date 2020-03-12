@@ -409,6 +409,9 @@
                                         <li><a href="{{route('admin.colorscrap.list')}}"><i
                                                     class="fa fa-circle-o"></i>ضایعات رنگ</a>
                                         </li>
+                                        <li><a href="{{route('admin.colorchange.list')}}"><i
+                                                    class="fa fa-circle-o"></i>زملن تغیر رنگ</a>
+                                        </li>
                                 </ul>
                             </li>
 

@@ -26,6 +26,7 @@ use Yajra\DataTables\DataTables;
 class ProductionPlanningController extends Controller
 {
     private $count1;
+    private $id;
     private $count2;
     private $count3;
     private $count4;
@@ -549,6 +550,30 @@ class ProductionPlanningController extends Controller
         return view('ProductionOrder.list');
     }
 
+    public function deviceproductfalse1(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = ProductionOrder::orderBy('id', 'desc')
+                ->where('status', 0)
+                ->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('product_id', function ($row) {
+                    return $row->product->label;
+                })
+                ->addColumn('color_id', function ($row) {
+                    $name = '<span>' . $row->color->manufacturer . ' - ' . $row->color->name . '</span>';
+                    return $name;
+                })
+                ->addColumn('created_at', function ($row) {
+                    return Jalalian::forge($row->created_at)->format('Y/m/d');
+                })
+                ->rawColumns(['color_id'])
+                ->make(true);
+        }
+        return view('ProductionOrder.list');
+    }
+
     public function Ldevice1(Request $request)
     {
 
@@ -658,9 +683,9 @@ class ProductionPlanningController extends Controller
                     return $this->productionqueue1($row);
 
                 })
+
                 ->addColumn('numberproduced', function ($row) {
                     return 0;
-
                 })
                 ->addColumn('Productionbalance', function ($row) {
                     $number = ProductionOrder::where('id', $row->order_id)
@@ -684,6 +709,8 @@ class ProductionPlanningController extends Controller
         $name = Format::where('id', $format->format_id)->first();
         $number = ProductionOrder::where('id', $id)
             ->first();
+
+
         $t = $number->number / $name->quetta;
         $v = $t * $format->cycletime;
         ProductionOrder::find($id)->update([
@@ -747,6 +774,30 @@ class ProductionPlanningController extends Controller
                     return Jalalian::forge($row->created_at)->format('Y/m/d');
                 })
                 ->rawColumns(['addTOdevice2', 'color_id'])
+                ->make(true);
+        }
+        return view('ProductionOrder.list');
+    }
+
+    public function deviceproductfalse2(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = ProductionOrder::orderBy('id', 'desc')
+                ->where('status', 0)
+                ->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('product_id', function ($row) {
+                    return $row->product->label;
+                })
+                ->addColumn('color_id', function ($row) {
+                    $name = '<span>' . $row->color->manufacturer . ' - ' . $row->color->name . '</span>';
+                    return $name;
+                })
+                ->addColumn('created_at', function ($row) {
+                    return Jalalian::forge($row->created_at)->format('Y/m/d');
+                })
+                ->rawColumns(['color_id'])
                 ->make(true);
         }
         return view('ProductionOrder.list');
@@ -951,6 +1002,30 @@ class ProductionPlanningController extends Controller
                     return Jalalian::forge($row->created_at)->format('Y/m/d');
                 })
                 ->rawColumns(['addTOdevice3', 'color_id'])
+                ->make(true);
+        }
+        return view('ProductionOrder.list');
+    }
+
+    public function deviceproductfalse3(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = ProductionOrder::orderBy('id', 'desc')
+                ->where('status', 0)
+                ->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('product_id', function ($row) {
+                    return $row->product->label;
+                })
+                ->addColumn('color_id', function ($row) {
+                    $name = '<span>' . $row->color->manufacturer . ' - ' . $row->color->name . '</span>';
+                    return $name;
+                })
+                ->addColumn('created_at', function ($row) {
+                    return Jalalian::forge($row->created_at)->format('Y/m/d');
+                })
+                ->rawColumns(['color_id'])
                 ->make(true);
         }
         return view('ProductionOrder.list');
@@ -1544,6 +1619,7 @@ class ProductionPlanningController extends Controller
     public function productionqueue1($row)
     {
 
+
         $count = $this->count1 += $row->productiontime;
         $days = intval(intval($count) / (3600 * 24));
         $h = intval($count % (24 * 3600));
@@ -1564,6 +1640,9 @@ class ProductionPlanningController extends Controller
 
 
     }
+
+
+
 
     public function productionqueue2($row)
     {

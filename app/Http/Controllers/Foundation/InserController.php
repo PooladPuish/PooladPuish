@@ -80,6 +80,7 @@ class InserController extends Controller
                     'code' => $request->code,
                     'manufacturer' => $request->manufacturer,
                     'name' => $request->name,
+                    'time' => $request->time,
                 ]);
             return response()->json(['success' => 'Product saved successfully.']);
         }

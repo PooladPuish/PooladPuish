@@ -77,7 +77,7 @@
                                     @else
                                         <div class="col-md-4">
                                             <label>{{$Name_Device1->name}}</label>
-                                            <a href="#">
+                                            <a href="javascript:void(0)" id="falsedevice1">
                                                 <img title="غیرفعال"
                                                      src="{{asset('/public/icon/BT-off.png')}}"
                                                      width="100">
@@ -98,7 +98,7 @@
                                     @else
                                         <div class="col-md-4">
                                             <label>{{$Name_Device2->name}}</label>
-                                            <a href="#">
+                                            <a href="javascript:void(0)" id="falsedevice2">
                                                 <img title="غیرفعال"
                                                      src="{{asset('/public/icon/BT-off.png')}}"
                                                      width="100">
@@ -119,7 +119,7 @@
                                     @else
                                         <div class="col-md-4">
                                             <label>{{$Name_Device3->name}}</label>
-                                            <a href="#">
+                                            <a href="javascript:void(0)" id="falsedevice3">
                                                 <img title="غیرفعال"
                                                      src="{{asset('/public/icon/BT-off.png')}}"
                                                      width="100">

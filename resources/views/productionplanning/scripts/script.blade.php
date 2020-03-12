@@ -9,6 +9,73 @@
             }
         });
 
+
+        var deviceproductfalse1 = $('.listfalsedevice1').DataTable({
+            processing: true,
+            serverSide: true,
+            "searching": false,
+            "lengthChange": false,
+            "info": false,
+            "bPaginate": false,
+            "language": {
+                "search": "جستجو:",
+                "lengthMenu": "نمایش _MENU_",
+                "zeroRecords": "موردی یافت نشد!",
+                "info": "نمایش _PAGE_ از _PAGES_",
+                "infoEmpty": "موردی یافت نشد",
+                "infoFiltered": "(جستجو از _MAX_ مورد)",
+                "processing": "در حال پردازش اطلاعات"
+            },
+            ajax: "{{ route('admin.pPlanning.deviceproductfalse1') }}",
+            columns: [
+                {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+                {data: 'ordercode', name: 'ordercode'},
+                {data: 'product_id', name: 'product_id'},
+                {data: 'color_id', name: 'color_id'},
+                {data: 'number', name: 'number'},
+                {data: 'created_at', name: 'created_at'},
+
+
+            ]
+        });
+        var devicefalse1 = $('.devicefalse1').DataTable({
+            processing: true,
+            serverSide: true,
+            rowreorder: true,
+            retrieve: true,
+            aaSorting: [],
+            "searching": false,
+            "lengthChange": false,
+            "info": false,
+            "bPaginate": false,
+            "bSort" : false,
+            "language": {
+                "search": "جستجو:",
+                "lengthMenu": "نمایش _MENU_",
+                "zeroRecords": "موردی یافت نشد!",
+                "info": "نمایش _PAGE_ از _PAGES_",
+                "infoEmpty": "موردی یافت نشد",
+                "infoFiltered": "(جستجو از _MAX_ مورد)",
+                "processing": "در حال پردازش اطلاعات"
+            },
+            ajax: "{{ route('admin.device1.list') }}",
+            columns: [
+                {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+                {data: 'product', name: 'product'},
+                {data: 'color', name: 'color'},
+                {data: 'number', name: 'number'},
+                {data: 'format', name: 'format'},
+                {data: 'insert', name: 'insert'},
+                {data: 'cycletime', name: 'cycletime'},
+                {data: 'size', name: 'size'},
+                {data: 'productiontime', name: 'productiontime'},
+                {data: 'productionqueue', name: 'productionqueue'},
+                {data: 'numberproduced', name: 'numberproduced'},
+                {data: 'Productionbalance', name: 'Productionbalance'},
+                {data: 'remainingtime', name: 'remainingtime'},
+                {data: 'deleteINdevice1', name: 'deleteINdevice1', orderable: false, searchable: false},
+            ]
+        });
         var deviceproduct1 = $('.listdevice1').DataTable({
             processing: true,
             serverSide: true,
@@ -102,6 +169,9 @@
         $('#device1').click(function () {
             $('#showDevice1').modal('show');
         });
+        $('#falsedevice1').click(function () {
+            $('#showFalseDevice1').modal('show');
+        });
         $('body').on('click', '.addTOdevice1', function () {
             var product_id = $(this).data('id');
             $.get("{{ route('admin.pPlanning.AddDevice1') }}" + '/' + product_id, function (data) {
@@ -110,6 +180,9 @@
                 deviceproduct3.draw();
                 deviceproduct4.draw();
                 deviceproduct5.draw();
+                deviceproductfalse3.draw();
+                deviceproductfalse2.draw();
+                deviceproductfalse1.draw();
                 device1.draw();
             })
         });
@@ -117,6 +190,10 @@
             var product_id = $(this).data('id');
             $.get("{{ route('admin.pPlanning.DeleteDevice1') }}" + '/' + product_id, function (data) {
                 device1.draw();
+                devicefalse1.draw();
+                deviceproductfalse3.draw();
+                deviceproductfalse2.draw();
+                deviceproductfalse1.draw();
                 deviceproduct1.draw();
                 deviceproduct2.draw();
                 deviceproduct3.draw();
@@ -127,6 +204,70 @@
         });
 
 
+        var deviceproductfalse2 = $('.listdevicefalse2').DataTable({
+            processing: true,
+            serverSide: true,
+            "searching": false,
+            "lengthChange": false,
+            "info": false,
+            "bPaginate": false,
+            "language": {
+                "search": "جستجو:",
+                "lengthMenu": "نمایش _MENU_",
+                "zeroRecords": "موردی یافت نشد!",
+                "info": "نمایش _PAGE_ از _PAGES_",
+                "infoEmpty": "موردی یافت نشد",
+                "infoFiltered": "(جستجو از _MAX_ مورد)",
+                "processing": "در حال پردازش اطلاعات"
+            },
+            ajax: "{{ route('admin.pPlanning.deviceproductfalse2') }}",
+            columns: [
+                {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+                {data: 'ordercode', name: 'ordercode'},
+                {data: 'product_id', name: 'product_id'},
+                {data: 'color_id', name: 'color_id'},
+                {data: 'number', name: 'number'},
+                {data: 'created_at', name: 'created_at'},
+            ]
+        });
+        var devicefalse2 = $('.devicefalse2').DataTable({
+            processing: true,
+            serverSide: true,
+            rowreorder: true,
+            retrieve: true,
+            aaSorting: [],
+            "searching": false,
+            "lengthChange": false,
+            "info": false,
+            "bPaginate": false,
+            "bSort" : false,
+            "language": {
+                "search": "جستجو:",
+                "lengthMenu": "نمایش _MENU_",
+                "zeroRecords": "موردی یافت نشد!",
+                "info": "نمایش _PAGE_ از _PAGES_",
+                "infoEmpty": "موردی یافت نشد",
+                "infoFiltered": "(جستجو از _MAX_ مورد)",
+                "processing": "در حال پردازش اطلاعات"
+            },
+            ajax: "{{ route('admin.device2.list') }}",
+            columns: [
+                {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+                {data: 'product', name: 'product'},
+                {data: 'color', name: 'color'},
+                {data: 'number', name: 'number'},
+                {data: 'format', name: 'format'},
+                {data: 'insert', name: 'insert'},
+                {data: 'cycletime', name: 'cycletime'},
+                {data: 'size', name: 'size'},
+                {data: 'productiontime', name: 'productiontime'},
+                {data: 'productionqueue2', name: 'productionqueue2'},
+                {data: 'numberproduced', name: 'numberproduced'},
+                {data: 'Productionbalance', name: 'Productionbalance'},
+                {data: 'remainingtime', name: 'remainingtime'},
+                {data: 'deleteINdevice2', name: 'deleteINdevice2', orderable: false, searchable: false},
+            ]
+        });
         var deviceproduct2 = $('.listdevice2').DataTable({
             processing: true,
             serverSide: true,
@@ -220,6 +361,9 @@
         $('#device2').click(function () {
             $('#showDevice2').modal('show');
         });
+        $('#falsedevice2').click(function () {
+            $('#showFalseDevice2').modal('show');
+        });
         $('body').on('click', '.addTOdevice2', function () {
             var product_id = $(this).data('id');
             $.get("{{ route('admin.pPlanning.AddDevice2') }}" + '/' + product_id, function (data) {
@@ -228,7 +372,9 @@
                 deviceproduct1.draw();
                 deviceproduct4.draw();
                 deviceproduct5.draw();
-
+                deviceproductfalse3.draw();
+                deviceproductfalse2.draw();
+                deviceproductfalse1.draw();
                 device2.draw();
             })
         });
@@ -236,8 +382,12 @@
             var product_id = $(this).data('id');
             $.get("{{ route('admin.pPlanning.DeleteDevice2') }}" + '/' + product_id, function (data) {
                 device2.draw();
+                devicefalse2.draw();
                 deviceproduct1.draw();
                 deviceproduct2.draw();
+                deviceproductfalse3.draw();
+                deviceproductfalse2.draw();
+                deviceproductfalse1.draw();
                 deviceproduct3.draw();
                 deviceproduct4.draw();
                 deviceproduct5.draw();
@@ -246,6 +396,74 @@
         });
 
 
+
+
+        var deviceproductfalse3 = $('.listdevicefalse3').DataTable({
+            processing: true,
+            serverSide: true,
+            "searching": false,
+            "lengthChange": false,
+            "info": false,
+            "bPaginate": false,
+            "language": {
+                "search": "جستجو:",
+                "lengthMenu": "نمایش _MENU_",
+                "zeroRecords": "موردی یافت نشد!",
+                "info": "نمایش _PAGE_ از _PAGES_",
+                "infoEmpty": "موردی یافت نشد",
+                "infoFiltered": "(جستجو از _MAX_ مورد)",
+                "processing": "در حال پردازش اطلاعات"
+            },
+            ajax: "{{ route('admin.pPlanning.deviceproductfalse3') }}",
+            columns: [
+                {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+                {data: 'ordercode', name: 'ordercode'},
+                {data: 'product_id', name: 'product_id'},
+                {data: 'color_id', name: 'color_id'},
+                {data: 'number', name: 'number'},
+                {data: 'created_at', name: 'created_at'},
+
+
+            ]
+        });
+        var devicefalse3 = $('.devicefalse3').DataTable({
+            processing: true,
+            serverSide: true,
+            rowreorder: true,
+            retrieve: true,
+            aaSorting: [],
+            "searching": false,
+            "lengthChange": false,
+            "info": false,
+            "bPaginate": false,
+            "bSort" : false,
+            "language": {
+                "search": "جستجو:",
+                "lengthMenu": "نمایش _MENU_",
+                "zeroRecords": "موردی یافت نشد!",
+                "info": "نمایش _PAGE_ از _PAGES_",
+                "infoEmpty": "موردی یافت نشد",
+                "infoFiltered": "(جستجو از _MAX_ مورد)",
+                "processing": "در حال پردازش اطلاعات"
+            },
+            ajax: "{{ route('admin.device3.list') }}",
+            columns: [
+                {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+                {data: 'product', name: 'product'},
+                {data: 'color', name: 'color'},
+                {data: 'number', name: 'number'},
+                {data: 'format', name: 'format'},
+                {data: 'insert', name: 'insert'},
+                {data: 'cycletime', name: 'cycletime'},
+                {data: 'size', name: 'size'},
+                {data: 'productiontime', name: 'productiontime'},
+                {data: 'productionqueue3', name: 'productionqueue3'},
+                {data: 'numberproduced', name: 'numberproduced'},
+                {data: 'Productionbalance', name: 'Productionbalance'},
+                {data: 'remainingtime', name: 'remainingtime'},
+                {data: 'deleteINdevice3', name: 'deleteINdevice3', orderable: false, searchable: false},
+            ]
+        });
         var deviceproduct3 = $('.listdevice3').DataTable({
             processing: true,
             serverSide: true,
@@ -339,6 +557,9 @@
         $('#device3').click(function () {
             $('#showDevice3').modal('show');
         });
+        $('#falsedevice3').click(function () {
+            $('#showFalseDevice3').modal('show');
+        });
         $('body').on('click', '.addTOdevice3', function () {
             var product_id = $(this).data('id');
             $.get("{{ route('admin.pPlanning.AddDevice3') }}" + '/' + product_id, function (data) {
@@ -347,7 +568,9 @@
                 deviceproduct1.draw();
                 deviceproduct4.draw();
                 deviceproduct5.draw();
-
+                deviceproductfalse3.draw();
+                deviceproductfalse2.draw();
+                deviceproductfalse1.draw();
                 device3.draw();
             })
         });
@@ -355,7 +578,11 @@
             var product_id = $(this).data('id');
             $.get("{{ route('admin.pPlanning.DeleteDevice3') }}" + '/' + product_id, function (data) {
                 device3.draw();
+                devicefalse3.draw();
                 deviceproduct1.draw();
+                deviceproductfalse3.draw();
+                deviceproductfalse2.draw();
+                deviceproductfalse1.draw();
                 deviceproduct2.draw();
                 deviceproduct3.draw();
                 deviceproduct4.draw();

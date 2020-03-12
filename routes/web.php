@@ -179,6 +179,12 @@ Route::group(['middleware' => ['auth', 'web']], function () {
         Route::get('/colorscrap/update/{id?}', 'ColorScrapController@update')->name('admin.colorscrap.update');
         Route::delete('/colorscrap/delete/{id?}', 'ColorScrapController@delete')->name('admin.colorscrap.delete');
 
+        //ColorChangeController
+        Route::get('/colorchange/list', 'ColorChangeController@list')->name('admin.colorchange.list');
+        Route::post('/colorchange/store', 'ColorChangeController@store')->name('admin.colorchange.store');
+        Route::get('/colorchange/update/{id?}', 'ColorChangeController@update')->name('admin.colorchange.update');
+        Route::delete('/colorchange/delete/{id?}', 'ColorChangeController@delete')->name('admin.colorchange.delete');
+
 
     });
     Route::group(["namespace" => "Customer"], function () {
@@ -333,18 +339,21 @@ Route::group(['middleware' => ['auth', 'web']], function () {
         //ProductionPlanningController
         Route::get('/pPlanning/list', 'ProductionPlanningController@list')->name('admin.pPlanning.list');
         Route::get('/pPlanning/deviceproduct1', 'ProductionPlanningController@deviceproduct1')->name('admin.pPlanning.deviceproduct1');
+        Route::get('/pPlanning/deviceproductfalse1', 'ProductionPlanningController@deviceproductfalse1')->name('admin.pPlanning.deviceproductfalse1');
         Route::get('/pPlanning/Ldevice1', 'ProductionPlanningController@Ldevice1')->name('admin.device1.list');
         Route::get('/pPlanning/AddDevice1/{id?}', 'ProductionPlanningController@AddDevice1')->name('admin.pPlanning.AddDevice1');
         Route::get('/pPlanning/DeleteDevice1/{id?}', 'ProductionPlanningController@DeleteDevice1')->name('admin.pPlanning.DeleteDevice1');
         Route::post('pPlanning/SortDevice1', 'ProductionPlanningController@SortDevice1')->name('admin.device1.list.SortDevice1');
 
         Route::get('/pPlanning/deviceproduct2', 'ProductionPlanningController@deviceproduct2')->name('admin.pPlanning.deviceproduct2');
+        Route::get('/pPlanning/deviceproductfalse2', 'ProductionPlanningController@deviceproductfalse2')->name('admin.pPlanning.deviceproductfalse2');
         Route::get('/pPlanning/Ldevice2', 'ProductionPlanningController@Ldevice2')->name('admin.device2.list');
         Route::get('/pPlanning/AddDevice2/{id?}', 'ProductionPlanningController@AddDevice2')->name('admin.pPlanning.AddDevice2');
         Route::get('/pPlanning/DeleteDevice2/{id?}', 'ProductionPlanningController@DeleteDevice2')->name('admin.pPlanning.DeleteDevice2');
         Route::post('pPlanning/SortDevice2', 'ProductionPlanningController@SortDevice2')->name('admin.device2.list.SortDevice2');
 
         Route::get('/pPlanning/deviceproduct3', 'ProductionPlanningController@deviceproduct3')->name('admin.pPlanning.deviceproduct3');
+        Route::get('/pPlanning/deviceproductfalse3', 'ProductionPlanningController@deviceproductfalse3')->name('admin.pPlanning.deviceproductfalse3');
         Route::get('/pPlanning/Ldevice3', 'ProductionPlanningController@Ldevice3')->name('admin.device3.list');
         Route::get('/pPlanning/AddDevice3/{id?}', 'ProductionPlanningController@AddDevice3')->name('admin.pPlanning.AddDevice3');
         Route::get('/pPlanning/DeleteDevice3/{id?}', 'ProductionPlanningController@DeleteDevice3')->name('admin.pPlanning.DeleteDevice3');
@@ -375,9 +384,17 @@ Route::group(['middleware' => ['auth', 'web']], function () {
     });
 
 
+
+
+
+
+
+
+
+
+
+
     Route::get('/testttt', 'TestController@testttt');
-
-
     Route::get('/showDatatable', 'TestController@showDatatable')->name('showDatatable');
     Route::get('/refresh', 'TestController@refresh')->name('admin.table.refresh');
     Route::post('/updateOrder', 'TestController@updateOrder')->name('updateOrder');

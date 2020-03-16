@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProductionPlanning extends Model
+class Manufacturing extends Model
 {
-
+    //
 }

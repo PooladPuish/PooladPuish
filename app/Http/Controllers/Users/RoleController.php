@@ -198,10 +198,6 @@ class RoleController extends Controller
      */
     public function actions($row)
     {
-        $success = url('/public/icon/icons8-edit-144.png');
-        $delete = url('/public/icon/icons8-delete-bin-96.png');
-        $copy = url('/public/icon/icons8-copy-96.png');
-
         $btn = '<a href="' . route('admin.role.edit', $row->id) . '">
                        <i class="fa fa-edit fa-lg" title="ویرایش"></i>
                        </a>&nbsp;&nbsp;';
@@ -226,8 +222,6 @@ class RoleController extends Controller
 
     public function actio($row)
     {
-        $success = url('/public/icon/icons8-edit-144.png');
-        $delete = url('/public/icon/icons8-delete-bin-96.png');
 
         $btn = '<a href="javascript:void(0)" data-toggle="tooltip"
                       data-id="' . $row->id . '" data-original-title="ویرایش"

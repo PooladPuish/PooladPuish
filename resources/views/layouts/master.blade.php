@@ -533,6 +533,10 @@
                         <li><a href="{{route('admin.viewproduct.list')}}"><i
                                     class="fa fa-circle-o"></i>برنامه ریزی تولید</a>
                         </li>
+                        <li><a href="{{route('admin.Manufacturing.list')}}"><i
+                                    class="fa fa-circle-o"></i>تولید</a>
+                        </li>
+
 
                     </ul>
                 </li>

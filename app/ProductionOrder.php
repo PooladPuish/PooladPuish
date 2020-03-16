@@ -21,5 +21,17 @@ class ProductionOrder extends Model
     {
         return $this->hasMany(Color::class);
     }
+    public function productionplanning()
+    {
+        return $this->hasMany(ProductionPlanning::class);
+
+    }
+    public function deviceorde()
+    {
+        return $this->hasMany(DeviceOrders::class);
+
+    }
+
+
 
 }

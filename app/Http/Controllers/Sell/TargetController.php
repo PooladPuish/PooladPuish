@@ -44,7 +44,6 @@ class TargetController extends Controller
                 'January' => $request->January,
                 'Avalanche' => $request->Avalanche,
                 'March' => $request->March,
-
                 'user_id' => auth()->user()->id,
                 'year' => $request->year,
             ]);
@@ -69,10 +68,6 @@ class TargetController extends Controller
 
     public function actions($row)
     {
-        $success = url('/public/icon/icons8-edit-144.png');
-        $delete = url('/public/icon/icons8-delete-bin-96.png');
-
-
         $btn = ' <a href="javascript:void(0)" data-toggle="tooltip"
                       data-id="' . $row->id . '" data-original-title="ویرایش"
                        class="editProduct">

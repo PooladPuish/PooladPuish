@@ -19,6 +19,7 @@ use DB;
 use Gate;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
+use Mockery\Exception;
 use Morilog\Jalali\Jalalian;
 use Response;
 use Symfony\Component\VarDumper\Cloner\Data;
@@ -809,20 +810,23 @@ class InvoiceController extends Controller
 
     public function RestoreDelete($id)
     {
-
         $restore = Invoice::withTrashed()->find($id);
-        $success = $restore->restore();
-        if ($success) {
-            $restore->update([
-                'state' => 0,
-            ]);
-            \DB::table('invoice_delete')
-                ->where('invoice_id', $restore->id)
-                ->delete();
+        DB::beginTransaction();
+        try {
+            $success = $restore->restore();
+            if ($success) {
+                $restore->update([
+                    'state' => 0,
+                ]);
+                \DB::table('invoice_delete')
+                    ->where('invoice_id', $restore->id)
+                    ->delete();
+            }
+            DB::commit();
+        } catch (Exception $exception) {
+            DB::rollBack();
         }
-
         return response()->json(['success' => 'Product saved successfully.']);
-
     }
 
     public function wizard()
@@ -857,18 +861,17 @@ class InvoiceController extends Controller
 
     public function edit(Request $request)
     {
-
-
-        $invoice = Invoice::find($request->id)->update([
-            'user_id' => $request->user_id,
-            'customer_id' => $request->customer_id,
-            'invoiceType' => $request->InvoiceType,
-            'paymentMethod' => $request->paymentMethod,
-            'sum_sell' => $request->sum_selll,
-            'number_sell' => $request->number_selll,
-            'price_sell' => $request->price_selll,
-        ]);
-        if ($invoice) {
+        DB::beginTransaction();
+        try {
+            $invoice = Invoice::find($request->id)->update([
+                'user_id' => $request->user_id,
+                'customer_id' => $request->customer_id,
+                'invoiceType' => $request->InvoiceType,
+                'paymentMethod' => $request->paymentMethod,
+                'sum_sell' => $request->sum_selll,
+                'number_sell' => $request->number_selll,
+                'price_sell' => $request->price_selll,
+            ]);
             try {
                 \DB::table('invoice_product')
                     ->where('invoice_id', $request->id)
@@ -888,10 +891,11 @@ class InvoiceController extends Controller
                 }
             } catch (\Exception $e) {
             }
-            return response()->json(['success' => 'مشخصات با موفقیت در سیستم ثبت شد']);
-
-
+            DB::commit();
+        } catch (Exception $exception) {
+            DB::rollBack();
         }
+        return response()->json(['success' => 'مشخصات با موفقیت در سیستم ثبت شد']);
 
 
     }
@@ -910,21 +914,22 @@ class InvoiceController extends Controller
         } else
             $numberCount = $count->id + 1;
         $invoiceNumber = $year . $now_date->month . $now_date->day . $numberCount;
-        $invoice = Invoice::create([
-            'invoiceNumber' => $invoiceNumber,
-            'user_id' => $request->user_id,
-            'customer_id' => $request->customer_id,
-            'invoiceType' => $request->InvoiceType,
-            'paymentMethod' => $request->paymentMethod,
-            'sum_sell' => $request->sum_selll,
-            'number_sell' => $request->number_selll,
-            'price_sell' => $request->price_selll,
-            'created' => date("Y/m/d"),
-            'date' => $date,
-            'Month' => $to->month,
-            'Year' => $to->year,
-        ]);
-        if ($invoice) {
+        DB::beginTransaction();
+        try {
+            $invoice = Invoice::create([
+                'invoiceNumber' => $invoiceNumber,
+                'user_id' => $request->user_id,
+                'customer_id' => $request->customer_id,
+                'invoiceType' => $request->InvoiceType,
+                'paymentMethod' => $request->paymentMethod,
+                'sum_sell' => $request->sum_selll,
+                'number_sell' => $request->number_selll,
+                'price_sell' => $request->price_selll,
+                'created' => date("Y/m/d"),
+                'date' => $date,
+                'Month' => $to->month,
+                'Year' => $to->year,
+            ]);
             try {
                 $number = count(collect($request)->get('product'));
                 for ($i = 0; $i <= $number; $i++) {
@@ -941,10 +946,11 @@ class InvoiceController extends Controller
                 }
             } catch (\Exception $e) {
             }
-            return response()->json(['success' => 'مشخصات با موفقیت در سیستم ثبت شد']);
-
-
+            DB::commit();
+        } catch (Exception $exception) {
+            DB::rollBack();
         }
+        return response()->json(['success' => 'مشخصات با موفقیت در سیستم ثبت شد']);
 
 
     }
@@ -968,18 +974,23 @@ class InvoiceController extends Controller
 
     public function print(Request $request)
     {
-
-        \DB::table('invoice_print_date')
-            ->updateOrInsert(['invoice_id' => $request->id],
-                [
-                    'selectstores_id' => $request->selectstores,
-                    'bank_id' => $request->name_bank,
-                    'date' => $request->date,
-                    'description' => $request->description,
-                ]);
-        Invoice::where('id', $request->id)->update([
-            'selectstores' => $request->selectstores,
-        ]);
+        DB::beginTransaction();
+        try {
+            \DB::table('invoice_print_date')
+                ->updateOrInsert(['invoice_id' => $request->id],
+                    [
+                        'selectstores_id' => $request->selectstores,
+                        'bank_id' => $request->name_bank,
+                        'date' => $request->date,
+                        'description' => $request->description,
+                    ]);
+            Invoice::where('id', $request->id)->update([
+                'selectstores' => $request->selectstores,
+            ]);
+            DB::commit();
+        } catch (Exception $exception) {
+            DB::rollBack();
+        }
         $bank = Bank::where('id', $request->name_bank)->first();
         $selectstore = SelectStore::where('id', $request->selectstores)->first();
         $id = Invoice::find($request->id);
@@ -1015,20 +1026,24 @@ class InvoiceController extends Controller
         ]);
 
         if ($validator->passes()) {
-            $invoice_customer = \DB::table('invoice_customer')
-                ->updateOrInsert(['invoice_id' => $request->id_in],
-                    [
-                        'date' => $request->date,
-                        'name' => $request->name,
-                        'HowConfirm' => $request->HowConfirm,
-                        'file' => $request->file,
-                        'description' => $request->description,
-                        'created_at' => date('Y/m/d'),
-                    ]);
-            if ($invoice_customer) {
+            DB::beginTransaction();
+            try {
+                $invoice_customer = \DB::table('invoice_customer')
+                    ->updateOrInsert(['invoice_id' => $request->id_in],
+                        [
+                            'date' => $request->date,
+                            'name' => $request->name,
+                            'HowConfirm' => $request->HowConfirm,
+                            'file' => $request->file,
+                            'description' => $request->description,
+                            'created_at' => date('Y/m/d'),
+                        ]);
                 Invoice::find($request->id_in)->update([
                     'state' => 1,
                 ]);
+                DB::commit();
+            } catch (Exception $exception) {
+                DB::rollBack();
             }
             return response()->json(['success' => 'Product saved successfully.']);
         }
@@ -1041,43 +1056,43 @@ class InvoiceController extends Controller
     {
         $id = Invoice::where('id', $request->customer_id)->first();
 
-
-        $success = \DB::table('customer_validation_payment')
-            ->updateOrInsert(['customer_id' => $id->customer_id],
-                [
-                    'Creditceiling' => $request->Creditceiling,
-                    'Openceiling' => $request->Openceiling,
-                    'Yearcount' => $request->Yearcount,
-                    'yearAgoCount' => $request->yearAgoCount,
-                    'Yearturnover' => $request->Yearturnover,
-                    'lastYearturnover' => $request->lastYearturnover,
-                    'user_id' => auth()->user()->id,
-                    'Checkback' => $request->Checkback,
-                    'Checkbackintheflow' => $request->Checkbackintheflow,
-                    'accountbalance' => $request->accountbalance,
-                    'Averagetimedelay' => $request->Averagetimedelay,
-                    'Futurefactors' => $request->Futurefactors,
-                    'Receiveddocuments' => $request->Receiveddocuments,
-                    'Openaccountbalance' => $request->Openaccountbalance,
-                    'paymentmethod' => $request->paymentmethod,
-                    'description' => $request->description,
-                    'created_at' => date('Y/m/d'),
-                ]);
-
-        Invoice::where('id', $request->customer_id)->update([
-            'state' => 3,
-        ]);
-
+        DB::beginTransaction();
+        try {
+            $success = \DB::table('customer_validation_payment')
+                ->updateOrInsert(['customer_id' => $id->customer_id],
+                    [
+                        'Creditceiling' => $request->Creditceiling,
+                        'Openceiling' => $request->Openceiling,
+                        'Yearcount' => $request->Yearcount,
+                        'yearAgoCount' => $request->yearAgoCount,
+                        'Yearturnover' => $request->Yearturnover,
+                        'lastYearturnover' => $request->lastYearturnover,
+                        'user_id' => auth()->user()->id,
+                        'Checkback' => $request->Checkback,
+                        'Checkbackintheflow' => $request->Checkbackintheflow,
+                        'accountbalance' => $request->accountbalance,
+                        'Averagetimedelay' => $request->Averagetimedelay,
+                        'Futurefactors' => $request->Futurefactors,
+                        'Receiveddocuments' => $request->Receiveddocuments,
+                        'Openaccountbalance' => $request->Openaccountbalance,
+                        'paymentmethod' => $request->paymentmethod,
+                        'description' => $request->description,
+                        'created_at' => date('Y/m/d'),
+                    ]);
+            Invoice::where('id', $request->customer_id)->update([
+                'state' => 3,
+            ]);
+            DB::commit();
+        } catch (Exception $exception) {
+            DB::rollBack();
+        }
         return response()->json(['success' => 'Product saved successfully.']);
-
     }
 
     public function ManyStore(Request $request)
     {
 
         $id = Invoice::where('id', $request->many_id)->first();
-
-
         $success = \DB::table('customer_history_payment')
             ->updateOrInsert(['customer_id' => $id->customer_id],
                 [
@@ -1109,30 +1124,34 @@ class InvoiceController extends Controller
 
     public function delete(Request $request)
     {
-        if ($request->step == 1) {
-            Invoice::find($request->id_delete)->update([
-                'state' => 0,
-            ]);
-        } elseif ($request->step == 2) {
-            Invoice::find($request->id_delete)->update([
-                'state' => 1,
-            ]);
-        } else {
-            \DB::table('invoice_delete')->insert([
-                'invoice_id' => $request->id_delete,
-                'cancellation' => $request->cancellation,
-                'description' => $request->description,
-            ]);
-            $update = Invoice::find($request->id_delete)->update([
-                'state' => 2,
-            ]);
-            if ($update) {
-                $delete_soft = Invoice::find($request->id_delete);
-                $delete_soft->delete();
+        DB::beginTransaction();
+        try {
+            if ($request->step == 1) {
+                Invoice::find($request->id_delete)->update([
+                    'state' => 0,
+                ]);
+            } elseif ($request->step == 2) {
+                Invoice::find($request->id_delete)->update([
+                    'state' => 1,
+                ]);
+            } else {
+                \DB::table('invoice_delete')->insert([
+                    'invoice_id' => $request->id_delete,
+                    'cancellation' => $request->cancellation,
+                    'description' => $request->description,
+                ]);
+                $update = Invoice::find($request->id_delete)->update([
+                    'state' => 2,
+                ]);
+                if ($update) {
+                    $delete_soft = Invoice::find($request->id_delete);
+                    $delete_soft->delete();
+                }
             }
+            DB::commit();
+        } catch (Exception $exception) {
+            DB::rollBack();
         }
-
-
         return response()->json(['success' => 'Product saved successfully.']);
     }
 
@@ -1214,10 +1233,11 @@ class InvoiceController extends Controller
 
     public function AdminSuccess(Request $request)
     {
-        $success = Invoice::where('id', $request->id_invoice)->update([
-            'state' => 4,
-        ]);
-        if ($success) {
+        DB::beginTransaction();
+        try {
+            Invoice::where('id', $request->id_invoice)->update([
+                'state' => 4,
+            ]);
             \DB::table('admin_invoice')
                 ->updateOrInsert(['invoice_id' => $request->id_invoice],
                     [
@@ -1225,6 +1245,9 @@ class InvoiceController extends Controller
                         'invoice_id' => $request->id_invoice,
                         'description' => $request->description,
                     ]);
+            DB::commit();
+        } catch (Exception $exception) {
+            DB::rollBack();
         }
         return response()->json(['success' => 'Product saved successfully.']);
     }
@@ -1234,8 +1257,6 @@ class InvoiceController extends Controller
         $return = \DB::table('admin_invoice')
             ->where('invoice_id', $id)->first();
         return response()->json($return);
-
-
     }
 
     public function CheckCanceled($id)
@@ -1243,8 +1264,6 @@ class InvoiceController extends Controller
         $return = \DB::table('invoice_delete')
             ->where('invoice_id', $id)->first();
         return response()->json($return);
-
-
     }
 
     public function success(Request $request)
@@ -1452,13 +1471,7 @@ class InvoiceController extends Controller
 
     public function actions($row)
     {
-        $success = url('/public/icon/icons8-edit-144.png');
-        $delete = url('/public/icon/icons8-delete-bin-96.png');
-        $print = url('/public/icon/icons8-print-96.png');
-        $success_customer = url('/public/icon/icons8-good-pincode-80.png');
-        $validate = url('/public/icon/icons8-id-verified-80.png');
-        $many = url('/public/icon/icons8-wallet-96.png');
-        $detail = url('/public/icon/icons8-more-details-96.png');
+
         $btn = null;
         if (Gate::check('تایید توسط مشتری')) {
             $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"

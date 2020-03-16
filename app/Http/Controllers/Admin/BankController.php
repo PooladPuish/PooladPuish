@@ -14,7 +14,6 @@ class BankController extends Controller
      */
     public function list(Request $request)
     {
-
         if ($request->ajax()) {
             $data = Bank::get();
             return Datatables::of($data)
@@ -24,7 +23,6 @@ class BankController extends Controller
                         return 'فعال';
                     } else
                         return 'غیر فعال';
-
                 })
                 ->addColumn('action', function ($row) {
                     return $this->actions($row);
@@ -51,7 +49,6 @@ class BankController extends Controller
                 'status' => $request->status,
             ]);
         return response()->json(['success' => 'Product saved successfully.']);
-
     }
 
     /**
@@ -61,7 +58,6 @@ class BankController extends Controller
     {
         $bank = Bank::find($id);
         return response()->json($bank);
-
     }
 
     /**
@@ -72,7 +68,6 @@ class BankController extends Controller
         $delete = Bank::find($id);
         $delete->delete();
         return response()->json(['success' => 'Product saved successfully.']);
-
     }
 
     /**
@@ -80,25 +75,17 @@ class BankController extends Controller
      */
     public function actions($row)
     {
-        $success = url('/public/icon/icons8-edit-144.png');
-        $delete = url('/public/icon/icons8-delete-bin-96.png');
-
-
         $btn = ' <a href="javascript:void(0)" data-toggle="tooltip"
                       data-id="' . $row->id . '" data-original-title="ویرایش"
                        class="editProduct">
                       <i class="fa fa-edit fa-lg" title="ویرایش"></i>
                       </a>&nbsp;&nbsp;';
-
         $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"
                       data-id="' . $row->id . '" data-original-title="حذف"
                        class="deleteProduct">
                        <i class="fa fa-trash fa-lg" title="حذف"></i>
                        </a>';
-
         return $btn;
 
     }
-
-
 }

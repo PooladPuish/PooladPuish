@@ -371,34 +371,23 @@ Route::group(['middleware' => ['auth', 'web']], function () {
         Route::get('/pPlanning/DeleteDevice5/{id?}', 'ProductionPlanningController@DeleteDevice5')->name('admin.pPlanning.DeleteDevice5');
         Route::post('pPlanning/SortDevice5', 'ProductionPlanningController@SortDevice5')->name('admin.device5.list.SortDevice5');
 
-
-
-
-
-
-
         //ViewProductController
         Route::get('/viewproduct/list', 'ViewProductController@list')->name('admin.viewproduct.list');
 
+        //ManufacturingController
+        Route::get('/Manufacturing/list', 'ManufacturingController@list')->name('admin.Manufacturing.list');
+        Route::get('/Manufacturing/device1/list', 'ManufacturingController@deviceList1')->name('admin.Manufacturing.device1.list');
+        Route::get('/Manufacturing/device2/list', 'ManufacturingController@deviceList2')->name('admin.Manufacturing.device2.list');
+        Route::get('/Manufacturing/device3/list', 'ManufacturingController@deviceList3')->name('admin.Manufacturing.device3.list');
+
 
     });
-
-
-
-
-
-
-
-
-
-
 
 
     Route::get('/testttt', 'TestController@testttt');
     Route::get('/showDatatable', 'TestController@showDatatable')->name('showDatatable');
     Route::get('/refresh', 'TestController@refresh')->name('admin.table.refresh');
     Route::post('/updateOrder', 'TestController@updateOrder')->name('updateOrder');
-
 
 
 });

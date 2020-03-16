@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manufacturing;
 
 use App\Color;
+use App\ColorChange;
 use App\Device;
 use App\DeviceOrders;
 use App\EventsFormat;
@@ -576,47 +577,39 @@ class ProductionPlanningController extends Controller
 
     public function Ldevice1(Request $request)
     {
-
-
         if ($request->ajax()) {
             $data = DeviceOrders::where('device_id', 1)
                 ->orderBy('Order', 'ASC')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('product', function ($row) {
-                    $product = ProductionOrder::where('id', $row->order_id)
-                        ->first();
-                    $name = Product::where('id', $product->product_id)->first();
+                    $product = $row->productorder->product_id;
+                    $name = Product::where('id', $product)->first();
                     return $name->label;
                 })
                 ->addColumn('deleteINdevice1', function ($row) {
                     return $this->deleteINdevice1($row);
                 })
                 ->addColumn('color', function ($row) {
-                    $color = ProductionOrder::where('id', $row->order_id)
-                        ->first();
-                    $name = Color::where('id', $color->color_id)->first();
+                    $color = $row->productorder->color_id;
+                    $name = Color::where('id', $color)->first();
                     return $name->manufacturer . ' - ' . $name->name;
                 })
                 ->addColumn('number', function ($row) {
-                    $number = ProductionOrder::where('id', $row->order_id)
-                        ->first();
-                    return $number->number;
+                    return $row->productorder->number;
                 })
                 ->addColumn('format', function ($row) {
-                    $product_id = ProductionOrder::where('id', $row->order_id)
-                        ->first();
+                    $product_id = $row->productorder->product_id;
                     $format = DB::table('model_products')
-                        ->where('product_id', $product_id->product_id)
+                        ->where('product_id', $product_id)
                         ->first();
                     $name = Format::where('id', $format->format_id)->first();
                     return $name->name;
                 })
                 ->addColumn('insert', function ($row) {
-                    $product_id = ProductionOrder::where('id', $row->order_id)
-                        ->first();
+                    $product_id = $row->productorder->product_id;
                     $format = DB::table('model_products')
-                        ->where('product_id', $product_id->product_id)
+                        ->where('product_id', $product_id)
                         ->first();
                     $name = Insert::where('id', $format->insert_id)->first();
                     if (!empty($name)) {
@@ -626,18 +619,16 @@ class ProductionPlanningController extends Controller
                     }
                 })
                 ->addColumn('cycletime', function ($row) {
-                    $product_id = ProductionOrder::where('id', $row->order_id)
-                        ->first();
+                    $product_id = $row->productorder->product_id;
                     $format = DB::table('model_products')
-                        ->where('product_id', $product_id->product_id)
+                        ->where('product_id', $product_id)
                         ->first();
                     return $format->cycletime;
                 })
                 ->addColumn('size', function ($row) {
-                    $product_id = ProductionOrder::where('id', $row->order_id)
-                        ->first();
+                    $product_id = $row->productorder->product_id;
                     $format = DB::table('model_products')
-                        ->where('product_id', $product_id->product_id)
+                        ->where('product_id', $product_id)
                         ->first();
                     return $format->size;
                 })
@@ -661,6 +652,7 @@ class ProductionPlanningController extends Controller
 
                 })
                 ->addColumn('remainingtime', function ($row) {
+
                     $days = intval(intval($row->productiontime) / (3600 * 24));
                     $h = intval($row->productiontime % (24 * 3600));
                     $hour = intval($h / 3600);
@@ -683,14 +675,12 @@ class ProductionPlanningController extends Controller
                     return $this->productionqueue1($row);
 
                 })
-
                 ->addColumn('numberproduced', function ($row) {
                     return 0;
                 })
                 ->addColumn('Productionbalance', function ($row) {
-                    $number = ProductionOrder::where('id', $row->order_id)
-                        ->first();
-                    return $number->number;
+
+                    return $row->productorder->number;
                 })
                 ->rawColumns(['deleteINdevice1'])
                 ->make(true);
@@ -700,7 +690,6 @@ class ProductionPlanningController extends Controller
 
     public function AddDevice1($id)
     {
-
         $product_id = ProductionOrder::where('id', $id)
             ->first();
         $format = DB::table('model_products')
@@ -709,36 +698,46 @@ class ProductionPlanningController extends Controller
         $name = Format::where('id', $format->format_id)->first();
         $number = ProductionOrder::where('id', $id)
             ->first();
-
-
         $t = $number->number / $name->quetta;
         $v = $t * $format->cycletime;
-        ProductionOrder::find($id)->update([
-            'status' => 1,
-        ]);
-        $device = DeviceOrders::create([
-            'device_id' => 1,
-            'order_id' => $id,
-            'productiontime' => $v,
-        ]);
-        DeviceOrders::find($device->id)->update([
-            'Order' => $device->id,
-        ]);
-
-        return response()->json();
+        DB::beginTransaction();
+        try {
+            ProductionOrder::find($id)->update([
+                'status' => 1,
+            ]);
+            $device = DeviceOrders::create([
+                'device_id' => 1,
+                'order_id' => $id,
+                'productiontime' => $v,
+            ]);
+            DeviceOrders::find($device->id)->update([
+                'Order' => $device->id,
+            ]);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['error' => 'error']);
+        }
+        return response()->json(['success' => 'success']);
     }
 
     public function DeleteDevice1($id)
     {
-
         $update = DeviceOrders::where('id', $id)
             ->first();
-        ProductionOrder::find($update->order_id)->update([
-            'status' => 0,
-        ]);
-        DeviceOrders::where('id', $id)
-            ->delete();
-        return response()->json();
+        DB::beginTransaction();
+        try {
+            ProductionOrder::find($update->order_id)->update([
+                'status' => 0,
+            ]);
+            DeviceOrders::where('id', $id)
+                ->delete();
+            DB::commit();
+        } catch (Exception $exception) {
+            DB::rollBack();
+            return response()->json(['error' => 'error']);
+        }
+        return response()->json(['success' => 'success']);
     }
 
     public function SortDevice1(Request $request)
@@ -751,6 +750,7 @@ class ProductionPlanningController extends Controller
 
         return response()->json($data);
     }
+
 
     public function deviceproduct2(Request $request)
     {
@@ -813,39 +813,33 @@ class ProductionPlanningController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('product', function ($row) {
-                    $product = ProductionOrder::where('id', $row->order_id)
-                        ->first();
-                    $name = Product::where('id', $product->product_id)->first();
+                    $product = $row->productorder->product_id;
+                    $name = Product::where('id', $product)->first();
                     return $name->label;
                 })
                 ->addColumn('deleteINdevice2', function ($row) {
                     return $this->deleteINdevice2($row);
                 })
                 ->addColumn('color', function ($row) {
-                    $color = ProductionOrder::where('id', $row->order_id)
-                        ->first();
-                    $name = Color::where('id', $color->color_id)->first();
+                    $color = $row->productorder->color_id;
+                    $name = Color::where('id', $color)->first();
                     return $name->manufacturer . ' - ' . $name->name;
                 })
                 ->addColumn('number', function ($row) {
-                    $number = ProductionOrder::where('id', $row->order_id)
-                        ->first();
-                    return $number->number;
+                    return $row->productorder->number;
                 })
                 ->addColumn('format', function ($row) {
-                    $product_id = ProductionOrder::where('id', $row->order_id)
-                        ->first();
+                    $product_id = $row->productorder->product_id;
                     $format = DB::table('model_products')
-                        ->where('product_id', $product_id->product_id)
+                        ->where('product_id', $product_id)
                         ->first();
                     $name = Format::where('id', $format->format_id)->first();
                     return $name->name;
                 })
                 ->addColumn('insert', function ($row) {
-                    $product_id = ProductionOrder::where('id', $row->order_id)
-                        ->first();
+                    $product_id = $row->productorder->product_id;
                     $format = DB::table('model_products')
-                        ->where('product_id', $product_id->product_id)
+                        ->where('product_id', $product_id)
                         ->first();
                     $name = Insert::where('id', $format->insert_id)->first();
                     if (!empty($name)) {
@@ -855,18 +849,16 @@ class ProductionPlanningController extends Controller
                     }
                 })
                 ->addColumn('cycletime', function ($row) {
-                    $product_id = ProductionOrder::where('id', $row->order_id)
-                        ->first();
+                    $product_id = $row->productorder->product_id;
                     $format = DB::table('model_products')
-                        ->where('product_id', $product_id->product_id)
+                        ->where('product_id', $product_id)
                         ->first();
                     return $format->cycletime;
                 })
                 ->addColumn('size', function ($row) {
-                    $product_id = ProductionOrder::where('id', $row->order_id)
-                        ->first();
+                    $product_id = $row->productorder->product_id;
                     $format = DB::table('model_products')
-                        ->where('product_id', $product_id->product_id)
+                        ->where('product_id', $product_id)
                         ->first();
                     return $format->size;
                 })
@@ -879,15 +871,11 @@ class ProductionPlanningController extends Controller
                     $seconds = intval($m % 60);
                     if ($row->productiontime >= 86400) {
                         return $days . ' روز ' . $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
-
                     } elseif ($row->productiontime >= 3600) {
                         return $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
-
                     } else {
                         return $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
-
                     }
-
                 })
                 ->addColumn('remainingtime', function ($row) {
                     $days = intval(intval($row->productiontime) / (3600 * 24));
@@ -898,28 +886,21 @@ class ProductionPlanningController extends Controller
                     $seconds = intval($m % 60);
                     if ($row->productiontime >= 86400) {
                         return $days . ' روز ' . $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
-
                     } elseif ($row->productiontime >= 3600) {
                         return $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
-
                     } else {
                         return $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
-
                     }
-
                 })
                 ->addColumn('productionqueue2', function ($row) {
                     return $this->productionqueue2($row);
-
                 })
                 ->addColumn('numberproduced', function ($row) {
                     return 0;
 
                 })
                 ->addColumn('Productionbalance', function ($row) {
-                    $number = ProductionOrder::where('id', $row->order_id)
-                        ->first();
-                    return $number->number;
+                    return $row->productorder->number;
                 })
                 ->rawColumns(['deleteINdevice2'])
                 ->make(true);
@@ -929,7 +910,6 @@ class ProductionPlanningController extends Controller
 
     public function AddDevice2($id)
     {
-
         $product_id = ProductionOrder::where('id', $id)
             ->first();
         $format = DB::table('model_products')
@@ -940,32 +920,46 @@ class ProductionPlanningController extends Controller
             ->first();
         $t = $number->number / $name->quetta;
         $v = $t * $format->cycletime;
-        ProductionOrder::find($id)->update([
-            'status' => 1,
-        ]);
-        $device = DeviceOrders::create([
-            'device_id' => 2,
-            'order_id' => $id,
-            'productiontime' => $v,
-        ]);
-        DeviceOrders::find($device->id)->update([
-            'Order' => $device->id,
-        ]);
-
-        return response()->json();
+        DB::beginTransaction();
+        try {
+            ProductionOrder::find($id)->update([
+                'status' => 1,
+            ]);
+            $device = DeviceOrders::create([
+                'device_id' => 2,
+                'order_id' => $id,
+                'productiontime' => $v,
+            ]);
+            DeviceOrders::find($device->id)->update([
+                'Order' => $device->id,
+            ]);
+            DB::commit();
+        } catch (Exception $exception) {
+            DB::rollBack();
+            return response()->json(['error' => 'error']);
+        }
+        return response()->json(['success' => 'success']);
     }
 
     public function DeleteDevice2($id)
     {
-
         $update = DeviceOrders::where('id', $id)
             ->first();
-        ProductionOrder::find($update->order_id)->update([
-            'status' => 0,
-        ]);
-        DeviceOrders::where('id', $id)
-            ->delete();
-        return response()->json();
+        DB::beginTransaction();
+        try {
+            ProductionOrder::find($update->order_id)->update([
+                'status' => 0,
+            ]);
+            DeviceOrders::where('id', $id)
+                ->delete();
+            DB::commit();
+        } catch (Exception $exception) {
+            DB::rollBack();
+            return response()->json(['error' => 'error']);
+        }
+        return response()->json(['success' => 'success']);
+
+
     }
 
     public function SortDevice2(Request $request)
@@ -1157,7 +1151,6 @@ class ProductionPlanningController extends Controller
 
     public function AddDevice3($id)
     {
-
         $product_id = ProductionOrder::where('id', $id)
             ->first();
         $format = DB::table('model_products')
@@ -1168,19 +1161,25 @@ class ProductionPlanningController extends Controller
             ->first();
         $t = $number->number / $name->quetta;
         $v = $t * $format->cycletime;
-        ProductionOrder::find($id)->update([
-            'status' => 1,
-        ]);
-        $device = DeviceOrders::create([
-            'device_id' => 3,
-            'order_id' => $id,
-            'productiontime' => $v,
-        ]);
-        DeviceOrders::find($device->id)->update([
-            'Order' => $device->id,
-        ]);
-
-        return response()->json();
+        DB::beginTransaction();
+        try {
+            ProductionOrder::find($id)->update([
+                'status' => 1,
+            ]);
+            $device = DeviceOrders::create([
+                'device_id' => 3,
+                'order_id' => $id,
+                'productiontime' => $v,
+            ]);
+            DeviceOrders::find($device->id)->update([
+                'Order' => $device->id,
+            ]);
+            DB::commit();
+        } catch (Exception $exception) {
+            DB::rollBack();
+            return response()->json(['error' => 'error']);
+        }
+        return response()->json(['success' => 'success']);
     }
 
     public function DeleteDevice3($id)
@@ -1188,12 +1187,19 @@ class ProductionPlanningController extends Controller
 
         $update = DeviceOrders::where('id', $id)
             ->first();
-        ProductionOrder::find($update->order_id)->update([
-            'status' => 0,
-        ]);
-        DeviceOrders::where('id', $id)
-            ->delete();
-        return response()->json();
+        DB::beginTransaction();
+        try {
+            ProductionOrder::find($update->order_id)->update([
+                'status' => 0,
+            ]);
+            DeviceOrders::where('id', $id)
+                ->delete();
+            DB::commit();
+        } catch (Exception $exception) {
+            DB::rollBack();
+            return response()->json(['error' => 'error']);
+        }
+        return response()->json(['success' => 'success']);
     }
 
     public function SortDevice3(Request $request)
@@ -1619,18 +1625,21 @@ class ProductionPlanningController extends Controller
     public function productionqueue1($row)
     {
 
-
         $count = $this->count1 += $row->productiontime;
-        $days = intval(intval($count) / (3600 * 24));
-        $h = intval($count % (24 * 3600));
+        $color = $this->color($row);
+        $format = $this->format($row);
+        $insert = $this->insert($row);
+        $sum = $color + $count + $format + $insert;
+        $days = intval(intval($sum) / (3600 * 24));
+        $h = intval($sum % (24 * 3600));
         $hour = intval($h / 3600);
         $m = intval($h % 3600);
         $minutes = intval($m / 60);
         $seconds = intval($m % 60);
-        if ($count >= 86400) {
+        if ($sum >= 86400) {
             return $days . ' روز ' . $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
 
-        } elseif ($count >= 3600) {
+        } elseif ($sum >= 3600) {
             return $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
 
         } else {
@@ -1641,23 +1650,24 @@ class ProductionPlanningController extends Controller
 
     }
 
-
-
-
     public function productionqueue2($row)
     {
 
         $count2 = $this->count2 += $row->productiontime;
-        $days = intval(intval($count2) / (3600 * 24));
-        $h = intval($count2 % (24 * 3600));
+        $color = $this->color($row);
+        $format = $this->format($row);
+        $insert = $this->insert($row);
+        $sum = $color + $count2 + $format + $insert;
+        $days = intval(intval($sum) / (3600 * 24));
+        $h = intval($sum % (24 * 3600));
         $hour = intval($h / 3600);
         $m = intval($h % 3600);
         $minutes = intval($m / 60);
         $seconds = intval($m % 60);
-        if ($count2 >= 86400) {
+        if ($sum >= 86400) {
             return $days . ' روز ' . $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
 
-        } elseif ($count2 >= 3600) {
+        } elseif ($sum >= 3600) {
             return $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
 
         } else {
@@ -1672,16 +1682,20 @@ class ProductionPlanningController extends Controller
     {
 
         $count3 = $this->count3 += $row->productiontime;
-        $days = intval(intval($count3) / (3600 * 24));
-        $h = intval($count3 % (24 * 3600));
+        $color = $this->color($row);
+        $format = $this->format($row);
+        $insert = $this->insert($row);
+        $sum = $color + $count3 + $format + $insert;
+        $days = intval(intval($sum) / (3600 * 24));
+        $h = intval($sum % (24 * 3600));
         $hour = intval($h / 3600);
         $m = intval($h % 3600);
         $minutes = intval($m / 60);
         $seconds = intval($m % 60);
-        if ($count3 >= 86400) {
+        if ($sum >= 86400) {
             return $days . ' روز ' . $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
 
-        } elseif ($count3 >= 3600) {
+        } elseif ($sum >= 3600) {
             return $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
 
         } else {
@@ -1696,16 +1710,20 @@ class ProductionPlanningController extends Controller
     {
 
         $count4 = $this->count4 += $row->productiontime;
-        $days = intval(intval($count4) / (3600 * 24));
-        $h = intval($count4 % (24 * 3600));
+        $color = $this->color($row);
+        $format = $this->format($row);
+        $insert = $this->insert($row);
+        $sum = $color + $count4 + $format + $insert;
+        $days = intval(intval($sum) / (3600 * 24));
+        $h = intval($sum % (24 * 3600));
         $hour = intval($h / 3600);
         $m = intval($h % 3600);
         $minutes = intval($m / 60);
         $seconds = intval($m % 60);
-        if ($count4 >= 86400) {
+        if ($sum >= 86400) {
             return $days . ' روز ' . $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
 
-        } elseif ($count4 >= 3600) {
+        } elseif ($sum >= 3600) {
             return $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
 
         } else {
@@ -1720,16 +1738,20 @@ class ProductionPlanningController extends Controller
     {
 
         $count5 = $this->count5 += $row->productiontime;
-        $days = intval(intval($count5) / (3600 * 24));
-        $h = intval($count5 % (24 * 3600));
+        $color = $this->color($row);
+        $format = $this->format($row);
+        $insert = $this->insert($row);
+        $sum = $color + $count5 + $format + $insert;
+        $days = intval(intval($sum) / (3600 * 24));
+        $h = intval($sum % (24 * 3600));
         $hour = intval($h / 3600);
         $m = intval($h % 3600);
         $minutes = intval($m / 60);
         $seconds = intval($m % 60);
-        if ($count5 >= 86400) {
+        if ($sum >= 86400) {
             return $days . ' روز ' . $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
 
-        } elseif ($count5 >= 3600) {
+        } elseif ($sum >= 3600) {
             return $hour . ' ساعت ' . $minutes . ' دقیقه ' . $seconds . ' ثانیه ';
 
         } else {
@@ -1739,6 +1761,82 @@ class ProductionPlanningController extends Controller
 
 
     }
+
+
+    public function color($row)
+    {
+        $test = DeviceOrders::where('Order', '<', $row->Order)->max('Order');
+        if (!empty($test)) {
+            $count = DeviceOrders::where('Order', $test)->first();
+            $tes = ProductionOrder::where('id', $count->order_id)->first();
+            $color = Color::where('id', $tes->color_id)->first();
+            $tess = ProductionOrder::where('id', $row->order_id)->first();
+            $colorr = Color::where('id', $tess->color_id)->first();
+            if ($color->id != $colorr->id) {
+                $c = ColorChange::where('ofColor_id', $color->id)
+                    ->where('toColor_id', $colorr->id)
+                    ->first();
+                $seconds = intval($c->time * 60);
+                return $seconds;
+            } else {
+                return 0;
+            }
+        }
+    }
+
+    public function format($row)
+    {
+        $test = DeviceOrders::where('Order', '<', $row->Order)->max('Order');
+        if (!empty($test)) {
+            $count = DeviceOrders::where('Order', $test)->first();
+            $tes = ProductionOrder::where('id', $count->order_id)->first();
+            $modalProduct = DB::table('model_products')->where('product_id', $tes->product_id)
+                ->first();
+            $format = Format::where('id', $modalProduct->format_id)->first();
+
+            $tess = ProductionOrder::where('id', $row->order_id)->first();
+            $modalProductt = DB::table('model_products')
+                ->where('product_id', $tess->product_id)
+                ->first();
+            $formatt = Format::where('id', $modalProductt->format_id)->first();
+            if ($format->id != $formatt->id) {
+                $format_time = intval($format->time * 60);
+                return $format_time;
+            } else {
+                return 0;
+            }
+
+
+        }
+    }
+
+    public function insert($row)
+    {
+        $test = DeviceOrders::where('Order', '<', $row->Order)->max('Order');
+        if (!empty($test)) {
+            $count = DeviceOrders::where('Order', $test)->first();
+            $tes = ProductionOrder::where('id', $count->order_id)->first();
+            $modalProduct = DB::table('model_products')
+                ->where('product_id', $tes->product_id)
+                ->first();
+            $format = Insert::where('id', $modalProduct->insert_id)->first();
+
+            $tess = ProductionOrder::where('id', $row->order_id)->first();
+            $modalProductt = DB::table('model_products')
+                ->where('product_id', $tess->product_id)
+                ->first();
+            $formatt = Insert::where('id', $modalProductt->insert_id)->first();
+            if ($format->id != $formatt->id) {
+                $format_time = intval($format->time * 60);
+                return $format_time;
+            } else {
+                return 0;
+            }
+
+
+        }
+    }
+
 
     public function addTOdevice1($row)
     {

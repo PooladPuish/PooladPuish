@@ -68,4 +68,9 @@ class Product extends Model
         return $this->hasMany(Color::class);
 
     }
+    public function deviceorde()
+    {
+        return $this->hasMany(DeviceOrders::class);
+
+    }
 }

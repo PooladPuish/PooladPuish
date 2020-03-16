@@ -10,7 +10,7 @@ class BarnColor extends Model
 
     public function color()
     {
-        return $this->hasMany(Color::class);
+        return $this->belongsTo(Color::class, 'id', 'color_id');
 
     }
 

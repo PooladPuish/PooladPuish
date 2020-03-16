@@ -21,18 +21,15 @@ class BarnColorController extends Controller
                         ->first();
                     if (!empty($barncolor->PhysicalInventory)) {
                         return $barncolor->PhysicalInventory;
-
                     } else {
                         return 0;
                     }
-
                 })
                 ->addColumn('action', function ($row) {
                     return $this->actions($row);
                 })
                 ->rawColumns(['action', 'PhysicalInventory'])
                 ->make(true);
-
         }
         return view('barncolors.list');
 

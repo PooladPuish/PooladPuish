@@ -48,7 +48,7 @@
             "lengthChange": false,
             "info": false,
             "bPaginate": false,
-            "bSort" : false,
+            "bSort": false,
             "language": {
                 "search": "جستجو:",
                 "lengthMenu": "نمایش _MENU_",
@@ -115,7 +115,7 @@
             "lengthChange": false,
             "info": false,
             "bPaginate": false,
-            "bSort" : false,
+            "bSort": false,
             "language": {
                 "search": "جستجو:",
                 "lengthMenu": "نمایش _MENU_",
@@ -175,30 +175,51 @@
         $('body').on('click', '.addTOdevice1', function () {
             var product_id = $(this).data('id');
             $.get("{{ route('admin.pPlanning.AddDevice1') }}" + '/' + product_id, function (data) {
-                deviceproduct1.draw();
-                deviceproduct2.draw();
-                deviceproduct3.draw();
-                deviceproduct4.draw();
-                deviceproduct5.draw();
-                deviceproductfalse3.draw();
-                deviceproductfalse2.draw();
-                deviceproductfalse1.draw();
-                device1.draw();
+                if (data.success) {
+                    deviceproduct1.draw();
+                    deviceproduct2.draw();
+                    deviceproduct3.draw();
+                    deviceproduct4.draw();
+                    deviceproduct5.draw();
+                    deviceproductfalse3.draw();
+                    deviceproductfalse2.draw();
+                    deviceproductfalse1.draw();
+                    device1.draw();
+                } else {
+                    $('#showDevice1').modal('hide');
+                    Swal.fire({
+                        title: 'خطا!',
+                        text: 'خطایی در ارتباط با سیستم رخ داده است',
+                        icon: 'error',
+                        confirmButtonText: 'تایید'
+                    });
+                }
+
             })
         });
         $('body').on('click', '.deleteINdevice1', function () {
             var product_id = $(this).data('id');
             $.get("{{ route('admin.pPlanning.DeleteDevice1') }}" + '/' + product_id, function (data) {
-                device1.draw();
-                devicefalse1.draw();
-                deviceproductfalse3.draw();
-                deviceproductfalse2.draw();
-                deviceproductfalse1.draw();
-                deviceproduct1.draw();
-                deviceproduct2.draw();
-                deviceproduct3.draw();
-                deviceproduct4.draw();
-                deviceproduct5.draw();
+                if (data.success) {
+                    device1.draw();
+                    devicefalse1.draw();
+                    deviceproductfalse3.draw();
+                    deviceproductfalse2.draw();
+                    deviceproductfalse1.draw();
+                    deviceproduct1.draw();
+                    deviceproduct2.draw();
+                    deviceproduct3.draw();
+                    deviceproduct4.draw();
+                    deviceproduct5.draw();
+                } else {
+                    $('#showDevice1').modal('hide');
+                    Swal.fire({
+                        title: 'خطا!',
+                        text: 'خطایی در ارتباط با سیستم رخ داده است',
+                        icon: 'error',
+                        confirmButtonText: 'تایید'
+                    });
+                }
 
             })
         });
@@ -240,7 +261,7 @@
             "lengthChange": false,
             "info": false,
             "bPaginate": false,
-            "bSort" : false,
+            "bSort": false,
             "language": {
                 "search": "جستجو:",
                 "lengthMenu": "نمایش _MENU_",
@@ -307,7 +328,7 @@
             "lengthChange": false,
             "info": false,
             "bPaginate": false,
-            "bSort" : false,
+            "bSort": false,
             "language": {
                 "search": "جستجو:",
                 "lengthMenu": "نمایش _MENU_",
@@ -367,35 +388,55 @@
         $('body').on('click', '.addTOdevice2', function () {
             var product_id = $(this).data('id');
             $.get("{{ route('admin.pPlanning.AddDevice2') }}" + '/' + product_id, function (data) {
-                deviceproduct2.draw();
-                deviceproduct3.draw();
-                deviceproduct1.draw();
-                deviceproduct4.draw();
-                deviceproduct5.draw();
-                deviceproductfalse3.draw();
-                deviceproductfalse2.draw();
-                deviceproductfalse1.draw();
-                device2.draw();
+                if (data.success) {
+                    deviceproduct2.draw();
+                    deviceproduct3.draw();
+                    deviceproduct1.draw();
+                    deviceproduct4.draw();
+                    deviceproduct5.draw();
+                    deviceproductfalse3.draw();
+                    deviceproductfalse2.draw();
+                    deviceproductfalse1.draw();
+                    device2.draw();
+                } else {
+                    $('#showDevice2').modal('hide');
+                    Swal.fire({
+                        title: 'خطا!',
+                        text: 'خطایی در ارتباط با سیستم رخ داده است',
+                        icon: 'error',
+                        confirmButtonText: 'تایید'
+                    });
+                }
+
             })
         });
         $('body').on('click', '.deleteINdevice2', function () {
             var product_id = $(this).data('id');
             $.get("{{ route('admin.pPlanning.DeleteDevice2') }}" + '/' + product_id, function (data) {
-                device2.draw();
-                devicefalse2.draw();
-                deviceproduct1.draw();
-                deviceproduct2.draw();
-                deviceproductfalse3.draw();
-                deviceproductfalse2.draw();
-                deviceproductfalse1.draw();
-                deviceproduct3.draw();
-                deviceproduct4.draw();
-                deviceproduct5.draw();
+                if (data.success) {
+                    device2.draw();
+                    devicefalse2.draw();
+                    deviceproduct1.draw();
+                    deviceproduct2.draw();
+                    deviceproductfalse3.draw();
+                    deviceproductfalse2.draw();
+                    deviceproductfalse1.draw();
+                    deviceproduct3.draw();
+                    deviceproduct4.draw();
+                    deviceproduct5.draw();
+                } else {
+                    $('#showDevice2').modal('hide');
+                    Swal.fire({
+                        title: 'خطا!',
+                        text: 'خطایی در ارتباط با سیستم رخ داده است',
+                        icon: 'error',
+                        confirmButtonText: 'تایید'
+                    });
+                }
+
 
             })
         });
-
-
 
 
         var deviceproductfalse3 = $('.listdevicefalse3').DataTable({
@@ -436,7 +477,7 @@
             "lengthChange": false,
             "info": false,
             "bPaginate": false,
-            "bSort" : false,
+            "bSort": false,
             "language": {
                 "search": "جستجو:",
                 "lengthMenu": "نمایش _MENU_",
@@ -503,7 +544,7 @@
             "lengthChange": false,
             "info": false,
             "bPaginate": false,
-            "bSort" : false,
+            "bSort": false,
             "language": {
                 "search": "جستجو:",
                 "lengthMenu": "نمایش _MENU_",
@@ -563,34 +604,53 @@
         $('body').on('click', '.addTOdevice3', function () {
             var product_id = $(this).data('id');
             $.get("{{ route('admin.pPlanning.AddDevice3') }}" + '/' + product_id, function (data) {
-                deviceproduct2.draw();
-                deviceproduct3.draw();
-                deviceproduct1.draw();
-                deviceproduct4.draw();
-                deviceproduct5.draw();
-                deviceproductfalse3.draw();
-                deviceproductfalse2.draw();
-                deviceproductfalse1.draw();
-                device3.draw();
+                if (data.success) {
+                    deviceproduct2.draw();
+                    deviceproduct3.draw();
+                    deviceproduct1.draw();
+                    deviceproduct4.draw();
+                    deviceproduct5.draw();
+                    deviceproductfalse3.draw();
+                    deviceproductfalse2.draw();
+                    deviceproductfalse1.draw();
+                    device3.draw();
+                } else {
+                    $('#showDevice3').modal('hide');
+                    Swal.fire({
+                        title: 'خطا!',
+                        text: 'خطایی در ارتباط با سیستم رخ داده است',
+                        icon: 'error',
+                        confirmButtonText: 'تایید'
+                    });
+                }
+
             })
         });
         $('body').on('click', '.deleteINdevice3', function () {
             var product_id = $(this).data('id');
             $.get("{{ route('admin.pPlanning.DeleteDevice3') }}" + '/' + product_id, function (data) {
-                device3.draw();
-                devicefalse3.draw();
-                deviceproduct1.draw();
-                deviceproductfalse3.draw();
-                deviceproductfalse2.draw();
-                deviceproductfalse1.draw();
-                deviceproduct2.draw();
-                deviceproduct3.draw();
-                deviceproduct4.draw();
-                deviceproduct5.draw();
-
+                if (data.success) {
+                    device3.draw();
+                    devicefalse3.draw();
+                    deviceproduct1.draw();
+                    deviceproductfalse3.draw();
+                    deviceproductfalse2.draw();
+                    deviceproductfalse1.draw();
+                    deviceproduct2.draw();
+                    deviceproduct3.draw();
+                    deviceproduct4.draw();
+                    deviceproduct5.draw();
+                } else {
+                    $('#showDevice3').modal('hide');
+                    Swal.fire({
+                        title: 'خطا!',
+                        text: 'خطایی در ارتباط با سیستم رخ داده است',
+                        icon: 'error',
+                        confirmButtonText: 'تایید'
+                    });
+                }
             })
         });
-
 
 
         var deviceproduct4 = $('.listdevice4').DataTable({
@@ -632,7 +692,7 @@
             "lengthChange": false,
             "info": false,
             "bPaginate": false,
-            "bSort" : false,
+            "bSort": false,
             "language": {
                 "search": "جستجو:",
                 "lengthMenu": "نمایش _MENU_",
@@ -751,7 +811,7 @@
             "lengthChange": false,
             "info": false,
             "bPaginate": false,
-            "bSort" : false,
+            "bSort": false,
             "language": {
                 "search": "جستجو:",
                 "lengthMenu": "نمایش _MENU_",
@@ -828,8 +888,6 @@
 
             })
         });
-
-
 
 
     });

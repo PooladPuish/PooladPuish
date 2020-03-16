@@ -44,8 +44,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-
-
         if (!empty($request->id)) {
             $user = User::find($request->id);
             if ($user->email != $request->email) {
@@ -438,8 +436,7 @@ class UserController extends Controller
      */
     public function actions($row)
     {
-        $success = url('/public/icon/icons8-edit-144.png');
-        $delete = url('/public/icon/icons8-key-144.png');
+
         $btn = '<a href="javascript:void(0)" data-toggle="tooltip"
                       data-id="' . $row->id . '" data-original-title="ویرایش"
                        class="editProduct">

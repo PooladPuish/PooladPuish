@@ -202,22 +202,21 @@ class CustomerController extends Controller
                 ->move('public/documents/final/', $name);
         } else {
             $final_documents_company = null;
-
         }
-
         if ($validator->passes()) {
-            $customer = \App\Customer::create(
-                [
-                    'code' => $request->code,
-                    'name' => $request->name,
-                    'type' => $request->type,
-                    'state' => $request->state,
-                    'method' => $request->methodd,
-                    'date' => $request->date,
-                    'expert' => $request->expert,
-                    'description' => $request->description,
-                ]);
-            if ($customer) {
+            \DB::beginTransaction();
+            try {
+                $customer = \App\Customer::create(
+                    [
+                        'code' => $request->code,
+                        'name' => $request->name,
+                        'type' => $request->type,
+                        'state' => $request->state,
+                        'method' => $request->methodd,
+                        'date' => $request->date,
+                        'expert' => $request->expert,
+                        'description' => $request->description,
+                    ]);
                 if ($type->type == 1) {
                     \DB::table('customer_company')->insert([
                         'customer_id' => $customer->id,
@@ -325,8 +324,12 @@ class CustomerController extends Controller
                         'text_personel' => $request->text_personel,
                         'fax_personel' => $request->fax_personel,
                     ]);
-                return response()->json(['success' => 'مشخصات مشتری با موفقیت در سیستم ثبت شد']);
+                \DB::commit();
+            } catch (Exception $e) {
+                \DB::rollBack();
+                return Response::json(['errors' => 'error']);
             }
+            return response()->json(['success' => 'مشخصات مشتری با موفقیت در سیستم ثبت شد']);
         }
         return Response::json(['errors' => $validator->errors()]);
     }
@@ -509,18 +512,19 @@ class CustomerController extends Controller
 
 
         if ($validator->passes()) {
-            $customer = \App\Customer::find($request->id)->update(
-                [
-                    'code' => $request->code,
-                    'name' => $request->name,
-                    'type' => $request->type,
-                    'state' => $request->state,
-                    'method' => $request->methodd,
-                    'date' => $request->date,
-                    'expert' => $request->expert,
-                    'description' => $request->description,
-                ]);
-            if ($customer) {
+            \DB::beginTransaction();
+            try {
+                $customer = \App\Customer::find($request->id)->update(
+                    [
+                        'code' => $request->code,
+                        'name' => $request->name,
+                        'type' => $request->type,
+                        'state' => $request->state,
+                        'method' => $request->methodd,
+                        'date' => $request->date,
+                        'expert' => $request->expert,
+                        'description' => $request->description,
+                    ]);
                 if ($type->type == 1) {
                     \DB::table('customer_company')
                         ->where('customer_id', $request->id)->update([
@@ -639,8 +643,12 @@ class CustomerController extends Controller
                             'text_personel' => $request->text_personel,
                             'fax_personel' => $request->fax_personel,
                         ]);
-                return response()->json(['success' => 'مشخصات مشتری با موفقیت در سیستم ثبت شد']);
+                \DB::commit();
+            } catch (Exception $e) {
+                \DB::rollBack();
+                return Response::json(['errors' => 'error']);
             }
+            return response()->json(['success' => 'مشخصات مشتری با موفقیت در سیستم ثبت شد']);
         }
         return Response::json(['errors' => $validator->errors()]);
     }

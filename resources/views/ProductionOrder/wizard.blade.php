@@ -10,7 +10,6 @@
         @csrf
         <div class="row">
             <div class="col-md-12">
-
                 <!-- BEGIN EXAMPLE TABLE PORTLET-->
                 <div class="portlet box blue">
                     <div class="portlet-title">
@@ -19,7 +18,6 @@
                         </div>
 
                     </div>
-
                     <div class="portlet-body">
                         <div class="alert alert-danger" id="alert" style="display: none">
                             <ul>
@@ -45,7 +43,6 @@
                                     </select>
                                 </div>
                             </div>
-
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>رنگ
@@ -62,7 +59,6 @@
                                     </select>
                                 </div>
                             </div>
-
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>تعداد
@@ -70,8 +66,6 @@
                                     <input type="number" name="number" id="number" class="form-control">
                                 </div>
                             </div>
-
-
                         </div>
                         <div class="table table-responsive">
                             <table
